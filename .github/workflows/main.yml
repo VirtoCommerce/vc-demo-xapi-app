@@ -97,7 +97,11 @@ jobs:
         login-server: ghcr.io
         username: $GITHUB_ACTOR
         password: ${{ secrets.GITHUB_TOKEN }}
-      
+
+    - name: Ls
+      run: |
+          ls ~/
+
     - name: Build and Publish Docker Image
       shell: pwsh
       run: |
