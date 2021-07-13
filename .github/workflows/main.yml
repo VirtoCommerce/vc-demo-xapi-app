@@ -90,4 +90,17 @@ jobs:
       uses: VirtoCommerce/vc-github-actions/publish-artifact-link@master
       with:
         artifactUrl: 'ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}'
+    
+    - name: Docker Login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ghcr.io
+        username: $GITHUB_ACTOR
+        password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Build and Publish Docker Image
+      shell: pwsh
+      run: |
+          $imageTag = "ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}"
+          docker build ${{ github.workspace }} --tag $imageTag
+          docker push $imageTag
