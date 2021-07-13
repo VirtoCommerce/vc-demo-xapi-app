@@ -60,10 +60,10 @@ jobs:
       run: |
         echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}-${{ steps.image.outputs.SHA }}" >> $GITHUB_ENV
 
-    # - name: SonarCloud Scan
-    #   uses: VirtoCommerce/vc-github-actions/sonar-theme@master
-    #   with:
-    #     projectVersion: ${{ env.VERSION_SUFFIX }}
+    - name: SonarCloud Scan
+      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+      with:
+        projectVersion: ${{ env.VERSION_SUFFIX }}
 
     - name: Cache node modules
       uses: actions/cache@v2
