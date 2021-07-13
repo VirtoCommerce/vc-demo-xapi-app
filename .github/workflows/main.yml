@@ -99,6 +99,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Build and Publish Docker Image
+      shell: pwsh
       run: |
           $imageTag = "ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}"
           docker build ${{ github.workspace }} --tag $imageTag
