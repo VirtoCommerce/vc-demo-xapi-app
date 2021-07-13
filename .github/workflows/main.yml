@@ -47,11 +47,12 @@ jobs:
         projectType: theme
 
     - name: Set release variables
+      if: ${{ github.ref == 'refs/heads/master' }}
       run: |
         echo "VERSION_SUFFIX=${{ steps.image.outputs.prefix }}" >> $GITHUB_ENV
 
     - name: Set release-alpha variables
-      if: ${{ github.event_name == 'workflow_dispatch' }}
+      if: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/dev' }}
       run: |
         echo "VERSION_SUFFIX=${{ steps.image.outputs.fullVersion }}" >> $GITHUB_ENV
 
