@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
 RUN rm /usr/share/nginx/html/index.html \
-    && apk add apk add gettext
+    && apk update && apk add -u gettext
 
 COPY ~/vc-demo-xapi-app/vc-demo-xapi-app /usr/share/nginx/html
 
