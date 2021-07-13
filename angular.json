@@ -33,7 +33,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/environments/environment.variables.json",
+              "src/environments/environment.variables.json.template"
             ],
             "styles": [
               "src/styles.scss"
@@ -101,7 +103,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/environments/environment.variables.json",
+              "src/environments/environment.variables.json.template"
             ],
             "styles": [
               "src/styles.scss"
