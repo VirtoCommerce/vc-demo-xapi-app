@@ -1,0 +1,93 @@
+# v0.0.1
+name: Demo XAPI CI
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - 'build/**'
+      - 'README.md'
+      - 'LICENSE'
+    branches:
+      [master, dev]
+  pull_request:
+    branches:
+      [master, dev]
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - 'build/**'
+      - 'README.md'
+      - 'LICENSE'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    env: 
+      SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+      GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      BLOB_SAS: ${{ secrets.BLOB_TOKEN }}
+      VERSION_SUFFIX: ""
+
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v3
+
+    - name: Get Image Version
+      uses: VirtoCommerce/vc-github-actions/get-image-version@VDS-2324
+      id: image
+      with:
+        projectType: theme
+
+    - name: Set release variables
+      run: |
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}" >> $GITHUB_ENV
+
+    - name: Set release-alpha variables
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      run: |
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.fullSuffix }}" >> $GITHUB_ENV
+
+    - name: Set PR variables
+      if: ${{ github.event_name == 'pull_request' }}
+      run: |
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}-${{ steps.image.outputs.SHA }}" >> $GITHUB_ENV
+
+    - name: SonarCloud Scan
+      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+      with:
+        projectVersion: ${{ env.VERSION_SUFFIX }}
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: npm install
+      run: |
+        npm i
+
+    - name: npm lint
+      run: |
+        npm run lint
+
+    - name: Build
+      run: |
+        npm run build
+
+    - name: Add link to PR
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: VirtoCommerce/vc-github-actions/publish-artifact-link@master
+      with:
+        artifactUrl: 'ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}'
+
