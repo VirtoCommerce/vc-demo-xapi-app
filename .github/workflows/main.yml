@@ -41,24 +41,24 @@ jobs:
       uses: warchant/setup-sonar-scanner@v3
 
     - name: Get Image Version
-      uses: VirtoCommerce/vc-github-actions/get-image-version@VDS-2324
+      uses: VirtoCommerce/vc-github-actions/get-image-version@master
       id: image
       with:
         projectType: theme
 
     - name: Set release variables
       run: |
-        echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}" >> $GITHUB_ENV
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.prefix }}" >> $GITHUB_ENV
 
     - name: Set release-alpha variables
       if: ${{ github.event_name == 'workflow_dispatch' }}
       run: |
-        echo "VERSION_SUFFIX=${{ steps.image.outputs.fullSuffix }}" >> $GITHUB_ENV
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.fullVersion }}" >> $GITHUB_ENV
 
     - name: Set PR variables
       if: ${{ github.event_name == 'pull_request' }}
       run: |
-        echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}-${{ steps.image.outputs.SHA }}" >> $GITHUB_ENV
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.taggedVersion }}" >> $GITHUB_ENV
 
     - name: SonarCloud Scan
       uses: VirtoCommerce/vc-github-actions/sonar-theme@master
@@ -85,12 +85,6 @@ jobs:
       run: |
         npm run build
 
-    - name: Add link to PR
-      if: ${{ github.event_name == 'pull_request' }}
-      uses: VirtoCommerce/vc-github-actions/publish-artifact-link@master
-      with:
-        artifactUrl: 'ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}'
-    
     - name: Docker Login
       uses: azure/docker-login@v1
       with:
@@ -104,3 +98,9 @@ jobs:
           $imageTag = "ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}"
           docker build ${{ github.workspace }} --tag $imageTag
           docker push $imageTag
+
+    - name: Add link to PR
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: VirtoCommerce/vc-github-actions/publish-artifact-link@master
+      with:
+        artifactUrl: 'ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}'
