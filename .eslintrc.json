@@ -1,9 +1,12 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "projects/**/*",
+    // auto-generated
+    "src/app/store/index.ts"
   ],
   "overrides": [
+    // typescript
     {
       "files": [
         "*.ts"
@@ -16,6 +19,8 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:ngrx/recommended"
       ],
@@ -41,6 +46,23 @@
         "ngrx"
       ]
     },
+    // unit tests has issues with type checking
+    {
+      "files": [
+        "*.ts"
+      ],
+      "excludedFiles": "*.spec.ts",
+      "extends": ["plugin:@typescript-eslint/recommended-requiring-type-checking"]
+    },
+    {
+      "files": [
+        "*.spec.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    // templates
     {
       "files": [
         "*.html"
