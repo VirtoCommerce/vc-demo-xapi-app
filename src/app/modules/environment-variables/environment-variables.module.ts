@@ -5,8 +5,6 @@ import * as fromEnvironmentVariables from './store/environment-variables.reducer
 import { EffectsModule } from '@ngrx/effects';
 import { EnvironmentVariablesEffects } from './store/environment-variables.effects';
 
-
-
 @NgModule({
   declarations: [],
   imports: [

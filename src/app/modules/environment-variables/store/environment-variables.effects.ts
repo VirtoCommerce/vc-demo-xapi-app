@@ -7,8 +7,6 @@ import * as EnvironmentVariablesActions from './environment-variables.actions';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EnvironmentVariables } from './environment-variables.payload';
 
-
-
 @Injectable()
 export class EnvironmentVariablesEffects {
 
@@ -23,8 +21,6 @@ export class EnvironmentVariablesEffects {
       )
     );
   });
-
-
 
   constructor(
     private readonly httpClient: HttpClient,

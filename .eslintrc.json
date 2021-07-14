@@ -25,6 +25,8 @@
         "plugin:ngrx/recommended"
       ],
       "rules": {
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1, "maxBOF": 0 }],
+        "@typescript-eslint/prefer-readonly": ["error"],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -40,8 +42,7 @@
             "prefix": "vc",
             "style": "kebab-case"
           }
-        ],
-        "@typescript-eslint/prefer-readonly": ["error"]
+        ]
       },
       "plugins": [
         "ngrx"
