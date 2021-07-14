@@ -12,6 +12,17 @@ Run `ng generate component component-name` to generate a new component.
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module` to generate `angular` files and  
 `ng generate @ngrx/schematics:store|action|reducer|selector|effect|feature` to generate `ngrx` files.
 
+Examples:
+
+```
+ng generate @ngrx/schematics:feature modules/environment-variables/store/environment-variables --module modules/environment-variables/environment-variables.module.ts --reducers ../../../store/index.ts
+```
+```
+? Should we generate and wire success and failure actions? Yes
+? Do you want to use the create functions? Yes
+? What should be the prefix of the action? load
+```
+
 ## Build
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
