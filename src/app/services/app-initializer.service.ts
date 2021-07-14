@@ -7,7 +7,7 @@ import { loadEnvironmentVariables } from '../modules/environment-variables/store
 })
 export class AppInitializerService {
 
-  constructor(private store: Store) { }
+  constructor(private readonly store: Store) { }
 
   initialize(): void {
     this.store.dispatch(loadEnvironmentVariables());

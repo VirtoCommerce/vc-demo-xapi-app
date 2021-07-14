@@ -9,7 +9,13 @@ Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The 
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component.  
-You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module` to generate `angular` files and  
+You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module` to generate `angular` files.
+
+## Linting
+
+Use `npm run lint` to run linter. `npm run lint -- --fix` will fix issues with available auto fixing.
+
+## ngrx  
 `ng generate @ngrx/schematics:store|action|reducer|selector|effect|feature` to generate `ngrx` files.
 
 Examples:
