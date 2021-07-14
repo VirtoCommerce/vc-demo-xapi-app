@@ -27,7 +27,7 @@ export class EnvironmentVariablesEffects {
 
 
   constructor(
-    private httpClient: HttpClient,
-    private actions$: Actions) {}
+    private readonly httpClient: HttpClient,
+    private readonly actions$: Actions) {}
 
 }

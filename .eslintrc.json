@@ -40,7 +40,8 @@
             "prefix": "vc",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/prefer-readonly": ["error"]
       },
       "plugins": [
         "ngrx"
