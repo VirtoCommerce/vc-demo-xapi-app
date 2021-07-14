@@ -104,3 +104,11 @@ jobs:
     - name: CI results
       run: |
           echo "Project $GITHUB_REPOSITORY successfully build and published to $ARTIFACT_URL"
+
+    # - name: Invoke Theme deployment workflow
+    #   if: ${{ github.ref == 'refs/heads/dev' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/master')}}
+    #   uses: benc-uk/workflow-dispatch@v1
+    #   with:
+    #     workflow: VC deployment
+    #     token: ${{ secrets.REPO_TOKEN }}
+    #     inputs: '{ "artifactUrl": "${{ env.ARTIFACT_URL }}" }'
