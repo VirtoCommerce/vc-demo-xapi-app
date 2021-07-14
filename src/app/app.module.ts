@@ -16,26 +16,32 @@ const appInitializerFactory = (appInitializer: AppInitializerService) => () => a
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, {
-      metaReducers
+      metaReducers,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({ maxAge: 25,
+      logOnly: environment.production }),
     EffectsModule.forRoot([]),
-    EnvironmentVariablesModule
+    EnvironmentVariablesModule,
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
-      deps: [AppInitializerService],
-      multi: true
-    }],
-  bootstrap: [AppComponent]
+      deps: [
+        AppInitializerService,
+      ],
+      multi: true,
+    },
+  ],
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule { }

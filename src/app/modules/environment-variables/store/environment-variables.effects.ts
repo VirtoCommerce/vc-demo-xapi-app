@@ -9,21 +9,23 @@ import { EnvironmentVariables } from './environment-variables.payload';
 
 @Injectable()
 export class EnvironmentVariablesEffects {
-
   loadEnvironmentVariables$ = createEffect(() => {
     return this.actions$.pipe(
 
       ofType(EnvironmentVariablesActions.loadEnvironmentVariables),
-      concatMap(() =>
-        this.httpClient.get('environments/environment.variables.json').pipe(
-          map(data => EnvironmentVariablesActions.loadEnvironmentVariablesSuccess({ data: data as EnvironmentVariables })),
-          catchError(error => of(EnvironmentVariablesActions.loadEnvironmentVariablesFailure({ error: error as HttpErrorResponse }))))
-      )
+      concatMap(() => this.httpClient.get('environments/environment.variables.json').pipe(
+        map(data => EnvironmentVariablesActions.loadEnvironmentVariablesSuccess({
+          data: data as EnvironmentVariables,
+        })),
+        catchError(error => of(EnvironmentVariablesActions.loadEnvironmentVariablesFailure({
+          error: error as HttpErrorResponse,
+        })))
+      ))
     );
   });
 
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly actions$: Actions) {}
-
+    private readonly actions$: Actions
+  ) {}
 }

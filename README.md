@@ -15,7 +15,8 @@ You can also use `ng generate directive|pipe|service|class|guard|interface|enum|
 
 Use `npm run lint` to run linter. `npm run lint -- --fix` will fix issues with available auto fixing.
 
-## ngrx  
+## ngrx
+
 `ng generate @ngrx/schematics:store|action|reducer|selector|effect|feature` to generate `ngrx` files.
 
 Examples:
@@ -23,6 +24,7 @@ Examples:
 ```
 ng generate @ngrx/schematics:feature modules/environment-variables/store/environment-variables --module modules/environment-variables/environment-variables.module.ts --reducers ../../../store/index.ts
 ```
+
 ```
 ? Should we generate and wire success and failure actions? Yes
 ? Do you want to use the create functions? Yes

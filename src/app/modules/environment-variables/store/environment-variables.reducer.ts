@@ -15,8 +15,9 @@ export const reducer = createReducer(
   initialState,
 
   on(EnvironmentVariablesActions.loadEnvironmentVariables, (state): State => state),
-  on(EnvironmentVariablesActions.loadEnvironmentVariablesSuccess, (state, action): State => ({ ...state, platformUrl: action.data.platformUrl })),
-  on(EnvironmentVariablesActions.loadEnvironmentVariablesFailure, (state): State => state),
+  on(EnvironmentVariablesActions.loadEnvironmentVariablesSuccess, (state, action): State => ({ ...state,
+    platformUrl: action.data.platformUrl })),
+  on(EnvironmentVariablesActions.loadEnvironmentVariablesFailure, (state): State => state)
 
 );
 

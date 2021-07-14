@@ -10,7 +10,9 @@ import { EnvironmentVariablesEffects } from './store/environment-variables.effec
   imports: [
     CommonModule,
     StoreModule.forFeature(fromEnvironmentVariables.environmentVariablesFeatureKey, fromEnvironmentVariables.reducer),
-    EffectsModule.forFeature([EnvironmentVariablesEffects])
-  ]
+    EffectsModule.forFeature([
+      EnvironmentVariablesEffects,
+    ]),
+  ],
 })
 export class EnvironmentVariablesModule { }
