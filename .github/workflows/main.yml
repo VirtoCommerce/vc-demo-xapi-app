@@ -30,6 +30,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       BLOB_SAS: ${{ secrets.BLOB_TOKEN }}
       VERSION_SUFFIX: ""
+      ARTIFACT_URL: ""
 
     steps:
 
@@ -61,24 +62,20 @@ jobs:
       run: |
         echo "VERSION_SUFFIX=${{ steps.image.outputs.taggedVersion }}" >> $GITHUB_ENV
 
+    - name: Set ARTIFACT_URL
+      run: |
+        echo "ARTIFACT_URL=ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}" >> $GITHUB_ENV
+
     - name: Add link to PR
       if: ${{ github.event_name == 'pull_request' }}
       uses: VirtoCommerce/vc-github-actions/publish-artifact-link@master
       with:
-        artifactUrl: 'ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}'
+        artifactUrl: '${{ env.ARTIFACT_URL }}'
 
     - name: SonarCloud Scan
       uses: VirtoCommerce/vc-github-actions/sonar-theme@master
       with:
         projectVersion: ${{ env.VERSION_SUFFIX }}
-
-    - name: Cache node modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
 
     - name: npm install
       run: |
@@ -100,8 +97,18 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and Publish Docker Image
-      shell: pwsh
       run: |
-          $imageTag = "ghcr.io/virtocommerce/demo-xapi-app:${{ env.VERSION_SUFFIX }}"
-          docker build ${{ github.workspace }} --tag $imageTag
-          docker push $imageTag
+          docker build ${{ github.workspace }} --tag ${{ env.ARTIFACT_URL }}
+          docker push ${{ env.ARTIFACT_URL }}
+
+    - name: CI results
+      run: |
+          echo "Project $GITHUB_REPOSITORY successfully build and published to $ARTIFACT_URL"
+
+    # - name: Invoke Theme deployment workflow
+    #   if: ${{ github.ref == 'refs/heads/dev' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/master')}}
+    #   uses: benc-uk/workflow-dispatch@v1
+    #   with:
+    #     workflow: VC deployment
+    #     token: ${{ secrets.REPO_TOKEN }}
+    #     inputs: '{ "artifactUrl": "${{ env.ARTIFACT_URL }}" }'
