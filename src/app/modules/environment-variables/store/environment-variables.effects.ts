@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import * as EnvironmentVariablesActions from './environment-variables.actions';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EnvironmentVariables } from './environment-variables.payload';
 
 
@@ -19,7 +19,7 @@ export class EnvironmentVariablesEffects {
       concatMap(() =>
         this.httpClient.get('environments/environment.variables.json').pipe(
           map(data => EnvironmentVariablesActions.loadEnvironmentVariablesSuccess({ data: data as EnvironmentVariables })),
-          catchError(error => of(EnvironmentVariablesActions.loadEnvironmentVariablesFailure({ error }))))
+          catchError(error => of(EnvironmentVariablesActions.loadEnvironmentVariablesFailure({ error: error as HttpErrorResponse }))))
       )
     );
   });
