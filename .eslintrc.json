@@ -1,9 +1,7 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*",
-    // auto-generated
-    "src/app/store/index.ts"
+    "projects/**/*"
   ],
   "overrides": [
     // typescript
@@ -21,12 +19,124 @@
         "plugin:@angular-eslint/recommended",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:editorconfig/all",
+        "plugin:editorconfig/noconflict",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:ngrx/recommended"
       ],
       "rules": {
-        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1, "maxBOF": 0 }],
-        "@typescript-eslint/prefer-readonly": ["error"],
+        "array-bracket-newline": [
+          "error", {
+            "minItems": 1
+          }
+        ],
+        "array-bracket-spacing": "error",
+        "array-element-newline": "error",
+        "arrow-parens": ["error", "as-needed"],
+        "block-spacing": "error",
+        "brace-style": [
+          "error",
+          "stroustrup"
+        ],
+        "capitalized-comments": "error",
+        "comma-dangle": [
+          "error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline"
+            }
+          ],
+        "comma-spacing": "error",
+        "comma-style": "error",
+        "computed-property-spacing": "error",
+        "func-call-spacing": "error",
+        "function-call-argument-newline": [
+          "error",
+          "consistent"
+        ],
+        "function-paren-newline": [
+          "error",
+          "multiline-arguments"
+        ],
+        "implicit-arrow-linebreak": "error",
+        "key-spacing": "error",
+        "keyword-spacing": "error",
+        "lines-around-comment": "error",
+        "lines-between-class-members": "error",
+        "max-len": [
+          "error", {
+            "code": 120
+          }
+        ],
+        "multiline-comment-style": "error",
+        "multiline-ternary": [
+          "error",
+          "always-multiline"
+        ],
+        "new-parens": "error",
+        "newline-per-chained-call": "error",
+        "no-lonely-if": "error",
+        "no-multiple-empty-lines": [
+          "error", {
+            "max": 1,
+            "maxEOF": 1,
+            "maxBOF": 0
+          }
+        ],
+        "no-unneeded-ternary": "error",
+        "no-whitespace-before-property": "error",
+        "object-curly-newline": "error",
+        "object-curly-spacing": [
+          "error",
+          "always"
+        ],
+        "object-property-newline": "error",
+        "one-var": [
+          "error",
+          "never"
+        ],
+        "operator-assignment": "error",
+        "operator-linebreak": "error",
+        "padded-blocks": [
+          "error",
+          "never"
+        ],
+        "prefer-object-spread": "error",
+        "quote-props": [
+          "error",
+          "consistent-as-needed"
+        ],
+        "quotes": [
+          "error",
+          "single", {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "semi": "error",
+        "semi-spacing": "error",
+        "semi-style": "error",
+        "space-before-blocks": "error",
+        "space-in-parens": "error",
+        "space-infix-ops": "error",
+        "space-unary-ops": "error",
+        "space-before-function-paren": ["error", {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }],
+        "spaced-comment": "error",
+        "switch-colon-spacing": "error",
+        "template-tag-spacing": "error",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/prefer-readonly": [
+          "error"
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "error",
+          { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -45,6 +155,8 @@
         ]
       },
       "plugins": [
+        "editorconfig",
+        "unused-imports",
         "ngrx"
       ]
     },
@@ -54,7 +166,9 @@
         "*.ts"
       ],
       "excludedFiles": "*.spec.ts",
-      "extends": ["plugin:@typescript-eslint/recommended-requiring-type-checking"]
+      "extends": [
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ]
     },
     {
       "files": [

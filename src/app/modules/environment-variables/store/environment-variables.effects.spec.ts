@@ -12,8 +12,8 @@ describe('EnvironmentVariablesEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         EnvironmentVariablesEffects,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects = TestBed.inject(EnvironmentVariablesEffects);
