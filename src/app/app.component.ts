@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'vc-root',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   ],
 })
 export class AppComponent {
-  title = 'vc-demo-xapi-app';
+  title = 'VirtoCommerce XAPI App (DEMO)';
+
+  public constructor(titleService: Title) {
+    titleService.setTitle(this.title);
+   }
 }
