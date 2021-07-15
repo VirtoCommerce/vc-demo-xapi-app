@@ -10,7 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { EnvironmentVariablesModule } from './modules/environment-variables/environment-variables.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppInitializerService } from './services/app-initializer.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbNavModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appInitializerFactory = (appInitializer: AppInitializerService) => () => appInitializer.initialize();
 
@@ -28,7 +28,9 @@ const appInitializerFactory = (appInitializer: AppInitializerService) => () => a
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot([]),
     EnvironmentVariablesModule,
-    NgbModule,
+    NgbDropdownModule,
+    NgbNavModule,
+    NgbPaginationModule,    
   ],
   providers: [
     {
