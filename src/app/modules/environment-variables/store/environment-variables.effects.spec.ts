@@ -12,11 +12,11 @@ describe('EnvironmentVariablesEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       providers: [
         EnvironmentVariablesEffects,
-        provideMockActions(() => actions$)
+        provideMockActions(() => actions$),
       ],
     });
 

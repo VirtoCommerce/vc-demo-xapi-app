@@ -30,7 +30,7 @@ const appInitializerFactory = (appInitializer: AppInitializerService) => () => a
     EnvironmentVariablesModule,
     NgbDropdownModule,
     NgbNavModule,
-    NgbPaginationModule,    
+    NgbPaginationModule,
   ],
   providers: [
     {

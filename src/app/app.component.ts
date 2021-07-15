@@ -13,5 +13,5 @@ export class AppComponent {
 
   public constructor(titleService: Title) {
     titleService.setTitle(this.title);
-   }
+  }
 }
