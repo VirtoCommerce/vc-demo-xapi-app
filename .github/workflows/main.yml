@@ -41,6 +41,11 @@ jobs:
     - uses: actions/checkout@v2    
       with:
         fetch-depth: 0
+
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
     
     - name: Install dependencies
       run: |
@@ -49,6 +54,10 @@ jobs:
     - name: Run linting
       run: |
         npm run lint
+
+    - name: Run unit tests
+      run: |
+        npm run test -- --no-progress --no-watch --code-coverage --configuration=ci
 
     - name: Setup sonarqube
       uses: warchant/setup-sonar-scanner@v3
@@ -85,7 +94,7 @@ jobs:
         artifactUrl: '${{ env.ARTIFACT_URL }}'
 
     - name: SonarCloud Scan
-      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+      uses: VirtoCommerce/vc-github-actions/sonar-theme@karma
       with:
         projectVersion: ${{ env.VERSION_SUFFIX }}
 
