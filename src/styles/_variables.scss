@@ -41,10 +41,10 @@ $font-family-condensed: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, 
 $font-weight-bold: 700;
 $font-size-base: 0.875rem;
 $font-size-sm: $font-size-base * .85;
-$font-size-lg: $font-size-base;
+$font-size-lg: $font-size-base * 1.214285714;
 $line-height-base: 1.428571429;
 $line-height-sm: 1.428571429;
-$line-height-lg: 1.428571429;
+$line-height-lg: 1.176470588;
 
 $small-font-size: 85%;
 
@@ -87,10 +87,9 @@ $input-btn-font-size: 0.9375rem;
 $input-btn-line-height: 1.3392875;
 $input-btn-padding-x: 1rem;
 
-$input-btn-padding-x-lg: 1.5rem;
-
-$input-btn-font-size-sm: $font-size-sm !default;
-$input-btn-line-height-sm: $line-height-sm !default;
+$input-btn-font-size-sm: $font-size-sm;
+$input-btn-line-height-sm: $line-height-sm;
+$input-btn-line-height-lg: $line-height-lg;
 
 $paragraph-margin-bottom: 0.625rem;
 
@@ -102,7 +101,7 @@ $custom-control-indicator-border-color: $gray-400;
 $custom-control-indicator-checked-bg: $secondary;
 $custom-control-indicator-checked-border-color: $secondary;
 $custom-control-indicator-focus-box-shadow: $secondary;
-$custom-control-margin-bottom: $spacer / 2;
+$custom-control-margin-bottom: divide($spacer, 2);
 
 $custom-checkbox-indicator-border-radius: 0;
 
@@ -114,6 +113,8 @@ $btn-box-shadow: false;
 $btn-padding-y: $input-padding-y;
 $btn-padding-x: $input-padding-x;
 
+$btn-line-height-lg: $input-btn-line-height-lg;
+
 $btn-border-radius-sm: $border-radius-sm;
 $btn-font-size-sm: $input-btn-font-size-sm;
 $btn-line-height-sm: $input-btn-line-height-sm;
@@ -123,8 +124,8 @@ $btn-padding-x-sm: 0.625rem;
 $btn-font-size-xs: $btn-font-size-sm;
 $btn-line-height-xs: $btn-line-height-sm;
 $btn-border-radius-xs: $btn-border-radius-sm;
-$btn-padding-y-xs: $btn-padding-y-sm / 2;
-$btn-padding-x-xs: $btn-padding-x-sm / 2;
+$btn-padding-y-xs: divide($btn-padding-y-sm, 2);
+$btn-padding-x-xs: divide($btn-padding-x-sm, 2);
 
 $dropdown-padding-y: 0.3125rem;
 $dropdown-header-color: $gray-700;

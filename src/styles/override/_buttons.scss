@@ -32,3 +32,11 @@ $override-variant-names: ("primary", "success", "info", "warning", "danger");
 .btn-outline-light {
   color: #b3bec7;
 }
+
+.btn-lg {
+  line-height: $btn-line-height-lg;
+}
+
+.btn-sm {
+  line-height: $btn-line-height-sm;
+}
