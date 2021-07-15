@@ -1,0 +1,43 @@
+$theme-colors: ();
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+);
+
+$spacer: 1rem;
+$spacers: ();
+
+$position-values: (
+  0: 0,
+  50: 50%,
+  100: 100%
+);
+
+$black: #000;
+$white: #fff;
+
+$body-bg: $white;
+
+$font-weight-bold: 700;
+
+$border-color: $gray-300;
+$border-radius-sm: .2rem;
+$border-width: 1px;
+$border-widths: (
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px
+);

@@ -26,8 +26,7 @@ const appInitializerFactory = (appInitializer: AppInitializerService) => () => a
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25,
-      logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot([]),
     EnvironmentVariablesModule,
     NgbModule,
