@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
@@ -10,9 +11,12 @@ describe('EnvironmentVariablesEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ],
       providers: [
         EnvironmentVariablesEffects,
-        provideMockActions(() => actions$),
+        provideMockActions(() => actions$)
       ],
     });
 

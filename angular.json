@@ -115,7 +115,7 @@
             ],
             "scripts": [],
             "customWebpackConfig": {
-              "path": "apps/default-shell/webpack.config.js"
+              "path": "webpack.config.js"
             }
           }
         },
