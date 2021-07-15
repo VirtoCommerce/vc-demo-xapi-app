@@ -4,14 +4,13 @@ import { CommonModule } from '@angular/common';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ShowcaseComponent } from './showcase.component';
 
-
 @NgModule({
   declarations: [
-    ShowcaseComponent
+    ShowcaseComponent,
   ],
   imports: [
     CommonModule,
-    ShowcaseRoutingModule
-  ]
+    ShowcaseRoutingModule,
+  ],
 })
 export class ShowcaseModule { }

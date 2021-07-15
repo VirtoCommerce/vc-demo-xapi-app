@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'vc-showcase',
   templateUrl: './showcase.component.html',
-  styleUrls: ['./showcase.component.scss'],
-  preserveWhitespaces: true
+  styleUrls: [
+    './showcase.component.scss',
+  ],
+  preserveWhitespaces: true,
 })
-export class ShowcaseComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ShowcaseComponent {
 }
