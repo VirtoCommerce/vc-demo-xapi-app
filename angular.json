@@ -117,6 +117,14 @@
             "customWebpackConfig": {
               "path": "webpack.config.js"
             }
+          },
+          "configurations": {
+            "development": {              
+            },
+            "ci": {
+              "karmaConfig": "karma.conf.ci.js"
+            },
+            "defaultConfiguration": "development"
           }
         },
         "lint": {
