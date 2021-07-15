@@ -34,7 +34,11 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
+    - name: Set git to use CRLF
+      run: |
+        git config core.autocrlf true
+
+    - uses: actions/checkout@v2    
       with:
         fetch-depth: 0
 
