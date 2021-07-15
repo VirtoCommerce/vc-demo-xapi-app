@@ -1,0 +1,30 @@
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    'gray-900': $gray-900,
+    'gray-800': $gray-800,
+    'gray-700': $gray-700,
+    'gray-600': $gray-600,
+    'gray-500': $gray-500,
+    'gray-400': $gray-400,
+    'gray-300': $gray-300,
+    'gray-200': $gray-200,
+    'gray-100': $gray-100,
+    'gray-modal': $gray-modal-bg,
+    'black': $black,
+    'white': $white
+  )
+);
+
+$theme-semitransparent-colors: ();
+@each $name, $value in $theme-colors {
+  $theme-semitransparent-colors: map-merge($theme-semitransparent-colors, (#{$name}-semitransparent: rgba($value, 0.5)));
+}
+
+$spacers: map-merge(
+  $spacers,
+  (
+    5: ($spacer * 2),
+    6: ($spacer * 3)
+  )
+);

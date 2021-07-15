@@ -1,0 +1,48 @@
+.form-control {
+  box-shadow: none;
+
+  &:focus {
+    box-shadow: 0 0 0 1px $input-focus-border-color inset;
+  }
+}
+
+form label.required:after {
+  color: $primary;
+  content: '*';
+}
+
+label:not(.custom-control-label) {
+  font-weight: 700;
+}
+
+// Remove arrows/spinners from input with type="number"
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+// Remove the 'X' in input with type="search
+
+/* Chrome */
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
+// Remove button-border from input-group buttons, so they are aligned with inputs
+// (because input height calculation doesn't take into account the width of the button border)
+.input-group-append {
+  .btn {
+    border-width: 0;
+  }
+}

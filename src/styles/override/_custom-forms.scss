@@ -1,0 +1,5 @@
+.custom-control {
+  // Workaround for custom form controls height
+  // Use this formula here because of speciality of custom controls input height calculation
+  min-height: ($font-size-base * $line-height-base + $custom-control-indicator-size) / 1.5;
+}

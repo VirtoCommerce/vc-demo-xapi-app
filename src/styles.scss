@@ -1,4 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+// Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+
+// Include overriden variables
+@import "styles/variables";
+
+// Include variables
+@import "bootstrap/scss/variables";
+@import "styles/maps";
+
+// Include utilities to be able override them
+@import "bootstrap/scss/utilities";
+
+// Override utilities
+@import "styles/utilities";
+
+// Include Bootstrap stylesheets
+@import "bootstrap/scss/bootstrap";
+
+// Custom code, including which one override Bootstrap
+@import "styles/override";
+@import "styles/custom";
