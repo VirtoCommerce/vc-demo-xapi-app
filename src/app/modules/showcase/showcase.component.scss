@@ -1,0 +1,59 @@
+.section {
+  margin-top: 2em;
+}
+
+.component {
+  position: relative;
+
+  + .component {
+    margin-top: 1rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  .modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    z-index: 1;
+    display: block;
+  }
+
+  .modal-dialog {
+    width: 90%;
+  }
+
+  .popover {
+    position: relative;
+    display: inline-block;
+    width: 220px;
+    margin: 20px;
+  }
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+.progress {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  #header {
+    margin-bottom: 2em;
+    text-align: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar {
+    .fa {
+      display: none;
+    }
+  }
+}

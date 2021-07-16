@@ -20,16 +20,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'vc-demo-xapi-app'`, () => {
+  it(`should have as title 'VirtoCommerce XAPI App (DEMO)'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('vc-demo-xapi-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('vc-demo-xapi-app app is running!');
+    expect(app.title).toEqual('VirtoCommerce XAPI App (DEMO)');
   });
 });

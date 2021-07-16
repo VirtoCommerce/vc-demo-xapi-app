@@ -1,0 +1,42 @@
+$override-variant-names: ("primary", "success", "info", "warning", "danger");
+@each $name in $override-variant-names {
+  $theme-color: map-get($theme-colors, $name);
+  .btn-#{$name} {
+    @include button-variant($background: $theme-color, $border: $theme-color, $color: $white, $hover-color: $white, $active-color: $white);
+  }
+  .btn-outline-#{$name} {
+    @include button-outline-variant($color: $theme-color, $color-hover: $white, $active-color: $white);
+  }
+}
+
+.btn {
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: $gray-200;
+      border-color: $gray-500;
+      color: $text-muted;
+      cursor: default;
+    }
+  }
+}
+
+.btn:not(.btn-link) {
+  text-transform: uppercase;
+}
+
+.btn-outline-light {
+  color: #b3bec7;
+}
+
+.btn-lg {
+  line-height: $btn-line-height-lg;
+}
+
+.btn-sm {
+  line-height: $btn-line-height-sm;
+}

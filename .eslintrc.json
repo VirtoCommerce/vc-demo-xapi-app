@@ -19,8 +19,6 @@
         "plugin:@angular-eslint/recommended",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:editorconfig/all",
-        "plugin:editorconfig/noconflict",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:ngrx/recommended"
       ],
@@ -50,6 +48,7 @@
         "comma-spacing": "error",
         "comma-style": "error",
         "computed-property-spacing": "error",
+        "eol-last": "error",
         "func-call-spacing": "error",
         "function-call-argument-newline": [
           "error",
@@ -60,8 +59,10 @@
           "multiline-arguments"
         ],
         "implicit-arrow-linebreak": "error",
+        "indent": ["error", 2],
         "key-spacing": "error",
         "keyword-spacing": "error",
+        "linebreak-style": ["error", "windows"],
         "lines-around-comment": "error",
         "lines-between-class-members": "error",
         "max-len": [
@@ -84,6 +85,7 @@
             "maxBOF": 0
           }
         ],
+        "no-trailing-spaces": "error",
         "no-unneeded-ternary": "error",
         "no-whitespace-before-property": "error",
         "object-curly-newline": "error",
@@ -128,14 +130,15 @@
         "spaced-comment": "error",
         "switch-colon-spacing": "error",
         "template-tag-spacing": "error",
-        "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/prefer-readonly": [
-          "error"
-        ],
+        "unicode-bom": "error",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
           { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/prefer-readonly": [
+          "error"
         ],
         "@angular-eslint/directive-selector": [
           "error",

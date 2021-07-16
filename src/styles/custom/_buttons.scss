@@ -1,0 +1,27 @@
+.btn-xs {
+  @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $btn-font-size-xs, $btn-border-radius-xs);
+  line-height: $btn-line-height-xs;
+}
+
+.btn-square {
+  width: add($btn-line-height * 1em, add($btn-padding-y * 2, $btn-height-border, false));
+
+  &.btn-lg {
+    width: add($btn-line-height * 1em, add($btn-padding-y-lg * 2, $btn-height-border, false));
+  }
+
+  &.btn-sm {
+    width: add($btn-line-height * 1em, add($btn-padding-y-sm * 2, $btn-height-border, false));
+  }
+
+  &.btn-xs {
+    width: add($btn-line-height * 1em, add($btn-padding-y-xs * 2, $btn-height-border, false));
+  }
+}
+
+.btn-white {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+  &:hover {
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
+  }
+}

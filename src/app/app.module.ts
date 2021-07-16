@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { EnvironmentVariablesModule } from './modules/environment-variables/environment-variables.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppInitializerService } from './services/app-initializer.service';
+import { NgbDropdownModule, NgbNavModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appInitializerFactory = (appInitializer: AppInitializerService) => () => appInitializer.initialize();
 
@@ -25,10 +25,12 @@ const appInitializerFactory = (appInitializer: AppInitializerService) => () => a
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25,
-      logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot([]),
     EnvironmentVariablesModule,
+    NgbDropdownModule,
+    NgbNavModule,
+    NgbPaginationModule,
   ],
   providers: [
     {

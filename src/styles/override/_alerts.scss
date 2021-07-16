@@ -1,0 +1,7 @@
+.alert-success {
+  @include alert-variant($primary, $primary, $white);
+}
+
+.alert button.close {
+  font-size: 1.563rem;
+}

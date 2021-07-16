@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ShowcaseComponent } from './showcase.component';
 
 const routes: Routes = [
-  { path: 'showcase',
-    loadChildren: () => import('./modules/showcase/showcase.module').then(m => m.ShowcaseModule) },
+  { path: '',
+    component: ShowcaseComponent },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forChild(routes),
   ],
   exports: [
     RouterModule,
   ],
 })
-export class AppRoutingModule { }
+export class ShowcaseRoutingModule { }
