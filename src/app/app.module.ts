@@ -1,18 +1,18 @@
+import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgbDropdownModule, NgbNavModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
-import { EnvironmentVariablesModule } from './modules/environment-variables/environment-variables.module';
-import { HttpClientModule } from '@angular/common/http';
+import { GraphQLModule } from './graphql.module';
 import { AppInitializerService } from './services/app-initializer.service';
-import { NgbDropdownModule, NgbNavModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { metaReducers, reducers } from './store';
 
-const appInitializerFactory = (appInitializer: AppInitializerService) => () => appInitializer.initialize();
+const appInitializerFactory =
+  (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ const appInitializerFactory = (appInitializer: AppInitializerService) => () => a
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot([]),
-    EnvironmentVariablesModule,
+    GraphQLModule,
     NgbDropdownModule,
     NgbNavModule,
     NgbPaginationModule,
