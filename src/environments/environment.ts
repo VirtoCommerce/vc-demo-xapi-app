@@ -4,9 +4,9 @@
  * The list of file replacements can be found in `angular.json`.
  */
 
-export const environment = {
-  production: false,
-};
+import { Environment } from './environment.type';
+
+export const environment = new Environment(false);
 
 /*
  * For easier debugging in development mode, you can import the following file
