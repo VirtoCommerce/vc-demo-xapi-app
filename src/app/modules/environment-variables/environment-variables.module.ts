@@ -5,14 +5,14 @@ import * as fromEnvironmentVariables from './store/environment-variables.reducer
 import { EffectsModule } from '@ngrx/effects';
 import { EnvironmentVariablesEffects } from './store/environment-variables.effects';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     StoreModule.forFeature(fromEnvironmentVariables.environmentVariablesFeatureKey, fromEnvironmentVariables.reducer),
-    EffectsModule.forFeature([EnvironmentVariablesEffects])
-  ]
+    EffectsModule.forFeature([
+      EnvironmentVariablesEffects,
+    ]),
+  ],
 })
 export class EnvironmentVariablesModule { }

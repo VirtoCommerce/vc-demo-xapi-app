@@ -34,9 +34,21 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
+    - name: Set git to use CRLF
+      run: |
+        git config --global core.autocrlf true
+
+    - uses: actions/checkout@v2    
       with:
         fetch-depth: 0
+    
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Run linting
+      run: |
+        npm run lint
 
     - name: Setup sonarqube
       uses: warchant/setup-sonar-scanner@v3
@@ -76,14 +88,6 @@ jobs:
       uses: VirtoCommerce/vc-github-actions/sonar-theme@master
       with:
         projectVersion: ${{ env.VERSION_SUFFIX }}
-
-    - name: npm install
-      run: |
-        npm i
-
-    - name: npm lint
-      run: |
-        npm run lint
 
     - name: Build
       run: |
