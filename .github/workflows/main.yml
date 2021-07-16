@@ -129,7 +129,7 @@ jobs:
       uses: warchant/setup-sonar-scanner@v3
 
     - name: SonarCloud Scan
-      uses: VirtoCommerce/vc-github-actions/sonar-theme@karma
+      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
       with:
         projectVersion: ${{ env.VERSION_SUFFIX }}
 
