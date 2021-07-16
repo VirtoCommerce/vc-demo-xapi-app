@@ -19,7 +19,9 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    // Requried for auto-import because of type resolving bugs in Visual Studio Code/Angular/Typescript
+    "typeRoots": ["node_modules/@types", "node_modules/@angular/common/http"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
