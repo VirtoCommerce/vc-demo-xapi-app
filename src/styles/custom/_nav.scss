@@ -1,0 +1,9 @@
+.nav-outline {
+  > li {
+    > a.active {
+      color: $primary !important;
+      background-color: $body-bg !important;
+      border: 1px solid $primary;
+    }
+  }
+}

@@ -2,8 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'showcase',
-    loadChildren: () => import('./modules/showcase/showcase.module').then(m => m.ShowcaseModule) },
+  {
+    path: 'showcase',
+    loadChildren: () => import('./modules/showcase/showcase.module').then(m => m.ShowcaseModule),
+  },
+  {
+    path: 'registration',
+    loadChildren: () => import('./modules/registration/registration.module').then(m => m.RegistrationModule),
+  },
 ];
 
 @NgModule({

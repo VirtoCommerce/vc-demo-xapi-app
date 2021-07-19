@@ -13,7 +13,10 @@ describe('AppInitializerService', () => {
         HttpClientTestingModule,
       ],
       providers: [
-        provideMockStore({ initialState: {} }),
+        provideMockStore({
+          initialState: {
+          },
+        }),
       ],
     });
     service = TestBed.inject(AppInitializerService);

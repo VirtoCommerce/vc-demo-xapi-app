@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { AppInitializerService } from './services/app-initializer.service';
 import { metaReducers, reducers } from './store';
+import { HeaderComponent } from './components/header/header.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -17,6 +19,8 @@ const appInitializerFactory =
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ const appInitializerFactory =
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
     EffectsModule.forRoot([]),
     GraphQLModule,
     NgbDropdownModule,

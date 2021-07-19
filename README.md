@@ -11,6 +11,10 @@ Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The 
 Run `ng generate component component-name` to generate a new component.  
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module` to generate `angular` files.
 
+### How to generate new lazy-loading module with component
+
+`ng generate module modules/<name> --module app|modules/<name> --route <route>`
+
 ## Linting
 
 Use `npm run lint` to run linter. `npm run lint -- --fix` will fix issues with available auto fixing.
