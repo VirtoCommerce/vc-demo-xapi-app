@@ -29,21 +29,25 @@ describe('StyleguideComponent', () => {
 
   it('should have specified height for medium input', () => {
     const inputDefault = nativeElement.querySelector('#inputDefault');
-    expect(inputDefault?.clientHeight).toBe(34);
+    const expectedHeight = 34;
+    expect(inputDefault?.clientHeight).toBe(expectedHeight);
   });
 
   it('should have specified height for large input', () => {
     const inputLarge = nativeElement.querySelector('#inputLarge');
-    expect(inputLarge?.clientHeight).toBe(46);
+    const expectedHeight = 46;
+    expect(inputLarge?.clientHeight).toBe(expectedHeight);
   });
 
   it('should have specified height for medium button', () => {
     const buttonDefault = nativeElement.querySelector('#buttonDefault');
-    expect(buttonDefault?.clientHeight).toBe(34);
+    const expectedHeight = 34;
+    expect(buttonDefault?.clientHeight).toBe(expectedHeight);
   });
 
   it('should have specified height for large button', () => {
     const buttonLarge = nativeElement.querySelector('#buttonLarge');
-    expect(buttonLarge?.clientHeight).toBe(42);
+    const expectedHeight = 42;
+    expect(buttonLarge?.clientHeight).toBe(expectedHeight);
   });
 });
