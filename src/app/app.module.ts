@@ -13,6 +13,7 @@ import { metaReducers, reducers } from './store';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { FooterComponent } from './components/footer/footer.component';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -22,6 +23,7 @@ const appInitializerFactory =
     AppComponent,
     HeaderComponent,
     NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
