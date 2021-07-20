@@ -21,10 +21,31 @@ $theme-semitransparent-colors: ();
   $theme-semitransparent-colors: map-merge($theme-semitransparent-colors, (#{$name}-semitransparent: rgba($value, 0.5)));
 }
 
+$grid-breakpoints: map-merge(
+  $grid-breakpoints,
+  (
+    xl: 1400px,
+  )
+);
+
+$grid-breakpoints: map-remove($grid-breakpoints, "xxl");
+
+$container-max-widths: map-merge(
+  $container-max-widths,
+  (
+    xl: 1160px,
+  )
+);
+
+$container-max-widths: map-remove($container-max-widths, "xxl");
+
 $spacers: map-merge(
   $spacers,
   (
     5: ($spacer * 2),
-    6: ($spacer * 3)
+    6: ($spacer * 3),
+    7: ($spacer * 4)
   )
 );
+
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);

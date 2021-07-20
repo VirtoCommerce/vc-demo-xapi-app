@@ -1,0 +1,14 @@
+<section class="row">
+  <div class="col">
+    <form [formGroup]="formGroup">
+      <dynamic-ng-bootstrap-form [group]="formGroup"
+                                [model]="formModel">
+      </dynamic-ng-bootstrap-form>                          
+    </form>
+    <vc-registration-company-address></vc-registration-company-address>
+  </div>
+  <aside class="col offset-2 position-relative">
+    <img src="assets/images/company-details.svg"
+         class="position-absolute mt-n7">
+  </aside>
+</section>

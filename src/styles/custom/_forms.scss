@@ -1,0 +1,10 @@
+// Workaround until it will be upgraded to Bootstrap 5
+dynamic-ng-bootstrap-form {
+  label {
+    @extend .form-label;
+  }
+
+  .form-group {
+    @extend .mb-3;
+  }
+}

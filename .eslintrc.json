@@ -97,7 +97,7 @@
             },
             "ObjectPattern": "never",
             "ImportDeclaration": {
-              "multiline": true
+              "consistent": true
             },
             "ExportDeclaration": {
               "multiline": true

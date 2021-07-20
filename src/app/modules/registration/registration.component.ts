@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
   ],
 })
 export class RegistrationComponent {
+  activeId!: string;
 }

@@ -12,6 +12,7 @@ import { AppInitializerService } from './services/app-initializer.service';
 import { metaReducers, reducers } from './store';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -37,6 +38,7 @@ const appInitializerFactory =
     NgbDropdownModule,
     NgbNavModule,
     NgbPaginationModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {

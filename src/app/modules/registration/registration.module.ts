@@ -6,16 +6,24 @@ import { RegistrationComponent } from './registration.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { CompanyDetailsComponent } from './components/company-details/company-details.component';
+import {
+  RegistrationCompanyAddressComponent,
+} from './components/registration-company-address/registration-company-address.component';
 
 @NgModule({
   declarations: [
     RegistrationComponent,
     PersonalInformationComponent,
+    CompanyDetailsComponent,
+    RegistrationCompanyAddressComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     NgbNavModule,
+    DynamicFormsNGBootstrapUIModule,
     RegistrationRoutingModule,
   ],
 })

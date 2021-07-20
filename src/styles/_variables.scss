@@ -1,3 +1,4 @@
+$enable-negative-margins: true;
 $enable-rounded: true;
 $enable-shadows: true;
 
@@ -37,6 +38,8 @@ $gray-user-inactive: #8c8c8c;
 
 $yiq-contrasted-threshold: 200;
 
+$grid-columns: 24;
+
 $font-family-sans-serif: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-condensed: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-weight-bold: 700;
@@ -72,25 +75,27 @@ $form-feedback-font-size: $font-size-base;
 
 $border-radius-sm: .2rem;
 
-$input-bg: $body-bg;
-$input-bg-checked: $secondary;
-$input-border-radius: 0;
-$input-border-radius-sm: 0;
-$input-border-radius-lg: 0;
-$input-focus-border-color: $secondary;
-$input-border-checked: $secondary;
-$input-padding-y: 0.438rem;
-$input-padding-x: 0.938rem;
-$input-color: $body-color;
-
 $input-btn-border-width: 1px;
 $input-btn-font-size: 0.9375rem;
 $input-btn-line-height: 1.3392875;
-$input-btn-padding-x: 1rem;
 
 $input-btn-font-size-sm: $font-size-sm;
 $input-btn-line-height-sm: $line-height-sm;
 $input-btn-line-height-lg: $line-height-lg;
+
+$input-btn-padding-x: 1rem;
+$input-btn-padding-y: 0.4375rem;
+$input-btn-padding-y-lg: 0.8125rem;
+
+$input-bg: $body-bg;
+$input-bg-checked: $secondary;
+$input-font-size: $input-btn-font-size;
+$input-font-size-lg: $input-font-size;
+$input-focus-border-color: $secondary;
+$input-border-checked: $secondary;
+$input-padding-x: 0.938rem;
+$input-padding-y: $input-btn-padding-y;
+$input-color: $body-color;
 
 $paragraph-margin-bottom: 0.625rem;
 
@@ -115,6 +120,7 @@ $btn-padding-y: $input-padding-y;
 $btn-padding-x: $input-padding-x;
 
 $btn-line-height-lg: $input-btn-line-height-lg;
+$btn-padding-y-lg: 6px;
 
 $btn-border-radius-sm: $border-radius-sm;
 $btn-font-size-sm: $input-btn-font-size-sm;
