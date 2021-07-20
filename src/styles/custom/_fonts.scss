@@ -1,5 +1,14 @@
 @use "@fontsource/lato/scss/mixins" as Lato;
 @use "@fontsource/roboto-condensed/scss/mixins" as RobotoCondensed;
 
-@include Lato.fontFace();
+@include Lato.fontFace($weight: 100);
+@include Lato.fontFace($weight: 100, $style: italic);
+@include Lato.fontFace($weight: 300);
+@include Lato.fontFace($weight: 300, $style: italic);
+@include Lato.fontFace($weight: 400);
+@include Lato.fontFace($weight: 400, $style: italic);
+@include Lato.fontFace($weight: 700);
+@include Lato.fontFace($weight: 700, $style: italic);
+@include Lato.fontFace($weight: 900);
+@include Lato.fontFace($weight: 900, $style: italic);
 @include RobotoCondensed.fontFace();

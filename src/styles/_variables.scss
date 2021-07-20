@@ -35,6 +35,7 @@ $gray-modal-bg: #f8f8f8;
 $gray-modal-border: #e5e5e5;
 $gray-checkout-card-border: #e3e3e3;
 $gray-user-inactive: #8c8c8c;
+$gray-navbar-light: #827869;
 
 $yiq-contrasted-threshold: 200;
 
@@ -140,7 +141,7 @@ $dropdown-item-padding-x: 1.25rem;
 $dropdown-link-active-bg: $primary;
 
 $navbar-dark-color: $white;
-$navbar-light-color: $black;
+$navbar-light-color: $gray-navbar-light;
 
 $nav-link-disabled-color: $gray-300;
 
