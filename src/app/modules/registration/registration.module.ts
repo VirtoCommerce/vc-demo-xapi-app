@@ -11,6 +11,7 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
 import {
   RegistrationCompanyAddressComponent,
 } from './components/registration-company-address/registration-company-address.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {
     PersonalInformationComponent,
     CompanyDetailsComponent,
     RegistrationCompanyAddressComponent,
+    ThankYouComponent,
   ],
   imports: [
     CommonModule,

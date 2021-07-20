@@ -1,47 +1,55 @@
-<article class="row g-0">
-  <div class="col">
-    <h1 class="mb-4">Registration</h1>
+<main class="h-100" role="main">
+  <div class="container pt-4 pb-6">
+    <article class="row g-0">
+      <div class="col">
+        <h1 class="mb-4">Registration</h1>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-11">
+        <ul ngbNav
+            #nav="ngbNav"
+            [(activeId)]="activeId"
+            class="nav-pills nav-outline justify-content-between mb-4">
+          <li ngbNavItem="personal-information">
+            <a ngbNavLink
+              class="disabled">
+              <h3 class="text-condensed mb-0">
+                1 <span [ngClass]="{'text-black': activeId !== 'personal-information'}">Personal information</span>
+              </h3>
+            </a>
+            <ng-template ngbNavContent>
+              <vc-personal-information></vc-personal-information>
+            </ng-template>
+          </li>
+          <li ngbNavItem="company-details">
+            <a ngbNavLink
+               class="disabled ms-5">
+              <h3 class="text-condensed mb-0">
+                2 <span [ngClass]="{'text-black': activeId !== 'company-details'}">Company details</span>
+              </h3>
+            </a>
+            <ng-template ngbNavContent>
+              <vc-company-details></vc-company-details>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <div [ngbNavOutlet]="nav"
+             class="mb-3">
+        </div>
+        <button *ngIf="activeId === 'personal-information'" class="btn btn-primary" (click)="nav.select('company-details')">
+          <span class="mx-5">Next step</span>
+        </button>
+        <button *ngIf="activeId === 'company-details'" class="btn btn-outline-primary" (click)="nav.select('personal-information')">
+          <span class="mx-5">Back</span>
+        </button>
+        <button *ngIf="activeId === 'company-details'" class="btn btn-primary ms-3">
+          <span class="mx-5">Submit</span>
+        </button>
+      </div>
+    </article>
   </div>
-  <div class="w-100"></div>
-  <div class="col-11">
-    <ul ngbNav
-        #nav="ngbNav"
-        [(activeId)]="activeId"
-        class="nav-pills nav-outline justify-content-between mb-4">
-      <li ngbNavItem="personal-information">
-        <a ngbNavLink>
-          <h3 class="text-condensed mb-0">1 Personal information</h3>
-        </a>
-        <ng-template ngbNavContent>
-          <vc-personal-information></vc-personal-information>
-        </ng-template>
-      </li>
-      <li ngbNavItem="company-details">
-        <a ngbNavLink
-           class="disabled ms-5">
-          <h3 class="mb-0">
-            2 <span class="text-condensed text-black">Company details</span>
-          </h3>
-        </a>
-        <ng-template ngbNavContent>
-          <vc-company-details></vc-company-details>
-        </ng-template>
-      </li>
-    </ul>
-  </div>
-  <div class="w-100"></div>
-  <div class="col">
-    <div [ngbNavOutlet]="nav"
-         class="mb-3">
-    </div>
-    <button *ngIf="activeId === 'personal-information'" class="btn btn-primary" (click)="nav.select('company-details')">
-      <span class="mx-5">Next step</span>
-    </button>
-    <button *ngIf="activeId === 'company-details'" class="btn btn-outline-primary" (click)="nav.select('personal-information')">
-      <span class="mx-5">Back</span>
-    </button>
-    <button *ngIf="activeId === 'company-details'" class="btn btn-primary ms-3">
-      <span class="mx-5">Submit</span>
-    </button>
-  </div>
-</article>
+
+</main>
