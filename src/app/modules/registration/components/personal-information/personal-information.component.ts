@@ -38,10 +38,12 @@ export class PersonalInformationComponent {
           new DynamicInputModel({
             id: 'password',
             label: 'Password',
+            inputType: 'password',
           }),
           new DynamicInputModel({
             id: 'confirmPassword',
             label: 'Confirm password',
+            inputType: 'password',
           }),
         ],
       }),
