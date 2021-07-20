@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DynamicFormModel, DynamicInputModel, DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicFormService } from '@ng-dynamic-forms/core';
+import { COMPANY_DETAILS_MODEL } from './company-details.model';
 
 @Component({
   selector: 'vc-company-details',
@@ -9,12 +10,7 @@ import { DynamicFormModel, DynamicInputModel, DynamicFormService } from '@ng-dyn
   ],
 })
 export class CompanyDetailsComponent {
-  formModel: DynamicFormModel = [
-    new DynamicInputModel({
-      id: 'companyName',
-      label: 'Company Name',
-    }),
-  ];
+  formModel = COMPANY_DETAILS_MODEL;
 
   formGroup = this.formService.createFormGroup(this.formModel, {  });
 

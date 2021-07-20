@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import {
-  DynamicFormGroupModel,
-  DynamicFormLayout,
-  DynamicFormModel,
   DynamicFormService,
-  DynamicInputModel,
 } from '@ng-dynamic-forms/core';
+import { PERSONAL_INFORMATION_LAYOUT } from './personal-information.layout';
+import { PERSONAL_INFORMATION_MODEL } from './personal-information.model';
 
 @Component({
   selector: 'vc-personal-information',
@@ -15,55 +13,9 @@ import {
   ],
 })
 export class PersonalInformationComponent {
-    formModel: DynamicFormModel = [
-      new DynamicInputModel({
-        id: 'firstName',
-        label: 'First Name',
-      }),
-      new DynamicInputModel({
-        id: 'lastName',
-        label: 'Last Name',
-      }),
-      new DynamicInputModel({
-        id: 'email',
-        label: 'Email',
-      }),
-      new DynamicInputModel({
-        id: 'userName',
-        label: 'Username',
-      }),
-      new DynamicFormGroupModel({
-        id: 'passwords',
-        group: [
-          new DynamicInputModel({
-            id: 'password',
-            label: 'Password',
-          }),
-          new DynamicInputModel({
-            id: 'confirmPassword',
-            label: 'Confirm password',
-          }),
-        ],
-      }),
-    ];
+    formModel = PERSONAL_INFORMATION_MODEL;
 
-    formLayout: DynamicFormLayout = {
-      passwords: {
-        element: {
-          control: 'row',
-        },
-      },
-      password: {
-        grid: {
-          host: 'col',
-        },
-      },
-      confirmPassword: {
-        grid: {
-          host: 'col',
-        },
-      },
-    };
+    formLayout = PERSONAL_INFORMATION_LAYOUT;
 
     formGroup = this.formService.createFormGroup(this.formModel, {  });
 

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import {
-  DynamicFormGroupModel,
-  DynamicFormLayout,
-  DynamicFormModel,
-  DynamicFormService,
-  DynamicInputModel,
-} from '@ng-dynamic-forms/core';
+import { Component, OnInit } from '@angular/core';
+import { DynamicFormService, DynamicSelectModel } from '@ng-dynamic-forms/core';
+import { Store } from '@ngrx/store';
+import { filter } from 'rxjs/operators';
+import { nonNull } from 'src/app/helpers/nonNull';
+import { getCountries } from 'src/app/store/countries/countries.actions';
+import { selectCountryOptions } from './countries.selector';
+import { REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT } from './registration-company-address.layout';
+import { REGISTRATION_COMPANY_ADDRESS_FORM_MODEL } from './registration-company-address.model';
 
 @Component({
   selector: 'vc-registration-company-address',
@@ -14,75 +15,24 @@ import {
     './registration-company-address.component.scss',
   ],
 })
-export class RegistrationCompanyAddressComponent {
-  formModel: DynamicFormModel = [
-    new DynamicInputModel({
-      id: 'country',
-      label: 'Country',
-    }),
+export class RegistrationCompanyAddressComponent implements OnInit {
+  formModel = REGISTRATION_COMPANY_ADDRESS_FORM_MODEL;
 
-    new DynamicFormGroupModel({
-      id: 'cityAndPostalCode',
-      group: [
-        new DynamicInputModel({
-          id: 'city',
-          label: 'City',
-        }),
-        new DynamicInputModel({
-          id: 'postalCode',
-          label: 'Zip / Postal Code',
-        }),
-      ],
-    }),
-    new DynamicFormGroupModel({
-      id: 'lines',
-      group: [
-        new DynamicInputModel({
-          id: 'line1',
-          label: 'Street Address',
-        }),
-        new DynamicInputModel({
-          id: 'line2',
-          label: 'Floor / Unit / Suite #',
-        }),
-      ],
-    }),
-  ];
-
-  formLayout: DynamicFormLayout = {
-    cityAndPostalCode: {
-      element: {
-        control: 'row',
-      },
-    },
-    city: {
-      grid: {
-        host: 'col',
-      },
-    },
-    postalCode: {
-      grid: {
-        host: 'col-8',
-      },
-    },
-    lines: {
-      element: {
-        control: 'row',
-      },
-    },
-    line1: {
-      grid: {
-        host: 'col',
-      },
-    },
-    line2: {
-      grid: {
-        host: 'col-8',
-      },
-    },
-  };
+  formLayout = REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT;
 
   formGroup = this.formService.createFormGroup(this.formModel, {  });
 
-  constructor(private readonly formService: DynamicFormService) {}
+  constructor(
+    private readonly formService: DynamicFormService,
+    private readonly store: Store
+  ) {
+  }
+
+  ngOnInit(): void {
+    const countriesModel = this.formService.findModelById<DynamicSelectModel<string>>('country', this.formModel);
+    if (countriesModel != null) {
+      countriesModel.options$ = this.store.select(selectCountryOptions).pipe(filter(nonNull));
+    }
+    this.store.dispatch(getCountries());
+  }
 }

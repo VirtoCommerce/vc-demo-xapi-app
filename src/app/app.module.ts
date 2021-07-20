@@ -13,6 +13,8 @@ import { metaReducers, reducers } from './store';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxMaskModule } from 'ngx-mask';
+import * as fromCountries from './store/countries/countries.reducer';
+import { CountriesEffects } from './store/countries/countries.effects';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -39,6 +41,10 @@ const appInitializerFactory =
     NgbNavModule,
     NgbPaginationModule,
     NgxMaskModule.forRoot(),
+    StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    EffectsModule.forFeature([
+      CountriesEffects,
+    ]),
   ],
   providers: [
     {

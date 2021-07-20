@@ -4,11 +4,12 @@ import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
+import { AppInitializerService } from './services/app-initializer.service';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<NormalizedCacheObject> {
   return {
     link: httpLink.create({
-      uri: `${environment.variables.platformUrl}/graphql`,
+      uri: () => `${environment.variables.platformUrl}/graphql`,
     }),
     cache: new InMemoryCache(),
     connectToDevTools: true,
@@ -22,6 +23,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<Normalized
       useFactory: createApollo,
       deps: [
         HttpLink,
+        AppInitializerService,
       ],
     },
   ],
