@@ -119,11 +119,10 @@
             "scripts": [],
             "customWebpackConfig": {
               "path": "webpack.config.js"
-            },
-            "proxyConfig": "proxy.conf.json"
+            }
           },
           "configurations": {
-            "development": {              
+            "development": {
             },
             "ci": {
               "karmaConfig": "karma.conf.ci.js"

@@ -4,9 +4,9 @@ import { selectCountriesState } from './countries.selectors';
 describe('Countries Selectors', () => {
   it('should select the feature state', () => {
     const result = selectCountriesState({
-      [fromCountries.countriesFeatureKey]: {},
+      [fromCountries.countriesFeatureKey]: [],
     });
 
-    expect(result).toEqual({});
+    expect(result).toEqual([]);
   });
 });

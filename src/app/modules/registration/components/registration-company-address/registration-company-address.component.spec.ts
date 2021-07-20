@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { RegistrationCompanyAddressComponent } from './registration-company-address.component';
 
@@ -8,6 +9,9 @@ describe('RegistrationCompanyAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        provideMockStore(),
+      ],
       declarations: [
         RegistrationCompanyAddressComponent,
       ],

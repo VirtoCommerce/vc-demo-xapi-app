@@ -31,19 +31,19 @@ const appInitializerFactory =
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-    }),
-    EffectsModule.forRoot([]),
     GraphQLModule,
     NgbDropdownModule,
     NgbNavModule,
     NgbPaginationModule,
     NgxMaskModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
     StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       CountriesEffects,
     ]),
