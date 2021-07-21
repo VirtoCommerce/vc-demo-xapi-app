@@ -8,12 +8,12 @@ export const PERSONAL_INFORMATION_LAYOUT: DynamicFormLayout = {
   },
   password: {
     grid: {
-      host: 'col',
+      host: 'col-xs-24 col-md',
     },
   },
   confirmPassword: {
     grid: {
-      host: 'col',
+      host: 'col-xs-24 col-md',
     },
   },
 };
