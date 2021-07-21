@@ -8,12 +8,12 @@ export const REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   city: {
     grid: {
-      host: 'col',
+      host: 'col-xs-24 col-md-16',
     },
   },
   postalCode: {
     grid: {
-      host: 'col-8',
+      host: 'col-xs-24 col-md-8',
     },
   },
   lines: {
@@ -23,12 +23,12 @@ export const REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   line1: {
     grid: {
-      host: 'col',
+      host: 'col-xs-24 col-md-16',
     },
   },
   line2: {
     grid: {
-      host: 'col-8',
+      host: 'col-xs-24 col-md-8',
     },
   },
 };
