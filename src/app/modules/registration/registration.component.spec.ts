@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { RegistrationComponent } from './registration.component';
 
@@ -11,6 +12,9 @@ describe('RegistrationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         NgbNavModule,
+      ],
+      providers: [
+        provideMockStore(),
       ],
       declarations: [
         RegistrationComponent,

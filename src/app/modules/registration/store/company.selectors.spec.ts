@@ -4,7 +4,10 @@ import { selectCompanyState } from './company.selectors';
 describe('Company Selectors', () => {
   it('should select the feature state', () => {
     const result = selectCompanyState({
-      [fromCompany.companyFeatureKey]: {},
+      [fromCompany.companyFeatureKey]: {
+        company: null,
+        succeeded: null,
+      },
     });
 
     expect(result).toEqual({
