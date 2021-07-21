@@ -1,4 +1,9 @@
 {
+  "/connect/token": {
+      "target": "http://localhost:10645/",
+      "secure": false,
+      "logLevel": "debug"
+  },
   "/graphql/*": {
       "target": "http://localhost:10645/",
       "secure": false,

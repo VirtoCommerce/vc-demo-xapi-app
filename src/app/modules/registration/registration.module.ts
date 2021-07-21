@@ -12,6 +12,10 @@ import {
   RegistrationCompanyAddressComponent,
 } from './components/registration-company-address/registration-company-address.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromCompany from './store/company.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CompanyEffects } from './store/company.effects';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
     NgbNavModule,
     DynamicFormsNGBootstrapUIModule,
     RegistrationRoutingModule,
+    StoreModule.forFeature(fromCompany.companyFeatureKey, fromCompany.reducer),
+    EffectsModule.forFeature([
+      CompanyEffects,
+    ]),
   ],
 })
 export class RegistrationModule { }

@@ -1,7 +1,8 @@
 <div class="fs-3 fw-bold text-primary mb-2">Company address</div>
 <form [formGroup]="formGroup">
   <dynamic-ng-bootstrap-form [group]="formGroup"
-                              [layout]="formLayout"
-                              [model]="formModel">
-  </dynamic-ng-bootstrap-form>                          
+                             [layout]="formLayout"
+                             [model]="formModel"
+                             (change)="onChange($event)">
+  </dynamic-ng-bootstrap-form>
 </form>

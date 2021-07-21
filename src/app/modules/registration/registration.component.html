@@ -39,13 +39,19 @@
         <div [ngbNavOutlet]="nav"
              class="mb-3">
         </div>
-        <button *ngIf="activeId === 'personal-information'" class="btn btn-primary" (click)="nav.select('company-details')">
+        <button *ngIf="activeId === 'personal-information'"
+                class="btn btn-primary"
+                (click)="nav.select('company-details')">
           <span class="mx-5">Next step</span>
         </button>
-        <button *ngIf="activeId === 'company-details'" class="btn btn-outline-primary" (click)="nav.select('personal-information')">
+        <button *ngIf="activeId === 'company-details'"
+                class="btn btn-outline-primary"
+                (click)="nav.select('personal-information')">
           <span class="mx-5">Back</span>
         </button>
-        <button *ngIf="activeId === 'company-details'" class="btn btn-primary ms-3">
+        <button *ngIf="activeId === 'company-details'"
+                class="btn btn-primary ms-3"
+                (click)="submit()">
           <span class="mx-5">Submit</span>
         </button>
       </div>

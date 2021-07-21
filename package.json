@@ -2,13 +2,14 @@
   "name": "vc-demo-xapi-app",
   "version": "1.0.0",
   "scripts": {
+    "prepare": "husky install",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "xapi:codegen": "apollo client:codegen ../types --target typescript --useReadOnlyTypes"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "ngx-mask": "^12.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
+    "type-fest": "^1.2.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

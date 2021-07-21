@@ -36,14 +36,14 @@ const appInitializerFactory =
     NgbNavModule,
     NgbPaginationModule,
     NgxMaskModule.forRoot(),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-    }),
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
     EffectsModule.forRoot([]),
+    StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
     EffectsModule.forFeature([
       CountriesEffects,
     ]),

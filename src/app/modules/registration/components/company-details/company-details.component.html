@@ -2,7 +2,8 @@
   <div class="col">
     <form [formGroup]="formGroup">
       <dynamic-ng-bootstrap-form [group]="formGroup"
-                                [model]="formModel">
+                                 [model]="formModel"
+                                 (change)="onChange($event)">
       </dynamic-ng-bootstrap-form>
     </form>
     <vc-registration-company-address></vc-registration-company-address>
