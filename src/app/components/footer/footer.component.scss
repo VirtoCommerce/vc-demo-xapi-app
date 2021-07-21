@@ -1,3 +1,13 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 :host {
   margin-top: auto;
+}
+
+@include media-breakpoint-up(sm) {
+  .copyright {
+    margin-left: -82px;
+  }
 }
