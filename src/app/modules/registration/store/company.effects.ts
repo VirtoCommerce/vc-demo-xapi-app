@@ -32,7 +32,10 @@ export class CompanyEffects {
           command: {
             name: company.name,
             addresses: [
-              company.address,
+              {
+                ...company.address,
+                addressType: 3,
+              },
             ],
           },
         },
