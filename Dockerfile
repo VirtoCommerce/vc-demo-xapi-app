@@ -4,6 +4,7 @@ RUN rm /usr/share/nginx/html/index.html \
     && apk update && apk add -u gettext
 
 COPY ./dist/vc-demo-xapi-app /usr/share/nginx/html
+COPY ./nginx.default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
