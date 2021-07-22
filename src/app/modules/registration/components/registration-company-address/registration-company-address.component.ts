@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import {
   DynamicFormControlEvent,
+  DynamicFormOption,
   DynamicFormService,
 } from '@ng-dynamic-forms/core';
 import { Store } from '@ngrx/store';
-import { filter, takeUntil } from 'rxjs/operators';
+import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getCountries } from 'src/app/store/countries/countries.actions';
 import { setCompany } from '../../store/company.actions';
@@ -17,7 +18,7 @@ import {
 } from './registration-company-address.model';
 import { Country } from 'src/app/models/country.model';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { selectCompanyRegistration } from '../../store/company.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
@@ -59,7 +60,20 @@ export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDes
       .subscribe(countries => {
         this.countries = countries;
       });
-    this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions).pipe(filter(nonNull));
+    this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions)
+      .pipe(filter(nonNull), concatMap(options => {
+        return of([
+          new DynamicFormOption({
+            label: undefined,
+            value: undefined,
+            disabled: true,
+          }),
+          ...options,
+        ]);
+      }));
+    this.formInputs.countryCode.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
+      this.formInputs.countryCode.value = undefined;
+    });
     this.store.dispatch(getCountries());
 
     this.store.select(selectCompanyRegistration)

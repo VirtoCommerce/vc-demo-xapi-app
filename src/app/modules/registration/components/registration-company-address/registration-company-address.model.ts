@@ -6,7 +6,7 @@ import {
 } from '@ng-dynamic-forms/core';
 
 export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
-  countryCode: new DynamicSelectModel<string>({
+  countryCode: new DynamicSelectModel<string|undefined>({
     id: 'countryCode',
     label: 'Country',
   }),
