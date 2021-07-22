@@ -11,4 +11,10 @@
 @include Lato.fontFace($weight: 700, $style: italic);
 @include Lato.fontFace($weight: 900);
 @include Lato.fontFace($weight: 900, $style: italic);
-@include RobotoCondensed.fontFace();
+@include RobotoCondensed.fontFace($weight: 300);
+@include RobotoCondensed.fontFace($weight: 400);
+@include RobotoCondensed.fontFace($weight: 700);
+@include RobotoCondensed.fontFace($weight: 300, $style: italic);
+@include RobotoCondensed.fontFace($weight: 400, $style: italic);
+@include RobotoCondensed.fontFace($weight: 700, $style: italic);
+
