@@ -3,7 +3,7 @@ import { CompanyRegistration } from 'src/app/models/company-registration.model';
 import * as fromCompany from './company.reducer';
 
 export const selectCompanyState = createFeatureSelector<fromCompany.State>(
-  fromCompany.companyFeatureKey
+  fromCompany.companyRegistrationFeatureKey
 );
 
 export const selectCompanyRegistration = createSelector(

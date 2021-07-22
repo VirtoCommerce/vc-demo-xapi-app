@@ -3,7 +3,7 @@ import * as CompanyActions from './company.actions';
 import { CompanyRegistration } from 'src/app/models/company-registration.model';
 import { PartialDeep } from 'type-fest';
 
-export const companyFeatureKey = 'company';
+export const companyRegistrationFeatureKey = 'companyRegistration';
 
 export interface State {
   companyRegistration: PartialDeep<CompanyRegistration> | null;

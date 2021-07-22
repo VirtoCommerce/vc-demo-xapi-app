@@ -31,7 +31,7 @@ import { CompanyEffects } from './store/company.effects';
     NgbNavModule,
     DynamicFormsNGBootstrapUIModule,
     RegistrationRoutingModule,
-    StoreModule.forFeature(fromCompany.companyFeatureKey, fromCompany.reducer),
+    StoreModule.forFeature(fromCompany.companyRegistrationFeatureKey, fromCompany.reducer),
     EffectsModule.forFeature([
       CompanyEffects,
     ]),

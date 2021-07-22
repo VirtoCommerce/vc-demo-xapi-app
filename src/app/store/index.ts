@@ -11,12 +11,12 @@ import * as fromCompany from '../modules/registration/store/company.reducer';
 
 export interface State {
   [fromCountries.countriesFeatureKey]: fromCountries.State;
-  [fromCompany.companyFeatureKey]: fromCompany.State;
+  [fromCompany.companyRegistrationFeatureKey]: fromCompany.State;
 }
 
-export const reducers: ActionReducerMap<State> = {  
+export const reducers: ActionReducerMap<State> = {
   [fromCountries.countriesFeatureKey]: fromCountries.reducer,
-[fromCompany.companyFeatureKey]: fromCompany.reducer,
+[fromCompany.companyRegistrationFeatureKey]: fromCompany.reducer,
 };
 
 

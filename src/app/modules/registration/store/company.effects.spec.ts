@@ -3,8 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
-
 import { CompanyEffects } from './company.effects';
+import * as CompanyRegistration from 'src/app/modules/registration/store/company.reducer';
+import * as Countries from 'src/app/store/countries/countries.reducer';
 
 describe('CompanyEffects', () => {
   let actions$: Observable<any>;
@@ -16,7 +17,12 @@ describe('CompanyEffects', () => {
         RouterTestingModule,
       ],
       providers: [
-        provideMockStore(),
+        provideMockStore({
+          initialState: {
+            countries: Countries.initialState,
+            companyRegistration: CompanyRegistration.initialState,
+          },
+        }),
         CompanyEffects,
         provideMockActions(() => actions$),
       ],

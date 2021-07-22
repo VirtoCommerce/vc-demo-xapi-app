@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-
 import { PersonalInformationComponent } from './personal-information.component';
+import * as CompanyRegistration from 'src/app/modules/registration/store/company.reducer';
+import * as Countries from 'src/app/store/countries/countries.reducer';
 
 describe('PersonalInformationComponent', () => {
   let component: PersonalInformationComponent;
@@ -10,7 +11,12 @@ describe('PersonalInformationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        provideMockStore(),
+        provideMockStore({
+          initialState: {
+            countries: Countries.initialState,
+            companyRegistration: CompanyRegistration.initialState,
+          },
+        }),
       ],
       declarations: [
         PersonalInformationComponent,

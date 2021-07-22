@@ -4,7 +4,7 @@ import { selectCompanyState } from './company.selectors';
 describe('Company Selectors', () => {
   it('should select the feature state', () => {
     const result = selectCompanyState({
-      [fromCompany.companyFeatureKey]: {
+      [fromCompany.companyRegistrationFeatureKey]: {
         companyRegistration: null,
         succeeded: null,
       },
