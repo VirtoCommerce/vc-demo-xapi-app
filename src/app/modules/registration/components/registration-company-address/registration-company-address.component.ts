@@ -1,23 +1,26 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import {
   DynamicFormControlEvent,
   DynamicFormService,
-  DynamicFormValueControlModel,
-  DynamicSelectModel,
 } from '@ng-dynamic-forms/core';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getCountries } from 'src/app/store/countries/countries.actions';
 import { setCompany } from '../../store/company.actions';
-import { Company } from '../../store/company.payload';
+import { CompanyAddress } from 'src/app/models/company-registration.model';
 import { selectCountryOptions } from './countries.selector';
 import { REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT } from './registration-company-address.layout';
-import { REGISTRATION_COMPANY_ADDRESS_FORM_MODEL } from './registration-company-address.model';
-import { PartialDeep } from 'type-fest';
+import {
+  REGISTRATION_COMPANY_ADDRESS_FORM_MODEL,
+  REGISTRATION_COMPANY_ADDRESS_INPUTS,
+} from './registration-company-address.model';
 import { Country } from 'src/app/models/country.model';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { selectCompanyRegistration } from '../../store/company.selectors';
+import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 
 @Component({
   selector: 'vc-registration-company-address',
@@ -26,7 +29,14 @@ import { Subscription } from 'rxjs';
     './registration-company-address.component.scss',
   ],
 })
-export class RegistrationCompanyAddressComponent implements OnInit, OnDestroy {
+export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDestroy {
+  @ViewChild(DynamicNGBootstrapFormComponent, {
+    static: true,
+  })
+  formComponent!: DynamicNGBootstrapFormComponent;
+
+  formInputs = REGISTRATION_COMPANY_ADDRESS_INPUTS;
+
   formModel = REGISTRATION_COMPANY_ADDRESS_FORM_MODEL;
 
   formLayout = REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT;
@@ -35,7 +45,7 @@ export class RegistrationCompanyAddressComponent implements OnInit, OnDestroy {
 
   countries?: Country[] | null;
 
-  countriesSubscription?: Subscription;
+  unsubscriber = new Subject();
 
   constructor(
     private readonly formService: DynamicFormService,
@@ -43,45 +53,36 @@ export class RegistrationCompanyAddressComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
-    const countriesModel = this.formService.findModelById<DynamicSelectModel<string>>('country', this.formModel);
-    if (countriesModel != null) {
-      countriesModel.options$ = this.store.select(selectCountryOptions).pipe(filter(nonNull));
-    }
-    this.countriesSubscription = this.store.select(selectCountriesState)
-      .subscribe(countries => this.countries = countries);
+  ngAfterViewInit(): void {
+    this.store.select(selectCountriesState)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(countries => {
+        this.countries = countries;
+      });
+    this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions).pipe(filter(nonNull));
     this.store.dispatch(getCountries());
+
+    this.store.select(selectCompanyRegistration)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(companyRegistration => {
+        patchFormModel(this.formInputs, companyRegistration?.address);
+        this.formService.detectChanges();
+      });
   }
 
   onChange(event: DynamicFormControlEvent): void {
-    let data: PartialDeep<Company> = {};
-    switch (event.model.id) {
-    case 'country': {
-      const model = event.model as DynamicSelectModel<string>;
-      const countryCode = model.value as string;
-      const countryName = this.countries?.find(country => country.id == countryCode)?.name;
-      data = {
-        address: {
-          countryCode,
-          countryName,
+    const address = fromFormModel<CompanyAddress>(event.model);
+    if (address != null) {
+      this.store.dispatch(setCompany({
+        data: {
+          address,
         },
-      };
-      break;
+      }));
     }
-    default: {
-      const model = event.model as DynamicFormValueControlModel<string>;
-      data = {
-        address: {
-          [model.id]: model.value,
-        },
-      };
-      break;
-    }
-    }
-    this.store.dispatch(setCompany({ data }));
   }
 
   ngOnDestroy(): void {
-    this.countriesSubscription?.unsubscribe();
+    this.unsubscriber.next();
+    this.unsubscriber.complete();
   }
 }

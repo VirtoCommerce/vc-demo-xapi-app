@@ -1,7 +1,7 @@
 import { DynamicFormLayout } from '@ng-dynamic-forms/core';
 
 export const PERSONAL_INFORMATION_LAYOUT: DynamicFormLayout = {
-  passwords: {
+  personalInformation: {
     element: {
       control: 'row',
     },

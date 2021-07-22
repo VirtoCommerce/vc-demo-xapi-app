@@ -10,7 +10,8 @@
             #nav="ngbNav"
             [(activeId)]="activeId"
             class="nav-pills nav-outline flex-nowrap justify-content-between justify-content-sm-start mb-4">
-          <li ngbNavItem="personal-information">
+          <li ngbNavItem="personal-information"
+              destroyOnHide="false">
             <a ngbNavLink
               class="disabled" [ngClass]="{'ps-0': activeId === 'company-details'}">
               <h3 class="text-condensed mb-0">
@@ -21,7 +22,8 @@
               <vc-personal-information></vc-personal-information>
             </ng-template>
           </li>
-          <li ngbNavItem="company-details">
+          <li ngbNavItem="company-details"
+              destroyOnHide="false">
             <a ngbNavLink
                class="disabled ms-5">
               <h3 class="text-condensed mb-0">

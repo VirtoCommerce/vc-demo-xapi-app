@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, filter } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import createOrganizationMutation from 'src/app/graphql/mutations/create-organization.graphql';
 import createContactMutation from 'src/app/graphql/mutations/create-contact.graphql';
@@ -13,8 +13,10 @@ import { createContact, createContactVariables } from 'src/app/graphql/types/cre
 import { ApolloError } from '@apollo/client/errors';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
 import { Store } from '@ngrx/store';
-import { selectCompany } from './company.selectors';
+import { selectCompanyRegistration } from './company.selectors';
 import { Router } from '@angular/router';
+import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
+import { nonNull } from 'src/app/helpers/nonNull';
 
 @Injectable()
 export class CompanyEffects {
@@ -22,18 +24,25 @@ export class CompanyEffects {
     return this.actions$.pipe(
 
       ofType(CompanyActions.registerCompany),
-      concatLatestFrom(() => this.store.select(selectCompany)),
+      concatLatestFrom(() => [
+        this.store.select(selectCompanyRegistration),
+        this.store.select(selectCountriesState).pipe(filter(nonNull)),
+      ]),
       concatMap(([
         _,
-        company,
+        companyRegistration,
+        countries,
       ]) => this.apollo.mutate<createOrganization, createOrganizationVariables>({
         mutation: createOrganizationMutation,
         variables: {
           command: {
-            name: company.name,
+            name: companyRegistration.name,
             addresses: [
               {
-                ...company.address,
+                ...companyRegistration.address,
+                countryName: countries.find(country => {
+                  return country.id === companyRegistration.address.countryCode;
+                })?.name as string,
                 addressType: 3,
               },
             ],
@@ -45,9 +54,9 @@ export class CompanyEffects {
             mutation: createContactMutation,
             variables: {
               command: {
-                name: `${company.owner.firstName} ${company.owner.lastName}`,
-                firstName: company.owner.firstName,
-                lastName: company.owner.lastName,
+                name: `${companyRegistration.owner.firstName} ${companyRegistration.owner.lastName}`,
+                firstName: companyRegistration.owner.firstName,
+                lastName: companyRegistration.owner.lastName,
                 organizations: [
                   result.data?.createOrganization?.id ?? null,
                 ],
@@ -58,9 +67,9 @@ export class CompanyEffects {
               mutation: createUserMutation,
               variables: {
                 command: {
-                  userName: company.owner.userName,
-                  email: company.owner.email,
-                  password: company.owner.password,
+                  userName: companyRegistration.owner.userName,
+                  email: companyRegistration.owner.email,
+                  password: companyRegistration.owner.password,
                   userType: 'Customer',
                   memberId: result.data?.createContact?.id ?? null,
                 },
@@ -76,7 +85,15 @@ export class CompanyEffects {
     );
   });
 
-  companyRegistered$ = createEffect(() => {
+  clearCompanyAfterRegistration$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(CompanyActions.registerCompanySuccess),
+      concatMap(() => of(CompanyActions.clearCompany()))
+    );
+  });
+
+  redirectToThankYouPage$ = createEffect(() => {
     return this.actions$.pipe(
 
       ofType(CompanyActions.registerCompanySuccess),

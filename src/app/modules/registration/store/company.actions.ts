@@ -1,11 +1,15 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
-import { Company } from './company.payload';
+import { CompanyRegistration } from 'src/app/models/company-registration.model';
 import { PartialDeep } from 'type-fest';
 
 export const setCompany = createAction(
   '[Company] Set Company',
-  props<{ data: PartialDeep<Company> }>()
+  props<{ data: PartialDeep<CompanyRegistration> }>()
+);
+
+export const clearCompany = createAction(
+  '[Company] Clear Company'
 );
 
 export const registerCompany = createAction(

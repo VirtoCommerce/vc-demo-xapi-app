@@ -5,13 +5,13 @@ describe('Company Selectors', () => {
   it('should select the feature state', () => {
     const result = selectCompanyState({
       [fromCompany.companyFeatureKey]: {
-        company: null,
+        companyRegistration: null,
         succeeded: null,
       },
     });
 
     expect(result).toEqual({
-      company: null,
+      companyRegistration: null,
       succeeded: null,
     });
   });

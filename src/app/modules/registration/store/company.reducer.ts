@@ -1,17 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CompanyActions from './company.actions';
-import { Company } from './company.payload';
+import { CompanyRegistration } from 'src/app/models/company-registration.model';
 import { PartialDeep } from 'type-fest';
 
 export const companyFeatureKey = 'company';
 
 export interface State {
-  company: PartialDeep<Company> | null;
+  companyRegistration: PartialDeep<CompanyRegistration> | null;
   succeeded: boolean | null;
 }
 
 export const initialState: State = {
-  company: null,
+  companyRegistration: null,
   succeeded: null,
 };
 
@@ -20,18 +20,22 @@ export const reducer = createReducer(
 
   on(CompanyActions.setCompany, (state, action): State => ({
     ...state,
-    company: {
-      ...state.company,
+    companyRegistration: {
+      ...state.companyRegistration,
       ...action.data,
       owner: {
-        ...state.company?.owner,
+        ...state.companyRegistration?.owner,
         ...action.data.owner,
       },
       address: {
-        ...state.company?.address,
+        ...state.companyRegistration?.address,
         ...action.data.address,
       },
     },
+  })),
+  on(CompanyActions.clearCompany, (): State => ({
+    companyRegistration: null,
+    succeeded: null,
   })),
   on(CompanyActions.registerCompany, (state): State => state),
   on(CompanyActions.registerCompanySuccess, (state, action): State => ({
