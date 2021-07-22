@@ -10,6 +10,13 @@ import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { AppInitializerService } from './services/app-initializer.service';
 import { metaReducers, reducers } from './store';
+import { HeaderComponent } from './components/header/header.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { FooterComponent } from './components/footer/footer.component';
+import * as fromCountries from './store/countries/countries.reducer';
+import { CountriesEffects } from './store/countries/countries.effects';
+import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -17,20 +24,31 @@ const appInitializerFactory =
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    NavbarComponent,
+    FooterComponent,
+    NavigationButtonComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    EffectsModule.forRoot([]),
     GraphQLModule,
     NgbDropdownModule,
     NgbNavModule,
     NgbPaginationModule,
+    NgxMaskModule.forRoot(),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
+    EffectsModule.forRoot([]),
+    StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    EffectsModule.forFeature([
+      CountriesEffects,
+    ]),
   ],
   providers: [
     {

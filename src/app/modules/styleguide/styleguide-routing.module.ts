@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShowcaseComponent } from './showcase.component';
+import { StyleguideComponent } from './styleguide.component';
 
 const routes: Routes = [
-  { path: '',
-    component: ShowcaseComponent },
+  {
+    path: '',
+    component: StyleguideComponent,
+  },
 ];
 
 @NgModule({
@@ -15,4 +17,4 @@ const routes: Routes = [
     RouterModule,
   ],
 })
-export class ShowcaseRoutingModule { }
+export class StyleguideRoutingModule { }

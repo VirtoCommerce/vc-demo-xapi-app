@@ -1,6 +1,7 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 const base = require('./karma.conf.base.js');
+const proxies = require('./proxy.conf.json');
 
 module.exports = function (config) {
   base(config);
@@ -9,6 +10,7 @@ module.exports = function (config) {
       ...config.client,
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    proxies: proxies,
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },

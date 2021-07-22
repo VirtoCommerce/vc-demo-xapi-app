@@ -1,0 +1,15 @@
+<section class="row">
+  <form [formGroup]="formGroup"
+        class="col">
+    <dynamic-ng-bootstrap-form [group]="formGroup"
+                               [layout]="formLayout"
+                               [model]="formModel"
+                               (change)="onChange($event)">
+    </dynamic-ng-bootstrap-form>
+  </form>
+  <aside class="d-none d-md-block col offset-2 position-relative">
+    <img class="position-absolute img-fluid mt-n7"
+         src="assets/images/personal-information.svg"
+         alt="">
+  </aside>
+</section>

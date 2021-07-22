@@ -1,3 +1,5 @@
+$enable-negative-margins: true;
+$enable-rounded: true;
 $enable-shadows: true;
 
 $gray-100: #f5f5f5;
@@ -33,10 +35,13 @@ $gray-modal-bg: #f8f8f8;
 $gray-modal-border: #e5e5e5;
 $gray-checkout-card-border: #e3e3e3;
 $gray-user-inactive: #8c8c8c;
+$gray-navbar-light: #827869;
 
 $yiq-contrasted-threshold: 200;
 
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$grid-columns: 24;
+
+$font-family-sans-serif: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-condensed: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-weight-bold: 700;
 $font-size-base: 0.875rem;
@@ -48,7 +53,7 @@ $line-height-lg: 1.176470588;
 
 $small-font-size: 85%;
 
-$headings-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headings-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $headings-font-weight: $font-weight-bold;
 $h1-font-size: $font-size-base * 2.428571429;
 $h2-font-size: $font-size-base * 1.75;
@@ -71,25 +76,27 @@ $form-feedback-font-size: $font-size-base;
 
 $border-radius-sm: .2rem;
 
-$input-bg: $body-bg;
-$input-bg-checked: $secondary;
-$input-border-radius: 0;
-$input-border-radius-sm: 0;
-$input-border-radius-lg: 0;
-$input-focus-border-color: $secondary;
-$input-border-checked: $secondary;
-$input-padding-y: 0.438rem;
-$input-padding-x: 0.938rem;
-$input-color: $body-color;
-
 $input-btn-border-width: 1px;
 $input-btn-font-size: 0.9375rem;
 $input-btn-line-height: 1.3392875;
-$input-btn-padding-x: 1rem;
 
 $input-btn-font-size-sm: $font-size-sm;
 $input-btn-line-height-sm: $line-height-sm;
 $input-btn-line-height-lg: $line-height-lg;
+
+$input-btn-padding-x: 1rem;
+$input-btn-padding-y: 0.4375rem;
+$input-btn-padding-y-lg: 0.8125rem;
+
+$input-bg: $body-bg;
+$input-bg-checked: $secondary;
+$input-font-size: $input-btn-font-size;
+$input-font-size-lg: $input-font-size;
+$input-focus-border-color: $secondary;
+$input-border-checked: $secondary;
+$input-padding-x: 0.938rem;
+$input-padding-y: $input-btn-padding-y;
+$input-color: $body-color;
 
 $paragraph-margin-bottom: 0.625rem;
 
@@ -114,6 +121,7 @@ $btn-padding-y: $input-padding-y;
 $btn-padding-x: $input-padding-x;
 
 $btn-line-height-lg: $input-btn-line-height-lg;
+$btn-padding-y-lg: 0.6875rem;
 
 $btn-border-radius-sm: $border-radius-sm;
 $btn-font-size-sm: $input-btn-font-size-sm;
@@ -133,7 +141,7 @@ $dropdown-item-padding-x: 1.25rem;
 $dropdown-link-active-bg: $primary;
 
 $navbar-dark-color: $white;
-$navbar-light-color: $black;
+$navbar-light-color: $gray-navbar-light;
 
 $nav-link-disabled-color: $gray-300;
 

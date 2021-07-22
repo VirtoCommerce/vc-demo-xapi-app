@@ -1,9 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
 
 const routes: Routes = [
-  { path: 'showcase',
-    loadChildren: () => import('./modules/showcase/showcase.module').then(m => m.ShowcaseModule) },
+  {
+    path: '',
+    component: NavigationButtonComponent,
+  },
+  {
+    path: 'styleguide',
+    loadChildren: () => import('./modules/styleguide/styleguide.module').then(m => m.StyleguideModule),
+  },
+  {
+    path: 'registration',
+    loadChildren: () => import('./modules/registration/registration.module').then(m => m.RegistrationModule),
+  },
 ];
 
 @NgModule({

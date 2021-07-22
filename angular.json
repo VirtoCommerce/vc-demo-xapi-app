@@ -80,6 +80,9 @@
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "vc-demo-xapi-app:build:production"
@@ -119,7 +122,7 @@
             }
           },
           "configurations": {
-            "development": {              
+            "development": {
             },
             "ci": {
               "karmaConfig": "karma.conf.ci.js"

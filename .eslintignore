@@ -1,2 +1,3 @@
 dist/
 src/app/store/index.ts
+src/app/apollo/
