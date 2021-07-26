@@ -7,6 +7,17 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface InputAddItemsType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly cartItems: ReadonlyArray<(InputNewCartItemType | null)>;
+}
+
 export interface InputApplicationUserLoginType {
   readonly loginProvider: string;
   readonly providerKey: string;
@@ -27,6 +38,16 @@ export interface InputAssignRoleType {
   readonly id: string;
   readonly name: string;
   readonly permissions: ReadonlyArray<(InputAssignPermissionType | null)>;
+}
+
+export interface InputClearCartType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
 }
 
 export interface InputCreateContactType {
@@ -99,6 +120,11 @@ export interface InputMemberAddressType {
   readonly regionName?: string | null;
   readonly zip?: string | null;
   readonly addressType?: number | null;
+}
+
+export interface InputNewCartItemType {
+  readonly productId: string;
+  readonly quantity?: number | null;
 }
 
 //==============================================================
