@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'vc-checkout',
@@ -7,5 +9,22 @@ import { Component } from '@angular/core';
     './checkout.component.scss',
   ],
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit, OnDestroy {
+  public cartId!: string;
+
+  routeWatcher!: Subscription;
+
+  constructor(private readonly route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.routeWatcher = this.route
+      .queryParams
+      .subscribe(params => {
+        this.cartId = params.cartId as string;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.routeWatcher.unsubscribe();
+  }
 }
