@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'vc-navbar',
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
   ],
 })
 export class NavbarComponent {
+  constructor(public router: Router) {
+  }
 }
