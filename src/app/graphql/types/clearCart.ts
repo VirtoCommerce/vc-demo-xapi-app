@@ -15,6 +15,10 @@ export interface clearCart_clearCart {
    * Shopping cart Id
    */
   readonly id: string | null;
+  /**
+   * Shopping cart user id
+   */
+  readonly customerId: string | null;
 }
 
 export interface clearCart {

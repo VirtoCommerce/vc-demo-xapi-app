@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
+import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
+import { Observable, Subject } from 'rxjs';
+import { concatMap, takeUntil } from 'rxjs/operators';
 
 import { clearCart, clearCartVariables } from 'src/app/graphql/types/clearCart';
 import { addItemsCart, addItemsCartVariables } from 'src/app/graphql/types/addItemsCart';
@@ -9,8 +12,6 @@ import { me } from 'src/app/graphql/types/me';
 import clearCartMutation from 'src/app/graphql/mutations/clear-cart.graphql';
 import addItemsCartMutation from 'src/app/graphql/mutations/add-cart-items.graphql';
 import getMeQuery from '../../graphql/queries/get-me.graphql';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'vc-navigation-button',
@@ -28,55 +29,61 @@ export class NavigationButtonComponent implements OnDestroy {
   ) {}
 
   openCheckout(): void {
-    this.apollo.query<me>({ query: getMeQuery })
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe(m => {
-        const userId = m.data.me?.id ?? 'Anonymous';
-
-        this.apollo.mutate<clearCart, clearCartVariables>({
-          mutation: clearCartMutation,
-          variables: {
-            command: {
-              userId,
-              storeId: 'Electronics',
-              cartName: 'default',
-              currencyCode: 'USD',
-              cultureName: 'en-US',
-            },
-          },
-        })
-          .pipe(takeUntil(this.unsubscriber))
-          .subscribe(cc => {
-            this.apollo.mutate<addItemsCart, addItemsCartVariables>({
-              mutation: addItemsCartMutation,
-              variables: {
-                command: {
-                  userId,
-                  cartId: cc.data?.clearCart?.id,
-                  storeId: 'Electronics',
-                  cartItems: [
-                    {
-                      productId: '9cbd8f316e254a679ba34a900fccb076',
-                      quantity: 2,
-                    },
-                    {
-                      productId: 'e7eee66223da43109502891b54bc33d3',
-                      quantity: 1,
-                    },
-                  ],
-                },
-              },
-            })
-              .pipe(takeUntil(this.unsubscriber))
-              .subscribe(c => {
-                const cartId = c.data?.addItemsCart?.id;
-
-                void this.router.navigate([
-                  '/checkout',
-                ], { queryParams: { cartId } });
-              });
-          });
+    this.getMe().pipe(
+      concatMap(getMeResult => this.clearCart(getMeResult.data.me?.id ?? 'Anonymous')),
+      concatMap(clearCartResult => this.addItemsToCart(
+        clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
+        clearCartResult.data?.clearCart?.id
+      )),
+      takeUntil(this.unsubscriber)
+    )
+      .subscribe(c => {
+        void this.router.navigate([
+          '/checkout',
+        ], { queryParams: { cartId: c.data?.addItemsCart?.id } });
       });
+  }
+
+  getMe(): Observable<ApolloQueryResult<me>> {
+    return this.apollo.query<me>({ query: getMeQuery });
+  }
+
+  clearCart(userId: string): Observable<FetchResult<clearCart>> {
+    return this.apollo.mutate<clearCart, clearCartVariables>({
+      mutation: clearCartMutation,
+      variables: {
+        command: {
+          userId,
+          storeId: 'Electronics',
+          cartName: 'default',
+          currencyCode: 'USD',
+          cultureName: 'en-US',
+        },
+      },
+    });
+  }
+
+  addItemsToCart(userId: string, cartId: string | null | undefined): Observable<FetchResult<addItemsCart>> {
+    return this.apollo.mutate<addItemsCart, addItemsCartVariables>({
+      mutation: addItemsCartMutation,
+      variables: {
+        command: {
+          userId,
+          cartId,
+          storeId: 'Electronics',
+          cartItems: [
+            {
+              productId: '9cbd8f316e254a679ba34a900fccb076',
+              quantity: 2,
+            },
+            {
+              productId: 'e7eee66223da43109502891b54bc33d3',
+              quantity: 1,
+            },
+          ],
+        },
+      },
+    });
   }
 
   ngOnDestroy():void {

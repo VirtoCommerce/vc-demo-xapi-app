@@ -15,6 +15,10 @@ export interface addItemsCart_addItemsCart {
    * Shopping cart Id
    */
   readonly id: string | null;
+  /**
+   * Shopping cart user id
+   */
+  readonly customerId: string | null;
 }
 
 export interface addItemsCart {
