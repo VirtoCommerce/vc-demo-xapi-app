@@ -7,7 +7,7 @@
 }
 
 form label.required:after {
-  color: $primary;
+  color: $danger;
   content: '*';
 }
 

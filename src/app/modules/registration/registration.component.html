@@ -19,7 +19,7 @@
               </h3>
             </a>
             <ng-template ngbNavContent>
-              <vc-personal-information></vc-personal-information>
+              <vc-personal-information (formWasChanged)="setPersonalInfoValidity($event)"></vc-personal-information>
             </ng-template>
           </li>
           <li ngbNavItem="company-details"
@@ -31,7 +31,7 @@
               </h3>
             </a>
             <ng-template ngbNavContent>
-              <vc-company-details></vc-company-details>
+              <vc-company-details (formWasChanged)="setCompanyDetailsValidity($event)"></vc-company-details>
             </ng-template>
           </li>
         </ul>
@@ -44,6 +44,7 @@
         <div class="d-flex">
           <button *ngIf="activeId === 'personal-information'"
                   class="btn btn-primary flex-fill flex-sm-grow-0"
+                  [disabled]="!personalInfoIsValid"
                   (click)="nav.select('company-details')">
             <span class="mx-5">Next step</span>
           </button>
@@ -56,6 +57,7 @@
           </button>
           <button *ngIf="activeId === 'company-details'"
                   class="btn btn-primary ms-3 flex-fill flex-sm-grow-0"
+                  [disabled]="!(personalInfoIsValid && companyDetailsIsValid)"
                   (click)="submit()">
             <span class="mx-5">Submit</span>
           </button>

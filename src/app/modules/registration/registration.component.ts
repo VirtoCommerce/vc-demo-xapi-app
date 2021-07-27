@@ -12,7 +12,19 @@ import { registerCompany } from './store/company.actions';
 export class RegistrationComponent {
   activeId!: string;
 
+  personalInfoIsValid = false;
+
+  companyDetailsIsValid = false;
+
   constructor(private readonly store: Store) {}
+
+  setPersonalInfoValidity(status: string): void {
+    status === 'VALID' ? this.personalInfoIsValid = true : this.personalInfoIsValid = false;
+  }
+
+  setCompanyDetailsValidity(status: string): void {
+    status === 'VALID' ? this.companyDetailsIsValid = true : this.companyDetailsIsValid = false;
+  }
 
   submit(): void {
     this.store.dispatch(registerCompany());

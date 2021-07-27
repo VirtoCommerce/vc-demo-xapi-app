@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
 import { COMPANY_DETAILS_INPUTS, COMPANY_DETAILS_MODEL } from './company-details.model';
 import { CompanyRegistration } from 'src/app/models/company-registration.model';
@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { selectCompanyRegistration } from '../../store/company.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { COMPANY_DETAILS_LAYOUT } from './company-details.layout';
 
 @Component({
   selector: 'vc-company-details',
@@ -18,6 +19,8 @@ import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstr
   ],
 })
 export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
+  @Output() formWasChanged = new EventEmitter<string>();
+
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
   })
@@ -27,7 +30,11 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
 
   formModel = COMPANY_DETAILS_MODEL;
 
+  formLayout = COMPANY_DETAILS_LAYOUT;
+
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+
+  formIsValid = false;
 
   unsubscriber = new Subject();
 
@@ -53,6 +60,8 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
         data,
       }));
     }
+    const formValidityStatus = event.group.status;
+    this.formWasChanged.emit(formValidityStatus);
   }
 
   ngOnDestroy(): void {

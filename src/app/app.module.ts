@@ -19,6 +19,8 @@ import { CountriesEffects } from './store/countries/countries.effects';
 import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
 import * as fromCart from './store/cart/cart.reducer';
 import { CartEffects } from './store/cart/cart.effects';
+import { NG_VALIDATORS } from '@angular/forms';
+import { passwordMatchValidator } from 'src/app/shared/password-match-validator';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -61,6 +63,11 @@ const appInitializerFactory =
       deps: [
         AppInitializerService,
       ],
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useValue: passwordMatchValidator,
       multi: true,
     },
   ],

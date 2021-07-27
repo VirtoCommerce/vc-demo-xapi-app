@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import {
   DynamicFormControlEvent,
   DynamicFormService,
@@ -22,9 +22,12 @@ import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstr
   ],
 })
 export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
+  @Output() formWasChanged = new EventEmitter<string>()
+
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
   })
+
   formComponent!: DynamicNGBootstrapFormComponent;
 
   formInputs = PERSONAL_INFORMATION_INPUTS;
@@ -34,6 +37,8 @@ export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
   formLayout = PERSONAL_INFORMATION_LAYOUT;
 
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+
+  formIsValid = false;
 
   unsubscriber = new Subject();
 
@@ -61,6 +66,8 @@ export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
         },
       }));
     }
+    const formValidityStatus = event.group.status;
+    this.formWasChanged.emit(formValidityStatus);
   }
 
   ngOnDestroy(): void {
