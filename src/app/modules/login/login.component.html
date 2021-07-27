@@ -9,6 +9,11 @@
         <section class="row">
           <form class="col" [formGroup]="formGroup">
             <dynamic-ng-bootstrap-form [group]="formGroup" [layout]="formLayout" [model]="formModel">
+              <ng-template modelId="password">
+                <div class="mt-2">
+                  <a href>Forgot your password?</a>
+                </div>
+              </ng-template>
             </dynamic-ng-bootstrap-form>
             <div class="d-flex justify-content-between justify-content-sm-start mt-6">
               <button class="btn btn-primary flex-fill flex-sm-grow-0">
