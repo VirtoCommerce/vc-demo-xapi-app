@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { LOGIN_FORM_LAYOUT } from './login-form.layout';
+import { LOGIN_FORM_INPUTS, LOGIN_FORM_MODEL } from './login-form.model';
 
 @Component({
   selector: 'vc-login',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
     './login.component.scss',
   ],
 })
-export class LoginComponent implements OnInit {
-  constructor() { }
+export class LoginComponent {
+  @ViewChild(DynamicNGBootstrapFormComponent, {
+    static: true,
+  })
+  formComponent!: DynamicNGBootstrapFormComponent;
 
-  ngOnInit(): void {
-  }
+  formInputs = LOGIN_FORM_INPUTS;
+
+  formModel = LOGIN_FORM_MODEL;
+
+  formLayout = LOGIN_FORM_LAYOUT;
+
+  formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+
+  constructor(
+    private readonly formService: DynamicFormService
+
+  ) { }
 }

@@ -1,1 +1,29 @@
-<p>login works!</p>
+<main class="h-100" role="main">
+  <div class="container pt-4 pb-6">
+    <article class="row g-0">
+      <div class="col">
+        <h1 class="mb-4">Login</h1>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <section class="row">
+          <form class="col" [formGroup]="formGroup">
+            <dynamic-ng-bootstrap-form [group]="formGroup" [layout]="formLayout" [model]="formModel">
+            </dynamic-ng-bootstrap-form>
+            <div class="d-flex justify-content-between justify-content-sm-start">
+              <button class="btn btn-primary flex-fill flex-sm-grow-0">
+                <span class="mx-5">Login</span>
+              </button>
+              <button class="btn btn-outline-primary ms-3 flex-fill flex-sm-grow-0">
+                <span class="mx-5">Registration</span>
+              </button>
+            </div>
+          </form>
+          <aside class="d-none d-md-block col offset-2">
+            <img class="img-fluid mt-n7" src="assets/images/login.svg" alt="" />
+          </aside>
+        </section>
+      </div>
+    </article>
+  </div>
+</main>
