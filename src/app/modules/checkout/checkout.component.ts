@@ -18,9 +18,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeWatcher = this.route
-      .queryParams
+      .queryParamMap
       .subscribe(params => {
-        this.cartId = params.cartId as string;
+        this.cartId = params.get('cartId')!;
       });
   }
 
