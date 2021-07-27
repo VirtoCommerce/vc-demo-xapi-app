@@ -37,7 +37,7 @@ export class NavigationButtonComponent implements OnDestroy {
           mutation: clearCartMutation,
           variables: {
             command: {
-              userId: userId,
+              userId,
               storeId: 'Electronics',
               cartName: 'default',
               currencyCode: 'USD',
@@ -51,7 +51,7 @@ export class NavigationButtonComponent implements OnDestroy {
               mutation: addItemsCartMutation,
               variables: {
                 command: {
-                  userId: userId,
+                  userId,
                   cartId: cc.data?.clearCart?.id,
                   storeId: 'Electronics',
                   cartItems: [
