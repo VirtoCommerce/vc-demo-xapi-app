@@ -60,10 +60,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
     inputType: 'password',
     validators: {
       required: null,
-      passwordMatchValidator: {
-        name: 'passwordMatchValidator',
-        args: 'personalInformation.password',
-      },
+      passwordMatchValidator: 'personalInformation.password',
     },
     errorMessages: {
       required: 'The {{ label }} is required',

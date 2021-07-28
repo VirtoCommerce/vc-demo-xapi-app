@@ -20,6 +20,7 @@ import { NavigationButtonComponent } from './components/navigation-button/naviga
 import * as fromCart from './store/cart/cart.reducer';
 import { CartEffects } from './store/cart/cart.effects';
 import { NG_VALIDATORS } from '@angular/forms';
+import { DYNAMIC_VALIDATORS, Validator, ValidatorFactory } from '@ng-dynamic-forms/core';
 import { passwordMatchValidator } from 'src/app/shared/password-match-validator';
 
 const appInitializerFactory =
@@ -69,6 +70,15 @@ const appInitializerFactory =
       provide: NG_VALIDATORS,
       useValue: passwordMatchValidator,
       multi: true,
+    },
+    {
+      provide: DYNAMIC_VALIDATORS,
+      useValue: new Map<string, Validator | ValidatorFactory>([
+        [
+          'passwordMatchValidator',
+          passwordMatchValidator,
+        ],
+      ]),
     },
   ],
   bootstrap: [
