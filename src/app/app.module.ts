@@ -17,6 +17,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import * as fromCountries from './store/countries/countries.reducer';
 import { CountriesEffects } from './store/countries/countries.effects';
 import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
+import * as fromCart from './store/cart/cart.reducer';
+import { CartEffects } from './store/cart/cart.effects';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -46,8 +48,10 @@ const appInitializerFactory =
     }),
     EffectsModule.forRoot([]),
     StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
     EffectsModule.forFeature([
       CountriesEffects,
+      CartEffects,
     ]),
   ],
   providers: [

@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { Observable, Subject } from 'rxjs';
 import { concatMap, takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import { clearCart, clearCartVariables } from 'src/app/graphql/types/clearCart';
 import { addItemsCart, addItemsCartVariables } from 'src/app/graphql/types/addItemsCart';
@@ -12,6 +12,7 @@ import { me } from 'src/app/graphql/types/me';
 import clearCartMutation from 'src/app/graphql/mutations/clear-cart.graphql';
 import addItemsCartMutation from 'src/app/graphql/mutations/add-cart-items.graphql';
 import getMeQuery from '../../graphql/queries/get-me.graphql';
+import { setCartUserId } from '../../store/cart/cart.actions';
 
 @Component({
   selector: 'vc-navigation-button',
@@ -25,7 +26,7 @@ export class NavigationButtonComponent implements OnDestroy {
 
   constructor(
     private readonly apollo: Apollo,
-    private readonly router: Router
+    private readonly store: Store
   ) {}
 
   openCheckout(): void {
@@ -38,9 +39,9 @@ export class NavigationButtonComponent implements OnDestroy {
       takeUntil(this.unsubscriber)
     )
       .subscribe(c => {
-        void this.router.navigate([
-          '/checkout',
-        ], { queryParams: { cartId: c.data?.addItemsCart?.id } });
+        this.store.dispatch(setCartUserId({
+          userId: c.data?.addItemsCart?.customerId  ?? 'Anonymous',
+        }));
       });
   }
 

@@ -8,7 +8,7 @@ import {
 import { environment } from '../../environments/environment';
 import * as fromCountries from './countries/countries.reducer';
 import * as fromCompany from '../modules/registration/store/company.reducer';
-import * as fromCart from '../modules/checkout/store/cart.reducer'
+import * as fromCart from './cart/cart.reducer'
 
 export interface State {
   [fromCountries.countriesFeatureKey]: fromCountries.State;

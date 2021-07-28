@@ -1,6 +1,10 @@
-<div>Comments</div>
-<textarea
-    name="comment"
-    rows="5">
-    {{ cart?.comment }}
-</textarea>
+<div>
+    <label for="comment" class="form-label mt-4">Comments</label>
+    <textarea class="form-control" 
+        id="comment" 
+        name="comment" 
+        rows="5" 
+        [value]="cart?.comment"
+        [formControl]="cartComment">
+    </textarea>
+</div>

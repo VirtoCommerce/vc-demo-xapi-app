@@ -7,21 +7,35 @@ export const cartFeatureKey = 'cart';
 
 export interface State {
   cart: PartialDeep<Cart> | null;
+  userId: string | null
 }
 
 export const initialState: State = {
   cart: null,
+  userId: null,
 };
 
 export const reducer = createReducer(
   initialState,
+  on(CartActions.updateStoredCart, (state, action): State => ({
+    ...state,
+    cart: {
+      ...state.cart,
+      ...action.data,
+    },
+  })),
   on(CartActions.getCart, (state): State => state),
   on(CartActions.getCartSuccess, (state, action): State => ({
     ...state,
     cart: {
+      ...state.cart,
       id: action.data?.cart?.id ?? '',
       comment: action.data.cart?.comment ?? '',
     },
   })),
-  on(CartActions.getCartFailure, (state): State => state)
+  on(CartActions.getCartFailure, (state): State => state),
+  on(CartActions.setCartUserId, (state, action): State => ({
+    ...state,
+    userId: action.userId,
+  }))
 );
