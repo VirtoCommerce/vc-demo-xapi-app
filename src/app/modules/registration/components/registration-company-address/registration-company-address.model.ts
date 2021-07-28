@@ -4,6 +4,7 @@ import {
   DynamicInputModel,
   DynamicSelectModel,
 } from '@ng-dynamic-forms/core';
+import { showRequiredMessage } from 'src/app/shared/show-required-message';
 
 export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
   countryCode: new DynamicSelectModel<string|undefined>({
@@ -13,7 +14,7 @@ export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Country'),
     },
   }),
   city: new DynamicInputModel({
@@ -23,7 +24,7 @@ export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('City'),
     },
   }),
   postalCode: new DynamicInputModel({
@@ -33,7 +34,7 @@ export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Zip / Postal Code'),
     },
   }),
   line1: new DynamicInputModel({
@@ -43,7 +44,7 @@ export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Street Address'),
     },
   }),
   line2: new DynamicInputModel({

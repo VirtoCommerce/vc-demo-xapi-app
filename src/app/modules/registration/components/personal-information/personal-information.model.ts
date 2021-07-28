@@ -1,4 +1,5 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
+import { showRequiredMessage } from 'src/app/shared/show-required-message';
 
 export const PERSONAL_INFORMATION_INPUTS = {
   firstName: new DynamicInputModel({
@@ -8,7 +9,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('First Name'),
     },
   }),
   lastName: new DynamicInputModel({
@@ -18,7 +19,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Last Name'),
     },
   }),
   email: new DynamicInputModel({
@@ -29,7 +30,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       email: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Email'),
       email: 'Enter correct email please (ex. john@gmail.com)',
     },
   }),
@@ -40,7 +41,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Username'),
     },
   }),
   password: new DynamicInputModel({
@@ -51,7 +52,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Password'),
     },
   }),
   confirmPassword: new DynamicInputModel({
@@ -63,7 +64,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       passwordMatchValidator: 'personalInformation.password',
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Confirm password'),
       passwordMatchValidator: 'Passwords are different',
     },
   }),

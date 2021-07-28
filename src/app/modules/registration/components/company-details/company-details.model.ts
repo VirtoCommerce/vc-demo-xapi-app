@@ -1,4 +1,5 @@
 import { DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
+import { showRequiredMessage } from 'src/app/shared/show-required-message';
 
 export const COMPANY_DETAILS_INPUTS = {
   name: new DynamicInputModel({
@@ -8,7 +9,7 @@ export const COMPANY_DETAILS_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: showRequiredMessage('Company Name'),
     },
   }),
 };
