@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutComponent } from './checkout.component';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CartCommentComponent } from './components/cart-comment/cart-comment.component';
@@ -12,6 +12,7 @@ import { CartCommentComponent } from './components/cart-comment/cart-comment.com
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     CheckoutRoutingModule,
   ],

@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { Cart } from 'src/app/models/cart.model';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'vc-cart-comment',
@@ -11,28 +10,28 @@ import { Cart } from 'src/app/models/cart.model';
     './cart-comment.component.scss',
   ],
 })
-export class CartCommentComponent implements OnInit, OnDestroy {
-  @Input() cart?: Cart | null;
+export class CartCommentComponent {
+  @Input() cartCommentText?: string | null;
 
-  @Output() commentUpdateEvent = new EventEmitter<string>()
+  @Output() commentUpdateEvent = new EventEmitter<string | null>()
 
   cartComment = new FormControl();
 
-  debounceWatcher!: Subscription;
+  debounceWatcher: Subject<string> = new Subject<string>();
 
-  sendCommentUpdate(): void {
-    this.commentUpdateEvent.emit(this.cartComment.value);
+  constructor() {
+    this.debounceWatcher.pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    )
+      .subscribe(comment => this.sendCommentUpdate(comment));
   }
 
-  ngOnInit(): void {
-    this.debounceWatcher = this.cartComment.valueChanges.pipe(
-      debounceTime(1000)
-    ).subscribe(() => {
-      this.sendCommentUpdate();
-    });
+  sendCommentUpdate(comment: string): void {
+    this.commentUpdateEvent.emit(comment);
   }
 
-  ngOnDestroy(): void {
-    this.debounceWatcher.unsubscribe();
+  onModelChange(comment: string): void {
+    this.debounceWatcher.next(comment);
   }
 }

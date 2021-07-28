@@ -1,5 +1,8 @@
 <main class="h-100" role="main">
     <div class="container pt-1 pb-1">
-        <vc-cart-comment [cart]="cart" (commentUpdateEvent)="onCommentUpdate($event)"></vc-cart-comment>
+        <vc-cart-comment 
+        [cartCommentText]="cart?.comment" 
+        (commentUpdateEvent)="onCommentUpdate($event)">
+        </vc-cart-comment>
     </div>
 </main>

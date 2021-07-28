@@ -20,7 +20,7 @@ export const getCartFailure = createAction(
 
 export const updateCartComment = createAction(
   '[Cart] Update Cart Comment',
-  props<{ comment: string }>()
+  props<{ comment: string | null }>()
 );
 
 export const updateCartCommentSuccess = createAction(

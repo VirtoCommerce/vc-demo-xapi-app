@@ -4,7 +4,7 @@
         id="comment" 
         name="comment" 
         rows="5" 
-        [value]="cart?.comment"
-        [formControl]="cartComment">
+        [ngModel]='cartCommentText'
+        (ngModelChange)='onModelChange($event)'>
     </textarea>
 </div>
