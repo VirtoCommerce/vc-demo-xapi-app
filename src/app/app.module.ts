@@ -22,6 +22,7 @@ import * as fromCart from './store/cart/cart.reducer';
 import { CartEffects } from './store/cart/cart.effects';
 import { SectorsEffects } from './store/sectors/sectors.effects';
 import { ValidationModule } from './modules/validation/validation.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -59,6 +60,7 @@ const appInitializerFactory =
       SectorsEffects,
     ]),
     ValidationModule,
+    FontAwesomeModule,
   ],
   providers: [
     {

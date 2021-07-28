@@ -30,6 +30,7 @@ $body-color: #111;
 $text-muted: #757575;
 $text-muted-contrast: #999;
 $text-danger-alert: #a94442;
+$light-pink: #fcebea;
 
 $dark-green: #3c763d;
 $gray-modal-bg: #f8f8f8;
@@ -182,7 +183,7 @@ $modal-header-padding-y: 0.813rem;
 $modal-header-padding-x: 0.938rem;
 $close-font-size: $font-size-base * 2.5;
 
-$alert-padding-y: 0.938rem;
-$alert-padding-x: 0.938rem;
+$alert-padding-y: 0.625rem;
+$alert-padding-x: 0.625rem;
 $alert-margin-bottom: 1.25rem;
-$alert-border-radius: 0;
+$alert-border-radius: 0.188rem;

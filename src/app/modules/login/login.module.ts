@@ -6,6 +6,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoggedInComponent } from './components/logged-in/logged-in.component';
+import { ErrorsModule } from '../errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoggedInComponent } from './components/logged-in/logged-in.component';
     ReactiveFormsModule,
     DynamicFormsNGBootstrapUIModule,
     LoginRoutingModule,
+    ErrorsModule,
   ],
 })
 export class LoginModule { }

@@ -8,6 +8,7 @@
       <div class="col">
         <section class="row">
           <form class="col" [formGroup]="formGroup">
+            <vc-errors [message]="errorMessage"></vc-errors>
             <dynamic-ng-bootstrap-form [group]="formGroup" [layout]="formLayout" [model]="formModel">
               <ng-template modelId="password">
                 <div class="mt-2">

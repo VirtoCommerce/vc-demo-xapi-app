@@ -2,6 +2,10 @@
   @include alert-variant($primary, $primary, $white);
 }
 
+.alert-danger {
+  @include alert-variant($light-pink, $light-pink, $white);
+}
+
 .alert button.close {
   font-size: 1.563rem;
 }

@@ -1,0 +1,7 @@
+<div class="alert alert-danger d-flex align-items-center" *ngIf="message">
+  <fa-stack class="me-2">
+    <fa-icon [icon]="faCircle" class="text-danger" stackItemSize="2x"></fa-icon>
+    <fa-icon [icon]="faTimes" [inverse]="true" stackItemSize="1x"></fa-icon>
+  </fa-stack>
+  <span class="text-black">{{message}}</span>
+</div>
