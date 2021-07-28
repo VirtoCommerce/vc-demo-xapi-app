@@ -7,11 +7,17 @@ export const LOGIN_FORM_LAYOUT: DynamicFormLayout = {
     },
   },
   password: {
+    element: {
+      label: 'required',
+    },
     grid: {
       host: 'col-24',
     },
   },
   userName: {
+    element: {
+      label: 'required',
+    },
     grid: {
       host: 'col-24',
     },
