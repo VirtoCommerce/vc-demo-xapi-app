@@ -18,12 +18,12 @@ export class RegistrationComponent {
 
   constructor(private readonly store: Store) {}
 
-  setPersonalInfoValidity(status: string): void {
-    status === 'VALID' ? this.personalInfoIsValid = true : this.personalInfoIsValid = false;
+  setPersonalInfoValidity(status: boolean): void {
+    this.personalInfoIsValid = status;
   }
 
-  setCompanyDetailsValidity(status: string): void {
-    status === 'VALID' ? this.companyDetailsIsValid = true : this.companyDetailsIsValid = false;
+  setCompanyDetailsValidity(status: boolean): void {
+    this.companyDetailsIsValid = status;
   }
 
   submit(): void {

@@ -19,7 +19,7 @@ import { COMPANY_DETAILS_LAYOUT } from './company-details.layout';
   ],
 })
 export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
-  @Output() formWasChanged = new EventEmitter<string>();
+  @Output() formWasChanged = new EventEmitter<boolean>();
 
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
@@ -35,6 +35,8 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
 
   formIsValid = false;
+
+  childFormIsValid = false;
 
   unsubscriber = new Subject();
 
@@ -53,6 +55,11 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
       });
   }
 
+  onChildFormChange(childFormIsValid: boolean): void {
+    this.childFormIsValid = childFormIsValid;
+    this.formWasChanged.emit(this.formIsValid && this.childFormIsValid);
+  }
+
   onChange(event: DynamicFormControlEvent): void {
     const data = fromFormModel<CompanyRegistration>(event.model);
     if (data != null) {
@@ -60,8 +67,8 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
         data,
       }));
     }
-    const formValidityStatus = event.group.status;
-    this.formWasChanged.emit(formValidityStatus);
+    this.formIsValid = event.group.valid;
+    this.formWasChanged.emit(this.formIsValid && this.childFormIsValid);
   }
 
   ngOnDestroy(): void {
