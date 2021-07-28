@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { NavigationButtonComponent } from './navigation-button.component';
+import { CheckoutComponent } from './checkout.component';
 
-describe('NavigationButtonComponent', () => {
-  let component: NavigationButtonComponent;
-  let fixture: ComponentFixture<NavigationButtonComponent>;
+describe('CheckoutComponent', () => {
+  let component: CheckoutComponent;
+  let fixture: ComponentFixture<CheckoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        NavigationButtonComponent,
+        CheckoutComponent,
       ],
       imports: [
         RouterTestingModule,
@@ -20,7 +20,7 @@ describe('NavigationButtonComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavigationButtonComponent);
+    fixture = TestBed.createComponent(CheckoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
