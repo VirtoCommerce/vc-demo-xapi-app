@@ -1,4 +1,4 @@
-import { loginSuccess } from './../modules/login/store/login.actions';
+import { loginRestore } from './../modules/login/store/login.actions';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -24,7 +24,7 @@ export class AppInitializerService {
     const token = localStorage.getItem('token');
 
     if (token !== null) {
-      this.store.dispatch(loginSuccess({ token }));
+      this.store.dispatch(loginRestore({ token }));
     }
   }
 }

@@ -5,12 +5,12 @@ export const loginFeatureKey = 'login';
 
 export interface State {
   token: string | null,
-  error: string | null,
+  error: string,
 }
 
 export const initialState: State = {
   token: null,
-  error: null,
+  error: '',
 };
 
 export const reducer = createReducer(
@@ -19,7 +19,11 @@ export const reducer = createReducer(
   on(LoginActions.login, (state): State => state),
   on(LoginActions.loginSuccess, (_, action) : State => ({
     token: action.token,
-    error: null,
+    error: '',
+  })),
+  on(LoginActions.loginRestore, (_, action) : State => ({
+    token: action.token,
+    error: '',
   })),
   on(LoginActions.loginFailure, (state, action) : State => ({
     ...state,

@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { from, of } from 'rxjs';
 
 import * as LoginActions from './login.actions';
 import { HttpParams, HttpClient } from '@angular/common/http';
@@ -27,7 +28,7 @@ export class LoginEffects {
         }
       ).pipe(
         map(data => LoginActions.loginSuccess({ token: data.access_token })),
-        catchError(error => of(LoginActions.loginFailure({ error: error as string })))
+        catchError(error => of(LoginActions.loginFailure({ error: error.error.errorDescription as string })))
       ))
     );
   });
@@ -39,5 +40,15 @@ export class LoginEffects {
     );
   }, { dispatch: false });
 
-  constructor(private readonly actions$: Actions, private readonly httpClient: HttpClient) {}
+  redirectToThankYouPage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LoginActions.loginSuccess),
+      concatMap(() => from(this.router.navigate([
+        'login',
+        'logged-in',
+      ])))
+    );
+  }, { dispatch: false });
+
+  constructor(private readonly actions$: Actions, private readonly httpClient: HttpClient, private readonly router: Router) {}
 }

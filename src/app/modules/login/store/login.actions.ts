@@ -10,6 +10,11 @@ export const loginSuccess = createAction(
   props<{ token: string }>()
 );
 
+export const loginRestore = createAction(
+  '[Login] Login Restore',
+  props<{ token: string }>()
+);
+
 export const loginFailure = createAction(
   '[Login] Login Failure',
   props<{ error: string }>()
