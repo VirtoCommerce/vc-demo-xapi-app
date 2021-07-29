@@ -24,8 +24,7 @@ export class CartEffects {
   getCart$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.getCart),
-      concatMap(() => this.apollo.watchQuery<cart>(
-        {
+      concatMap(() => this.apollo.watchQuery<cart>({
           query: getCartQuery,
           variables: {
             ...this.baseCartVariables,
