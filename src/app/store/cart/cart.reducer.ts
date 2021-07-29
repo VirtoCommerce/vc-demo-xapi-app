@@ -7,12 +7,10 @@ export const cartFeatureKey = 'cart';
 
 export interface State {
   cart: PartialDeep<Cart> | null;
-  userId: string | null
 }
 
 export const initialState: State = {
   cart: null,
-  userId: null,
 };
 
 export const reducer = createReducer(
@@ -34,8 +32,5 @@ export const reducer = createReducer(
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),
-  on(CartActions.setCartUserId, (state, action): State => ({
-    ...state,
-    userId: action.userId,
-  }))
+  on(CartActions.setCartUserId, (state): State => state)
 );

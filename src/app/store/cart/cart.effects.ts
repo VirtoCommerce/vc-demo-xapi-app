@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, withLatestFrom, tap } from 'rxjs/operators';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { ApolloError } from '@apollo/client/errors';
@@ -11,7 +11,6 @@ import * as CartActions from './cart.actions';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUserId } from './cart.selectors';
 
 @Injectable()
 export class CartEffects {
@@ -25,16 +24,12 @@ export class CartEffects {
   getCart$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.getCart),
-      withLatestFrom(this.store.select(selectUserId)),
-      concatMap(([
-        _,
-        userId,
-      ]) => this.apollo.watchQuery<cart>(
+      concatMap(() => this.apollo.watchQuery<cart>(
         {
           query: getCartQuery,
           variables: {
             ...this.baseCartVariables,
-            userId,
+            userId: localStorage.getItem('cartUserId'),
           },
         }
       )
@@ -49,16 +44,12 @@ export class CartEffects {
   updateCartComment$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.updateCartComment),
-      withLatestFrom(this.store.select(selectUserId)),
-      concatMap(([
-        action,
-        userId,
-      ]) => this.apollo.mutate<updateCartComment, updateCartCommentVariables>({
+      concatMap(action => this.apollo.mutate<updateCartComment, updateCartCommentVariables>({
         mutation: updateCartCommentMutation,
         variables: {
           command: {
             ...this.baseCartVariables,
-            userId: userId ?? '',
+            userId: localStorage.getItem('cartUserId') ?? '',
             comment: action.comment,
           },
         },
@@ -74,7 +65,8 @@ export class CartEffects {
   setCartUserId$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.setCartUserId),
-      tap(() => {
+      tap(result => {
+        localStorage.setItem('cartUserId', result.userId);
         void this.router.navigate([
           '/checkout',
         ]);

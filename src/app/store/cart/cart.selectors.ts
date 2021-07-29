@@ -10,8 +10,3 @@ export const selectCart = createSelector(
   selectCartState,
   (state: fromCart.State) => state.cart as Cart
 );
-
-export const selectUserId = createSelector(
-  selectCartState,
-  (state: fromCart.State) => state.userId
-);

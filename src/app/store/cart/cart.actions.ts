@@ -40,6 +40,6 @@ export const updateStoredCart = createAction(
 
 export const setCartUserId = createAction(
   '[Cart] Set Cart UserId',
-  props<{ userId: string | null }>()
+  props<{ userId: string }>()
 );
 
