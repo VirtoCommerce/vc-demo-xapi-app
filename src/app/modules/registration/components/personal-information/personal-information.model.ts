@@ -1,5 +1,5 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
-import { showRequiredMessage } from 'src/app/shared/show-required-message';
+import  * as validationMessages from 'src/app/shared/validation/constants/validation-messages.constants';
 
 export const PERSONAL_INFORMATION_INPUTS = {
   firstName: new DynamicInputModel({
@@ -9,7 +9,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: showRequiredMessage('First Name'),
+      required: validationMessages.requiredMessage,
     },
   }),
   lastName: new DynamicInputModel({
@@ -19,7 +19,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: showRequiredMessage('Last Name'),
+      required: validationMessages.requiredMessage,
     },
   }),
   email: new DynamicInputModel({
@@ -30,7 +30,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       email: null,
     },
     errorMessages: {
-      required: showRequiredMessage('Email'),
+      required: validationMessages.requiredMessage,
       email: 'Enter correct email please (ex. john@gmail.com)',
     },
   }),
@@ -41,7 +41,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: showRequiredMessage('Username'),
+      required: validationMessages.requiredMessage,
     },
   }),
   password: new DynamicInputModel({
@@ -52,7 +52,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: showRequiredMessage('Password'),
+      required: validationMessages.requiredMessage,
     },
   }),
   confirmPassword: new DynamicInputModel({
@@ -64,8 +64,8 @@ export const PERSONAL_INFORMATION_INPUTS = {
       passwordMatchValidator: 'personalInformation.password',
     },
     errorMessages: {
-      required: showRequiredMessage('Confirm password'),
-      passwordMatchValidator: 'Passwords are different',
+      required: validationMessages.requiredMessage,
+      passwordMatchValidator: validationMessages.passwordMismatchMessage,
     },
   }),
 };

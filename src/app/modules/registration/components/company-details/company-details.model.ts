@@ -1,5 +1,5 @@
 import { DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
-import { showRequiredMessage } from 'src/app/shared/show-required-message';
+import  * as validationMessages from 'src/app/shared/validation/constants/validation-messages.constants';
 
 export const COMPANY_DETAILS_INPUTS = {
   name: new DynamicInputModel({
@@ -9,7 +9,7 @@ export const COMPANY_DETAILS_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: showRequiredMessage('Company Name'),
+      required: validationMessages.requiredMessage,
     },
   }),
 };

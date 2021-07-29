@@ -19,9 +19,7 @@ import { CountriesEffects } from './store/countries/countries.effects';
 import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
 import * as fromCart from './store/cart/cart.reducer';
 import { CartEffects } from './store/cart/cart.effects';
-import { NG_VALIDATORS } from '@angular/forms';
-import { DYNAMIC_VALIDATORS, Validator, ValidatorFactory } from '@ng-dynamic-forms/core';
-import { passwordMatchValidator } from 'src/app/shared/password-match-validator';
+import { ValidationModule } from './shared/validation/validation.module';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -56,6 +54,7 @@ const appInitializerFactory =
       CountriesEffects,
       CartEffects,
     ]),
+    ValidationModule,
   ],
   providers: [
     {
@@ -65,20 +64,6 @@ const appInitializerFactory =
         AppInitializerService,
       ],
       multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useValue: passwordMatchValidator,
-      multi: true,
-    },
-    {
-      provide: DYNAMIC_VALIDATORS,
-      useValue: new Map<string, Validator | ValidatorFactory>([
-        [
-          'passwordMatchValidator',
-          passwordMatchValidator,
-        ],
-      ]),
     },
   ],
   bootstrap: [

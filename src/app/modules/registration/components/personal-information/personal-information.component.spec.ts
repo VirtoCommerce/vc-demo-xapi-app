@@ -5,7 +5,7 @@ import * as CompanyRegistration from 'src/app/modules/registration/store/company
 import * as Countries from 'src/app/store/countries/countries.reducer';
 import { NG_VALIDATORS } from '@angular/forms';
 import { DYNAMIC_VALIDATORS, Validator, ValidatorFactory } from '@ng-dynamic-forms/core';
-import { passwordMatchValidator } from 'src/app/shared/password-match-validator';
+import { passwordMatchValidator } from 'src/app/shared/validation/validators/password-match-validator';
 
 describe('PersonalInformationComponent', () => {
   let component: PersonalInformationComponent;
