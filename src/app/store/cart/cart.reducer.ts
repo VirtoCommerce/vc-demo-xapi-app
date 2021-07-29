@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { PartialDeep } from 'type-fest';
-import { Cart } from 'src/app/models/cart.model';
+import { Cart, CartItem } from 'src/app/models/cart.model';
 import * as CartActions from './cart.actions';
 
 export const cartFeatureKey = 'cart';
@@ -10,7 +10,11 @@ export interface State {
 }
 
 export const initialState: State = {
-  cart: null,
+  cart: {
+    cartData: {
+      items: [],
+    },
+  },
 };
 
 export const reducer = createReducer(
@@ -27,8 +31,10 @@ export const reducer = createReducer(
     ...state,
     cart: {
       ...state.cart,
-      id: action.data?.cart?.id ?? '',
-      comment: action.data.cart?.comment ?? '',
+      cartData: action.data?.cart,
+      items: action.data?.cart?.items != null
+        ? action.data.cart.items.map<CartItem>(x => ({ itemData: x }))
+        : [],
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),

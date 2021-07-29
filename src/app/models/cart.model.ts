@@ -1,14 +1,10 @@
+import * as graphql from '../graphql/types/cart';
+
 export interface Cart {
-    id?: string,
-    customerId?: string,
-    comment?: string,
-    name?: string,
-    items?: CartItem[],
+    cartData: graphql.cart_cart | null;
+    items: CartItem[];
 }
 
 export interface CartItem {
-    id?: string,
-    name?: string,
-    quantity?: number,
-    productId?: string,
+    itemData: graphql.cart_cart_items | null;
 }

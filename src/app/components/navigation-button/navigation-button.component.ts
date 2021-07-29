@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { Observable, Subject } from 'rxjs';
@@ -26,7 +27,8 @@ export class NavigationButtonComponent implements OnDestroy {
 
   constructor(
     private readonly apollo: Apollo,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly router: Router
   ) {}
 
   openCheckout(): void {
@@ -42,6 +44,10 @@ export class NavigationButtonComponent implements OnDestroy {
         this.store.dispatch(setCartUserId({
           userId: c.data?.addItemsCart?.customerId  ?? 'Anonymous',
         }));
+
+        void this.router.navigate([
+          '/checkout',
+        ]);
       });
   }
 

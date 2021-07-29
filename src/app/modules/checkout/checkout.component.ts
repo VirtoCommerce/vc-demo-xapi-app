@@ -16,7 +16,7 @@ import { selectCart } from '../../store/cart/cart.selectors';
 export class CheckoutComponent implements OnInit, OnDestroy {
   unsubscriber = new Subject();
 
-  public cart?: Cart | null;
+  public cart?: Cart;
 
   constructor(
     private readonly store: Store

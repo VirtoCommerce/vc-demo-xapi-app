@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { ApolloError } from '@apollo/client/errors';
-import { cart, cartVariables } from 'src/app/graphql/types/cart';
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
 import * as CartActions from './cart.actions';
+import { cart, cartVariables } from 'src/app/graphql/types/cart';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class CartEffects {
@@ -25,13 +24,12 @@ export class CartEffects {
     return this.actions$.pipe(
       ofType(CartActions.getCart),
       concatMap(() => this.apollo.watchQuery<cart>({
-          query: getCartQuery,
-          variables: {
-            ...this.baseCartVariables,
-            userId: localStorage.getItem('cartUserId'),
-          },
-        }
-      )
+        query: getCartQuery,
+        variables: {
+          ...this.baseCartVariables,
+          userId: localStorage.getItem('cartUserId'),
+        },
+      })
         .valueChanges
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
@@ -54,9 +52,13 @@ export class CartEffects {
         },
       })
         .pipe(
-          map(result => CartActions.updateStoredCart({ data: {
-            comment: result.data?.changeComment?.comment ?? '',
-          } }))
+          map(result => CartActions.updateStoredCart({
+            data: {
+              cartData: {
+                comment: result.data?.changeComment?.comment ?? '',
+              },
+            },
+          }))
         ))
     );
   });
@@ -66,9 +68,6 @@ export class CartEffects {
       ofType(CartActions.setCartUserId),
       tap(result => {
         localStorage.setItem('cartUserId', result.userId);
-        void this.router.navigate([
-          '/checkout',
-        ]);
       })
     );
   }, { dispatch: false });
@@ -76,7 +75,6 @@ export class CartEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly apollo: Apollo,
-    private readonly router: Router,
-    private readonly store: Store
+    private readonly router: Router
   ) { }
 }
