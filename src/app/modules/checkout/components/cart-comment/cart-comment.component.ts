@@ -19,11 +19,10 @@ export class CartCommentComponent {
 
   debounceWatcher: Subject<string> = new Subject<string>();
 
-  debounceTime = 1000;
-
   constructor() {
+    const debounceDuration = 1000;
     this.debounceWatcher.pipe(
-      debounceTime(this.debounceTime),
+      debounceTime(debounceDuration),
       distinctUntilChanged()
     )
       .subscribe(comment => this.sendCommentUpdate(comment));
