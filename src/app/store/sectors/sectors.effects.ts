@@ -13,11 +13,16 @@ import { ApolloError } from '@apollo/client/core';
 
 @Injectable()
 export class SectorsEffects {
-  loadSectors$ = createEffect(() => {
+  getSectors$ = createEffect(() => {
     return this.actions$.pipe(
 
       ofType(SectorActions.getSectors),
-      concatMap(() => this.apollo.watchQuery<getDictionaryItems>({ query: getDictionaryDynamicProperty })
+      concatMap(() => this.apollo.watchQuery<getDictionaryItems>({
+        query: getDictionaryDynamicProperty,
+        variables: {
+          idOrName: 'Sector',
+        },
+      })
         .valueChanges
         .pipe(
           map(result => SectorActions.getSectorsSuccess({ data: result.data })),

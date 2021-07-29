@@ -19,4 +19,6 @@ export interface CompanyRegistration {
   name: string;
   owner: CompanyOwner;
   address: CompanyAddress;
+  sector: string;
+  taxNumber: string;
 }
