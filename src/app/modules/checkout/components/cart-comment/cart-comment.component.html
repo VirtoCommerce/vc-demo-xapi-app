@@ -3,9 +3,9 @@
     <textarea class="form-control no-resize" 
         id="comment" 
         name="comment" 
-        rows="5" 
+        maxlength="1024"
+        rows="5"
         [ngModel]='cartCommentText'
-        (ngModelChange)='onModelChange($event)'
-        maxlength="1024">
+        (ngModelChange)='onModelChange($event)'>
     </textarea>
 </div>
