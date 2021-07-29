@@ -1,9 +1,9 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputAddItemsType } from "./globalTypes";
+import { InputAddItemsType } from "./../../../../../types/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: addItemsCart
