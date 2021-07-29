@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   onCommentUpdate(comment: string | null): void {
     this.store.dispatch(updateCartComment({
-      comment: comment,
+      comment,
     }));
   }
 
