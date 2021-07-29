@@ -1,9 +1,19 @@
 import { DynamicFormLayout } from '@ng-dynamic-forms/core';
 
 export const COMPANY_DETAILS_LAYOUT: DynamicFormLayout = {
-  name: {
+  registrationCompanyDetails: {
     element: {
-      label: 'required',
+      control: 'row',
+    },
+  },
+  taxNumber: {
+    grid: {
+      host: 'col-xs-24 col-md-12',
+    },
+  },
+  sector: {
+    grid: {
+      host: 'col-xs-24 col-md-12',
     },
   },
 };
