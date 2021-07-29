@@ -7,7 +7,11 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             id
             productId
             name
+            sku
             quantity
+            imageUrl
+            extendedPrice { formattedAmount}
+            placedPrice { formattedAmount}
         }
     }
 }

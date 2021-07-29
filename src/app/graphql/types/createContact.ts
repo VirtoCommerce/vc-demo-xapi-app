@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputCreateContactType } from "./globalTypes";
+import { InputCreateContactType } from "./../../../../../types/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: createContact
