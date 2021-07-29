@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputChangeCommentType } from "./../../../../../types/globalTypes";
+import { InputChangeCommentType } from "./globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: updateCartComment
