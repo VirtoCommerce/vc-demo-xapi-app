@@ -54,9 +54,7 @@ export class CartEffects {
         .pipe(
           map(result => CartActions.updateStoredCart({
             data: {
-              cartData: {
-                comment: result.data?.changeComment?.comment ?? '',
-              },
+              comment: result.data?.changeComment?.comment,
             },
           }))
         ))

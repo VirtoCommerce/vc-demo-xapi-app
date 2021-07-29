@@ -11,9 +11,7 @@ export interface State {
 
 export const initialState: State = {
   cart: {
-    cartData: {
-      items: [],
-    },
+    items: [],
   },
 };
 
@@ -31,9 +29,9 @@ export const reducer = createReducer(
     ...state,
     cart: {
       ...state.cart,
-      cartData: action.data?.cart,
-      items: action.data?.cart?.items != null
-        ? action.data.cart.items.map<CartItem>(x => ({ itemData: x }))
+      ...action.data?.cart,
+      itemsData: action.data?.cart?.items != null
+        ? action.data.cart.items.map(x => x as CartItem)
         : [],
     },
   })),
