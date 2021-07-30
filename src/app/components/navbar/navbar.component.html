@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand navbar-light bg-transparent">
   <div class="container">
       <a class="navbar-brand" href="/">
-        <img class="user-select-none" src="assets/images/logo.svg" alt="">
+        <img src="assets/images/logo.svg" alt="">
+        <vc-company-name class="d-none d-md-inline" *ngIf="!!companyName"  [companyName] ="companyName"></vc-company-name>
       </a>
       <div class="navbar-nav">
         <!-- TODO - Don't forget to replace these router checks in the future -->

@@ -27,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as fromLogin from './store/login/login.reducer';
 import { LoginEffects } from './store/login/login.effects';
 import * as fromCurrentCustomer from './store/current-customer/current-customer.reducer';
+import { CompanyNameComponent } from './components/company-name/company-name.component';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -38,6 +39,7 @@ const appInitializerFactory =
     NavbarComponent,
     FooterComponent,
     NavigationButtonComponent,
+    CompanyNameComponent,
   ],
   imports: [
     BrowserModule,
