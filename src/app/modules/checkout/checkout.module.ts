@@ -19,5 +19,4 @@ import { LineItemsComponent } from './components/line-items/line-items.component
     CheckoutRoutingModule,
   ],
 })
-export class CheckoutModule {
-}
+export class CheckoutModule { }
