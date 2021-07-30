@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { initialState, loginFeatureKey } from 'src/app/store/login/login.reducer';
 
 import { LoginComponent } from './login.component';
 
@@ -10,6 +12,13 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         LoginComponent,
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            [loginFeatureKey]: initialState,
+          },
+        }),
       ],
     })
       .compileComponents();
