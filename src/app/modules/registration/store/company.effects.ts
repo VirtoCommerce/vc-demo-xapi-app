@@ -45,7 +45,7 @@ export class CompanyEffects {
           this.createContact(companyRegistration, result),
         ]).pipe(
           concatMap(([
-            _,
+            __,
             contactResult,
           ]) => this.createUser(companyRegistration, contactResult).pipe(
             map(result => CompanyActions.registerCompanySuccess({
