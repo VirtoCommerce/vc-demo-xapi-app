@@ -3,6 +3,11 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
         id
         customerId
         comment
+        subTotal { formattedAmount }
+    	  total { formattedAmount }
+        discountTotal { formattedAmount }
+        taxTotal { formattedAmount }
+        shippingTotal { formattedAmount }
         items {
             id
             productId
@@ -10,8 +15,8 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             sku
             quantity
             imageUrl
-            extendedPrice { formattedAmount}
-            placedPrice { formattedAmount}
+            extendedPrice { formattedAmount }
+            placedPrice { formattedAmount }
         }
     }
 }

@@ -1,0 +1,21 @@
+.card {
+    .summary-item {
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #111111;
+    }
+
+    .summary-value {
+        @extend .summary-item;
+        font-weight: 800;
+        text-align: right;
+    }
+
+    .summary-total {
+        @extend .summary-value;
+        color: #3C763D;
+    }
+}
