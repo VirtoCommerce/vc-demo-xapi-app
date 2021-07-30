@@ -3,8 +3,6 @@ $enable-rounded: true;
 $enable-shadows: true;
 $enable-validation-icons: false;
 
-
-
 $gray-100: #f5f5f5;
 $gray-200: #f0f0f0;
 $gray-300: #d8d8d8;
@@ -54,8 +52,6 @@ $line-height-base: 1.428571429;
 $line-height-sm: 1.428571429;
 $line-height-lg: 1.176470588;
 
-$form-feedback-invalid-color: $gray-400;
-
 $small-font-size: 85%;
 
 $headings-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -76,6 +72,7 @@ $box-shadow-sm: .0625rem .0625rem .3125rem rgba($black, .15);
 $box-shadow: .0625rem .25rem .625rem rgba($black, .15);
 $box-shadow-lg: .0625rem .5rem .9375rem rgba($black, .15);
 
+$form-feedback-invalid-color: $gray-400;
 $form-feedback-font-size: $font-size-base;
 
 $border-radius-sm: .2rem;
