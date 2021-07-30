@@ -1,8 +1,13 @@
 <main class="h-100" role="main">
     <div class="container pt-1 pb-1">
-        <vc-cart-comment 
-        [cartCommentText]="cart?.comment" 
-        (commentUpdateEvent)="onCommentUpdate($event)">
-        </vc-cart-comment>
+        <div class="row">
+            <div class="col-17">
+                <vc-cart-comment [cartCommentText]="cart?.comment" (commentUpdateEvent)="onCommentUpdate($event)">
+                </vc-cart-comment>
+            </div>
+            <div class="col-7">
+                <vc-cart-summary [cart]="cart"></vc-cart-summary>
+            </div>
+        </div>
     </div>
 </main>

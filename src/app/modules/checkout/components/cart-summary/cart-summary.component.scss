@@ -1,0 +1,35 @@
+.card {
+  .summary-header {
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+
+  .summary-item {
+    font-size: 16px;
+    line-height: 20px;
+    color: #111111;
+  }
+
+  .summary-value {
+    @extend .summary-item;
+    font-weight: 800;
+    text-align: right;
+  }
+
+  .summary-total {
+    @extend .summary-value;
+    color: #3C763D;
+  }
+
+  .summary-footer {
+    font-size: 12px;
+    color: #9F9F9F;
+  }
+}

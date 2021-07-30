@@ -7,6 +7,46 @@
 // GraphQL query operation: cart
 // ====================================================
 
+export interface cart_cart_subTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_total {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_discountTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_taxTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_shippingTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
 export interface cart_cart_items {
   readonly __typename: "LineItemType";
   /**
@@ -41,6 +81,11 @@ export interface cart_cart {
    * Shopping cart text comment
    */
   readonly comment: string | null;
+  readonly subTotal: cart_cart_subTotal | null;
+  readonly total: cart_cart_total | null;
+  readonly discountTotal: cart_cart_discountTotal | null;
+  readonly taxTotal: cart_cart_taxTotal | null;
+  readonly shippingTotal: cart_cart_shippingTotal | null;
   readonly items: ReadonlyArray<(cart_cart_items | null)> | null;
 }
 
