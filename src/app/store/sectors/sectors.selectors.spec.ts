@@ -4,7 +4,7 @@ import { selectSectorsState } from './sectors.selectors';
 describe('Sector Selectors', () => {
   it('should select the feature state', () => {
     const result = selectSectorsState({
-      [fromSector.sectorsFeatureKey]: {},
+      [fromSector.sectorsFeatureKey]: [],
     });
 
     expect(result).toEqual([]);
