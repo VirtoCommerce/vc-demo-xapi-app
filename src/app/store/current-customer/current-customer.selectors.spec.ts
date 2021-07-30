@@ -7,6 +7,6 @@ describe('CurrentCustomer Selectors', () => {
       [fromCurrentCustomer.currentCustomerFeatureKey]: {},
     });
 
-    expect(result).toEqual({});
+    expect(result).toEqual({ user: null });
   });
 });

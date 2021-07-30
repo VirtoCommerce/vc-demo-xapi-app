@@ -1,12 +1,15 @@
 import * as fromLogin from './login.reducer';
-import { selectLogintate } from './login.selectors';
+import { selectLoginState } from './login.selectors';
 
 describe('Login Selectors', () => {
   it('should select the feature state', () => {
-    const result = selectLogintate({
+    const result = selectLoginState({
       [fromLogin.loginFeatureKey]: {},
     });
 
-    expect(result).toEqual({});
+    expect(result).toEqual({
+      token: null,
+      error: '',
+    });
   });
 });
