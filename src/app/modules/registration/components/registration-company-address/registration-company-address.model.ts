@@ -4,7 +4,7 @@ import {
   DynamicInputModel,
   DynamicSelectModel,
 } from '@ng-dynamic-forms/core';
-import  * as validationMessages from 'src/app/shared/validation/constants/validation-messages.constants';
+import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const REGISTRATION_COMPANY_ADDRESS_INPUTS = {
   countryCode: new DynamicSelectModel<string|undefined>({

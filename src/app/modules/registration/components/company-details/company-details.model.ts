@@ -1,5 +1,5 @@
 import { DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
-import  * as validationMessages from 'src/app/shared/validation/constants/validation-messages.constants';
+import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const COMPANY_DETAILS_INPUTS = {
   name: new DynamicInputModel({
