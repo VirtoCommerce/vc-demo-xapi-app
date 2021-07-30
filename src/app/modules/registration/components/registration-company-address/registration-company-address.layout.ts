@@ -6,17 +6,31 @@ export const REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
       control: 'row',
     },
   },
+  countryCode: {
+    element: {
+      label: 'required',
+    },
+  },
   city: {
+    element: {
+      label: 'required',
+    },
     grid: {
       host: 'col-xs-24 col-md-16',
     },
   },
   postalCode: {
+    element: {
+      label: 'required',
+    },
     grid: {
       host: 'col-xs-24 col-md-8',
     },
   },
   line1: {
+    element: {
+      label: 'required',
+    },
     grid: {
       host: 'col-xs-24 col-md-16',
     },

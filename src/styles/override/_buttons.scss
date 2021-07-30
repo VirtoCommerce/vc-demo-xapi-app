@@ -17,9 +17,9 @@ $override-variant-names: ("primary", "success", "info", "warning", "danger");
     &:hover,
     &:focus,
     &.focus {
-      background-color: $gray-200;
-      border-color: $gray-500;
-      color: $text-muted;
+      background-color: $primary;
+      border: none;
+      color: $white;
       cursor: default;
     }
   }
