@@ -5,7 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 export function createApollo(httpLink: HttpLink, httpClient: HttpClient): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
