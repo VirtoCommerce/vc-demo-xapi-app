@@ -10,8 +10,6 @@ import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { selectCompanyRegistration } from '../../store/company.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { COMPANY_DETAILS_LAYOUT } from './company-details.layout';
-import { Sector } from 'src/app/models/sector.model';
-import { selectSectorsState } from 'src/app/store/sectors/sectors.selectors';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getSectors } from 'src/app/store/sectors/sectors.actions';
 import { selectSectorOptions } from './countries.selector';
