@@ -12,8 +12,8 @@ describe('CurrentCustomerEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         CurrentCustomerEffects,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects = TestBed.inject(CurrentCustomerEffects);

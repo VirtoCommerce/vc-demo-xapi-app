@@ -1,12 +1,12 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, tap, mapTo } from 'rxjs/operators';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 
 import * as LoginActions from './login.actions';
 import * as CurrentCustomerActions from 'src/app/store/current-customer/current-customer.actions';
-import { HttpParams, HttpClient } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -29,7 +29,9 @@ export class LoginEffects {
         }
       ).pipe(
         map(data => LoginActions.loginSuccess({ token: data.access_token })),
-        catchError(error => of(LoginActions.loginFailure({ error: error.error.errorDescription as string })))
+        catchError((error: HttpErrorResponse) => of(LoginActions.loginFailure({
+          error: (error.error as { errorDescription: string }).errorDescription,
+        })))
       ))
     );
   });

@@ -12,8 +12,8 @@ describe('LoginEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         LoginEffects,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects = TestBed.inject(LoginEffects);

@@ -33,8 +33,8 @@ export const reducer = createReducer(
     const user = action.data.me as getCurrentCustomer_me;
     let userOrganization = null;
 
-    if (user.contact != null && user.contact.organizations!.length > 0) {
-      userOrganization = user.contact.organizations![0];
+    if (user.contact?.organizations != null && user.contact.organizations.length > 0) {
+      userOrganization = user.contact.organizations[0];
     }
 
     return {

@@ -10,7 +10,7 @@ import * as fromCountries from './countries/countries.reducer';
 import * as fromCompany from '../modules/registration/store/company.reducer';
 import * as fromCart from './cart/cart.reducer'
 import * as fromSectors from './sectors/sectors.reducer';
-import * as fromLogin from '../modules/login/store/login.reducer';
+import * as fromLogin from './login/login.reducer';
 import * as fromCurrentCustomer from './current-customer/current-customer.reducer';
 
 export interface State {
