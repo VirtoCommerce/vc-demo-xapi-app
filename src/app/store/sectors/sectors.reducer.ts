@@ -14,7 +14,7 @@ export const reducer = createReducer<State>(
   initialState,
 
   on(SectorActions.getSectors, (state): State => state),
-  on(SectorActions.getSectorsSuccess, (_, action): State => action.data.items
+  on(SectorActions.getSectorsSuccess, (_, action): State => action.data.dynamicProperty?.dictionaryItems?.items
     ?.map(item => item as GetDictionaryItem).map(item => ({
       id: item.id,
       name: item.name,
