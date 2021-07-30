@@ -6,6 +6,11 @@ export const COMPANY_DETAILS_LAYOUT: DynamicFormLayout = {
       control: 'row',
     },
   },
+  name: {
+    element: {
+      label: 'required',
+    },
+  },
   taxNumber: {
     grid: {
       host: 'col-xs-24 col-md-12',
