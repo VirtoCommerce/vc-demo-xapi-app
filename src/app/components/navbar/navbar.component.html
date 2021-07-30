@@ -4,6 +4,7 @@
         <img class="user-select-none" src="assets/images/logo.svg" alt="">
       </a>
       <div class="navbar-nav">
+        <!-- TODO - Don't forget to replace these router checks in the future -->
         <a *ngIf="router.url !== '/login/logged-in'" class="d-none d-sm-block nav-link text-uppercase fw-bold" routerLinkActive="border-bottom border-primary border-3 active" routerLink="/login">Login</a>
         <a *ngIf="router.url === '/login/logged-in'" class="d-none d-sm-block nav-link text-uppercase fw-bold" href="/">My account</a>
         <a *ngIf="router.url === '/login/logged-in'" class="d-none d-sm-block nav-link text-uppercase fw-bold" href="/">Settings</a>
