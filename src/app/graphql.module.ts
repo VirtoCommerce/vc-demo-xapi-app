@@ -15,24 +15,26 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient): Apollo
   }));
   const auth = setContext(async operation => {
     let token: string | null = null;
+    switch (operation.operationName) {
+    case 'updateMemberDynamicProperty':
+    { token = (await httpClient.post<{access_token: string}>(
+      `${environment.variables.platformUrl}/connect/token`,
+      new HttpParams({ fromObject: {
+        grant_type: 'password',
+        username: 'admin',
+        password: 'store',
+      } }).toString(),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    ).toPromise()).access_token;
+    break; }
 
-    if (operation.operationName === 'updateMemberDynamicProperty') {
-      token = (await httpClient.post<{access_token: string}>(
-        `${environment.variables.platformUrl}/connect/token`,
-        new HttpParams({ fromObject: {
-          grant_type: 'password',
-          username: 'admin',
-          password: 'store',
-        } }).toString(),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        }
-      ).toPromise()).access_token;
-    }
-    else {
-      token = null;
+    default:
+    { token = null;
+      break; }
     }
 
     return token === null
