@@ -58,11 +58,6 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
         patchFormModel(this.formInputs, companyRegistration);
         this.formService.detectChanges(this.formComponent);
       });
-    this.store.select(selectSectorsState)
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe(sectors => {
-        this.sectors = sectors;
-      });
     this.formInputs.sector.options$ = this.store.select(selectSectorOptions)
       .pipe(filter(nonNull), concatMap(options => {
         return of([
