@@ -31,7 +31,7 @@ import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
   ],
 })
 export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDestroy {
-  @Output() formWasChanged = new EventEmitter<boolean>()
+  @Output() formChange = new EventEmitter<boolean>()
 
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
@@ -96,7 +96,7 @@ export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDes
       }));
     }
     const formIsValid = event.group.valid;
-    this.formWasChanged.emit(formIsValid);
+    this.formChange.emit(formIsValid);
   }
 
   ngOnDestroy(): void {

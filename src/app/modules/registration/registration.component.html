@@ -19,7 +19,7 @@
               </h3>
             </a>
             <ng-template ngbNavContent>
-              <vc-personal-information (formWasChanged)="setPersonalInfoValidity($event)"></vc-personal-information>
+              <vc-personal-information (formChange)="setPersonalInfoValidity($event)"></vc-personal-information>
             </ng-template>
           </li>
           <li ngbNavItem="company-details"
@@ -31,7 +31,7 @@
               </h3>
             </a>
             <ng-template ngbNavContent>
-              <vc-company-details (formWasChanged)="setCompanyDetailsValidity($event)"></vc-company-details>
+              <vc-company-details (formChange)="setCompanyDetailsValidity($event)"></vc-company-details>
             </ng-template>
           </li>
         </ul>

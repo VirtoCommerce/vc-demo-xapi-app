@@ -19,7 +19,7 @@ import { COMPANY_DETAILS_LAYOUT } from './company-details.layout';
   ],
 })
 export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
-  @Output() formWasChanged = new EventEmitter<boolean>();
+  @Output() formChange = new EventEmitter<boolean>();
 
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
@@ -34,9 +34,9 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
 
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
 
-  formIsValid = false;
+  companyDetailsFormIsValid = false;
 
-  childFormIsValid = false;
+  addressFormIsValid = false;
 
   unsubscriber = new Subject();
 
@@ -55,9 +55,9 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  onChildFormChange(childFormIsValid: boolean): void {
-    this.childFormIsValid = childFormIsValid;
-    this.formWasChanged.emit(this.formIsValid && this.childFormIsValid);
+  onAddressFormChange(addressFormIsValid: boolean): void {
+    this.addressFormIsValid = addressFormIsValid;
+    this.formChange.emit(this.companyDetailsFormIsValid && this.addressFormIsValid);
   }
 
   onChange(event: DynamicFormControlEvent): void {
@@ -67,8 +67,8 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
         data,
       }));
     }
-    this.formIsValid = event.group.valid;
-    this.formWasChanged.emit(this.formIsValid && this.childFormIsValid);
+    this.companyDetailsFormIsValid = event.group.valid;
+    this.formChange.emit(this.companyDetailsFormIsValid && this.addressFormIsValid);
   }
 
   ngOnDestroy(): void {

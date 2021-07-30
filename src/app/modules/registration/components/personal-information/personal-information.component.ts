@@ -22,7 +22,7 @@ import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstr
   ],
 })
 export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
-  @Output() formWasChanged = new EventEmitter<boolean>()
+  @Output() formChange = new EventEmitter<boolean>()
 
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
@@ -65,7 +65,7 @@ export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
       }));
     }
     const formIsValid = event.group.valid;
-    this.formWasChanged.emit(formIsValid);
+    this.formChange.emit(formIsValid);
   }
 
   ngOnDestroy(): void {
