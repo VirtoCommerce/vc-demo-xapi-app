@@ -56,6 +56,11 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
         patchFormModel(this.formInputs, companyRegistration);
         this.formService.detectChanges(this.formComponent);
       });
+
+    /*
+     * We need to add an undefined option and set the value of the select
+     * element to undefined to prevent auto-selection on Safari browser
+     */
     this.formInputs.sector.options$ = this.store.select(selectSectorOptions)
       .pipe(filter(nonNull), concatMap(options => {
         return of([
