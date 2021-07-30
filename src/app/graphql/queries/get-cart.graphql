@@ -1,0 +1,13 @@
+query cart ($storeId: String!, $userId: String, $currencyCode: String!, $cultureName: String, $cartName: String) {
+    cart (storeId: $storeId, userId: $userId, currencyCode: $currencyCode, cultureName: $cultureName, cartName: $cartName) {
+        id
+        customerId
+        comment
+        items {
+            id
+            productId
+            name
+            quantity
+        }
+    }
+}

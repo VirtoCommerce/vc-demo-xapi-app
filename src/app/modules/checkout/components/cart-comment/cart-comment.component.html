@@ -1,0 +1,11 @@
+<div>
+    <label for="comment" class="form-label mt-4">Comments</label>
+    <textarea class="form-control no-resize" 
+        id="comment" 
+        name="comment" 
+        maxlength="1024"
+        rows="5"
+        [ngModel]='cartCommentText'
+        (ngModelChange)='onModelChange($event)'>
+    </textarea>
+</div>

@@ -1,0 +1,6 @@
+mutation updateCartComment ($command: InputChangeCommentType!) {
+    changeComment (command: $command) {
+        id
+        comment
+    }
+}

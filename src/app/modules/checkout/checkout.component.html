@@ -1,3 +1,8 @@
-<div class="container">
-    <p>CartId: {{ cartId }}</p>
-</div>
+<main class="h-100" role="main">
+    <div class="container pt-1 pb-1">
+        <vc-cart-comment 
+        [cartCommentText]="cart?.comment" 
+        (commentUpdateEvent)="onCommentUpdate($event)">
+        </vc-cart-comment>
+    </div>
+</main>

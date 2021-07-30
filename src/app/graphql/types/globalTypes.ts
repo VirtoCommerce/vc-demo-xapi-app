@@ -40,6 +40,17 @@ export interface InputAssignRoleType {
   readonly permissions: ReadonlyArray<(InputAssignPermissionType | null)>;
 }
 
+export interface InputChangeCommentType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly comment?: string | null;
+}
+
 export interface InputClearCartType {
   readonly cartId?: string | null;
   readonly storeId: string;
