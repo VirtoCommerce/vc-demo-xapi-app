@@ -3,8 +3,8 @@ import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { DynamicFormService } from '@ng-dynamic-forms/core';
 import { LOGIN_FORM_LAYOUT } from './login-form.layout';
 import { LOGIN_FORM_INPUTS, LOGIN_FORM_MODEL } from './login-form.model';
-import { login } from './store/login.actions';
-import { selectLoginState } from './store/login.selectors';
+import { login } from '../../store/login/login.actions';
+import { selectLoginState } from '../../store/login/login.selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

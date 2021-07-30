@@ -1,3 +1,4 @@
+import { CurrentCustomerEffects } from './store/current-customer/current-customer.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +24,9 @@ import { CartEffects } from './store/cart/cart.effects';
 import { SectorsEffects } from './store/sectors/sectors.effects';
 import { ValidationModule } from './modules/validation/validation.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import * as fromLogin from './store/login/login.reducer';
+import { LoginEffects } from './store/login/login.effects';
+import * as fromCurrentCustomer from './store/current-customer/current-customer.reducer';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -43,6 +47,7 @@ const appInitializerFactory =
     NgbDropdownModule,
     NgbNavModule,
     NgbPaginationModule,
+    FontAwesomeModule,
     NgxMaskModule.forRoot(),
     StoreModule.forRoot(reducers, {
       metaReducers,
@@ -51,14 +56,18 @@ const appInitializerFactory =
       maxAge: 25,
     }),
     EffectsModule.forRoot([]),
-    StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
-    StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
     StoreModule.forFeature(fromSectors.sectorsFeatureKey, fromSectors.reducer),
     EffectsModule.forFeature([
       CountriesEffects,
       CartEffects,
       SectorsEffects,
+      LoginEffects,
+      CurrentCustomerEffects,
     ]),
+    StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
+    StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer),
+    StoreModule.forFeature(fromCurrentCustomer.currentCustomerFeatureKey, fromCurrentCustomer.reducer),
     ValidationModule,
     FontAwesomeModule,
   ],

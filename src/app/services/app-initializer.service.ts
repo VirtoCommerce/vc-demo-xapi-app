@@ -1,4 +1,4 @@
-import { loginRestore } from './../modules/login/store/login.actions';
+import { loginRestore } from '../store/login/login.actions';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

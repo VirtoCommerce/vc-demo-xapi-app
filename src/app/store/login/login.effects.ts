@@ -34,6 +34,13 @@ export class LoginEffects {
     );
   });
 
+  saveToken$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LoginActions.loginSuccess),
+      tap(action => localStorage.setItem('token', action.token))
+    );
+  }, { dispatch: false });
+
   logout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LoginActions.logout),
@@ -53,11 +60,10 @@ export class LoginEffects {
 
   loadUserProfile$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LoginActions.loginSuccess),
-      ofType(LoginActions.loginRestore),
-      mapTo(CurrentCustomerActions.getCurrentCustomer)
+      ofType(LoginActions.loginSuccess, LoginActions.loginRestore),
+      map(CurrentCustomerActions.getCurrentCustomer)
     );
-  }, { dispatch: false });
+  });
 
   constructor(
     private readonly actions$: Actions,

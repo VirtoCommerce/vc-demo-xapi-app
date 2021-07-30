@@ -7,9 +7,9 @@ import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { selectLoginState } from './modules/login/store/login.selectors';
+import { selectLoginState } from './store/login/login.selectors';
 import { take } from 'rxjs/operators';
-import { State } from './modules/login/store/login.reducer';
+import { State } from './store/login/login.reducer';
 
 export function createApollo(httpLink: HttpLink, httpClient: HttpClient, store: Store): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
@@ -78,7 +78,7 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient, store: 
       useFactory: createApollo,
       deps: [
         HttpLink,
-        HttpClient,
+        Store,
       ],
     },
   ],
