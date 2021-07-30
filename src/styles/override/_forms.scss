@@ -11,6 +11,10 @@ form label.required:after {
   content: '*';
 }
 
+form .invalid-feedback {
+  color: $danger;
+}
+
 label:not(.custom-control-label) {
   font-weight: 700;
 }

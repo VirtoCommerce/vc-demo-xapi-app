@@ -4,8 +4,3 @@
   min-height: divide($font-size-base * $line-height-base + $custom-control-indicator-size, 1.5);
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid {
-  background-image: none;
-  border-color: $gray-400;
-}
-

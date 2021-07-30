@@ -1,6 +1,9 @@
 $enable-negative-margins: true;
 $enable-rounded: true;
 $enable-shadows: true;
+$enable-validation-icons: false;
+
+
 
 $gray-100: #f5f5f5;
 $gray-200: #f0f0f0;
@@ -50,6 +53,8 @@ $font-size-lg: $font-size-base * 1.214285714;
 $line-height-base: 1.428571429;
 $line-height-sm: 1.428571429;
 $line-height-lg: 1.176470588;
+
+$form-feedback-invalid-color: $gray-400;
 
 $small-font-size: 85%;
 
