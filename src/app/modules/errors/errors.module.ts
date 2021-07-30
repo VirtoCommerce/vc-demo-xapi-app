@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ErrorsRoutingModule } from './errors-routing.module';
 import { ErrorsComponent } from './errors.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -11,7 +10,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     CommonModule,
-    ErrorsRoutingModule,
     FontAwesomeModule,
   ],
   exports: [
