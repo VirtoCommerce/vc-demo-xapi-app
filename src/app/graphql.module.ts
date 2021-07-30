@@ -7,15 +7,43 @@ import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
 import { HttpClient } from '@angular/common/http';
 
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<NormalizedCacheObject> {
+export function createApollo(httpLink: HttpLink, httpClient: HttpClient): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
     headers: {
       Accept: 'charset=utf-8',
     },
   }));
-  const auth = setContext(() => {
-    // Temporary do nothing. Add Authentication: Bearer {token} header here on login implmentation
-    return { };
+  const auth = setContext(async operation => {
+    let token: string | null = null;
+    switch (operation.operationName) {
+    case 'updateMemberDynamicProperty':
+    { token = (await httpClient.post<{access_token: string}>(
+      `${environment.variables.platformUrl}/connect/token`,
+      new HttpParams({ fromObject: {
+        grant_type: 'password',
+        username: 'admin',
+        password: 'store',
+      } }).toString(),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    ).toPromise()).access_token;
+    break; }
+
+    default:
+    { token = null;
+      break; }
+    }
+
+    return token === null
+      ?  {}
+      : {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
   });
   const link = ApolloLink.from([
     basic,

@@ -1,0 +1,5 @@
+mutation updateMemberDynamicProperties($command: InputUpdateMemberDynamicPropertiesType!) {
+  updateMemberDynamicProperties(command: $command) {
+    name
+  }
+}
