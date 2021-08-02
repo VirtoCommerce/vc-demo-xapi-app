@@ -78,6 +78,7 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient, store: 
       useFactory: createApollo,
       deps: [
         HttpLink,
+        HttpClient,
         Store,
       ],
     },
