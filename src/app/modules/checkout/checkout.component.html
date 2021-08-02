@@ -8,19 +8,18 @@
             <div class="container">
                 <h2>MY PRODUCTS</h2>
                 <div class="row">
-                    <div class="col-18">
+                    <div class="col-17">
                         <div class="d-grid gap-3">
                             <vc-line-items [cart]="cart"></vc-line-items>
-                            
-                            <vc-cart-comment [cartCommentText]="cart?.comment"
-                                (commentUpdateEvent)="onCommentUpdate($event)">
+
+                            <vc-cart-comment [cartCommentText]="cart?.comment" (commentUpdateEvent)="onCommentUpdate($event)">
                             </vc-cart-comment>
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="d-grid gap-3">
-                            <div class="p-2 border">order summary</div>
+                            <vc-cart-summary [cart]="cart"></vc-cart-summary>
                             <div class="p-2 border">purchase order</div>
                             <div class="p-2 border">promotion code</div>
                         </div>

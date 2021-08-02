@@ -7,8 +7,12 @@
 }
 
 form label.required:after {
-  color: $primary;
+  color: $danger;
   content: '*';
+}
+
+form .invalid-feedback {
+  color: $danger;
 }
 
 label:not(.custom-control-label) {
