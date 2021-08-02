@@ -1,6 +1,6 @@
 import { selectCurrentCustomerOrganization } from './../../store/current-customer/current-customer.selectors';
 import { Store } from '@ngrx/store';
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({

@@ -37,9 +37,7 @@ export const reducer = createReducer(
       const sortedOrganizationos = [
         ...user.contact.organizations,
       ].sort((a, b) => {
-        const va = (a?.name === null) ? '' : a?.name as string;
-        const vb = (b?.name === null) ? '' : b?.name as string;
-        return va.localeCompare(vb);
+        return (a?.name ?? '').localeCompare(b?.name ?? '');
       });
 
       userOrganization = sortedOrganizationos[0];
