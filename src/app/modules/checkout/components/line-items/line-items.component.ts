@@ -27,7 +27,7 @@ export class LineItemsComponent {
       return [];
     }
 
-    return props.filter(p => this.typesToCheck.includes(p?.valueType ?? '') && p?.value || p?.valueType == 'Boolean')
+    return props.filter(p => this.typesToCheck.includes(p?.valueType ?? '') && p?.value || p?.valueType === 'Boolean')
       .map(p => {
         let displayValue = '';
 
