@@ -1,18 +1,22 @@
 <main class="h-100" role="main">
-    <div class="container pt-4 pb-6">
+    <div class="container-fliud pt-4 pb-6 px-4">
         <article class="row g-0">
             <div class="col">
-                <h1 class="mb-4">Checkout</h1>
+                <h1 class="mb-7">Checkout</h1>
             </div>
-            
+
             <div class="container">
-                <h2>MY PRODUCTS</h2>
                 <div class="row">
-                    <div class="col-17">
+                    <div class="col-2">
+                        <img class="user-select-none mt-n3" src="assets/images/checkout-products-icon.svg" alt="">
+                    </div>
+                    <div class="col-15">
+                        <h2 class="mb-3">MY PRODUCTS</h2>
                         <div class="d-grid gap-3">
                             <vc-line-items [cart]="cart"></vc-line-items>
 
-                            <vc-cart-comment [cartCommentText]="cart?.comment" (commentUpdateEvent)="onCommentUpdate($event)">
+                            <vc-cart-comment [cartCommentText]="cart?.comment"
+                                (commentUpdateEvent)="onCommentUpdate($event)">
                             </vc-cart-comment>
                         </div>
                     </div>
