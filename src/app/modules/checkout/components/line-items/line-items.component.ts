@@ -22,30 +22,23 @@ export class LineItemsComponent {
 
   getDynamicPropertiesToDisplay(
     props: ReadonlyArray<(cart_cart_items_dynamicProperties | null)> | null
-  ): displayItem[] {
-    if (props == null) return [];
+  ): DisplayItem[] {
+    if (props == null) {
+      return [];
+    }
 
-    const result = props.filter(p => this.knownTypes.includes(p?.valueType ?? ''))
+    return props.filter(p => this.knownTypes.includes(p?.valueType ?? ''))
       .map(p => {
         let displayValue = p?.value ?? '';
-        switch (p?.valueType) {
-        case 'DateTime':
-          if (p?.value) {
-            displayValue = new Date(p.value).toLocaleDateString();
-          }
-          break;
-
-        default:
-          break;
+        if (p?.valueType == 'DateTime' && p?.value) {
+          displayValue = new Date(p.value).toLocaleDateString();
         }
 
         return {
           name: p?.name,
-          displayValue: displayValue,
+          displayValue,
         };
       });
-
-    return result;
   }
 
   update(): void {
@@ -57,7 +50,7 @@ export class LineItemsComponent {
   }
 }
 
-interface displayItem {
+interface DisplayItem {
   readonly name: string | null | undefined;
   readonly displayValue: string | null;
 }
