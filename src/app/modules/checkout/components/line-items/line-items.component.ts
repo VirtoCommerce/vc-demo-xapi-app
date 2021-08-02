@@ -13,8 +13,8 @@ import { Cart } from 'src/app/models/cart.model';
 export class LineItemsComponent {
   @Input() cart?: Cart;
 
-  private readonly knownTypes: string[] = [
-    'Boolean',
+  private readonly typesToCheck: string[] = [
+    // 'Boolean',
     'Integer',
     'ShortText',
     'DateTime',
@@ -27,11 +27,24 @@ export class LineItemsComponent {
       return [];
     }
 
-    return props.filter(p => this.knownTypes.includes(p?.valueType ?? ''))
+    return props.filter(p => this.typesToCheck.includes(p?.valueType ?? '') && p?.value || p?.valueType == 'Boolean')
       .map(p => {
-        let displayValue = p?.value ?? '';
-        if (p?.valueType == 'DateTime' && p?.value) {
-          displayValue = new Date(p.value).toLocaleDateString();
+        let displayValue = '';
+
+        switch (p?.valueType) {
+        case 'Boolean':
+          displayValue = p?.value && p.value.toLowerCase() === 'true' ? 'yes' : 'no';
+          break;
+
+        case 'DateTime':
+          if (p?.value) {
+            displayValue = new Date(p.value).toLocaleDateString();
+          }
+          break;
+
+        default:
+          displayValue = p?.value ?? '';
+          break;
         }
 
         return {

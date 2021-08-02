@@ -114,20 +114,19 @@ export class NavigationButtonComponent implements OnDestroy {
           storeId: 'Electronics',
           dynamicProperties: [
             {
-              name: 'text',
-              value: 'a very long dynamic Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod' +
-                ' tempor incididunt ut labore et dolore magna aliqua.',
+              name: 'Brand',
+              value: 'Epson',
             },
             {
-              name: 'bool',
+              name: 'Is alcoholic',
               value: 'true',
             },
             {
-              name: 'date',
-              value: '2021-09-15',
+              name: 'Production date',
+              value: '2021-07-15',
             },
             {
-              name: 'integer',
+              name: 'Pack size',
               value: '123',
             },
           ],
