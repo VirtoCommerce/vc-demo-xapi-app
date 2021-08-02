@@ -26,7 +26,7 @@ export const reducers: ActionReducerMap<State> = {
 [fromCountries.countriesFeatureKey]: fromCountries.reducer,
 [fromCompany.companyRegistrationFeatureKey]: fromCompany.reducer,
 [fromCart.cartFeatureKey]: fromCart.reducer,
-[fromSectors.sectorsFeatureKey]: fromSectors.reducer
+[fromSectors.sectorsFeatureKey]: fromSectors.reducer,
 [fromLogin.loginFeatureKey]: fromLogin.reducer,
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.reducer,
 };
