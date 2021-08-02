@@ -1,9 +1,9 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputCreateUserType } from "./../../../../../types/globalTypes";
+import { InputCreateUserType } from "./globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: createUser

@@ -1,9 +1,9 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputCreateContactType } from "./../../../../../types/globalTypes";
+import { InputCreateContactType } from "./globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: createContact

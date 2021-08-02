@@ -1,9 +1,9 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputCreateOrganizationType } from "./../../../../../types/globalTypes";
+import { InputCreateOrganizationType } from "./globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: createOrganization

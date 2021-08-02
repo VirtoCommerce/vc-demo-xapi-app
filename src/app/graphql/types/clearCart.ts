@@ -1,9 +1,9 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputClearCartType } from "./../../../../../types/globalTypes";
+import { InputClearCartType } from "./globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: clearCart
