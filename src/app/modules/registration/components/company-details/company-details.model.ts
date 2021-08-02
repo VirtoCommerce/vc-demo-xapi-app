@@ -1,4 +1,4 @@
-import { DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
+import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const COMPANY_DETAILS_INPUTS = {
@@ -12,8 +12,21 @@ export const COMPANY_DETAILS_INPUTS = {
       required: validationMessages.requiredMessage,
     },
   }),
+  taxNumber: new DynamicInputModel({
+    id: 'taxNumber',
+    label: 'Tax Number',
+  }),
+  sector: new DynamicSelectModel<string|undefined>({
+    id: 'sector',
+    label: 'Sector',
+  }),
 };
 
 export const COMPANY_DETAILS_MODEL: DynamicFormModel = [
-  ...Object.values(COMPANY_DETAILS_INPUTS),
+  new DynamicFormGroupModel({
+    id: 'registrationCompanyDetails',
+    group: [
+      ...Object.values(COMPANY_DETAILS_INPUTS),
+    ],
+  }),
 ];

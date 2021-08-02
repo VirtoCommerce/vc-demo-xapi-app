@@ -62,6 +62,11 @@ export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDes
       .subscribe(countries => {
         this.countries = countries;
       });
+
+    /*
+     * We need to add an undefined option and set the value of the select
+     * element to undefined to prevent auto-selection on Safari browser
+     */
     this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions)
       .pipe(filter(nonNull), concatMap(options => {
         return of([

@@ -156,6 +156,11 @@ export interface InputUpdateCartItemDynamicPropertiesType {
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
 }
 
+export interface InputUpdateMemberDynamicPropertiesType {
+  readonly memberId: string;
+  readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

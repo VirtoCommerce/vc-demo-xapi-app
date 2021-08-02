@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "xapi:codegen": "apollo client:codegen ../types --target typescript --useReadOnlyTypes"
+    "xapi:codegen": "npx apollo client:codegen ../types --target typescript --useReadOnlyTypes --globalTypesFile './src/app/graphql/types/globalTypes.ts'"
   },
   "private": true,
   "dependencies": {
