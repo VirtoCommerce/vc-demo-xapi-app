@@ -1,5 +1,11 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
+import {
+  EmailUniquenessAsyncValidatorService,
+} from 'src/app/modules/validation/validators/email-uniqueness-async-validator.service';
+import {
+  UsernameUniquenessAsyncValidatorService,
+} from 'src/app/modules/validation/validators/username-uniqueness-async-validator.service';
 
 export const PERSONAL_INFORMATION_INPUTS = {
   firstName: new DynamicInputModel({
@@ -29,9 +35,13 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
       email: null,
     },
+    asyncValidators: {
+      [EmailUniquenessAsyncValidatorService.name]: null,
+    },
     errorMessages: {
       required: validationMessages.requiredMessage,
       email: 'Enter correct email please (ex. john@gmail.com)',
+      [EmailUniquenessAsyncValidatorService.name]: validationMessages.uniqueMessage,
     },
   }),
   userName: new DynamicInputModel({
@@ -40,8 +50,12 @@ export const PERSONAL_INFORMATION_INPUTS = {
     validators: {
       required: null,
     },
+    asyncValidators: {
+      [UsernameUniquenessAsyncValidatorService.name]: null,
+    },
     errorMessages: {
       required: validationMessages.requiredMessage,
+      [UsernameUniquenessAsyncValidatorService.name]: validationMessages.uniqueMessage,
     },
   }),
   password: new DynamicInputModel({

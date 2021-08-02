@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NG_VALIDATORS, Validator } from '@angular/forms';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, Validator } from '@angular/forms';
 import { DYNAMIC_VALIDATORS, ValidatorFactory } from '@ng-dynamic-forms/core';
 import { passwordMatchValidator } from './validators/password-match-validator';
+import { EmailUniquenessAsyncValidatorService } from './validators/email-uniqueness-async-validator.service';
+import { UsernameUniquenessAsyncValidatorService } from './validators/username-uniqueness-async-validator.service';
 
 @NgModule({
   declarations: [],
@@ -16,13 +18,40 @@ import { passwordMatchValidator } from './validators/password-match-validator';
       multi: true,
     },
     {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: EmailUniquenessAsyncValidatorService,
+      multi: true,
+    },
+    {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: UsernameUniquenessAsyncValidatorService,
+      multi: true,
+    },
+    {
       provide: DYNAMIC_VALIDATORS,
-      useValue: new Map<string, Validator | ValidatorFactory>([
-        [
-          'passwordMatchValidator',
-          passwordMatchValidator,
-        ],
-      ]),
+      useFactory: (
+        emailUniquenessAsyncValidator: EmailUniquenessAsyncValidatorService,
+        usernameUniquenessAsyncValidator: UsernameUniquenessAsyncValidatorService
+      ) => {
+        return new Map<string, Validator | ValidatorFactory>([
+          [
+            'passwordMatchValidator',
+            passwordMatchValidator,
+          ],
+          [
+            EmailUniquenessAsyncValidatorService.name,
+            emailUniquenessAsyncValidator,
+          ],
+          [
+            UsernameUniquenessAsyncValidatorService.name,
+            usernameUniquenessAsyncValidator,
+          ],
+        ]);
+      },
+      deps: [
+        EmailUniquenessAsyncValidatorService,
+        UsernameUniquenessAsyncValidatorService,
+      ],
     },
   ],
 })
