@@ -111,6 +111,12 @@ export interface InputCreateUserType {
   readonly userType: string;
 }
 
+export interface InputDynamicPropertyValueType {
+  readonly name: string;
+  readonly value?: string | null;
+  readonly locale?: string | null;
+}
+
 export interface InputMemberAddressType {
   readonly city: string;
   readonly countryCode: string;
@@ -136,6 +142,18 @@ export interface InputMemberAddressType {
 export interface InputNewCartItemType {
   readonly productId: string;
   readonly quantity?: number | null;
+}
+
+export interface InputUpdateCartItemDynamicPropertiesType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly lineItemId: string;
+  readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
 }
 
 //==============================================================

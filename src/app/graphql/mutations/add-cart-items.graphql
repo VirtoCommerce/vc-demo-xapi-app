@@ -2,5 +2,6 @@ mutation addItemsCart ($command: InputAddItemsType!) {
     addItemsCart (command: $command) {
         id
         customerId
+        items { id }
     }
 }

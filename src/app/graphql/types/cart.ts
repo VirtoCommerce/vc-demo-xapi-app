@@ -47,6 +47,22 @@ export interface cart_cart_shippingTotal {
   readonly formattedAmount: string;
 }
 
+export interface cart_cart_items_dynamicProperties {
+  readonly __typename: "DynamicPropertyValueType";
+  /**
+   * Property Name
+   */
+  readonly name: string | null;
+  /**
+   * Property Value
+   */
+  readonly value: string | null;
+  /**
+   * Value Type
+   */
+  readonly valueType: string | null;
+}
+
 export interface cart_cart_items_extendedPrice {
   readonly __typename: "MoneyType";
   /**
@@ -89,6 +105,10 @@ export interface cart_cart_items {
    * Value of line item image absolute URL
    */
   readonly imageUrl: string | null;
+  /**
+   * Cart line item dynamic property values
+   */
+  readonly dynamicProperties: ReadonlyArray<(cart_cart_items_dynamicProperties | null)> | null;
   readonly extendedPrice: cart_cart_items_extendedPrice | null;
   readonly placedPrice: cart_cart_items_placedPrice | null;
 }
