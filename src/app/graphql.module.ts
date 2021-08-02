@@ -17,7 +17,7 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient): Apollo
     let token: string | null = null;
     switch (operation.operationName) {
     case 'createUser':
-    case 'updateMemberDynamicProperty':
+    case 'updateMemberDynamicProperties':
     {
       token = (await httpClient.post<{access_token: string}>(
         `${environment.variables.platformUrl}/connect/token`,
