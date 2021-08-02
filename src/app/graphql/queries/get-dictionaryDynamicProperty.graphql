@@ -1,0 +1,10 @@
+query getDictionaryDynamicPropery($idOrName: String!) {
+  dynamicProperty(idOrName: $idOrName) {
+    dictionaryItems {
+      items {
+        name
+        id
+      }
+    }
+  }
+}
