@@ -11,7 +11,11 @@ import { selectLoginState } from './store/login/login.selectors';
 import { take } from 'rxjs/operators';
 import { State } from './store/login/login.reducer';
 
-export function createApollo(httpLink: HttpLink, httpClient: HttpClient, store: Store): ApolloClientOptions<NormalizedCacheObject>  {
+export function createApollo(
+  httpLink: HttpLink,
+  httpClient: HttpClient,
+  store: Store
+): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
     headers: {
       Accept: 'charset=utf-8',
@@ -42,7 +46,7 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient, store: 
     default:
     {
       const state = await store.select(selectLoginState).pipe(take(1))
-      .toPromise<State>();
+        .toPromise<State>();
       token = state.token;
       break;
     }
