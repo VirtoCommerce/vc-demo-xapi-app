@@ -1,0 +1,8 @@
+mutation removeCartCoupon ($command: InputRemoveCouponType!) {
+    removeCoupon (command: $command) {
+      coupons {
+        code
+        isAppliedSuccessfully
+      }
+  }
+}

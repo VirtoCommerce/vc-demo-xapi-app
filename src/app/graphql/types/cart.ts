@@ -67,6 +67,30 @@ export interface cart_cart_items {
   readonly quantity: number | null;
 }
 
+export interface cart_cart_dynamicProperties {
+  readonly __typename: "DynamicPropertyValueType";
+  /**
+   * Property Name
+   */
+  readonly name: string | null;
+  /**
+   * Property Value
+   */
+  readonly value: string | null;
+}
+
+export interface cart_cart_coupons {
+  readonly __typename: "CouponType";
+  /**
+   * Coupon code
+   */
+  readonly code: string | null;
+  /**
+   * Is coupon was applied successfully
+   */
+  readonly isAppliedSuccessfully: boolean | null;
+}
+
 export interface cart_cart {
   readonly __typename: "CartType";
   /**
@@ -87,6 +111,11 @@ export interface cart_cart {
   readonly taxTotal: cart_cart_taxTotal | null;
   readonly shippingTotal: cart_cart_shippingTotal | null;
   readonly items: ReadonlyArray<(cart_cart_items | null)> | null;
+  /**
+   * Cart dynamic property values
+   */
+  readonly dynamicProperties: ReadonlyArray<(cart_cart_dynamicProperties | null)> | null;
+  readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
 }
 
 export interface cart {

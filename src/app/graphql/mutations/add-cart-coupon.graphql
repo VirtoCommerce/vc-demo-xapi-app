@@ -1,0 +1,8 @@
+mutation addCartCoupon ($command: InputAddCouponType!) {
+    addCoupon (command: $command) {
+      coupons {
+        code
+        isAppliedSuccessfully
+      }
+  }
+}

@@ -1,8 +1,14 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
-import { cart } from 'src/app/graphql/types/cart';
-import { Cart } from 'src/app/models/cart.model';
 import { PartialDeep } from 'type-fest';
+
+import { Cart } from 'src/app/models/cart.model';
+import { cart } from 'src/app/graphql/types/cart';
+
+import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperties }
+  from 'src/app/graphql/types/updateCartDynamicProperties';
+import { addCartCoupon_addCoupon_coupons } from 'src/app/graphql/types/addCartCoupon';
+import { removeCartCoupon_removeCoupon_coupons } from 'src/app/graphql/types/removeCartCoupon';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -23,14 +29,37 @@ export const updateCartComment = createAction(
   props<{ comment: string | null }>()
 );
 
-export const updateCartCommentSuccess = createAction(
-  '[Cart] Update Cart Comment Success',
-  props<{ comment: string | null }>()
+export const updateCartPurchaseNumber = createAction(
+  '[Cart] Update Cart Purchase Number',
+  props<{ purchaseNumber?: string | null }>()
 );
 
-export const updateCartCommentFailure = createAction(
-  '[Cart] Update Cart Comment Failure',
-  props<{ error: ApolloError }>()
+export const updateCartDynamicProperties = createAction(
+  '[Cart] Update Cart DynamicProperties',
+  props<{ dynamicProperties?:
+    ReadonlyArray<(updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperties | null)> | null }>()
+);
+
+export const addCartCoupon = createAction(
+  '[Cart] Add Cart Coupon',
+  props<{ coupon: string | null }>()
+);
+
+export const addCartCouponSuccess = createAction(
+  '[Cart] Add Cart Coupon Success',
+  props<{ coupons?:
+    ReadonlyArray<(addCartCoupon_addCoupon_coupons | null)> | null }>()
+);
+
+export const removeCartCoupon = createAction(
+  '[Cart] Remove Cart Coupon',
+  props<{ coupon: string | null }>()
+);
+
+export const removeCartCouponSuccess = createAction(
+  '[Cart] Remove Cart Coupon Success',
+  props<{ coupons?:
+    ReadonlyArray<(removeCartCoupon_removeCoupon_coupons | null)> | null }>()
 );
 
 export const updateStoredCart = createAction(
@@ -42,4 +71,3 @@ export const setCartUserId = createAction(
   '[Cart] Set Cart UserId',
   props<{ userId: string }>()
 );
-
