@@ -1,10 +1,22 @@
+.vertical-line {
+    border-left: 1px solid #b6b6b6;
+}
+
+a.strong {
+    font-weight: 800;
+}
+
+.fs-label{
+    font-size: 13px;
+}
+
 $dark-green: #3c763d;
 
 .text-dark-green {
-    color: $dark-green!important;
+    color: $dark-green !important;
     font-family: Helvetica, sans-serif;
 }
 
-.small-input{
-    width: 50px
+.small-input {
+    width: 50px;
 }

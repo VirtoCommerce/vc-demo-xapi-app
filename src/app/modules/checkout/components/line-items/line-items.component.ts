@@ -14,7 +14,6 @@ export class LineItemsComponent {
   @Input() cart?: Cart;
 
   private readonly typesToCheck: string[] = [
-    // 'Boolean',
     'Integer',
     'ShortText',
     'DateTime',
