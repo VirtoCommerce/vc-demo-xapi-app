@@ -1,3 +1,5 @@
+import { loginRestore } from '../store/login/login.actions';
+import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
@@ -9,7 +11,7 @@ import { EnvironmentVariables } from 'src/environments/environment.variables';
   providedIn: 'root',
 })
 export class AppInitializerService {
-  constructor(private readonly httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient, private readonly store: Store) { }
 
   async initialize(): Promise<void> {
     await this.httpClient.get<EnvironmentVariables>('environments/environment.variables.json')
@@ -18,5 +20,11 @@ export class AppInitializerService {
         catchError(() => of(false))
       )
       .toPromise();
+
+    const token = localStorage.getItem('token');
+
+    if (token !== null) {
+      this.store.dispatch(loginRestore({ token }));
+    }
   }
 }

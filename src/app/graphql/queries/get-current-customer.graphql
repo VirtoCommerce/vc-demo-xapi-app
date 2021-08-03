@@ -1,0 +1,16 @@
+query getCurrentCustomer {
+  me {
+    id
+    userName
+    contact {
+      id
+      firstName
+      lastName
+      fullName
+      organizations {
+        id
+        name
+      }
+    }
+  }
+}
