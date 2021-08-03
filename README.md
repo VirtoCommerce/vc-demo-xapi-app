@@ -34,6 +34,11 @@ ng generate @ngrx/schematics:feature modules/environment-variables/store/environ
 ? Do you want to use the create functions? Yes
 ? What should be the prefix of the action? load
 ```
+## Apollo (GraphQl)
+
+How to generate types for XAPI GraphQL queries and mutations:
+
+`npm run xapi:codegen`
 
 ## Build
 
