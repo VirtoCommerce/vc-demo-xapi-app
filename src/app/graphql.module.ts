@@ -1,3 +1,4 @@
+import { Store } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, ApolloLink, InMemoryCache } from '@apollo/client/core';
@@ -6,8 +7,15 @@ import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { selectLoginState } from './store/login/login.selectors';
+import { take } from 'rxjs/operators';
+import { State } from './store/login/login.reducer';
 
-export function createApollo(httpLink: HttpLink, httpClient: HttpClient): ApolloClientOptions<NormalizedCacheObject>  {
+export function createApollo(
+  httpLink: HttpLink,
+  httpClient: HttpClient,
+  store: Store
+): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
     headers: {
       Accept: 'charset=utf-8',
@@ -37,7 +45,9 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient): Apollo
 
     default:
     {
-      token = null;
+      const state = await store.select(selectLoginState).pipe(take(1))
+        .toPromise<State>();
+      token = state.token;
       break;
     }
     }
@@ -73,6 +83,7 @@ export function createApollo(httpLink: HttpLink, httpClient: HttpClient): Apollo
       deps: [
         HttpLink,
         HttpClient,
+        Store,
       ],
     },
   ],
