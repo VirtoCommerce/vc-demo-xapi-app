@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
+import * as Cart from 'src/app/store/cart/cart.reducer';
 import { LineItemsComponent } from './line-items.component';
 
 describe('LineItemsComponent', () => {
@@ -10,6 +12,13 @@ describe('LineItemsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         LineItemsComponent,
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            cart: Cart.initialState,
+          },
+        }),
       ],
     })
       .compileComponents();
