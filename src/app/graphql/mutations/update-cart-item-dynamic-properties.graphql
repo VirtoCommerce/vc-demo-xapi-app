@@ -2,5 +2,6 @@ mutation updateCartItemDynamicProperties ($command: InputUpdateCartItemDynamicPr
     updateCartItemDynamicProperties (command: $command) {
         id
         customerId
+        items { id productId }
     }
 }
