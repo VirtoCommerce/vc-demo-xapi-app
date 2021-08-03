@@ -2,7 +2,7 @@
     border-left: 1px solid #b6b6b6;
 }
 
-a.strong {
+.fw-strong {
     font-weight: 800;
 }
 
@@ -12,9 +12,13 @@ a.strong {
 
 $dark-green: #3c763d;
 
-.text-dark-green {
-    color: $dark-green !important;
-    font-family: Helvetica, sans-serif;
+.price-item {
+  color: $dark-green !important;
+}
+
+.price-total {
+  color: $dark-green !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .small-input {
