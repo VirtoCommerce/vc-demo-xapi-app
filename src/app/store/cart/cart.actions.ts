@@ -18,6 +18,21 @@ export const getCartFailure = createAction(
   props<{ error: ApolloError }>()
 );
 
+export const removeCartItem = createAction(
+  '[Cart] Remove CartItem',
+  props<{ lineItemId: string }>()
+);
+
+export const removeCartItemSuccess = createAction(
+  '[Cart] Remove CartItem Success',
+  props<{ lineItemId: string }>()
+);
+
+export const removeCartItemFailure = createAction(
+  '[Cart] Remove CartItem Failure',
+  props<{ error: ApolloError }>()
+);
+
 export const updateCartComment = createAction(
   '[Cart] Update Cart Comment',
   props<{ comment: string | null }>()

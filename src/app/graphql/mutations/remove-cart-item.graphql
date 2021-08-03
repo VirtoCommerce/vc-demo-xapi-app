@@ -1,0 +1,23 @@
+mutation removeCartItem ($command: InputRemoveItemType!) {
+    removeCartItem(command: $command) {
+        id
+        customerId
+        comment
+        subTotal { formattedAmount }
+    	  total { formattedAmount }
+        discountTotal { formattedAmount }
+        taxTotal { formattedAmount }
+        shippingTotal { formattedAmount }
+        items {
+            id
+            productId
+            name
+            sku
+            quantity
+            imageUrl
+            dynamicProperties { name value valueType}
+            extendedPrice { formattedAmount}
+            placedPrice { formattedAmount}
+        }
+    }
+}
