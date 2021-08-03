@@ -44,9 +44,35 @@ export class NavigationButtonComponent implements OnDestroy {
         clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
         clearCartResult.data?.clearCart?.id
       )),
-      concatMap(previosResult => this.updateCartItemDynamicProperties(
-        previosResult.data?.addItemsCart?.customerId ?? 'Anonymous',
-        previosResult.data?.addItemsCart?.items?.find(Boolean)?.id ?? 'id-123'
+      concatMap(lastResult => this.updateCartItemDynamicProperties(
+        lastResult.data?.addItemsCart?.customerId ?? 'Anonymous',
+        lastResult.data?.addItemsCart?.items?.
+          find(x => x?.productId === '9cbd8f316e254a679ba34a900fccb076')?.id ?? 'id-1',
+        [
+          {
+            name: 'Brand',
+            value: 'Epson',
+          },
+          {
+            name: 'Is alcoholic',
+            value: 'true',
+          },
+        ]
+      )),
+      concatMap(lastResult => this.updateCartItemDynamicProperties(
+        lastResult.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
+        lastResult.data?.updateCartItemDynamicProperties?.items?.
+          find(x => x?.productId === 'e7eee66223da43109502891b54bc33d3')?.id ?? 'id-2',
+        [
+          {
+            name: 'Production date',
+            value: '2021-07-15',
+          },
+          {
+            name: 'Pack size',
+            value: '123',
+          },
+        ]
       )),
       takeUntil(this.unsubscriber)
     )
@@ -103,7 +129,7 @@ export class NavigationButtonComponent implements OnDestroy {
     });
   }
 
-  updateCartItemDynamicProperties(userId: string, itemId: string)
+  updateCartItemDynamicProperties(userId: string, itemId: string, dynamicProperties: { name: string; value: string; }[])
     : Observable<FetchResult<updateCartItemDynamicProperties>> {
     return this.apollo.mutate<updateCartItemDynamicProperties, updateCartItemDynamicPropertiesVariables>({
       mutation: updateCartItemDynamicPropertiesMutation,
@@ -112,24 +138,7 @@ export class NavigationButtonComponent implements OnDestroy {
           lineItemId: itemId,
           userId,
           storeId: 'Electronics',
-          dynamicProperties: [
-            {
-              name: 'Brand',
-              value: 'Epson',
-            },
-            {
-              name: 'Is alcoholic',
-              value: 'true',
-            },
-            {
-              name: 'Production date',
-              value: '2021-07-15',
-            },
-            {
-              name: 'Pack size',
-              value: '123',
-            },
-          ],
+          dynamicProperties,
         },
       },
     });
