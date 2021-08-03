@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore } from '@ngrx/store/testing';
 import { CartSummaryComponent } from './cart-summary.component';
+import * as Cart from 'src/app/store/cart/cart.reducer';
 
 describe('CartSummaryComponent', () => {
   let component: CartSummaryComponent;
@@ -10,6 +11,13 @@ describe('CartSummaryComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         CartSummaryComponent,
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            cart: Cart.initialState,
+          },
+        }),
       ],
     })
       .compileComponents();
