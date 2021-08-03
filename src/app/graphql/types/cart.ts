@@ -47,6 +47,22 @@ export interface cart_cart_shippingTotal {
   readonly formattedAmount: string;
 }
 
+export interface cart_cart_items_extendedPrice {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_items_placedPrice {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
 export interface cart_cart_items {
   readonly __typename: "LineItemType";
   /**
@@ -62,9 +78,19 @@ export interface cart_cart_items {
    */
   readonly name: string | null;
   /**
+   * Value of product SKU
+   */
+  readonly sku: string | null;
+  /**
    * Value of line item quantity
    */
   readonly quantity: number | null;
+  /**
+   * Value of line item image absolute URL
+   */
+  readonly imageUrl: string | null;
+  readonly extendedPrice: cart_cart_items_extendedPrice | null;
+  readonly placedPrice: cart_cart_items_placedPrice | null;
 }
 
 export interface cart_cart {
