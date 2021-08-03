@@ -44,22 +44,18 @@ export const reducer = createReducer(
       dynamicProperties: customMap(action?.dynamicProperties, x => ({ ...x })),
     },
   })),
-  on(CartActions.addCartCouponSuccess, (state, action): State => ({
-    ...state,
-    cart: {
-      ...state.cart,
-      ...action?.data,
-      coupons: customMap(action?.data?.coupons, x => ({ ...x })),
-    },
-  })),
-  on(CartActions.removeCartCouponSuccess, (state, action): State => ({
-    ...state,
-    cart: {
-      ...state.cart,
-      ...action?.data,
-      coupons: customMap(action?.data?.coupons, x => ({ ...x })),
-    },
-  })),
+  on(
+    CartActions.addCartCouponSuccess,
+    CartActions.removeCartCouponSuccess,
+    (state, action): State => ({
+      ...state,
+      cart: {
+        ...state.cart,
+        ...action?.data,
+        coupons: customMap(action?.data?.coupons, x => ({ ...x })),
+      },
+    })
+  ),
   on(CartActions.setCartUserId, (state): State => state)
 );
 
