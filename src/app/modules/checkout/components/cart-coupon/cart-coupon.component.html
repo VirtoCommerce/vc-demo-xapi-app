@@ -1,5 +1,5 @@
 <form #couponForm="ngForm">
-    <label for="code" class="form-label">Promotion Code</label>
+    <label for="code" class="form-label checkout-form-label">Promotion Code</label>
     <div class="d-flex form-group" [ngClass]="{'is-invalid': coupon.code && validateCouponResult===false }">
         <input class="form-control me-sm-2" id="code" name="code" type="text" placeholder="Enter your code"
             [(ngModel)]="coupon.code" #code="ngModel" [disabled]="coupon.isAppliedSuccessfully ?? false">

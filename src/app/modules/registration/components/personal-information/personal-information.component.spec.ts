@@ -3,6 +3,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { PersonalInformationComponent } from './personal-information.component';
 import * as CompanyRegistration from 'src/app/modules/registration/store/company.reducer';
 import * as Countries from 'src/app/store/countries/countries.reducer';
+import { ValidationModule } from 'src/app/modules/validation/validation.module';
 
 describe('PersonalInformationComponent', () => {
   let component: PersonalInformationComponent;
@@ -10,6 +11,9 @@ describe('PersonalInformationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        ValidationModule,
+      ],
       providers: [
         provideMockStore({
           initialState: {

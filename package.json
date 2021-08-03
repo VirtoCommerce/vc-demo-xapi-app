@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "xapi:codegen": "apollo client:codegen ../types --target typescript --useReadOnlyTypes"
+    "xapi:codegen": "npx apollo client:codegen ../types --target typescript --useReadOnlyTypes --globalTypesFile ./src/app/graphql/types/globalTypes.ts"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +25,9 @@
     "@apollo/client": "^3.0.0",
     "@fontsource/lato": "^4.5.0",
     "@fontsource/roboto-condensed": "^4.5.0",
+    "@fortawesome/angular-fontawesome": "^0.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@graphql-tools/webpack-loader": "^6.4.0",
     "@ng-bootstrap/ng-bootstrap": "~11.0.0-beta.2",
     "@ng-dynamic-forms/core": "^14.0.1",
@@ -56,6 +59,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.28.2",
     "@typescript-eslint/parser": "4.28.2",
+    "apollo": "^2.33.4",
     "eslint": "^7.30.0",
     "eslint-plugin-editorconfig": "^3.0.2",
     "eslint-plugin-ngrx": "^1.26.1",

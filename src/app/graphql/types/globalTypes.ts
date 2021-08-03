@@ -1,4 +1,4 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
@@ -174,6 +174,11 @@ export interface InputUpdateCartDynamicPropertiesType {
   readonly currencyCode?: string | null;
   readonly cultureName?: string | null;
   readonly cartType?: string | null;
+  readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
+}
+
+export interface InputUpdateMemberDynamicPropertiesType {
+  readonly memberId: string;
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
 }
 

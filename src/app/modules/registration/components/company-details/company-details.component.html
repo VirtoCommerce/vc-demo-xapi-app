@@ -3,13 +3,14 @@
     <form [formGroup]="formGroup">
       <dynamic-ng-bootstrap-form [group]="formGroup"
                                  [model]="formModel"
+                                 [layout]="formLayout"
                                  (change)="onChange($event)">
       </dynamic-ng-bootstrap-form>
     </form>
-    <vc-registration-company-address></vc-registration-company-address>
+    <vc-registration-company-address (formChange)="onAddressFormChange($event)"></vc-registration-company-address>
   </div>
   <aside class="d-none d-md-block col offset-2 position-relative">
-    <img class="position-absolute img-fluid mt-n7"
+    <img class="position-absolute img-fluid mt-n7 user-select-none"
          src="assets/images/company-details.svg"
          alt="">
   </aside>

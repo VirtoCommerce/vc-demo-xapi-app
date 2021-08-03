@@ -7,6 +7,7 @@ import { CartCommentComponent } from './components/cart-comment/cart-comment.com
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { CartDynamicPropertyComponent } from './components/cart-dynamic-property/cart-dynamic-property.component';
 import { CartCouponComponent } from './components/cart-coupon/cart-coupon.component';
+import { LineItemsComponent } from './components/line-items/line-items.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CartCouponComponent } from './components/cart-coupon/cart-coupon.compon
     CartSummaryComponent,
     CartDynamicPropertyComponent,
     CartCouponComponent,
+    LineItemsComponent,
   ],
   imports: [
     CommonModule,
@@ -23,5 +25,4 @@ import { CartCouponComponent } from './components/cart-coupon/cart-coupon.compon
     CheckoutRoutingModule,
   ],
 })
-export class CheckoutModule {
-}
+export class CheckoutModule { }

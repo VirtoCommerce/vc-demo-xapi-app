@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import {
   DynamicFormControlEvent,
   DynamicFormOption,
@@ -31,6 +31,8 @@ import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
   ],
 })
 export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDestroy {
+  @Output() formChange = new EventEmitter<boolean>()
+
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
   })
@@ -60,6 +62,11 @@ export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDes
       .subscribe(countries => {
         this.countries = countries;
       });
+
+    /*
+     * We need to add an undefined option and set the value of the select
+     * element to undefined to prevent auto-selection on Safari browser
+     */
     this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions)
       .pipe(filter(nonNull), concatMap(options => {
         return of([
@@ -93,6 +100,8 @@ export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDes
         },
       }));
     }
+    const formIsValid = event.group.valid;
+    this.formChange.emit(formIsValid);
   }
 
   ngOnDestroy(): void {

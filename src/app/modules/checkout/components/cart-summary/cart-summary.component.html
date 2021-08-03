@@ -1,6 +1,6 @@
 <div class="component">
     <div class="card mb-3">
-      <h3 class="card-header">Order Summary</h3>
+      <h3 class="card-header summary-header">Order Summary</h3>
       <div class="card-body">
         <vc-cart-dynamic-property></vc-cart-dynamic-property>
       </div>
@@ -48,7 +48,7 @@
                 <p class="summary-total">{{ cart?.total?.formattedAmount }}</p>
               </div>
         </div>
-        <div class="card-text text-muted">
+        <div class="card-text summary-footer">
             Availability, shipping, tax & promotions are not final until you complete your order.
         </div>
       </div>

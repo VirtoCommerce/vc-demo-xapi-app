@@ -1,3 +1,4 @@
+import { Store } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, ApolloLink, InMemoryCache } from '@apollo/client/core';
@@ -5,17 +6,59 @@ import { setContext } from '@apollo/client/link/context';
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { selectLoginState } from './store/login/login.selectors';
+import { take } from 'rxjs/operators';
+import { State } from './store/login/login.reducer';
 
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<NormalizedCacheObject> {
+export function createApollo(
+  httpLink: HttpLink,
+  httpClient: HttpClient,
+  store: Store
+): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
     headers: {
       Accept: 'charset=utf-8',
     },
   }));
-  const auth = setContext(() => {
-    // Temporary do nothing. Add Authentication: Bearer {token} header here on login implmentation
-    return { };
+  const auth = setContext(async operation => {
+    let token: string | null = null;
+    switch (operation.operationName) {
+    case 'createUser':
+    case 'updateMemberDynamicProperties':
+    {
+      token = (await httpClient.post<{access_token: string}>(
+        `${environment.variables.platformUrl}/connect/token`,
+        new HttpParams({ fromObject: {
+          grant_type: 'password',
+          username: 'admin',
+          password: 'store',
+        } }).toString(),
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      ).toPromise()).access_token;
+      break;
+    }
+
+    default:
+    {
+      const state = await store.select(selectLoginState).pipe(take(1))
+        .toPromise<State>();
+      token = state.token;
+      break;
+    }
+    }
+
+    return token === null
+      ?  {}
+      : {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
   });
   const link = ApolloLink.from([
     basic,
@@ -40,6 +83,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<Normalized
       deps: [
         HttpLink,
         HttpClient,
+        Store,
       ],
     },
   ],
