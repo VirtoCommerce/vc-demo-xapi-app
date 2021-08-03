@@ -36,12 +36,12 @@ export const PERSONAL_INFORMATION_INPUTS = {
       email: null,
     },
     asyncValidators: {
-      [EmailUniquenessAsyncValidatorService.name]: null,
+      [EmailUniquenessAsyncValidatorService.validatorName]: null,
     },
     errorMessages: {
       required: validationMessages.requiredMessage,
       email: 'Enter correct email please (ex. john@gmail.com)',
-      [EmailUniquenessAsyncValidatorService.name]: validationMessages.uniqueMessage,
+      [EmailUniquenessAsyncValidatorService.validatorName]: validationMessages.uniqueMessage,
     },
   }),
   userName: new DynamicInputModel({
@@ -51,11 +51,11 @@ export const PERSONAL_INFORMATION_INPUTS = {
       required: null,
     },
     asyncValidators: {
-      [UsernameUniquenessAsyncValidatorService.name]: null,
+      [UsernameUniquenessAsyncValidatorService.validatorName]: null,
     },
     errorMessages: {
       required: validationMessages.requiredMessage,
-      [UsernameUniquenessAsyncValidatorService.name]: validationMessages.uniqueMessage,
+      [UsernameUniquenessAsyncValidatorService.validatorName]: validationMessages.uniqueMessage,
     },
   }),
   password: new DynamicInputModel({

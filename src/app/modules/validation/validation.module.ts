@@ -39,11 +39,11 @@ import { UsernameUniquenessAsyncValidatorService } from './validators/username-u
             passwordMatchValidator,
           ],
           [
-            EmailUniquenessAsyncValidatorService.name,
+            EmailUniquenessAsyncValidatorService.validatorName,
             emailUniquenessAsyncValidator,
           ],
           [
-            UsernameUniquenessAsyncValidatorService.name,
+            UsernameUniquenessAsyncValidatorService.validatorName,
             usernameUniquenessAsyncValidator,
           ],
         ]);

@@ -10,6 +10,8 @@ import checkEmailUniquenessQuery from 'src/app/graphql/queries/check-email-uniqu
   providedIn: 'root',
 })
 export class EmailUniquenessAsyncValidatorService implements AsyncValidator {
+  static validatorName = 'emailUniqueness';
+
   constructor(private readonly apollo: Apollo) { }
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
@@ -18,7 +20,7 @@ export class EmailUniquenessAsyncValidatorService implements AsyncValidator {
       variables: { email: control.value as string },
     }).pipe(map(result => !result.data.checkEmailUniqueness
       ? {
-        [EmailUniquenessAsyncValidatorService.name]: true,
+        [EmailUniquenessAsyncValidatorService.validatorName]: true,
       }
       : null));
   }

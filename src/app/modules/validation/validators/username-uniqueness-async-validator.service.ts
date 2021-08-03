@@ -11,6 +11,8 @@ import checkUsernameUniquenessQuery from 'src/app/graphql/queries/check-username
   providedIn: 'root',
 })
 export class UsernameUniquenessAsyncValidatorService implements AsyncValidator {
+  static validatorName = 'usernameUniqueness';
+
   constructor(private readonly apollo: Apollo) { }
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
@@ -19,7 +21,7 @@ export class UsernameUniquenessAsyncValidatorService implements AsyncValidator {
       variables: { username: control.value as string },
     }).pipe(map(result => !result.data.checkUsernameUniqueness
       ? {
-        [UsernameUniquenessAsyncValidatorService.name]: !result.data.checkUsernameUniqueness,
+        [UsernameUniquenessAsyncValidatorService.validatorName]: !result.data.checkUsernameUniqueness,
       }
       : null));
   }
