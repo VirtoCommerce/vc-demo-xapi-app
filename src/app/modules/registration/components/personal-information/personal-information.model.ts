@@ -6,6 +6,9 @@ import {
 import {
   UsernameUniquenessAsyncValidatorService,
 } from 'src/app/modules/validation/validators/username-uniqueness-async-validator.service';
+import {
+  PasswordPolicyValidatorService,
+} from 'src/app/modules/validation/validators/password-policy-validator.service';
 
 export const PERSONAL_INFORMATION_INPUTS = {
   firstName: new DynamicInputModel({
@@ -40,7 +43,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
     },
     errorMessages: {
       required: validationMessages.requiredMessage,
-      email: 'Enter correct email please (ex. john@gmail.com)',
+      email: validationMessages.emailIncorrectMessage,
       [EmailUniquenessAsyncValidatorService.validatorName]: validationMessages.uniqueMessage,
     },
   }),
@@ -65,8 +68,12 @@ export const PERSONAL_INFORMATION_INPUTS = {
     validators: {
       required: null,
     },
+    asyncValidators: {
+      [PasswordPolicyValidatorService.validatorName]: null,
+    },
     errorMessages: {
       required: validationMessages.requiredMessage,
+      [PasswordPolicyValidatorService.validatorName]: '{{ validator.messages }}',
     },
   }),
   confirmPassword: new DynamicInputModel({
