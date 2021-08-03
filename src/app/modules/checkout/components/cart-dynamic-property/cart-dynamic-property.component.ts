@@ -43,8 +43,6 @@ export class CartDynamicPropertyComponent implements OnInit, OnDestroy {
     this.store.dispatch(updateCartPurchaseNumber({
       purchaseNumber,
     }));
-
-    this.originalPurchaseOrderNumber = this.purchaseNumber;
   }
 
   clearPurchaseNumber(): void {
@@ -53,8 +51,6 @@ export class CartDynamicPropertyComponent implements OnInit, OnDestroy {
     this.store.dispatch(updateCartPurchaseNumber({
       purchaseNumber: null,
     }));
-
-    this.originalPurchaseOrderNumber = this.purchaseNumber;
   }
 
   ngOnInit(): void {

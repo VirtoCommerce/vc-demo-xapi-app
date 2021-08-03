@@ -75,11 +75,16 @@ export class CartCouponComponent implements OnInit, OnDestroy {
     this.store.select(selectCoupons)
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(coupons => {
-        if (coupons) {
-          if (coupons.length) {
-            this.coupon = coupons[0] as Coupon;
-            this.hasCoupon = true;
-          }
+        if (coupons && coupons.length) {
+          this.coupon = { ...coupons[0] as Coupon };
+          this.hasCoupon = true;
+        }
+        else {
+          this.coupon = {
+            code: null,
+            isAppliedSuccessfully: false,
+          };
+          this.hasCoupon = false;
         }
       });
   }

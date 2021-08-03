@@ -21,9 +21,54 @@ export interface removeCartCoupon_removeCoupon_coupons {
   readonly isAppliedSuccessfully: boolean | null;
 }
 
+export interface removeCartCoupon_removeCoupon_subTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface removeCartCoupon_removeCoupon_total {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface removeCartCoupon_removeCoupon_discountTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface removeCartCoupon_removeCoupon_taxTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface removeCartCoupon_removeCoupon_shippingTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
 export interface removeCartCoupon_removeCoupon {
   readonly __typename: "CartType";
   readonly coupons: ReadonlyArray<(removeCartCoupon_removeCoupon_coupons | null)> | null;
+  readonly subTotal: removeCartCoupon_removeCoupon_subTotal | null;
+  readonly total: removeCartCoupon_removeCoupon_total | null;
+  readonly discountTotal: removeCartCoupon_removeCoupon_discountTotal | null;
+  readonly taxTotal: removeCartCoupon_removeCoupon_taxTotal | null;
+  readonly shippingTotal: removeCartCoupon_removeCoupon_shippingTotal | null;
 }
 
 export interface removeCartCoupon {

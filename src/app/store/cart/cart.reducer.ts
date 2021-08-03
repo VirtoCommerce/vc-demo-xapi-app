@@ -48,14 +48,16 @@ export const reducer = createReducer(
     ...state,
     cart: {
       ...state.cart,
-      coupons: customMap(action?.coupons, x => ({ ...x })),
+      ...action?.data,
+      coupons: customMap(action?.data?.coupons, x => ({ ...x })),
     },
   })),
   on(CartActions.removeCartCouponSuccess, (state, action): State => ({
     ...state,
     cart: {
       ...state.cart,
-      coupons: customMap(action?.coupons, x => ({ ...x })),
+      ...action?.data,
+      coupons: customMap(action?.data?.coupons, x => ({ ...x })),
     },
   })),
   on(CartActions.setCartUserId, (state): State => state)

@@ -5,10 +5,10 @@ import { PartialDeep } from 'type-fest';
 import { Cart } from 'src/app/models/cart.model';
 import { cart } from 'src/app/graphql/types/cart';
 
-import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperties }
+import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperties as dynamicPropertiesUpdateResult }
   from 'src/app/graphql/types/updateCartDynamicProperties';
-import { addCartCoupon_addCoupon_coupons } from 'src/app/graphql/types/addCartCoupon';
-import { removeCartCoupon_removeCoupon_coupons } from 'src/app/graphql/types/removeCartCoupon';
+import { addCartCoupon_addCoupon as addCouponResult } from 'src/app/graphql/types/addCartCoupon';
+import { removeCartCoupon_removeCoupon as removeCouponResult } from 'src/app/graphql/types/removeCartCoupon';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -35,9 +35,9 @@ export const updateCartPurchaseNumber = createAction(
 );
 
 export const updateCartDynamicProperties = createAction(
-  '[Cart] Update Cart DynamicProperties',
+  '[Cart] Update Cart DynamicProperties Success',
   props<{ dynamicProperties?:
-    ReadonlyArray<(updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperties | null)> | null }>()
+    ReadonlyArray<(dynamicPropertiesUpdateResult | null)> | null }>()
 );
 
 export const addCartCoupon = createAction(
@@ -47,8 +47,7 @@ export const addCartCoupon = createAction(
 
 export const addCartCouponSuccess = createAction(
   '[Cart] Add Cart Coupon Success',
-  props<{ coupons?:
-    ReadonlyArray<(addCartCoupon_addCoupon_coupons | null)> | null }>()
+  props<{ data: addCouponResult | null }>()
 );
 
 export const removeCartCoupon = createAction(
@@ -58,8 +57,7 @@ export const removeCartCoupon = createAction(
 
 export const removeCartCouponSuccess = createAction(
   '[Cart] Remove Cart Coupon Success',
-  props<{ coupons?:
-    ReadonlyArray<(removeCartCoupon_removeCoupon_coupons | null)> | null }>()
+  props<{ data: removeCouponResult | null }>()
 );
 
 export const updateStoredCart = createAction(

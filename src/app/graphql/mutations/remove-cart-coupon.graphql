@@ -4,5 +4,10 @@ mutation removeCartCoupon ($command: InputRemoveCouponType!) {
         code
         isAppliedSuccessfully
       }
+      subTotal { formattedAmount }
+    	total { formattedAmount }
+      discountTotal { formattedAmount }
+      taxTotal { formattedAmount }
+      shippingTotal { formattedAmount }
   }
 }

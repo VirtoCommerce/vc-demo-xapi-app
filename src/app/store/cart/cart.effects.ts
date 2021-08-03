@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, concatMap, tap } from 'rxjs/operators';
@@ -33,14 +32,13 @@ export class CartEffects {
   getCart$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.getCart),
-      concatMap(() => this.apollo.watchQuery<cart>({
+      concatMap(() => this.apollo.query<cart>({
         query: getCartQuery,
         variables: {
           ...this.baseCartVariables,
           userId: localStorage.getItem('cartUserId'),
         },
       })
-        .valueChanges
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CartActions.getCartFailure({ error })))
@@ -112,7 +110,7 @@ export class CartEffects {
       })
         .pipe(
           map(result => CartActions.addCartCouponSuccess({
-            coupons: result.data?.addCoupon?.coupons,
+            data: result.data?.addCoupon ?? null,
           }))
         ))
     );
@@ -132,8 +130,8 @@ export class CartEffects {
         },
       })
         .pipe(
-          map(() => CartActions.removeCartCouponSuccess({
-            coupons: [],
+          map(result => CartActions.removeCartCouponSuccess({
+            data: result.data?.removeCoupon ?? null,
           }))
         ))
     );
@@ -150,7 +148,6 @@ export class CartEffects {
 
   constructor(
     private readonly actions$: Actions,
-    private readonly apollo: Apollo,
-    private readonly router: Router
+    private readonly apollo: Apollo
   ) { }
 }
