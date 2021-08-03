@@ -6,9 +6,11 @@ import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { ApolloError } from '@apollo/client/errors';
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
+import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
 import * as CartActions from './cart.actions';
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
+import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
 
 @Injectable()
@@ -34,6 +36,29 @@ export class CartEffects {
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CartActions.getCartFailure({ error })))
+        ))
+    );
+  });
+
+  removeCartItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.removeCartItem),
+      concatMap(action => this.apollo.mutate<removeCartItem, removeCartItemVariables>({
+        mutation: removeCartItemMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            lineItemId: action.lineItemId,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.updateStoredCart({
+            data: {
+              ...result.data?.removeCartItem,
+            },
+          }))
         ))
     );
   });

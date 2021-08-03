@@ -4,15 +4,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: me
+// GraphQL query operation: checkUsernameUniqueness
 // ====================================================
 
-export interface me_me {
-  readonly __typename: "UserType";
-  readonly id: string;
-  readonly userName: string;
+export interface checkUsernameUniqueness {
+  readonly checkUsernameUniqueness: boolean | null;
 }
 
-export interface me {
-  readonly me: me_me | null;
+export interface checkUsernameUniquenessVariables {
+  readonly username: string;
 }
