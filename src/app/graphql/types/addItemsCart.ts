@@ -9,6 +9,14 @@ import { InputAddItemsType } from "./globalTypes";
 // GraphQL mutation operation: addItemsCart
 // ====================================================
 
+export interface addItemsCart_addItemsCart_items {
+  readonly __typename: "LineItemType";
+  /**
+   * Line item id
+   */
+  readonly id: string;
+}
+
 export interface addItemsCart_addItemsCart {
   readonly __typename: "CartType";
   /**
@@ -19,6 +27,7 @@ export interface addItemsCart_addItemsCart {
    * Shopping cart user id
    */
   readonly customerId: string | null;
+  readonly items: ReadonlyArray<(addItemsCart_addItemsCart_items | null)> | null;
 }
 
 export interface addItemsCart {

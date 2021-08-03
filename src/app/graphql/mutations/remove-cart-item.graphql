@@ -1,5 +1,5 @@
-query cart ($storeId: String!, $userId: String, $currencyCode: String!, $cultureName: String, $cartName: String) {
-    cart (storeId: $storeId, userId: $userId, currencyCode: $currencyCode, cultureName: $cultureName, cartName: $cartName) {
+mutation removeCartItem ($command: InputRemoveItemType!) {
+    removeCartItem(command: $command) {
         id
         customerId
         comment

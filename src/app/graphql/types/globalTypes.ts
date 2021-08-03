@@ -144,6 +144,29 @@ export interface InputNewCartItemType {
   readonly quantity?: number | null;
 }
 
+export interface InputRemoveItemType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly lineItemId: string;
+}
+
+export interface InputUpdateCartItemDynamicPropertiesType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly lineItemId: string;
+  readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
+}
+
 export interface InputUpdateMemberDynamicPropertiesType {
   readonly memberId: string;
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
