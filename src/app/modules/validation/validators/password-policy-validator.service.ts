@@ -10,7 +10,9 @@ import {
 import { nonNull } from 'src/app/helpers/nonNull';
 import validatePasswordQuery from '../../../graphql/queries/validate-password.graphql';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class PasswordPolicyValidatorService implements AsyncValidator {
   static validatorName = 'passwordPolicyValidatorService';
 
