@@ -7,6 +7,17 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface InputAddCouponType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly couponCode: string;
+}
+
 export interface InputAddItemsType {
   readonly cartId?: string | null;
   readonly storeId: string;
@@ -144,6 +155,17 @@ export interface InputNewCartItemType {
   readonly quantity?: number | null;
 }
 
+export interface InputRemoveCouponType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly couponCode?: string | null;
+}
+
 export interface InputRemoveItemType {
   readonly cartId?: string | null;
   readonly storeId: string;
@@ -153,6 +175,17 @@ export interface InputRemoveItemType {
   readonly cultureName?: string | null;
   readonly cartType?: string | null;
   readonly lineItemId: string;
+}
+
+export interface InputUpdateCartDynamicPropertiesType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
 }
 
 export interface InputUpdateCartItemDynamicPropertiesType {
@@ -170,6 +203,17 @@ export interface InputUpdateCartItemDynamicPropertiesType {
 export interface InputUpdateMemberDynamicPropertiesType {
   readonly memberId: string;
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
+}
+
+export interface InputValidateCouponType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly coupon: string;
 }
 
 //==============================================================

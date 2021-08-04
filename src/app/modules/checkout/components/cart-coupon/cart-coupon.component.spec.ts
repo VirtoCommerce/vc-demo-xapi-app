@@ -1,16 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import { CartSummaryComponent } from './cart-summary.component';
+import { CartCouponComponent } from './cart-coupon.component';
+import { FormsModule } from '@angular/forms';
 import * as Cart from 'src/app/store/cart/cart.reducer';
 
-describe('CartSummaryComponent', () => {
-  let component: CartSummaryComponent;
-  let fixture: ComponentFixture<CartSummaryComponent>;
+describe('CartCouponComponent', () => {
+  let component: CartCouponComponent;
+  let fixture: ComponentFixture<CartCouponComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        CartSummaryComponent,
+        CartCouponComponent,
+      ],
+      imports: [
+        FormsModule,
       ],
       providers: [
         provideMockStore({
@@ -24,7 +28,7 @@ describe('CartSummaryComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartSummaryComponent);
+    fixture = TestBed.createComponent(CartCouponComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

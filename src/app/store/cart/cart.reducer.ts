@@ -1,17 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 import { PartialDeep } from 'type-fest';
-import { Cart, CartItem } from 'src/app/models/cart.model';
+import { Cart } from 'src/app/models/cart.model';
 import * as CartActions from './cart.actions';
 
 export const cartFeatureKey = 'cart';
 
 export interface State {
-  cart: PartialDeep<Cart> | null;
+  cart: PartialDeep<Cart>;
 }
 
 export const initialState: State = {
   cart: {
     items: [],
+    dynamicProperties: [],
+    coupons: [],
   },
 };
 
@@ -30,11 +32,37 @@ export const reducer = createReducer(
     cart: {
       ...state.cart,
       ...action.data?.cart,
-      itemsData: action.data?.cart?.items != null
-        ? action.data.cart.items.map(x => x as CartItem)
-        : [],
+      dynamicProperties: customMap(action?.data?.cart?.dynamicProperties, x => ({ ...x })),
+      coupons: customMap(action?.data?.cart?.coupons, x => ({ ...x })),
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),
+  on(CartActions.updateCartDynamicProperties, (state, action): State => ({
+    ...state,
+    cart: {
+      ...state.cart,
+      dynamicProperties: customMap(action?.dynamicProperties, x => ({ ...x })),
+    },
+  })),
+  on(
+    CartActions.addCartCouponSuccess,
+    CartActions.removeCartCouponSuccess,
+    (state, action): State => ({
+      ...state,
+      cart: {
+        ...state.cart,
+        ...action?.data,
+        coupons: customMap(action?.data?.coupons, x => ({ ...x })),
+      },
+    })
+  ),
   on(CartActions.setCartUserId, (state): State => state)
 );
+
+export function customMap<T, P>(input: readonly (T | null)[] | null | undefined, callback: (value: T) => P): P[] {
+  return input?.filter(x => x != null)
+    .map(x => x as T)
+    .map<P>(x => {
+      return callback(x);
+    }) ?? [];
+}

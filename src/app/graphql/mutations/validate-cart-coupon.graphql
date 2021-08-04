@@ -1,0 +1,3 @@
+mutation validateCartCoupon ($command: InputValidateCouponType!) {
+    validateCoupon (command: $command)
+}
