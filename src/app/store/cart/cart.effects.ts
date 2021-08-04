@@ -65,10 +65,8 @@ export class CartEffects {
         },
       })
         .pipe(
-          map(result => CartActions.updateStoredCart({
-            data: {
-              ...result.data?.changeCartItemQuantity ?? {},
-            },
+          map(result => CartActions.changeCartItemQuantitySuccess({
+            data: result.data?.changeCartItemQuantity ?? null,
           }))
         ))
     );
@@ -88,10 +86,8 @@ export class CartEffects {
         },
       })
         .pipe(
-          map(result => CartActions.updateStoredCart({
-            data: {
-              ...result.data?.removeCartItem,
-            },
+          map(result => CartActions.removeCartItemSuccess({
+            data: result.data?.removeCartItem ?? null,
           }))
         ))
     );

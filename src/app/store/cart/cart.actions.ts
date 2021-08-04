@@ -9,6 +9,9 @@ import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperti
   from 'src/app/graphql/types/updateCartDynamicProperties';
 import { addCartCoupon_addCoupon as addCouponResult } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon_removeCoupon as removeCouponResult } from 'src/app/graphql/types/removeCartCoupon';
+import { changeCartItemQuantity_changeCartItemQuantity as changeCartItemQuantityResult }
+  from 'src/app/graphql/types/changeCartItemQuantity';
+import { removeCartItem_removeCartItem as removeCartItemResult } from 'src/app/graphql/types/removeCartItem';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -29,9 +32,19 @@ export const removeCartItem = createAction(
   props<{ lineItemId: string }>()
 );
 
+export const removeCartItemSuccess = createAction(
+  '[Cart] Remove CartItem Success',
+  props<{ data: removeCartItemResult | null }>()
+);
+
 export const changeCartItemQuantity = createAction(
   '[Cart] Change CartItem quantity',
   props<{ lineItemId: string, quantity: number }>()
+);
+
+export const changeCartItemQuantitySuccess = createAction(
+  '[Cart] Change CartItem quantity Success',
+  props<{ data: changeCartItemQuantityResult | null }>()
 );
 
 export const updateCartComment = createAction(
@@ -46,8 +59,7 @@ export const updateCartPurchaseNumber = createAction(
 
 export const updateCartDynamicProperties = createAction(
   '[Cart] Update Cart DynamicProperties Success',
-  props<{ dynamicProperties?:
-    ReadonlyArray<(dynamicPropertiesUpdateResult | null)> | null }>()
+  props<{ dynamicProperties?: ReadonlyArray<(dynamicPropertiesUpdateResult | null)> | null }>()
 );
 
 export const addCartCoupon = createAction(

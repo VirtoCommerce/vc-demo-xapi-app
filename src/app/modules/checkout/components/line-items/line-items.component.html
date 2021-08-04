@@ -1,4 +1,4 @@
-<div class="text-end">
+<!-- <div class="text-end">
     <div class="row mb-2">
         <div class="col">
             <a class="border-right pl-4 fw-strong" href="javascript: void(0)">Show Reference Information</a>
@@ -7,36 +7,37 @@
             <a class="pl-4 fw-strong" href="javascript: void(0)">Clear Cart</a>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="card">
     <div class="card-body pt-0">
-        <div *ngFor="let lineItem of cart?.itemsData" class="row align-items-center py-3 border-bottom">
+        <div *ngFor="let lineItem of items" class="row align-items-center py-3 border-bottom">
             <div class="col-4 align-self-start">
-                <img [src]="lineItem?.imageUrl" class="img-fluid" [alt]="lineItem?.name" />
+                <img [src]="lineItem.imageUrl" class="img-fluid" [alt]="lineItem.name" />
             </div>
             <div class="col-12">
                 <p class="mb-2">
-                    <a href="javascript: void(0)" class="fw-strong">{{ lineItem?.name }}</a>
+                    <a href="javascript: void(0)" class="fw-strong">{{ lineItem.name }}</a>
                 </p>
                 <p class="mb-0 fs-label">
                     <span class="fw-strong">Item: </span>
-                    <span>{{ lineItem?.sku }}</span>
+                    <span>{{ lineItem.sku }}</span>
                 </p>
-                <div *ngFor="let dp of getDynamicPropertiesToDisplay(lineItem?.dynamicProperties ?? null)" class="align-items-center mb-0 fs-label">
+                <div *ngFor="let dp of getDynamicPropertiesToDisplay(lineItem.dynamicProperties ?? null)"
+                    class="align-items-center mb-0 fs-label">
                     <span class="fw-strong">{{ dp?.name }}: </span>
                     <span>{{ dp?.displayValue }}</span>
                 </div>
                 <p class="mb-0">
                 <p class="mb-2 fs-label">
                     <span class="fw-strong">Price: </span>
-                    <span class="fw-strong price-item">{{ lineItem?.placedPrice!.formattedAmount }}</span>
+                    <span class="fw-strong price-item">{{ lineItem.placedPrice!.formattedAmount }}</span>
                     <span> / each</span>
                 </p>
             </div>
             <div class="col-2">
-                <input [(ngModel)]="lineItem!.quantity" type="number" class="form-control small-input text-center" min="1"
-                    max="5">
+                <input [(ngModel)]="lineItem!.quantity" type="number" class="form-control small-input text-center"
+                    min="1" max="5">
             </div>
             <div class="col-3 fs-label">
                 <a (click)="update(lineItem)" href="javascript: void(0)">Update</a>
@@ -45,7 +46,7 @@
             <div class="col-3">
                 <span class="fw-strong float-end">Total</span>
                 <br />
-                <span class="fw-bold price-total float-end">{{ lineItem?.extendedPrice!.formattedAmount }}</span>
+                <span class="fw-bold price-total float-end">{{ lineItem.extendedPrice!.formattedAmount }}</span>
             </div>
         </div>
         <div class="card-text text-end mt-3">If you changed multiple quantities,

@@ -1,8 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { cart_cart_items_dynamicProperties } from 'src/app/graphql/types/cart';
-import { Cart, CartItem } from 'src/app/models/cart.model';
+import { CartItem } from 'src/app/models/cart.model';
 import { changeCartItemQuantity, removeCartItem } from 'src/app/store/cart/cart.actions';
+import { selectItems } from 'src/app/store/cart/cart.selectors';
 
 @Component({
   selector: 'vc-line-items',
@@ -12,12 +15,22 @@ import { changeCartItemQuantity, removeCartItem } from 'src/app/store/cart/cart.
   ],
 })
 
-export class LineItemsComponent {
-  @Input() cart?: Cart;
+export class LineItemsComponent implements OnInit, OnDestroy {
+  unsubscriber = new Subject();
+
+  items: CartItem[] = [];
 
   constructor(
     private readonly store: Store
   ) { }
+
+  ngOnInit(): void {
+    this.store.select(selectItems)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(items => {
+        this.items = items.map(li => ({ ...li }));
+      });
+  }
 
   private readonly typesToCheck: string[] = [
     'Integer',
@@ -74,6 +87,11 @@ export class LineItemsComponent {
         lineItemId: item.id,
       }));
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber.next();
+    this.unsubscriber.complete();
   }
 }
 
