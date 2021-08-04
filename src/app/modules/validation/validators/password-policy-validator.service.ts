@@ -7,8 +7,8 @@ import {
   validatePassword,
   validatePasswordVariables,
 } from 'src/app/graphql/types/validatePassword';
+import { nonNull } from 'src/app/helpers/nonNull';
 import validatePasswordQuery from '../../../graphql/queries/validate-password.graphql';
-import { passwordPolicyMessages } from 'src/app/modules/validation/constants/validation-messages.constants';
 
 @Injectable({ providedIn: 'root' })
 export class PasswordPolicyValidatorService implements AsyncValidator {
@@ -25,30 +25,15 @@ export class PasswordPolicyValidatorService implements AsyncValidator {
         password: password,
       },
     }).pipe(
-      map(result => {
-        const errorsData = result.data.validatePassword?.errors;
-        const errorMessages = errorsData?.map(element => {
-          const code = element?.code as string;
-          let message = '';
-          if (code in passwordPolicyMessages) {
-            if (code === 'PasswordTooShort') {
-              message = passwordPolicyMessages[code] +
-              `${element?.errorParameter ?? '' }` +
-              passwordPolicyMessages.Characters;
-              return message;
-            }
-            else {
-              message = passwordPolicyMessages[code];
-            }
-          }
-          else {
-            message = passwordPolicyMessages.PasswordRequiresDefaultMessage;
-          }
-          return message;
+      map(response => {
+        const errors = response.data.validatePassword?.errors?.filter(nonNull);
+        const result: ValidationErrors = {};
+        errors?.forEach(error => {
+          result[`${PasswordPolicyValidatorService.validatorName}:${error?.code}`] = {
+            errorParameter: error.errorParameter,
+          };
         });
-        return result.data.validatePassword?.succeeded
-          ? null
-          : { [PasswordPolicyValidatorService.validatorName]: { messages: errorMessages } };
+        return result;
       })
     );
   }

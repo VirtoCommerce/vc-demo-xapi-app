@@ -9,6 +9,7 @@ import {
 import {
   PasswordPolicyValidatorService,
 } from 'src/app/modules/validation/validators/password-policy-validator.service';
+import { passwordPolicyMessages } from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const PERSONAL_INFORMATION_INPUTS = {
   firstName: new DynamicInputModel({
@@ -73,7 +74,13 @@ export const PERSONAL_INFORMATION_INPUTS = {
     },
     errorMessages: {
       required: validationMessages.requiredMessage,
-      [PasswordPolicyValidatorService.validatorName]: '{{ validator.messages }}',
+      ...Object.entries(passwordPolicyMessages).reduce((result, [
+        code,
+        message,
+      ]) => ({
+        ...result,
+        [`${PasswordPolicyValidatorService.validatorName}:${code}`]: message,
+      }), {}),
     },
   }),
   confirmPassword: new DynamicInputModel({
