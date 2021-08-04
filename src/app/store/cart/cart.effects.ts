@@ -8,12 +8,14 @@ import { ApolloError } from '@apollo/client/errors';
 import * as CartActions from './cart.actions';
 
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
+import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
 import updateCartDynamicPropertiesMutation from '../../graphql/mutations/update-cart-dynamic-properties.graphql';
 import addCartCouponMutation from '../../graphql/mutations/add-cart-coupon.graphql';
 import removeCartCouponMutation from '../../graphql/mutations/remove-cart-coupon.graphql';
 
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
+import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
 import { updateCartDynamicProperties, updateCartDynamicPropertiesVariables }
   from 'src/app/graphql/types/updateCartDynamicProperties';
@@ -42,6 +44,29 @@ export class CartEffects {
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CartActions.getCartFailure({ error })))
+        ))
+    );
+  });
+
+  removeCartItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.removeCartItem),
+      concatMap(action => this.apollo.mutate<removeCartItem, removeCartItemVariables>({
+        mutation: removeCartItemMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            lineItemId: action.lineItemId,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.updateStoredCart({
+            data: {
+              ...result.data?.removeCartItem,
+            },
+          }))
         ))
     );
   });

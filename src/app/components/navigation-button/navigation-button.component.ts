@@ -12,8 +12,14 @@ import { me } from 'src/app/graphql/types/me';
 
 import clearCartMutation from 'src/app/graphql/mutations/clear-cart.graphql';
 import addItemsCartMutation from 'src/app/graphql/mutations/add-cart-items.graphql';
+import updateCartItemDynamicPropertiesMutation
+  from 'src/app/graphql/mutations/update-cart-item-dynamic-properties.graphql';
 import getMeQuery from '../../graphql/queries/get-me.graphql';
 import { setCartUserId } from '../../store/cart/cart.actions';
+import {
+  updateCartItemDynamicProperties,
+  updateCartItemDynamicPropertiesVariables,
+} from 'src/app/graphql/types/updateCartItemDynamicProperties';
 
 @Component({
   selector: 'vc-navigation-button',
@@ -29,7 +35,7 @@ export class NavigationButtonComponent implements OnDestroy {
     private readonly apollo: Apollo,
     private readonly store: Store,
     private readonly router: Router
-  ) {}
+  ) { }
 
   openCheckout(): void {
     this.getMe().pipe(
@@ -38,11 +44,41 @@ export class NavigationButtonComponent implements OnDestroy {
         clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
         clearCartResult.data?.clearCart?.id
       )),
+      concatMap(lastResult => this.updateCartItemDynamicProperties(
+        lastResult.data?.addItemsCart?.customerId ?? 'Anonymous',
+        lastResult.data?.addItemsCart?.items?.
+          find(x => x?.productId === '9cbd8f316e254a679ba34a900fccb076')?.id ?? 'id-1',
+        [
+          {
+            name: 'Brand',
+            value: 'Epson',
+          },
+          {
+            name: 'Is alcoholic',
+            value: 'true',
+          },
+        ]
+      )),
+      concatMap(lastResult => this.updateCartItemDynamicProperties(
+        lastResult.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
+        lastResult.data?.updateCartItemDynamicProperties?.items?.
+          find(x => x?.productId === 'e7eee66223da43109502891b54bc33d3')?.id ?? 'id-2',
+        [
+          {
+            name: 'Production date',
+            value: '2021-07-15',
+          },
+          {
+            name: 'Pack size',
+            value: '123',
+          },
+        ]
+      )),
       takeUntil(this.unsubscriber)
     )
       .subscribe(c => {
         this.store.dispatch(setCartUserId({
-          userId: c.data?.addItemsCart?.customerId  ?? 'Anonymous',
+          userId: c.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
         }));
 
         void this.router.navigate([
@@ -93,7 +129,22 @@ export class NavigationButtonComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy():void {
+  updateCartItemDynamicProperties(userId: string, itemId: string, dynamicProperties: { name: string; value: string; }[])
+    : Observable<FetchResult<updateCartItemDynamicProperties>> {
+    return this.apollo.mutate<updateCartItemDynamicProperties, updateCartItemDynamicPropertiesVariables>({
+      mutation: updateCartItemDynamicPropertiesMutation,
+      variables: {
+        command: {
+          lineItemId: itemId,
+          userId,
+          storeId: 'Electronics',
+          dynamicProperties,
+        },
+      },
+    });
+  }
+
+  ngOnDestroy(): void {
     this.unsubscriber.next(true);
     this.unsubscriber.unsubscribe();
   }
