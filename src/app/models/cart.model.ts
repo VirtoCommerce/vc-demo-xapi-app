@@ -1,7 +1,10 @@
+import { Mutable } from 'type-fest';
 import * as graphql from '../graphql/types/cart';
 
-export interface Cart extends graphql.cart_cart {
-    itemsData: CartItem[];
+type typeNameTemplate = '__typename'
+
+export interface Cart extends Mutable<Omit<graphql.cart_cart, typeNameTemplate | 'items'>> {
+  itemsData: CartItem[];
 }
 
-export type CartItem = graphql.cart_cart_items
+export type CartItem = Mutable<graphql.cart_cart_items>

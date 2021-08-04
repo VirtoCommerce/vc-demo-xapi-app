@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-body pt-0">
-        <div *ngFor="let lineItem of cart?.items" class="row align-items-center py-3 border-bottom">
+        <div *ngFor="let lineItem of cart?.itemsData" class="row align-items-center py-3 border-bottom">
             <div class="col-4 align-self-start">
                 <img [src]="lineItem?.imageUrl" class="img-fluid" [alt]="lineItem?.name" />
             </div>
@@ -35,11 +35,11 @@
                 </p>
             </div>
             <div class="col-2">
-                <input [ngModel]="lineItem?.quantity" type="number" class="form-control small-input text-center" min="1"
+                <input [(ngModel)]="lineItem!.quantity" type="number" class="form-control small-input text-center" min="1"
                     max="5">
             </div>
             <div class="col-3 fs-label">
-                <a (click)="update()" href="javascript: void(0)">Update</a>
+                <a (click)="update(lineItem)" href="javascript: void(0)">Update</a>
                 <p><a (click)="remove(lineItem)" href="javascript: void(0)">Remove</a></p>
             </div>
             <div class="col-3">

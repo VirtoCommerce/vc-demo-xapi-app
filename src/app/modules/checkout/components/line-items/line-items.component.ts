@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { cart_cart_items_dynamicProperties } from 'src/app/graphql/types/cart';
 import { Cart, CartItem } from 'src/app/models/cart.model';
-import { removeCartItem } from 'src/app/store/cart/cart.actions';
+import { changeCartItemQuantity, removeCartItem } from 'src/app/store/cart/cart.actions';
 
 @Component({
   selector: 'vc-line-items',
@@ -59,8 +59,13 @@ export class LineItemsComponent {
       });
   }
 
-  update(): void {
-    // TODO
+  update(item: CartItem | null): void {
+    if (item != null && (item.quantity ?? 0) > 0) {
+      this.store.dispatch(changeCartItemQuantity({
+        lineItemId: item.id,
+        quantity: item.quantity ?? 1,
+      }));
+    }
   }
 
   remove(item: CartItem | null): void {

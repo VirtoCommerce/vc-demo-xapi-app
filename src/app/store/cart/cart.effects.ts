@@ -6,12 +6,14 @@ import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { ApolloError } from '@apollo/client/errors';
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
+import changeCartItemQuantityMutation from '../../graphql/mutations/change-cart-item-quantity.graphql';
 import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
 import * as CartActions from './cart.actions';
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
 import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
+import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 
 @Injectable()
 export class CartEffects {
@@ -36,6 +38,30 @@ export class CartEffects {
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CartActions.getCartFailure({ error })))
+        ))
+    );
+  });
+
+  changeCartItemQuantity$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.changeCartItemQuantity),
+      concatMap(action => this.apollo.mutate<changeCartItemQuantity, changeCartItemQuantityVariables>({
+        mutation: changeCartItemQuantityMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            lineItemId: action.lineItemId,
+            quantity: action.quantity,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.updateStoredCart({
+            data: {
+              ...result.data?.changeCartItemQuantity ?? {},
+            },
+          }))
         ))
     );
   });

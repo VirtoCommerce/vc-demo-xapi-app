@@ -23,6 +23,11 @@ export const removeCartItem = createAction(
   props<{ lineItemId: string }>()
 );
 
+export const changeCartItemQuantity = createAction(
+  '[Cart] Change CartItem quantity',
+  props<{ lineItemId: string, quantity: number }>()
+);
+
 export const updateCartComment = createAction(
   '[Cart] Update Cart Comment',
   props<{ comment: string | null }>()
