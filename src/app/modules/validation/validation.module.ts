@@ -5,6 +5,7 @@ import { DYNAMIC_VALIDATORS, ValidatorFactory } from '@ng-dynamic-forms/core';
 import { passwordMatchValidator } from './validators/password-match-validator';
 import { EmailUniquenessAsyncValidatorService } from './validators/email-uniqueness-async-validator.service';
 import { UsernameUniquenessAsyncValidatorService } from './validators/username-uniqueness-async-validator.service';
+import { PasswordPolicyValidatorService } from './validators/password-policy-validator.service';
 
 @NgModule({
   declarations: [],
@@ -28,10 +29,16 @@ import { UsernameUniquenessAsyncValidatorService } from './validators/username-u
       multi: true,
     },
     {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: PasswordPolicyValidatorService,
+      multi: true,
+    },
+    {
       provide: DYNAMIC_VALIDATORS,
       useFactory: (
         emailUniquenessAsyncValidator: EmailUniquenessAsyncValidatorService,
-        usernameUniquenessAsyncValidator: UsernameUniquenessAsyncValidatorService
+        usernameUniquenessAsyncValidator: UsernameUniquenessAsyncValidatorService,
+        passwordPolicyValidatorService: PasswordPolicyValidatorService
       ) => {
         return new Map<string, Validator | ValidatorFactory>([
           [
@@ -46,11 +53,16 @@ import { UsernameUniquenessAsyncValidatorService } from './validators/username-u
             UsernameUniquenessAsyncValidatorService.validatorName,
             usernameUniquenessAsyncValidator,
           ],
+          [
+            PasswordPolicyValidatorService.validatorName,
+            passwordPolicyValidatorService,
+          ],
         ]);
       },
       deps: [
         EmailUniquenessAsyncValidatorService,
         UsernameUniquenessAsyncValidatorService,
+        PasswordPolicyValidatorService,
       ],
     },
   ],
