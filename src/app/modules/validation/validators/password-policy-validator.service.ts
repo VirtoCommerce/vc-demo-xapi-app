@@ -24,7 +24,7 @@ export class PasswordPolicyValidatorService implements AsyncValidator {
     return this.apollo.query<validatePassword, validatePasswordVariables>({
       query: validatePasswordQuery,
       variables: {
-        password: password,
+        password,
       },
     }).pipe(
       map(response => {
