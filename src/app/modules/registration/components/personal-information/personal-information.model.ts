@@ -74,13 +74,7 @@ export const PERSONAL_INFORMATION_INPUTS = {
     },
     errorMessages: {
       required: validationMessages.requiredMessage,
-      ...Object.entries(passwordPolicyMessages).reduce((result, [
-        code,
-        message,
-      ]) => ({
-        ...result,
-        [`${PasswordPolicyValidatorService.validatorName}:${code}`]: message,
-      }), {}),
+      ...passwordPolicyMessages,
     },
   }),
   confirmPassword: new DynamicInputModel({

@@ -31,7 +31,7 @@ export class PasswordPolicyValidatorService implements AsyncValidator {
         const errors = response.data.validatePassword?.errors?.filter(nonNull);
         const result: ValidationErrors = {};
         errors?.forEach(error => {
-          result[`${PasswordPolicyValidatorService.validatorName}:${error?.code}`] = {
+          result[error?.code] = {
             errorParameter: error.errorParameter,
           };
         });
