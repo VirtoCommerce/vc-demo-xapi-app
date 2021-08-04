@@ -1,0 +1,13 @@
+mutation addCartCoupon ($command: InputAddCouponType!) {
+    addCoupon (command: $command) {
+      coupons {
+        code
+        isAppliedSuccessfully
+      }
+      subTotal { formattedAmount }
+    	total { formattedAmount }
+      discountTotal { formattedAmount }
+      taxTotal { formattedAmount }
+      shippingTotal { formattedAmount }
+  }
+}

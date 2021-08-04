@@ -12,6 +12,9 @@ export interface State {
 export const initialState: State = {
   cart: {
     itemsData: [],
+    //  Items: [],
+    dynamicProperties: [],
+    coupons: [],
   },
 };
 
@@ -30,10 +33,31 @@ export const reducer = createReducer(
     cart: {
       ...state.cart,
       ...action.data?.cart,
+      dynamicProperties: customMap(action?.data?.cart?.dynamicProperties, x => ({ ...x })),
+      coupons: customMap(action?.data?.cart?.coupons, x => ({ ...x })),
       itemsData: customMap(action?.data?.cart?.items, x => ({ ...x })),
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),
+  on(CartActions.updateCartDynamicProperties, (state, action): State => ({
+    ...state,
+    cart: {
+      ...state.cart,
+      dynamicProperties: customMap(action?.dynamicProperties, x => ({ ...x })),
+    },
+  })),
+  on(
+    CartActions.addCartCouponSuccess,
+    CartActions.removeCartCouponSuccess,
+    (state, action): State => ({
+      ...state,
+      cart: {
+        ...state.cart,
+        ...action?.data,
+        coupons: customMap(action?.data?.coupons, x => ({ ...x })),
+      },
+    })
+  ),
   on(CartActions.setCartUserId, (state): State => state)
 );
 

@@ -1,0 +1,38 @@
+.check {
+    background-image: url(~src/assets/images/check.svg);
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.cross {
+  background-image: url(~src/assets/images/cross.svg);
+  background-repeat: no-repeat;
+  background-position: center; 
+}
+
+.btn {
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      &,
+      &:hover,
+      &:focus,
+      &.focus {
+        opacity: 0.5 !important;
+        background-color: #f0ad4e;
+        border: 2px solid #f0ad4e;
+        color: #f0ad4e;
+        cursor: default;
+      }
+    }
+  }
+
+  .checkout-form-label {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #16110D;
+  }

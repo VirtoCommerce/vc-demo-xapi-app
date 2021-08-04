@@ -4,7 +4,7 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
         customerId
         comment
         subTotal { formattedAmount }
-    	  total { formattedAmount }
+    	total { formattedAmount }
         discountTotal { formattedAmount }
         taxTotal { formattedAmount }
         shippingTotal { formattedAmount }
@@ -18,6 +18,14 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             dynamicProperties { name value valueType}
             extendedPrice { formattedAmount}
             placedPrice { formattedAmount}
+        }
+        dynamicProperties {
+            name
+            value
+        }
+        coupons {
+          code
+          isAppliedSuccessfully
         }
     }
 }

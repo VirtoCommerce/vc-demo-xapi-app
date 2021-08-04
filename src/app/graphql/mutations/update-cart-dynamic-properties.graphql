@@ -1,0 +1,10 @@
+mutation updateCartDynamicProperties($command: InputUpdateCartDynamicPropertiesType!) {
+  updateCartDynamicProperties(command: $command) {
+    id        
+    dynamicProperties {
+      name 
+      value 
+      valueType
+    }
+  }
+}
