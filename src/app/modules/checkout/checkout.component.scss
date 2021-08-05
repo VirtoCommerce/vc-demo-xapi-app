@@ -1,8 +1,9 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
 @import "~src/styles/variables";
 
-@media (min-width: 1120px) {
+@include media-breakpoint-up(xl) {
   .magic-offset-1 {
     margin-left: -82px;
   }
