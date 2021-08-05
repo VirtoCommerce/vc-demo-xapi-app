@@ -1,4 +1,4 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
@@ -125,10 +125,6 @@ export interface removeCartItem_removeCartItem {
    * Shopping cart user id
    */
   readonly customerId: string | null;
-  /**
-   * Shopping cart text comment
-   */
-  readonly comment: string | null;
   readonly subTotal: removeCartItem_removeCartItem_subTotal | null;
   readonly total: removeCartItem_removeCartItem_total | null;
   readonly discountTotal: removeCartItem_removeCartItem_discountTotal | null;

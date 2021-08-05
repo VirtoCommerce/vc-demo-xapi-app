@@ -8,6 +8,7 @@ import { ApolloError } from '@apollo/client/errors';
 import * as CartActions from './cart.actions';
 
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
+import changeCartItemQuantityMutation from '../../graphql/mutations/change-cart-item-quantity.graphql';
 import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
 import updateCartDynamicPropertiesMutation from '../../graphql/mutations/update-cart-dynamic-properties.graphql';
@@ -21,6 +22,7 @@ import { updateCartDynamicProperties, updateCartDynamicPropertiesVariables }
   from 'src/app/graphql/types/updateCartDynamicProperties';
 import { addCartCoupon, addCartCouponVariables } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon, removeCartCouponVariables } from 'src/app/graphql/types/removeCartCoupon';
+import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 
 @Injectable()
 export class CartEffects {
@@ -48,6 +50,28 @@ export class CartEffects {
     );
   });
 
+  changeCartItemQuantity$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.changeCartItemQuantity),
+      concatMap(action => this.apollo.mutate<changeCartItemQuantity, changeCartItemQuantityVariables>({
+        mutation: changeCartItemQuantityMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            lineItemId: action.lineItemId,
+            quantity: action.quantity,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.changeCartItemQuantitySuccess({
+            data: result.data?.changeCartItemQuantity ?? null,
+          }))
+        ))
+    );
+  });
+
   removeCartItem$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.removeCartItem),
@@ -62,10 +86,8 @@ export class CartEffects {
         },
       })
         .pipe(
-          map(result => CartActions.updateStoredCart({
-            data: {
-              ...result.data?.removeCartItem,
-            },
+          map(result => CartActions.removeCartItemSuccess({
+            data: result.data?.removeCartItem ?? null,
           }))
         ))
     );

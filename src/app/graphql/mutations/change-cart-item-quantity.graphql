@@ -1,5 +1,5 @@
-mutation removeCartItem ($command: InputRemoveItemType!) {
-    removeCartItem(command: $command) {
+mutation changeCartItemQuantity ($command: InputChangeCartItemQuantityType!) {
+    changeCartItemQuantity(command: $command) {
         id
         customerId
         subTotal { formattedAmount }
