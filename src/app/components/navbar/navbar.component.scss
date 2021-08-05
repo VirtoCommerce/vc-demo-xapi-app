@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(xl) {
   .navbar-brand {
     margin-left: -82px;
   }

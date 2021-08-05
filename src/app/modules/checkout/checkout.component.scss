@@ -1,3 +1,18 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+@import "~src/styles/variables";
+
+@include media-breakpoint-up(xl) {
+  .magic-offset-1 {
+    margin-left: -82px;
+  }
+}
+
+.magic-offset-2 {
+  margin-left: 26px;
+}
+
 .check {
     background-image: url(~src/assets/images/check.svg);
     background-repeat: no-repeat;
@@ -19,16 +34,16 @@
       &:focus,
       &.focus {
         opacity: 0.5 !important;
-        background-color: #f0ad4e;
-        border: 2px solid #f0ad4e;
-        color: #f0ad4e;
+        background-color: $primary;
+        border: 2px solid $primary;
+        color: $primary;
         cursor: default;
       }
     }
   }
 
   .checkout-form-label {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: $headings-font-family;
     font-style: normal;
     font-weight: 800;
     font-size: 17px;
@@ -36,3 +51,18 @@
     letter-spacing: 0.01em;
     color: #16110D;
   }
+
+.media {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: start;
+  align-items: center;
+}
+
+.media-body {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
