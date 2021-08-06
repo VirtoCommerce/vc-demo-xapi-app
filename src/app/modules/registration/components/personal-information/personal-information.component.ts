@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { selectCompanyRegistration } from '../../store/company.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { NgForm} from '@angular/forms';
 
 @Component({
   selector: 'vc-personal-information',
@@ -66,6 +67,7 @@ export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
     }
     const formIsValid = event.group.valid;
     this.formChange.emit(formIsValid);
+    console.log(event.group);
   }
 
   ngOnDestroy(): void {
