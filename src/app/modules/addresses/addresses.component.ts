@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 
 @Component({
   selector: 'vc-addresses',
@@ -7,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
     './addresses.component.scss',
   ],
 })
-export class AddressesComponent implements OnInit {
-  constructor() { }
+export class AddressesComponent {
+  curentCustomerOrganization$ =  this.store.select(selectCurrentCustomerOrganization);
 
-  ngOnInit(): void {
-  }
+  constructor(private readonly store: Store) { }
 }
