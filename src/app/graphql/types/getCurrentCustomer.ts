@@ -41,6 +41,10 @@ export interface getCurrentCustomer_me_contact_organizations_addresses {
    * Region name
    */
   readonly regionName: string | null;
+  /**
+   * City
+   */
+  readonly city: string | null;
 }
 
 export interface getCurrentCustomer_me_contact_organizations {

@@ -26,6 +26,7 @@ export interface State {
         regionName?: string | null,
         countryCode?: string | null,
         postalCode?: string | null,
+        city?: string | null,
       } [] | null
     } | null
   }  | null

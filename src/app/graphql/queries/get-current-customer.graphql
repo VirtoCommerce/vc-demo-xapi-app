@@ -19,6 +19,7 @@ query getCurrentCustomer {
           countryCode,
           postalCode,
           regionName,
+          city
         }
       }
     }
