@@ -5,9 +5,9 @@
       <h3 class="text-condensed mb-0">Company address</h3>
       <button class="btn btn-outline-primary">Add new address</button>
     </div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
+    <div class="table-responsive" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">
+      <table class="table table-striped table-borderless small-table-head">
+        <thead class="border-top border-bottom border-table-header">
           <tr>
             <th>Contact name</th>
             <th>Address</th>
@@ -16,8 +16,8 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">
-          <tr *ngFor="let address of curentCustomerOrganization?.addresses">
+        <tbody>
+          <tr *ngFor="let address of curentCustomerOrganization.addresses">
             <td>{{address.firstName}} {{address.lastName}}</td>
             <td>{{address.countryCode}},{{address.regionName}},{{address.city}}, {{address.line1}}, {{address.postalCode}}</td>
             <td>{{address.phone}}</td>
