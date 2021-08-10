@@ -1,0 +1,6 @@
+mutation  updateOrganization($command: InputUpdateOrganizationType!) {
+  updateOrganization(command: $command) {
+    id,
+    name
+  }
+}

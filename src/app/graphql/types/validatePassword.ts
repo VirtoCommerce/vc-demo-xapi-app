@@ -1,4 +1,4 @@
-/* Tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 // @generated
 // This file was automatically generated and should not be edited.
@@ -26,13 +26,13 @@ export interface validatePassword_validatePassword_errors {
 export interface validatePassword_validatePassword {
   readonly __typename: "PasswordValidationType";
   /**
-   * Validation result status
-   */
-  readonly succeeded: boolean;
-  /**
    * Validation errors
    */
   readonly errors: ReadonlyArray<(validatePassword_validatePassword_errors | null)> | null;
+  /**
+   * Validation result status
+   */
+  readonly succeeded: boolean;
 }
 
 export interface validatePassword {
