@@ -2,7 +2,7 @@
   <div class="container">
       <a class="navbar-brand" href="/">
         <img src="assets/images/logo.svg" alt="">
-        <vc-company-name class="d-none d-md-inline" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization"  [companyName] ="curentCustomerOrganization?.name"></vc-company-name>
+        <vc-company-name class="d-none d-md-inline" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization"  [companyName]="curentCustomerOrganization?.name"></vc-company-name>
       </a>
       <div class="navbar-nav">
         <!-- TODO - Don't forget to replace these router checks in the future -->
