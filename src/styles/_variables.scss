@@ -161,12 +161,13 @@ $card-spacer-x: 0.938rem;
 $pagination-disabled-color: $gray-300;
 $pagination-padding-x: 1rem;
 
-$table-accent-bg: $gray-modal-bg;
+$table-striped-bg: $gray-modal-bg;
 $table-dark-bg: $dark;
 $table-active-bg: $secondary;
 $table-border-color: $gray-200;
 $table-striped-order: even;
-$table-cell-padding: 0.875rem 0.5rem 0.875rem 0.625rem;
+$table-cell-padding-x: 0.625rem;
+$table-cell-padding-y: 0.875rem;
 $table-cell-padding-sm: 0.438rem 1.25rem;
 
 $spinner-width: 3.75rem;
