@@ -28,6 +28,7 @@ import * as fromLogin from './store/login/login.reducer';
 import { LoginEffects } from './store/login/login.effects';
 import * as fromCurrentCustomer from './store/current-customer/current-customer.reducer';
 import { CompanyNameComponent } from './components/company-name/company-name.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -50,6 +51,8 @@ const appInitializerFactory =
     NgbNavModule,
     NgbPaginationModule,
     FontAwesomeModule,
+    ValidationModule,
+    DashboardModule,
     NgxMaskModule.forRoot(),
     StoreModule.forRoot(reducers, {
       metaReducers,
@@ -70,8 +73,6 @@ const appInitializerFactory =
     StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
     StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer),
     StoreModule.forFeature(fromCurrentCustomer.currentCustomerFeatureKey, fromCurrentCustomer.reducer),
-    ValidationModule,
-    FontAwesomeModule,
   ],
   providers: [
     {

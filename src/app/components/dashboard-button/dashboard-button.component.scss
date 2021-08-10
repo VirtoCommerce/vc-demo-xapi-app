@@ -1,0 +1,45 @@
+@import '../../../styles/_variables.scss';
+
+li {
+  margin-bottom: 20px;
+}
+
+a,
+a:hover,
+a:visited {
+  color: #111;
+}
+
+.btn-dashboard {
+  width: 341px;
+  height: 108px;
+  border: 1px solid #dad7d3;
+  background-color: $white;
+  border-radius: 4px;
+  line-height: 18px;
+}
+
+.btn-dashboard-icon {
+  width: 56px;
+  height: 56px;
+}
+
+.btn-dashboard-icon-container {
+  width: 98px;
+  height: 100%;
+}
+
+.btn-dashboard-text-container {
+  padding-top: 22px;
+}
+
+.btn-dashboard-caption {
+  font-family: $font-family-condensed;
+  margin-bottom: 3px;
+}
+
+.btn-dashboard-description {
+  font-weight: $link-font-weight;
+  color: $gray-800;
+  width: 200px;
+}

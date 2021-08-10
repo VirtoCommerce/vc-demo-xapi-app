@@ -1,0 +1,66 @@
+<main>
+  <div class="container pt-4 pb-6">
+
+    <h1 class="mb-5">DASHBOARD</h1>
+
+    <section id="login">
+      <h4 class="mb-2">LOGIN & REGISTRATION</h4>
+      <ul class="row m-0 p-0">
+        <vc-dashboard-button
+          *ngFor="let button of dashboardContent.loginButtons"
+          class="col-md-12 col-lg-8 g-0"
+          [buttonLink]="button.link"
+          [buttonIconSrc]="button.iconSrc"
+          [buttonCaption]="button.caption"
+          [buttonDescription]="button.description"
+        >
+        </vc-dashboard-button>
+      </ul>
+    </section>
+
+    <section id="company">
+      <h4 class="mb-2">COMPANY</h4>
+      <ul class="row m-0 p-0">
+        <vc-dashboard-button
+          *ngFor="let button of dashboardContent.companyButtons"
+          class="col-md-12 col-lg-8 g-0"
+          [buttonLink]="button.link"
+          [buttonIconSrc]="button.iconSrc"
+          [buttonCaption]="button.caption"
+          [buttonDescription]="button.description"
+        >
+        </vc-dashboard-button>
+      </ul>
+    </section>
+
+    <section id="checkout">
+      <h4 class="mb-2">CHECKOUT</h4>
+      <ul class="row m-0 p-0">
+        <vc-dashboard-button
+          *ngFor="let button of dashboardContent.checkoutButtons"
+          class="col-md-12 col-lg-8 g-0"
+          [buttonLink]="button.link"
+          [buttonIconSrc]="button.iconSrc"
+          [buttonCaption]="button.caption"
+          [buttonDescription]="button.description"
+        >
+        </vc-dashboard-button>
+      </ul>
+    </section>
+
+    <section id="members">
+      <h4 class="mb-2">MEMBERS</h4>
+      <ul class="row m-0 p-0">
+        <vc-dashboard-button
+          *ngFor="let button of dashboardContent.membersButtons"
+          class="col-md-12 col-lg-8 g-0"
+          [buttonLink]="button.link"
+          [buttonIconSrc]="button.iconSrc"
+          [buttonCaption]="button.caption"
+          [buttonDescription]="button.description"
+        >
+        </vc-dashboard-button>
+      </ul>
+    </section>
+  </div>
+</main>
