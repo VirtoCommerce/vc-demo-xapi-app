@@ -16,12 +16,12 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Ronald Richards</td>
-            <td>3891 Ranchview Dr. Richardson 443, USA, California 62639</td>
-            <td>(684) 555-0102</td>
-            <td>debra.holt@example.com</td>
+        <tbody *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">
+          <tr *ngFor="let address of curentCustomerOrganization?.addresses">
+            <td>{{address.firstName}} {{address.lastName}}</td>
+            <td>{{address.countryCode}},{{address.regionName}},{{address.city}}, {{address.line1}}, {{address.postalCode}}</td>
+            <td>{{address.phone}}</td>
+            <td>{{address.email}}</td>
             <td class="text-nowrap">
               <button type="button" class="btn btn-white btn-xs me-3">
                 <img src="assets/images/context-pencil.svg" />
@@ -30,13 +30,6 @@
                 <img src="assets/images/context-delete.svg" />
               </button>
             </td>
-          </tr>
-          <tr>
-            <td>Ronald Richards</td>
-            <td>3891 Ranchview Dr. Richardson 443, USA, California 62639</td>
-            <td>(684) 555-0102</td>
-            <td>debra.holt@example.com</td>
-            <td></td>
           </tr>
         </tbody>
       </table>
