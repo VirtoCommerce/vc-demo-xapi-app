@@ -7,6 +7,42 @@
 // GraphQL query operation: getCurrentCustomer
 // ====================================================
 
+export interface getCurrentCustomer_me_contact_organizations_addresses {
+  readonly __typename: "AddressType";
+  /**
+   * First name
+   */
+  readonly firstName: string | null;
+  /**
+   * Last name
+   */
+  readonly lastName: string | null;
+  /**
+   * Line1
+   */
+  readonly line1: string | null;
+  /**
+   * Phone
+   */
+  readonly phone: string | null;
+  /**
+   * Email
+   */
+  readonly email: string | null;
+  /**
+   * Country code
+   */
+  readonly countryCode: string | null;
+  /**
+   * Postal code
+   */
+  readonly postalCode: string;
+  /**
+   * Region name
+   */
+  readonly regionName: string | null;
+}
+
 export interface getCurrentCustomer_me_contact_organizations {
   readonly __typename: "Organization";
   readonly id: string;
@@ -14,6 +50,7 @@ export interface getCurrentCustomer_me_contact_organizations {
    * Name
    */
   readonly name: string | null;
+  readonly addresses: ReadonlyArray<(getCurrentCustomer_me_contact_organizations_addresses | null)>;
 }
 
 export interface getCurrentCustomer_me_contact {

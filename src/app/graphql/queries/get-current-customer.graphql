@@ -10,6 +10,16 @@ query getCurrentCustomer {
       organizations {
         id
         name
+        addresses {
+          firstName
+          lastName
+          line1
+          phone
+          email,
+          countryCode,
+          postalCode,
+          regionName,
+        }
       }
     }
   }
