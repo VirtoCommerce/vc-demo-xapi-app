@@ -5,13 +5,13 @@ export const dashboardContent = [
       {
         link: '/login',
         iconSrc: '../../../assets/images/dash-login.svg',
-        caption: 'login',
+        caption: 'LOGIN',
         description: 'A brief description of functionality',
       },
       {
         link: '/registration',
         iconSrc: '../../../assets/images/dash-login.svg',
-        caption: 'registration',
+        caption: 'REGISTRATION',
         description: 'A brief description of functionality',
       },
     ],
@@ -22,19 +22,19 @@ export const dashboardContent = [
       {
         link: '/company-edit',
         iconSrc: '../../../assets/images/dash-company.svg',
-        caption: 'company edit',
+        caption: 'COMPANY EDIT',
         description: 'A brief description of functionality',
       },
       {
         link: '/company-addresses',
         iconSrc: '../../../assets/images/dash-company.svg',
-        caption: 'company addresses',
+        caption: 'COMPANY ADDRESSES',
         description: 'A brief description of functionality',
       },
       {
         link: '/companies-listing',
         iconSrc: '../../../assets/images/dash-company.svg',
-        caption: 'companies listing',
+        caption: 'COMPANIES LISTING',
         description: 'A brief description of functionality',
       },
     ],
@@ -45,7 +45,7 @@ export const dashboardContent = [
       {
         link: '/checkout',
         iconSrc: '../../../assets/images/dash-checkout.svg',
-        caption: 'checkout',
+        caption: 'CHECKOUT',
         description: 'A brief description of functionality',
       },
     ],
@@ -56,13 +56,13 @@ export const dashboardContent = [
       {
         link: '/members-list',
         iconSrc: '../../../assets/images/dash-member.svg',
-        caption: 'members list',
+        caption: 'MEMBERS LIST',
         description: 'A brief description of functionality',
       },
       {
         link: '/members-list',
         iconSrc: '../../../assets/images/dash-member.svg',
-        caption: 'members list',
+        caption: 'MEMBERS LIST',
         description: 'A brief description of functionality',
       },
     ],

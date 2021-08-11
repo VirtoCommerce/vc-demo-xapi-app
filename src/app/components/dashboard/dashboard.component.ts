@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { selectCurrentCustomer } from './../../store/current-customer/current-customer.selectors';
+import { Store } from '@ngrx/store';
 import { dashboardContent } from './dashboard-content';
 
 @Component({
@@ -10,4 +12,9 @@ import { dashboardContent } from './dashboard-content';
 })
 export class DashboardComponent {
   readonly dashboardContent = dashboardContent;
+
+  currentCustomer$ =  this.store.select(selectCurrentCustomer);
+
+  constructor(private readonly store: Store) {
+  }
 }

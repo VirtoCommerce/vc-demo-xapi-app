@@ -9,7 +9,7 @@
         <a *ngIf="router.url !== '/login/logged-in'" class="d-none d-sm-block nav-link text-uppercase fw-bold" routerLinkActive="border-bottom border-primary border-3 active" routerLink="/login">Login</a>
         <a *ngIf="router.url === '/login/logged-in'" class="d-none d-sm-block nav-link text-uppercase fw-bold" href="/">My account</a>
         <a *ngIf="router.url === '/login/logged-in'" class="d-none d-sm-block nav-link text-uppercase fw-bold" href="/">Settings</a>
-        <a *ngIf="router.url !== '/dashboard'" class="d-none d-sm-block nav-link text-uppercase fw-bold" href="/dashboard">Dashboard</a>
+        <a class="d-none d-sm-block nav-link text-uppercase fw-bold" routerLinkActive="border-bottom border-primary border-3 active" routerLink="/dashboard">Dashboard</a>
         <a class="nav-link text-uppercase fw-bold" href="/">Help & Support</a>
       </div>
   </div>

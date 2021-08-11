@@ -9,3 +9,8 @@ export const selectCurrentCustomerOrganization = createSelector(
   selectCurrentCustomerState,
   (state: fromCurrentCustomer.State) => state.user?.organization
 );
+
+export const selectCurrentCustomer = createSelector(
+  selectCurrentCustomerState,
+  (state: fromCurrentCustomer.State) => state.user
+);
