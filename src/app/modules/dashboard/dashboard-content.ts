@@ -14,18 +14,6 @@ export const dashboardContent = [
         caption: 'registration',
         description: 'A brief description of functionality',
       },
-      {
-        link: '/registration',
-        iconSrc: '../../../assets/images/dash-login.svg',
-        caption: 'registration',
-        description: 'A brief description of functionality',
-      },
-      {
-        link: '/registration',
-        iconSrc: '../../../assets/images/dash-login.svg',
-        caption: 'registration',
-        description: 'A brief description of functionality',
-      },
     ],
   },
   {

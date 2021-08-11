@@ -4,6 +4,16 @@ main {
   max-width: 1115px;
 }
 
+h1, h4 {
+  max-width: 341px;
+}
+
 h4 {
   color: $gray-navbar-light;
+}
+
+vc-dashboard-item {
+  flex: 0 1 341px;
+  max-width: 341px;
+  height: 108px;
 }

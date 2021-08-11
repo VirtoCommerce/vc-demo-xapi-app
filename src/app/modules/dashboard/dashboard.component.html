@@ -2,26 +2,31 @@
   <div class="container pt-4 pb-6">
 
     <section>
-      <vc-dashboard-caption-container>
-        <h1 class="mb-5">DASHBOARD</h1>
-      </vc-dashboard-caption-container>
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <h1 class="m-auto mb-5">DASHBOARD</h1>
+        </div>
+      </div>
     </section>
 
     <section *ngFor="let section of dashboardContent">
-      <vc-dashboard-caption-container>
-        <h4 class="mb-2">{{ section.header }}</h4>
-      </vc-dashboard-caption-container>
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <h4 class="m-auto mb-2">{{ section.header }}</h4>
+        </div>
+      </div>
 
-      <div class="row p-0 mb-4">
-        <vc-dashboard-item
-          *ngFor="let item of section.content"
-          class="col-md-12 col-lg-8 mb-3"
-          [buttonLink]="item.link"
-          [buttonIconSrc]="item.iconSrc"
-          [buttonCaption]="item.caption"
-          [buttonDescription]="item.description"
-        ></vc-dashboard-item>
+      <div class="row mb-4">
+        <div class="col-md-12 col-lg-8 mb-3" *ngFor="let item of section.content">
+          <vc-dashboard-item
+            [buttonLink]="item.link"
+            [buttonIconSrc]="item.iconSrc"
+            [buttonCaption]="item.caption"
+            [buttonDescription]="item.description"
+          ></vc-dashboard-item>
+        </div>
       </div>
     </section>
+
   </div>
 </main>
