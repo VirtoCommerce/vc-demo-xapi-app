@@ -1,33 +1,16 @@
 <main class="m-auto">
   <div class="container pt-4 pb-6">
-
-    <section>
-      <div class="row">
-        <div class="col-md-12 col-lg-8">
-          <h1 class="m-auto mb-5">DASHBOARD</h1>
-        </div>
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <h1 class="m-auto mb-5">DASHBOARD</h1>
       </div>
-    </section>
+    </div>
 
     <ng-container *ngFor="let section of dashboardContent">
-      <section *ngIf="(currentCustomer$ | async) || section.header === 'LOGIN & REGISTRATION'">
-        <div class="row">
-          <div class="col-md-12 col-lg-8">
-            <h4 class="m-auto mb-2">{{ section.header }}</h4>
-          </div>
-        </div>
-        <div class="row mb-4">
-          <div class="col-md-12 col-lg-8 mb-3" *ngFor="let item of section.content">
-            <vc-dashboard-item
-              [itemIconSrc]="section.iconSrc"
-              [itemLink]="item.link"
-              [itemCaption]="item.caption"
-              [itemDescription]="item.description"
-            ></vc-dashboard-item>
-          </div>
-        </div>
-      </section>
+      <vc-dashboard-section
+        *ngIf="(currentCustomer$ | async) || section.header === 'LOGIN & REGISTRATION'"
+        [currentSection]="section"
+      ></vc-dashboard-section>
     </ng-container>
-
   </div>
 </main>

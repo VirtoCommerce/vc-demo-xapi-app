@@ -7,6 +7,7 @@ import { NavigationButtonComponent } from './components/navigation-button/naviga
 import { CompanyNameComponent } from './components/company-name/company-name.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardItemComponent } from './components/dashboard-item/dashboard-item.component';
+import { DashboardSectionComponent } from './components/dashboard-section/dashboard-section.component';
 
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -47,6 +48,7 @@ const appInitializerFactory =
     CompanyNameComponent,
     DashboardComponent,
     DashboardItemComponent,
+    DashboardSectionComponent,
   ],
   imports: [
     BrowserModule,

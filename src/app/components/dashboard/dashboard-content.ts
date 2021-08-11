@@ -64,3 +64,23 @@ export const dashboardContent = [
     ],
   },
 ];
+
+export type DashboardContentType = {
+  header: string;
+  iconSrc: string;
+  content: {
+      link: string;
+      caption: string;
+      description: string;
+  }[];
+}[];
+
+export type DashboardSectionType = {
+  header: string;
+  iconSrc: string;
+  content: {
+      link: string;
+      caption: string;
+      description: string;
+  }[];
+};
