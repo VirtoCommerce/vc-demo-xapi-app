@@ -17,17 +17,6 @@ export interface State {
     organization: {
       id: string,
       name: string,
-      addresses: {
-        firstName?: string | null,
-        lastName?: string | null,
-        line1?: string | null,
-        phone?: string | null,
-        email?: string | null,
-        regionName?: string | null,
-        countryCode?: string | null,
-        postalCode?: string | null,
-        city?: string | null,
-      } [] | null
     } | null
   }  | null
 }
@@ -71,9 +60,6 @@ export const reducer = createReducer(
           : {
             id: userOrganization.id,
             name: userOrganization.name as string,
-            addresses: userOrganization.addresses.map(address => ({
-              ...address,
-            })),
           },
       },
     };
