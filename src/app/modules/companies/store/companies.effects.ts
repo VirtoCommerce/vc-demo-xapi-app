@@ -6,7 +6,7 @@ import { catchError, map, concatMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as CompaniesActions from './companies.actions';
-import { ApolloError } from '@apollo/client';
+import { ApolloError } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import getOrganizationQuery from '../../../graphql/queries/get-organization.graphql';
 import updateOrganizationMutation from '../../../graphql/mutations/update-organization.graphql';
