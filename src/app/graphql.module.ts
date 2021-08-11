@@ -24,6 +24,7 @@ export function createApollo(
   const auth = setContext(async operation => {
     let token: string | null = null;
     switch (operation.operationName) {
+    case 'updateOrganization':
     case 'createUser':
     case 'updateMemberDynamicProperties':
     {
