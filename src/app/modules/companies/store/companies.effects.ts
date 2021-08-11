@@ -8,8 +8,8 @@ import { of } from 'rxjs';
 import * as CompaniesActions from './companies.actions';
 import { ApolloError } from '@apollo/client';
 import { Apollo } from 'apollo-angular';
-import getOrganizationQuery from '../../graphql/queries/get-organization.graphql';
-import updateOrganizationMutation from '../../graphql/mutations/update-organization.graphql';
+import getOrganizationQuery from '../../../graphql/queries/get-organization.graphql';
+import updateOrganizationMutation from '../../../graphql/mutations/update-organization.graphql';
 
 @Injectable()
 export class CompaniesEffects {
