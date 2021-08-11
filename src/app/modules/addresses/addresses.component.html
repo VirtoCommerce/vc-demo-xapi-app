@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let address of curentCustomerOrganization.addresses">
+          <tr *ngFor="let address of addresses">
             <td>{{address.firstName}} {{address.lastName}}</td>
             <td>{{address.countryCode}},{{address.regionName}},{{address.city}}, {{address.line1}}, {{address.postalCode}}</td>
             <td>{{address.phone}}</td>
@@ -34,5 +34,7 @@
         </tbody>
       </table>
     </div>
+    <ngb-pagination [collectionSize]="totalCount!" [page]="page" [pageSize]="pageSize" (pageChange)="loadPage($event)">
+    </ngb-pagination>
   </div>
 </main>

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { AddressesComponent } from './addresses.component';
+import * as Addresses from 'src/app/modules/addresses/store/addresses.reducer';
 
 describe('AddressesComponent', () => {
   let component: AddressesComponent;
@@ -8,6 +10,13 @@ describe('AddressesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        provideMockStore({
+          initialState: {
+            addresses: Addresses.initialState
+          },
+        }),
+      ],
       declarations: [
         AddressesComponent,
       ],
