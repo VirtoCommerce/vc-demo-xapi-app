@@ -19,10 +19,10 @@
         <div class="row mb-4">
           <div class="col-md-12 col-lg-8 mb-3" *ngFor="let item of section.content">
             <vc-dashboard-item
-              [buttonLink]="item.link"
-              [buttonIconSrc]="item.iconSrc"
-              [buttonCaption]="item.caption"
-              [buttonDescription]="item.description"
+              [itemIconSrc]="section.iconSrc"
+              [itemLink]="item.link"
+              [itemCaption]="item.caption"
+              [itemDescription]="item.description"
             ></vc-dashboard-item>
           </div>
         </div>

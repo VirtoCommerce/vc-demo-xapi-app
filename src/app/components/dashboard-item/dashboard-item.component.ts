@@ -9,11 +9,11 @@ import { Component, Input } from '@angular/core';
 })
 
 export class DashboardItemComponent {
-  @Input() buttonLink =  '';
+  @Input() itemLink =  '';
 
-  @Input() buttonIconSrc =  '';
+  @Input() itemIconSrc =  '';
 
-  @Input() buttonCaption =  '';
+  @Input() itemCaption =  '';
 
-  @Input() buttonDescription =  '';
+  @Input() itemDescription =  '';
 }
