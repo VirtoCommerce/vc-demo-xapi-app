@@ -8,18 +8,23 @@ import { StoreModule } from '@ngrx/store';
 import * as fromCompanies from './store/companies.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CompaniesEffects } from './store/companies.effects';
-
+import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     CompaniesComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
   ],
   imports: [
     CommonModule,
     CompaniesRoutingModule,
+    ReactiveFormsModule,
+    DynamicFormsNGBootstrapUIModule,
     StoreModule.forFeature(fromCompanies.companiesFeatureKey, fromCompanies.reducer),
-    EffectsModule.forFeature([CompaniesEffects])
-  ]
+    EffectsModule.forFeature([
+      CompaniesEffects,
+    ]),
+  ],
 })
 export class CompaniesModule { }

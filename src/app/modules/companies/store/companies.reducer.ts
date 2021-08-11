@@ -1,13 +1,12 @@
+import { EditCompany } from './../../../models/edit-company.model';
+import { PartialDeep } from 'type-fest';
 import { createReducer, on } from '@ngrx/store';
 import * as CompaniesActions from './companies.actions';
 
 export const companiesFeatureKey = 'companies';
 
 export interface State {
-  company: {
-    id: string,
-    name: string
-  } | null,
+  company: PartialDeep<EditCompany> | null,
 }
 
 export const initialState: State = {
@@ -28,6 +27,13 @@ export const reducer = createReducer(
       } };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
+  on(CompaniesActions.setCompany, (state, action) : State => ({
+    ...state,
+    company: {
+      ...state.company,
+      ...action.data,
+    },
+  })),
   on(CompaniesActions.updateCompany, (state) : State => state),
   on(CompaniesActions.updateCompanySuccess, (_, action): State  =>  {
     const organization = action.data?.updateOrganization;

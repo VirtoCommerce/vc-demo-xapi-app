@@ -1,3 +1,4 @@
+import { PartialDeep } from 'type-fest';
 import { updateOrganization } from './../../../graphql/types/updateOrganization';
 import { EditCompany } from './../../../models/edit-company.model';
 import { ApolloError } from '@apollo/client/core';
@@ -10,26 +11,30 @@ export const getCompany = createAction(
 );
 
 export const getCompanySuccess = createAction(
-  '[Companies] Get Companiess Success',
+  '[Companies] Get Company Success',
   props<{ data: getOrganization }>()
 );
 
 export const getCompanyFailure = createAction(
-  '[Companies] Get Companiess Failure',
+  '[Companies] Get Company Failure',
   props<{ error: ApolloError }>()
 );
 
+export const setCompany = createAction(
+  '[Companies] Set Company',
+  props<{ data: PartialDeep<EditCompany> }>()
+);
+
 export const updateCompany = createAction(
-  '[Companies] Get Companiess',
-  props<{ data:EditCompany }>()
+  '[Companies] Update Company'
 );
 
 export const updateCompanySuccess = createAction(
-  '[Companies] Get Companiess Success',
+  '[Companies] Update Company Success',
   props<{ data: updateOrganization | null | undefined }>()
 );
 
 export const updateCompanyFailure = createAction(
-  '[Companies] Get Companiess Failure',
+  '[Companies] Update Company Failure',
   props<{ error: ApolloError }>()
 );
