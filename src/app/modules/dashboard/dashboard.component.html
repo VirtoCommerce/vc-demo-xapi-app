@@ -1,66 +1,27 @@
-<main>
+<main class="m-auto">
   <div class="container pt-4 pb-6">
 
-    <h1 class="mb-5">DASHBOARD</h1>
-
-    <section id="login">
-      <h4 class="mb-2">LOGIN & REGISTRATION</h4>
-      <ul class="row m-0 p-0">
-        <vc-dashboard-button
-          *ngFor="let button of dashboardContent.loginButtons"
-          class="col-md-12 col-lg-8 g-0"
-          [buttonLink]="button.link"
-          [buttonIconSrc]="button.iconSrc"
-          [buttonCaption]="button.caption"
-          [buttonDescription]="button.description"
-        >
-        </vc-dashboard-button>
-      </ul>
+    <section>
+      <vc-dashboard-caption-container>
+        <h1 class="mb-5">DASHBOARD</h1>
+      </vc-dashboard-caption-container>
     </section>
 
-    <section id="company">
-      <h4 class="mb-2">COMPANY</h4>
-      <ul class="row m-0 p-0">
-        <vc-dashboard-button
-          *ngFor="let button of dashboardContent.companyButtons"
-          class="col-md-12 col-lg-8 g-0"
-          [buttonLink]="button.link"
-          [buttonIconSrc]="button.iconSrc"
-          [buttonCaption]="button.caption"
-          [buttonDescription]="button.description"
-        >
-        </vc-dashboard-button>
-      </ul>
-    </section>
+    <section *ngFor="let section of dashboardContent">
+      <vc-dashboard-caption-container>
+        <h4 class="mb-2">{{ section.header }}</h4>
+      </vc-dashboard-caption-container>
 
-    <section id="checkout">
-      <h4 class="mb-2">CHECKOUT</h4>
-      <ul class="row m-0 p-0">
-        <vc-dashboard-button
-          *ngFor="let button of dashboardContent.checkoutButtons"
-          class="col-md-12 col-lg-8 g-0"
-          [buttonLink]="button.link"
-          [buttonIconSrc]="button.iconSrc"
-          [buttonCaption]="button.caption"
-          [buttonDescription]="button.description"
-        >
-        </vc-dashboard-button>
-      </ul>
-    </section>
-
-    <section id="members">
-      <h4 class="mb-2">MEMBERS</h4>
-      <ul class="row m-0 p-0">
-        <vc-dashboard-button
-          *ngFor="let button of dashboardContent.membersButtons"
-          class="col-md-12 col-lg-8 g-0"
-          [buttonLink]="button.link"
-          [buttonIconSrc]="button.iconSrc"
-          [buttonCaption]="button.caption"
-          [buttonDescription]="button.description"
-        >
-        </vc-dashboard-button>
-      </ul>
+      <div class="row p-0 mb-4">
+        <vc-dashboard-item
+          *ngFor="let item of section.content"
+          class="col-md-12 col-lg-8 mb-3"
+          [buttonLink]="item.link"
+          [buttonIconSrc]="item.iconSrc"
+          [buttonCaption]="item.caption"
+          [buttonDescription]="item.description"
+        ></vc-dashboard-item>
+      </div>
     </section>
   </div>
 </main>

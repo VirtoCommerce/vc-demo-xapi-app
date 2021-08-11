@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'vc-dashboard-button',
-  templateUrl: './dashboard-button.component.html',
+  selector: 'vc-dashboard-item',
+  templateUrl: './dashboard-item.component.html',
   styleUrls: [
-    './dashboard-button.component.scss',
+    './dashboard-item.component.scss',
   ],
 })
 
-export class DashboardButtonComponent {
+export class DashboardItemComponent {
   @Input() buttonLink =  '';
 
   @Input() buttonIconSrc =  '';

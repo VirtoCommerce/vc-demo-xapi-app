@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
-import { DashboardButtonComponent } from 'src/app/components/dashboard-button/dashboard-button.component';
+import { DashboardItemComponent } from 'src/app/components/dashboard-item/dashboard-item.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import {
+  DashboardCaptionContainerComponent,
+} from './dashboard-caption-container/dashboard-caption-container.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    DashboardButtonComponent,
+    DashboardItemComponent,
+    DashboardCaptionContainerComponent,
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,9 @@
-@import "../../../styles/_variables.scss";
+@import '../../../styles/_variables.scss';
 
-h1 {
-  transform: translateX(-1px);
+main {
+  max-width: 1115px;
 }
 
 h4 {
   color: $gray-navbar-light;
 }
-

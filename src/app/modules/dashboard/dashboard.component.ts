@@ -8,7 +8,6 @@ import { dashboardContent } from './dashboard-content';
     './dashboard.component.scss',
   ],
 })
-
 export class DashboardComponent {
   readonly dashboardContent = dashboardContent;
 }
