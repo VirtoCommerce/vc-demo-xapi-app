@@ -46,7 +46,7 @@ export class CompaniesEffects {
         },
       }).pipe(
         map(result => CompaniesActions.updateCompanySuccess({
-          data: result.data!,
+          data: result.data,
         })),
         catchError((error: ApolloError) => of(CompaniesActions.updateCompanyFailure({ error })))
       ))

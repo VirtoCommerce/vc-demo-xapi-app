@@ -30,8 +30,8 @@ export const reducer = createReducer(
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.updateCompany, (state) : State => state),
   on(CompaniesActions.updateCompanySuccess, (_, action): State  =>  {
-    const organization = action.data.updateOrganization;
-    return { company: organization === null
+    const organization = action.data?.updateOrganization;
+    return { company: !organization
       ? null
       : {
         id: organization.id,

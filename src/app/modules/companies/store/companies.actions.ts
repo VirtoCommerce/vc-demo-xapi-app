@@ -26,7 +26,7 @@ export const updateCompany = createAction(
 
 export const updateCompanySuccess = createAction(
   '[Companies] Get Companiess Success',
-  props<{ data: updateOrganization }>()
+  props<{ data: updateOrganization | null | undefined }>()
 );
 
 export const updateCompanyFailure = createAction(
