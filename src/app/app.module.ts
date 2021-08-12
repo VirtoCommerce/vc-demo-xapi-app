@@ -1,9 +1,9 @@
-import { AppComponent } from './app.component';
 import { AppInitializerService } from './services/app-initializer.service';
+
+import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
 import { CompanyNameComponent } from './components/company-name/company-name.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardItemComponent } from './components/dashboard-item/dashboard-item.component';
@@ -44,7 +44,6 @@ const appInitializerFactory =
     HeaderComponent,
     NavbarComponent,
     FooterComponent,
-    NavigationButtonComponent,
     CompanyNameComponent,
     DashboardComponent,
     DashboardItemComponent,

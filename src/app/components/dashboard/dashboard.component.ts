@@ -15,6 +15,5 @@ export class DashboardComponent {
 
   currentCustomer$ =  this.store.select(selectCurrentCustomer);
 
-  constructor(private readonly store: Store) {
-  }
+  constructor(private readonly store: Store) {}
 }
