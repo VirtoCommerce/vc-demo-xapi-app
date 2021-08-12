@@ -6,43 +6,57 @@ import * as CompaniesActions from './companies.actions';
 export const companiesFeatureKey = 'companies';
 
 export interface State {
-  company: PartialDeep<EditCompany> | null,
+  selectedCompany: PartialDeep<EditCompany> | null,
+  editCompany: PartialDeep<EditCompany> | null,
 }
 
 export const initialState: State = {
-  company: null,
+  selectedCompany: null,
+  editCompany: null,
 };
 
 export const reducer = createReducer(
   initialState,
 
   on(CompaniesActions.getCompany, (state) : State => state),
-  on(CompaniesActions.getCompanySuccess, (_, action): State  =>  {
+  on(CompaniesActions.getCompanySuccess, (state, action): State  =>  {
     const organization = action.data.organization;
-    return { company: organization === null
-      ? null
-      : {
-        id: organization.id,
-        name: organization.name as string,
-      } };
+    return {
+      ...state,
+      selectedCompany: organization === null
+        ? null
+        : {
+          id: organization.id,
+          name: organization.name as string,
+        },
+      editCompany: organization === null
+        ? null
+        : {
+          id: organization.id,
+          name: organization.name as string,
+        },
+    };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.setCompany, (state, action) : State => ({
     ...state,
-    company: {
-      ...state.company,
+    editCompany: {
+      ...state.selectedCompany,
       ...action.data,
     },
   })),
   on(CompaniesActions.updateCompany, (state) : State => state),
-  on(CompaniesActions.updateCompanySuccess, (_, action): State  =>  {
+  on(CompaniesActions.updateCompanySuccess, (state, action): State  =>  {
     const organization = action.data?.updateOrganization;
-    return { company: !organization
-      ? null
-      : {
-        id: organization.id,
-        name: organization.name as string,
-      } };
+    return {
+      ...state,
+      selectedCompany: !organization
+        ? null
+        : {
+          id: organization.id,
+          name: organization.name as string,
+        },
+    };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state)
 

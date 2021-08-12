@@ -2,8 +2,8 @@ import { selectCompaniesState } from './companies.selectors';
 import { updateOrganization, updateOrganizationVariables } from './../../../graphql/types/updateOrganization';
 import { getOrganization } from './../../../graphql/types/getOrganization';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as CompaniesActions from './companies.actions';
@@ -18,13 +18,13 @@ export class CompaniesEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly apollo: Apollo,
-    private readonly store: Store,
+    private readonly store: Store
   ) {}
 
   getCompany$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CompaniesActions.getCompany),
-      concatMap(action =>this.apollo.watchQuery<getOrganization>({
+      switchMap(action =>this.apollo.watchQuery<getOrganization>({
         query: getOrganizationQuery,
         variables: { id: action.id },
       })
@@ -39,13 +39,18 @@ export class CompaniesEffects {
   updateCompany$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CompaniesActions.updateCompany),
-      concatMap(() => this.store.select(selectCompaniesState)),
-      concatMap(state => this.apollo.mutate<updateOrganization, updateOrganizationVariables>({
+      concatLatestFrom(() => [
+        this.store.select(selectCompaniesState),
+      ]),
+      concatMap(([
+        _,
+        state,
+      ]) => this.apollo.mutate<updateOrganization, updateOrganizationVariables>({
         mutation: updateOrganizationMutation,
         variables: {
           command: {
-            id: state.company?.id as string,
-            name: state.company?.name as string,
+            id: state.editCompany?.id as string,
+            name: state.editCompany?.name as string,
           },
         },
       }).pipe(

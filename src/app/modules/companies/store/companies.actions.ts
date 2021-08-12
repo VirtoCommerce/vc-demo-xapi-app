@@ -6,7 +6,7 @@ import { createAction, props } from '@ngrx/store';
 import { getOrganization } from 'src/app/graphql/types/getOrganization';
 
 export const getCompany = createAction(
-  '[Companies] Get Companiess',
+  '[Companies] Get Company',
   props<{id: string}>()
 );
 

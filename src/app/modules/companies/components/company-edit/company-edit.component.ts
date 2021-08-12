@@ -1,5 +1,5 @@
 import { EditCompany } from './../../../../models/edit-company.model';
-import { selectCompaniesState } from './../../store/companies.selectors';
+import { selectSelectedCompany } from './../../store/companies.selectors';
 import { getCompany, setCompany, updateCompany } from './../../store/companies.actions';
 import { Component, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 
@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { COMPANY_EDIT_FORM_LAYOUT } from './company-edit-form.layout';
 import { COMPANY_EDIT_FORM_INPUTS, COMPANY_EDIT_FORM_MODEL } from './company-edit-form.model';
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
@@ -29,9 +29,9 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
   })
-  companyName: string | null = null;
-
   formComponent!: DynamicNGBootstrapFormComponent;
+
+  selectedCompany$ = this.store.select(selectSelectedCompany);
 
   formInputs = COMPANY_EDIT_FORM_INPUTS;
 
@@ -55,10 +55,9 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
       this.store.dispatch(getCompany({ id: id as string }));
     });
 
-    this.store.select(selectCompaniesState).pipe(takeUntil(this.unsubscriber))
+    this.store.select(selectSelectedCompany).pipe(takeUntil(this.unsubscriber))
       .subscribe(state => {
-        this.companyName = state.company?.name ?? '';
-        patchFormModel(this.formInputs, state.company);
+        patchFormModel(this.formInputs, state);
         this.formService.detectChanges(this.formComponent);
       });
   }
