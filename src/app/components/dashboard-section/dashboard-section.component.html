@@ -7,10 +7,10 @@
   <div class="row mb-4">
     <div class="col-md-12 col-lg-8 mb-3" *ngFor="let item of currentSection?.content">
       <vc-dashboard-item
-        [itemIconSrc]="currentSection.iconSrc"
-        [itemLink]="item.link"
-        [itemCaption]="item.caption"
-        [itemDescription]="item.description"
+        [iconSrc]="currentSection.iconSrc"
+        [link]="item.link"
+        [caption]="item.caption"
+        [description]="item.description"
       ></vc-dashboard-item>
     </div>
   </div>

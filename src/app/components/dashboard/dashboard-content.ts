@@ -1,4 +1,4 @@
-export const dashboardContent = [
+export const dashboardContent: DashboardContentType = [
   {
     header: 'LOGIN & REGISTRATION',
     iconSrc: '../../../assets/images/dash-login.svg',
@@ -75,7 +75,7 @@ export type DashboardContentType = {
   }[];
 }[];
 
-export type DashboardSectionType = {
+export interface DashboardSectionType {
   header: string;
   iconSrc: string;
   content: {
@@ -83,4 +83,4 @@ export type DashboardSectionType = {
       caption: string;
       description: string;
   }[];
-};
+}
