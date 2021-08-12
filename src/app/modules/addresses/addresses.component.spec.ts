@@ -13,7 +13,7 @@ describe('AddressesComponent', () => {
       providers: [
         provideMockStore({
           initialState: {
-            addresses: Addresses.initialState
+            addresses: Addresses.initialState,
           },
         }),
       ],
