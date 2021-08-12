@@ -47,7 +47,11 @@ export class AddressesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.curentCustomerOrganization$.subscribe(value => this.curentCustomerOrganizationId = value?.id);
     const sortigExpression = this.getSortingExpression();
-    this.loadAddresses(this.curentCustomerOrganizationId!, this.pageSize, this.cursor, sortigExpression);
+
+    if (this.curentCustomerOrganizationId) {
+      this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
+    }
+
     this.store.select(selectOrganizationAddresses)
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(addresses => {
@@ -59,14 +63,21 @@ export class AddressesComponent implements OnInit, OnDestroy {
   loadPage(page: number): void {
     this.cursor = (page * this.pageSize - this.pageSize).toString();
     const sortigExpression = this.getSortingExpression();
-    this.loadAddresses(this.curentCustomerOrganizationId!, this.pageSize, this.cursor, sortigExpression);
+
+    if (this.curentCustomerOrganizationId) {
+      this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
+    }
+
     this.page = page;
   }
 
   applySorting(): void {
     this.sortDirection = this.invertSortDirection(this.sortDirection);
     const sortigExpression = this.getSortingExpression();
-    this.loadAddresses(this.curentCustomerOrganizationId!, this.pageSize, this.cursor, sortigExpression);
+
+    if (this.curentCustomerOrganizationId) {
+      this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
+    }
   }
 
   ngOnDestroy(): void {
