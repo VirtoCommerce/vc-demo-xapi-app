@@ -1,0 +1,8 @@
+<form [formGroup]="formGroup"
+      class="col">
+  <dynamic-ng-bootstrap-form [group]="formGroup"
+                             [model]="formModel"
+                             (change)="onChange($event)"
+                             (ngbEvent)="onNgbEvent($event)">
+  </dynamic-ng-bootstrap-form>
+</form>

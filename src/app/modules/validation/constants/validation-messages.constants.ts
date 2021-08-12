@@ -1,5 +1,7 @@
 export const requiredMessage = `The {{ label }} is required`;
 
+export const maxLengthMessage = `The {{ label }} can be a maximum of {{ validator.maxlength }} characters`;
+
 export const uniqueMessage = 'The {{ label }} should be unique';
 
 export const emailIncorrectMessage = `Enter correct email please (ex. john@gmail.com)`;

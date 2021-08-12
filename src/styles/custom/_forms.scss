@@ -13,3 +13,19 @@ dynamic-ng-bootstrap-form-control {
     @extend .form-select;
   }
 }
+
+dynamic-ng-bootstrap-switch {
+  .custom-switch {
+    @extend .form-check;
+    @extend .form-switch;
+  }
+
+  .custom-control-input {
+    @extend .form-check-input;
+  }
+
+  .custom-control-label {
+    display: none;
+    @extend .form-check-label;
+  }
+}

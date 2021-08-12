@@ -1,0 +1,13 @@
+.popover {
+  &.no-arrow {
+    .popover-arrow {
+      display: none;
+    }
+  }
+
+  &.no-padding {
+    .popover-body {
+      padding: 0;
+    }
+  }
+}
