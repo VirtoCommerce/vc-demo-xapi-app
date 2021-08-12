@@ -2,7 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { AddressesComponent } from './addresses.component';
-import * as Addresses from 'src/app/modules/addresses/store/addresses.reducer';
+import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
+  from 'src/app/store/current-customer/current-customer.reducer';
+import { addressesFeatureKey, initialState as AddressesInitialState } from './store/addresses.reducer';
 
 describe('AddressesComponent', () => {
   let component: AddressesComponent;
@@ -13,7 +15,8 @@ describe('AddressesComponent', () => {
       providers: [
         provideMockStore({
           initialState: {
-            addresses: Addresses.initialState,
+            [addressesFeatureKey]: AddressesInitialState,
+            [currentCustomerFeatureKey]: currentCustomerInitialState,
           },
         }),
       ],
