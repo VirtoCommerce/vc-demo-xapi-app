@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as AddressesActions from './addresses.actions';
@@ -15,7 +15,7 @@ export class AddressesEffects {
     return this.actions$.pipe(
 
       ofType(AddressesActions.getAddressess),
-      mergeMap(action => this.apollo.watchQuery<getOrganizationAddresses>({
+      switchMap(action => this.apollo.watchQuery<getOrganizationAddresses>({
         query: getOrganizationAddressesQuery,
         variables: {
           id: action.id,

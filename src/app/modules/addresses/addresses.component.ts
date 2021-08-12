@@ -56,15 +56,8 @@ export class AddressesComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page: number): void {
-    if (page > this.page) {
-      this.loadAddresses(this.curentCustomerOrganizationId!, this.pageSize, this.pageInfo?.endCursor!);
-    }
-    else if (page < this.page) {
-      this.loadAddresses(this.curentCustomerOrganizationId!, this.pageSize, this.pageInfo?.startCursor!);
-    }
-    else {
-      return;
-    }
+    const cursor = (page * this.pageSize - this.pageSize).toString();
+    this.loadAddresses(this.curentCustomerOrganizationId!, this.pageSize, cursor!);
     this.page = page;
   }
 
