@@ -5,11 +5,11 @@
       <h3 class="text-condensed mb-0">Company address</h3>
       <button class="btn btn-outline-primary">Add new address</button>
     </div>
-    <div class="table-responsive" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">
+    <div class="table-responsive mb-3" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">
       <table class="table table-striped table-borderless small-table-head">
         <thead class="border-top border-bottom border-table-header">
           <tr>
-            <th>Contact name</th>
+            <th (click)="applySorting()" [ngClass]="{'desc': sortDirection === sortDescending, 'asc': sortDirection === sortAscending}">Contact name</th>
             <th>Address</th>
             <th>Phone</th>
             <th>Email</th>
