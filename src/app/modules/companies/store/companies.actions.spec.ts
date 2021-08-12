@@ -1,7 +1,7 @@
 import * as fromCompanies from './companies.actions';
 
-describe('getCompaniess', () => {
+describe('getCompany', () => {
   it('should return an action', () => {
-    expect(fromCompanies.getCompany().type).toBe('[Companies] Get Companiess');
+    expect(fromCompanies.getCompany({ id: 'id' }).type).toBe('[Companies] Get Company');
   });
 });

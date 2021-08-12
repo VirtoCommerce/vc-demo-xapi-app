@@ -1,8 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 
 import { CompaniesEffects } from './companies.effects';
+import { companiesFeatureKey, initialState } from './companies.reducer';
 
 describe('CompaniesEffects', () => {
   let actions$: Observable<any>;
@@ -13,6 +15,11 @@ describe('CompaniesEffects', () => {
       providers: [
         CompaniesEffects,
         provideMockActions(() => actions$),
+        provideMockStore({
+          initialState: {
+            [companiesFeatureKey]: initialState,
+          },
+        }),
       ],
     });
 

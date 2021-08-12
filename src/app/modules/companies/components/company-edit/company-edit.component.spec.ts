@@ -1,4 +1,7 @@
+import { provideMockStore } from '@ngrx/store/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { companiesFeatureKey, initialState } from '../../store/companies.reducer';
+import { RouterTestingModule } from "@angular/router/testing";
 
 import { CompanyEditComponent } from './company-edit.component';
 
@@ -10,6 +13,16 @@ describe('CompanyEditComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         CompanyEditComponent,
+      ],
+      imports: [
+        RouterTestingModule,
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            [companiesFeatureKey]: initialState,
+          },
+        }),
       ],
     })
       .compileComponents();
@@ -25,3 +38,4 @@ describe('CompanyEditComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
