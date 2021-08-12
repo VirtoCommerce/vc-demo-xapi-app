@@ -12,8 +12,8 @@ describe('CompaniesEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         CompaniesEffects,
-        provideMockActions(() => actions$)
-      ]
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects = TestBed.inject(CompaniesEffects);
