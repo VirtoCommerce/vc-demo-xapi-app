@@ -1,9 +1,7 @@
-<a class="dash-item d-flex m-auto" href="{{ link }}">
-  <div class="dash-item-icon-container d-flex">
-    <img class="dash-item-icon m-auto user-select-none" src="{{ iconSrc }}" alt="item icon" />
+<div class="card flex-row" role="button" routerLink="{{ link }}">
+  <img class="card-img-left mx-4" src="{{ iconSrc }}" alt="Card image cap">
+  <div class="card-body my-2 pb-4 ps-0">
+    <h3 class="card-title text-condensed mb-0">{{ caption }}</h3>
+    <p class="card-text text-gray-800">{{ description }}</p>
   </div>
-  <div class="dash-item-text-container pt-4">
-    <h3 class="dash-item-caption mb-1">{{ caption }}</h3>
-    <div class="dash-item-description">{{ description }}</div>
-  </div>
-</a>
+</div>

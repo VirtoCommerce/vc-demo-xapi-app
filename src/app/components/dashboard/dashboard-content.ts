@@ -20,17 +20,17 @@ export const dashboardContent: DashboardContentType = [
     iconSrc: '../../../assets/images/dash-company.svg',
     content: [
       {
-        link: '/company-edit',
+        link: '/companies/current',
         caption: 'COMPANY EDIT',
         description: 'Company edit script demo',
       },
       {
-        link: '/company-addresses',
+        link: '/companies/addresses',
         caption: 'COMPANY ADDRESSES',
         description: 'Company addresses script demo',
       },
       {
-        link: '/companies-listing',
+        link: '/companies/listing',
         caption: 'COMPANIES LISTING',
         description: 'Companies listing script demo',
       },

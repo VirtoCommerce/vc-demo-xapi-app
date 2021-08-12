@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { Observable, Subject } from 'rxjs';
