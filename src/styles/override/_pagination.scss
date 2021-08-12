@@ -1,4 +1,11 @@
-.page-item, .page-link {
-  font-family: $font-family-condensed;
-  font-weight: $font-weight-bold;
+.page-item,
+.page-link {
+  font-weight: 600;
+}
+
+.page-item:not(.disabled):last-child,
+.page-item:not(.disabled):first-child {
+  .page-link {
+    color: $primary;
+  }
 }

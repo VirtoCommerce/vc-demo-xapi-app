@@ -7,6 +7,7 @@ import { PageInfo } from 'src/app/models/pageInfo.model';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { getAddressess } from './store/addresses.actions';
 import { selectOrganizationAddresses } from './store/addresses.selectors';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'vc-addresses',
@@ -31,6 +32,10 @@ export class AddressesComponent implements OnInit, OnDestroy {
   page = 1;
 
   pageSize = 6;
+
+  faChevronLeft = faChevronLeft;
+
+  faChevronRight = faChevronRight;
 
   constructor(private readonly store: Store) { }
 

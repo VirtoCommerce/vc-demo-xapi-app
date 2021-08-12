@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AddressesEffects } from './store/addresses.effects';
 import { StoreModule } from '@ngrx/store';
 import * as fromAddresses from '../addresses/store/addresses.reducer';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import * as fromAddresses from '../addresses/store/addresses.reducer';
     EffectsModule.forFeature([
       AddressesEffects,
     ]),
+    FontAwesomeModule,
   ],
 })
 export class AddressesModule { }

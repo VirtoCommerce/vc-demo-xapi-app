@@ -35,6 +35,12 @@
       </table>
     </div>
     <ngb-pagination [collectionSize]="totalCount!" [page]="page" [pageSize]="pageSize" (pageChange)="loadPage($event)">
+      <ng-template ngbPaginationPrevious>
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
+      </ng-template>
+      <ng-template ngbPaginationNext>
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </ng-template>
     </ngb-pagination>
   </div>
 </main>
