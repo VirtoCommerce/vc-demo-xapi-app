@@ -49,7 +49,7 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.route.paramMap.pipe(takeUntil(this.unsubscriber)).subscribe(params => {
       const id = params.get('id');
-      if (id == 'current') {
+      if (id === 'current') {
         this.store.select(selectCurrentCustomerOrganization)
           .subscribe(organization => this.store.dispatch(getCompany({ id: organization?.id as string })));
       }
