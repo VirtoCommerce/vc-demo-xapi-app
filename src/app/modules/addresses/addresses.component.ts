@@ -5,7 +5,7 @@ import { selectCurrentCustomerOrganization } from 'src/app/store/current-custome
 import { getAddressess } from './store/addresses.actions';
 import { selectOrganizationAddresses } from './store/addresses.selectors';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { pageSize } from './addresses.constants';
+import { pageSize, sortAscending, sortDescending } from './addresses.constants';
 import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 
@@ -35,9 +35,9 @@ export class AddressesComponent implements OnInit, OnDestroy {
 
   faChevronRight = faChevronRight;
 
-  sortDescending = 'desc';
+  sortDescending = sortDescending;
 
-  sortAscending = 'asc';
+  sortAscending = sortAscending;
 
   sortDirection = this.sortDescending;
 
