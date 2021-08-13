@@ -22,7 +22,7 @@ export const reducer = createReducer(
 
   on(CompaniesActions.getCompany, (state) : State => state),
   on(CompaniesActions.getCompanySuccess, (state, action): State  =>  {
-    const organization = action.data.organization;
+    const organization = action.data?.organization;
     return {
       ...state,
       company: mapToEditCompany(organization),
@@ -50,8 +50,9 @@ export const reducer = createReducer(
 );
 
 function mapToEditCompany(
-  organizatin: getOrganization_organization | updateOrganization_updateOrganization): EditCompany {
-  return organizatin === null
+  organizatin?: getOrganization_organization | updateOrganization_updateOrganization | null
+) : EditCompany | null {
+  return !organizatin
     ? null
     : {
       id: organizatin.id,

@@ -1,3 +1,4 @@
+import { selectCurrentCustomerOrganization } from './../../../../store/current-customer/current-customer.selectors';
 import { EditCompany } from './../../../../models/edit-company.model';
 import { selectSelectedCompany } from './../../store/companies.selectors';
 import { getCompany, setCompany, updateCompany } from './../../store/companies.actions';
@@ -48,7 +49,13 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.route.paramMap.pipe(takeUntil(this.unsubscriber)).subscribe(params => {
       const id = params.get('id');
-      this.store.dispatch(getCompany({ id: id as string }));
+      if (id == 'current') {
+        this.store.select(selectCurrentCustomerOrganization)
+          .subscribe(organization => this.store.dispatch(getCompany({ id: organization?.id as string })));
+      }
+      else {
+        this.store.dispatch(getCompany({ id: id as string }));
+      }
     });
 
     this.store.select(selectSelectedCompany).pipe(takeUntil(this.unsubscriber))
