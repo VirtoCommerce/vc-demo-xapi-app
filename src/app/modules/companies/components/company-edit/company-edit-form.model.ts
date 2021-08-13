@@ -1,3 +1,4 @@
+import { requiredMessage } from './../../../validation/constants/validation-messages.constants';
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
 
 export const COMPANY_EDIT_FORM_INPUTS = {
@@ -8,7 +9,7 @@ export const COMPANY_EDIT_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: 'The {{ label }} is required',
+      required: requiredMessage,
     },
   }),
 };

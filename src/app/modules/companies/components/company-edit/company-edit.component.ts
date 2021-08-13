@@ -14,15 +14,11 @@ import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 
 @Component({
-
   selector: 'vc-company-edit',
-
   templateUrl: './company-edit.component.html',
-
   styleUrls: [
     './company-edit.component.scss',
   ],
-
 })
 
 export class CompanyEditComponent implements AfterViewInit, OnDestroy {
@@ -31,8 +27,6 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   })
   formComponent!: DynamicNGBootstrapFormComponent;
 
-  selectedCompany$ = this.store.select(selectSelectedCompany);
-
   formInputs = COMPANY_EDIT_FORM_INPUTS;
 
   formModel = COMPANY_EDIT_FORM_MODEL;
@@ -40,6 +34,8 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   formLayout = COMPANY_EDIT_FORM_LAYOUT;
 
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+
+  selectedCompany$ = this.store.select(selectSelectedCompany);
 
   unsubscriber = new Subject();
 

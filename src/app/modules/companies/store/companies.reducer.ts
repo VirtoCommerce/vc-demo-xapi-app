@@ -1,17 +1,19 @@
+import { getOrganization_organization } from './../../../graphql/types/getOrganization';
 import { EditCompany } from './../../../models/edit-company.model';
 import { PartialDeep } from 'type-fest';
 import { createReducer, on } from '@ngrx/store';
 import * as CompaniesActions from './companies.actions';
+import { updateOrganization_updateOrganization } from '../../../graphql/types/updateOrganization';
 
 export const companiesFeatureKey = 'companies';
 
 export interface State {
-  selectedCompany: PartialDeep<EditCompany> | null,
+  company: PartialDeep<EditCompany> | null,
   editCompany: PartialDeep<EditCompany> | null,
 }
 
 export const initialState: State = {
-  selectedCompany: null,
+  company: null,
   editCompany: null,
 };
 
@@ -23,25 +25,15 @@ export const reducer = createReducer(
     const organization = action.data.organization;
     return {
       ...state,
-      selectedCompany: organization === null
-        ? null
-        : {
-          id: organization.id,
-          name: organization.name as string,
-        },
-      editCompany: organization === null
-        ? null
-        : {
-          id: organization.id,
-          name: organization.name as string,
-        },
+      company: mapToEditCompany(organization),
+      editCompany: mapToEditCompany(organization),
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.setCompany, (state, action) : State => ({
     ...state,
     editCompany: {
-      ...state.selectedCompany,
+      ...state.company,
       ...action.data,
     },
   })),
@@ -50,15 +42,20 @@ export const reducer = createReducer(
     const organization = action.data?.updateOrganization;
     return {
       ...state,
-      selectedCompany: !organization
-        ? null
-        : {
-          id: organization.id,
-          name: organization.name as string,
-        },
+      company: mapToEditCompany(organization),
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state)
 
 );
+
+function mapToEditCompany(
+  organizatin: getOrganization_organization | updateOrganization_updateOrganization): EditCompany {
+  return organizatin === null
+    ? null
+    : {
+      id: organizatin.id,
+      name: organizatin.name as string,
+    };
+}
 
