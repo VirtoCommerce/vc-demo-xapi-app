@@ -6,6 +6,8 @@ import { getAddressess } from './store/addresses.actions';
 import { selectOrganizationAddresses } from './store/addresses.selectors';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { pageSize } from './addresses.constants';
+import { filter, takeUntil } from 'rxjs/operators';
+import { nonNull } from 'src/app/helpers/nonNull';
 
 @Component({
   selector: 'vc-addresses',
@@ -21,7 +23,7 @@ export class AddressesComponent implements OnInit, OnDestroy {
 
   organizationAddresses$ = this.store.select(selectOrganizationAddresses);
 
-  curentCustomerOrganizationId?: string;
+  curentCustomerOrganizationId!: string;
 
   cursor = '0';
 
@@ -42,32 +44,23 @@ export class AddressesComponent implements OnInit, OnDestroy {
   constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
-    this.curentCustomerOrganization$.subscribe(value => this.curentCustomerOrganizationId = value?.id);
+    this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber))
+      .subscribe(value => this.curentCustomerOrganizationId = value?.id);
     const sortigExpression = this.getSortingExpression();
-
-    if (this.curentCustomerOrganizationId) {
-      this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
-    }
+    this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
   }
 
   loadPage(page: number): void {
     this.cursor = (page * this.pageSize - this.pageSize).toString();
     const sortigExpression = this.getSortingExpression();
-
-    if (this.curentCustomerOrganizationId) {
-      this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
-    }
-
+    this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
     this.page = page;
   }
 
   applySorting(): void {
     this.sortDirection = this.invertSortDirection(this.sortDirection);
     const sortigExpression = this.getSortingExpression();
-
-    if (this.curentCustomerOrganizationId) {
-      this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
-    }
+    this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
   }
 
   ngOnDestroy(): void {
