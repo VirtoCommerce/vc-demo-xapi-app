@@ -1,4 +1,4 @@
-export interface EditCompany {
+export interface Company {
   id: string,
   name: string
 }

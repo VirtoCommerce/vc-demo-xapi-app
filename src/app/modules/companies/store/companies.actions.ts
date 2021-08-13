@@ -1,6 +1,6 @@
 import { PartialDeep } from 'type-fest';
 import { updateOrganization } from './../../../graphql/types/updateOrganization';
-import { EditCompany } from './../../../models/edit-company.model';
+import { Company } from '../../../models/company.model';
 import { ApolloError } from '@apollo/client/core';
 import { createAction, props } from '@ngrx/store';
 import { getOrganization } from 'src/app/graphql/types/getOrganization';
@@ -22,7 +22,7 @@ export const getCompanyFailure = createAction(
 
 export const setCompany = createAction(
   '[Companies] Set Company',
-  props<{ data: PartialDeep<EditCompany> }>()
+  props<{ data: PartialDeep<Company> }>()
 );
 
 export const updateCompany = createAction(

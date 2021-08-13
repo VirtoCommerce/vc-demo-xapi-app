@@ -1,5 +1,5 @@
 import { getOrganization_organization } from './../../../graphql/types/getOrganization';
-import { EditCompany } from './../../../models/edit-company.model';
+import { Company } from '../../../models/company.model';
 import { PartialDeep } from 'type-fest';
 import { createReducer, on } from '@ngrx/store';
 import * as CompaniesActions from './companies.actions';
@@ -8,12 +8,12 @@ import { updateOrganization_updateOrganization } from '../../../graphql/types/up
 export const companiesFeatureKey = 'companies';
 
 export interface State {
-  company: PartialDeep<EditCompany> | null,
-  editCompany: PartialDeep<EditCompany> | null,
+  selectedCompany: PartialDeep<Company> | null,
+  editCompany: PartialDeep<Company> | null,
 }
 
 export const initialState: State = {
-  company: null,
+  selectedCompany: null,
   editCompany: null,
 };
 
@@ -25,15 +25,15 @@ export const reducer = createReducer(
     const organization = action.data?.organization;
     return {
       ...state,
-      company: mapToEditCompany(organization),
-      editCompany: mapToEditCompany(organization),
+      selectedCompany: mapToCompany(organization),
+      editCompany: mapToCompany(organization),
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.setCompany, (state, action) : State => ({
     ...state,
     editCompany: {
-      ...state.company,
+      ...state.selectedCompany,
       ...action.data,
     },
   })),
@@ -42,16 +42,16 @@ export const reducer = createReducer(
     const organization = action.data?.updateOrganization;
     return {
       ...state,
-      company: mapToEditCompany(organization),
+      selectedCompany: mapToCompany(organization),
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state)
 
 );
 
-function mapToEditCompany(
+function mapToCompany(
   organizatin?: getOrganization_organization | updateOrganization_updateOrganization | null
-) : EditCompany | null {
+) : Company | null {
   return !organizatin
     ? null
     : {

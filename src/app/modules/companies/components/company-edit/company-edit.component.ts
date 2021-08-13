@@ -1,5 +1,5 @@
 import { selectCurrentCustomerOrganization } from './../../../../store/current-customer/current-customer.selectors';
-import { EditCompany } from './../../../../models/edit-company.model';
+import { Company } from '../../../../models/company.model';
 import { selectSelectedCompany } from './../../store/companies.selectors';
 import { getCompany, setCompany, updateCompany } from './../../store/companies.actions';
 import { Component, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
@@ -66,7 +66,7 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   }
 
   onChange(event: DynamicFormControlEvent): void {
-    const company = fromFormModel<EditCompany>(event.model);
+    const company = fromFormModel<Company>(event.model);
     if (company != null) {
       this.store.dispatch(setCompany({
         data: company,

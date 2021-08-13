@@ -7,5 +7,5 @@ export const selectCompaniesState = createFeatureSelector<fromCompanies.State>(
 
 export const selectSelectedCompany = createSelector(
   selectCompaniesState,
-  (state: fromCompanies.State) => state.company
+  (state: fromCompanies.State) => state.selectedCompany
 );
