@@ -7,14 +7,6 @@
 // GraphQL query operation: getOrganizationAddresses
 // ====================================================
 
-export interface getOrganizationAddresses_organization_addresses_edges {
-  readonly __typename: "AddressEdge";
-  /**
-   * A cursor for use in pagination
-   */
-  readonly cursor: string;
-}
-
 export interface getOrganizationAddresses_organization_addresses_items {
   readonly __typename: "AddressType";
   /**
@@ -55,26 +47,6 @@ export interface getOrganizationAddresses_organization_addresses_items {
   readonly city: string | null;
 }
 
-export interface getOrganizationAddresses_organization_addresses_pageInfo {
-  readonly __typename: "PageInfo";
-  /**
-   * When paginating forwards, the cursor to continue.
-   */
-  readonly endCursor: string | null;
-  /**
-   * When paginating forwards, are there more items?
-   */
-  readonly hasNextPage: boolean;
-  /**
-   * When paginating backwards, are there more items?
-   */
-  readonly hasPreviousPage: boolean;
-  /**
-   * When paginating backwards, the cursor to continue.
-   */
-  readonly startCursor: string | null;
-}
-
 export interface getOrganizationAddresses_organization_addresses {
   readonly __typename: "AddressConnection";
   /**
@@ -82,17 +54,9 @@ export interface getOrganizationAddresses_organization_addresses {
    */
   readonly totalCount: number | null;
   /**
-   * Information to aid in pagination.
-   */
-  readonly edges: ReadonlyArray<(getOrganizationAddresses_organization_addresses_edges | null)> | null;
-  /**
    * A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for "{ edges { node } }" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the "cursor" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full "{ edges { node } } " version should be used instead.
    */
   readonly items: ReadonlyArray<(getOrganizationAddresses_organization_addresses_items | null)> | null;
-  /**
-   * Information to aid in pagination.
-   */
-  readonly pageInfo: getOrganizationAddresses_organization_addresses_pageInfo;
 }
 
 export interface getOrganizationAddresses_organization {

@@ -16,13 +16,7 @@ export interface State {
       postalCode?: string | null,
       city?: string | null,
     } [] | null,
-    totalCount?: number | null,
-    pageInfo?: {
-      endCursor: string | null,
-      hasNextPage: boolean,
-      hasPreviousPage: boolean,
-      startCursor: string | null
-    }
+    totalCount?: number | null
   } | null
 }
 
@@ -41,7 +35,6 @@ export const reducer = createReducer(
           ...address,
         })),
         totalCount: action.data.organization?.addresses?.totalCount,
-        pageInfo: action.data.organization?.addresses?.pageInfo,
       },
     };
   }),
