@@ -25,12 +25,12 @@ export const dashboardContent: DashboardContentType = [
         description: 'Company edit script demo',
       },
       {
-        link: '/companies/addresses',
+        link: '/addresses',
         caption: 'COMPANY ADDRESSES',
         description: 'Company addresses script demo',
       },
       {
-        link: '/companies/listing',
+        link: '/companies',
         caption: 'COMPANIES LISTING',
         description: 'Companies listing script demo',
       },
