@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Address } from 'src/app/models/address.model';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { getAddressess } from './store/addresses.actions';
 import { selectOrganizationAddresses } from './store/addresses.selectors';
@@ -21,11 +19,9 @@ export class AddressesComponent implements OnInit, OnDestroy {
 
   curentCustomerOrganization$ = this.store.select(selectCurrentCustomerOrganization);
 
+  organizationAddresses$ = this.store.select(selectOrganizationAddresses);
+
   curentCustomerOrganizationId?: string;
-
-  addresses?: Address[] | null;
-
-  totalCount?: number | null;
 
   cursor = '0';
 
@@ -52,13 +48,6 @@ export class AddressesComponent implements OnInit, OnDestroy {
     if (this.curentCustomerOrganizationId) {
       this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
     }
-
-    this.store.select(selectOrganizationAddresses)
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe(addresses => {
-        this.addresses = addresses?.items;
-        this.totalCount = addresses?.totalCount;
-      });
   }
 
   loadPage(page: number): void {

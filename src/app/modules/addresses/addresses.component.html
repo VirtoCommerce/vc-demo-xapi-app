@@ -1,11 +1,11 @@
 <main class="h-100" role="main">
-  <div class="container pt-4 pb-6">
+  <div class="container pt-4 pb-6" *ngIf="organizationAddresses$ | async as organizationAddresses">
     <h1 class="mb-3" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">{{curentCustomerOrganization?.name}}</h1>
     <div class="d-flex justify-content-between align-items-center pb-3">
       <h3 class="text-condensed mb-0">Company address</h3>
       <button class="btn btn-outline-primary">Add new address</button>
     </div>
-    <div class="table-responsive mb-3" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">
+    <div class="table-responsive mb-3">
       <table class="table table-striped table-borderless small-table-head" aria-label="Company addresses">
         <thead class="border-top border-bottom border-table-header">
           <tr>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let address of addresses">
+          <tr *ngFor="let address of organizationAddresses.items">
             <td>{{address.firstName}} {{address.lastName}}</td>
             <td>{{address.countryCode}},{{address.regionName}},{{address.city}}, {{address.line1}}, {{address.postalCode}}</td>
             <td>{{address.phone}}</td>
@@ -34,7 +34,7 @@
         </tbody>
       </table>
     </div>
-    <ngb-pagination [collectionSize]="totalCount!" [page]="page" [pageSize]="pageSize" (pageChange)="loadPage($event)">
+    <ngb-pagination [collectionSize]="organizationAddresses.totalCount!" [page]="page" [pageSize]="pageSize" (pageChange)="loadPage($event)">
       <ng-template ngbPaginationPrevious>
         <fa-icon [icon]="faChevronLeft"></fa-icon>
       </ng-template>
