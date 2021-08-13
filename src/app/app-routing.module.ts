@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: NavigationButtonComponent,
+    component: DashboardComponent,
   },
   {
     path: 'styleguide',

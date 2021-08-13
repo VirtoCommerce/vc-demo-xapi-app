@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CheckoutComponent } from './checkout.component';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
 import * as Cart from 'src/app/store/cart/cart.reducer';
 
@@ -16,7 +16,8 @@ describe('CheckoutComponent', () => {
         CheckoutComponent,
       ],
       imports: [
-        RouterTestingModule,
+        HttpClientTestingModule,
+        ApolloTestingModule,
       ],
       providers: [
         provideMockStore({

@@ -1,5 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { Observable, Subject } from 'rxjs';
@@ -12,78 +11,72 @@ import { me } from 'src/app/graphql/types/me';
 
 import clearCartMutation from 'src/app/graphql/mutations/clear-cart.graphql';
 import addItemsCartMutation from 'src/app/graphql/mutations/add-cart-items.graphql';
-import updateCartItemDynamicPropertiesMutation
+import
+updateCartItemDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-cart-item-dynamic-properties.graphql';
-import getMeQuery from '../../graphql/queries/get-me.graphql';
-import { setCartUserId } from '../../store/cart/cart.actions';
+import getMeQuery from '../graphql/queries/get-me.graphql';
+import { setCartUserId } from '../store/cart/cart.actions';
 import {
   updateCartItemDynamicProperties,
   updateCartItemDynamicPropertiesVariables,
 } from 'src/app/graphql/types/updateCartItemDynamicProperties';
 
-@Component({
-  selector: 'vc-navigation-button',
-  templateUrl: './navigation-button.component.html',
-  styleUrls: [
-    './navigation-button.component.scss',
-  ],
+@Injectable({
+  providedIn: 'root',
 })
-export class NavigationButtonComponent implements OnDestroy {
+
+export class CheckoutService implements OnDestroy {
   unsubscriber: Subject<boolean> = new Subject<boolean>();
 
-  constructor(
-    private readonly apollo: Apollo,
-    private readonly store: Store,
-    private readonly router: Router
-  ) { }
+  constructor(private readonly apollo: Apollo, private readonly store: Store) {}
 
-  openCheckout(): void {
-    this.getMe().pipe(
-      concatMap(getMeResult => this.clearCart(getMeResult.data.me?.id ?? 'Anonymous')),
-      concatMap(clearCartResult => this.addItemsToCart(
-        clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
-        clearCartResult.data?.clearCart?.id
-      )),
-      concatMap(lastResult => this.updateCartItemDynamicProperties(
-        lastResult.data?.addItemsCart?.customerId ?? 'Anonymous',
-        lastResult.data?.addItemsCart?.items?.
-          find(x => x?.productId === '9cbd8f316e254a679ba34a900fccb076')?.id ?? 'id-1',
-        [
-          {
-            name: 'Brand',
-            value: 'Epson',
-          },
-          {
-            name: 'Is alcoholic',
-            value: 'true',
-          },
-        ]
-      )),
-      concatMap(lastResult => this.updateCartItemDynamicProperties(
-        lastResult.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
-        lastResult.data?.updateCartItemDynamicProperties?.items?.
-          find(x => x?.productId === 'e7eee66223da43109502891b54bc33d3')?.id ?? 'id-2',
-        [
-          {
-            name: 'Production date',
-            value: '2021-07-15',
-          },
-          {
-            name: 'Pack size',
-            value: '123',
-          },
-        ]
-      )),
-      takeUntil(this.unsubscriber)
-    )
+  loadSampleData(): void {
+    this.getMe()
+      .pipe(
+        concatMap(getMeResult => this.clearCart(getMeResult.data.me?.id ?? 'Anonymous')),
+        concatMap(clearCartResult => this.addItemsToCart(
+          clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
+          clearCartResult.data?.clearCart?.id
+        )),
+        concatMap(lastResult => this.updateCartItemDynamicProperties(
+          lastResult.data?.addItemsCart?.customerId ?? 'Anonymous',
+          lastResult.data?.addItemsCart?.items?.find(x => x?.productId === '9cbd8f316e254a679ba34a900fccb076')?.id ??
+            'id-1',
+          [
+            {
+              name: 'Brand',
+              value: 'Epson',
+            },
+            {
+              name: 'Is alcoholic',
+              value: 'true',
+            },
+          ]
+        )),
+        concatMap(lastResult => this.updateCartItemDynamicProperties(
+          lastResult.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
+          lastResult.data?.updateCartItemDynamicProperties?.items?.find(
+            x => x?.productId === 'e7eee66223da43109502891b54bc33d3'
+          )?.id ?? 'id-2',
+          [
+            {
+              name: 'Production date',
+              value: '2021-07-15',
+            },
+            {
+              name: 'Pack size',
+              value: '123',
+            },
+          ]
+        )),
+        takeUntil(this.unsubscriber)
+      )
       .subscribe(c => {
-        this.store.dispatch(setCartUserId({
-          userId: c.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
-        }));
-
-        void this.router.navigate([
-          '/checkout',
-        ]);
+        this.store.dispatch(
+          setCartUserId({
+            userId: c.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
+          })
+        );
       });
   }
 
@@ -129,8 +122,11 @@ export class NavigationButtonComponent implements OnDestroy {
     });
   }
 
-  updateCartItemDynamicProperties(userId: string, itemId: string, dynamicProperties: { name: string; value: string; }[])
-    : Observable<FetchResult<updateCartItemDynamicProperties>> {
+  updateCartItemDynamicProperties(
+    userId: string,
+    itemId: string,
+    dynamicProperties: { name: string; value: string }[]
+  ): Observable<FetchResult<updateCartItemDynamicProperties>> {
     return this.apollo.mutate<updateCartItemDynamicProperties, updateCartItemDynamicPropertiesVariables>({
       mutation: updateCartItemDynamicPropertiesMutation,
       variables: {

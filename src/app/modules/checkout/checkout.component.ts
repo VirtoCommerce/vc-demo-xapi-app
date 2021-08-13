@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart.model';
+import { CheckoutService } from 'src/app/services/checkout.service';
 import { getCart, updateCartComment } from '../../store/cart/cart.actions';
 import { selectCart } from '../../store/cart/cart.selectors';
 
@@ -19,7 +20,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public cart?: Cart;
 
   constructor(
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly checkoutService: CheckoutService
   ) { }
 
   onCommentUpdate(comment: string | null): void {
@@ -29,6 +31,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.checkoutService.loadSampleData();
     this.store.dispatch(getCart());
 
     this.store.select(selectCart)
