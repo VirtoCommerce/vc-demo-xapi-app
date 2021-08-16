@@ -19,6 +19,8 @@ export class CartCommentComponent {
 
   debounceWatcher: Subject<string> = new Subject<string>();
 
+  readonly maxLength: number = 1024;
+
   constructor() {
     const debounceDuration = 1000;
     this.debounceWatcher.pipe(
