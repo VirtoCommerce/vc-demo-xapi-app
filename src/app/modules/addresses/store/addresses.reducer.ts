@@ -6,6 +6,7 @@ export const addressesFeatureKey = 'addresses';
 export interface State {
   addresses: {
     items?: {
+      id?: string,
       firstName?: string | null,
       lastName?: string | null,
       line1?: string | null,
