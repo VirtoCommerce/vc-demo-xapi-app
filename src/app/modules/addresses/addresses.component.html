@@ -1,0 +1,46 @@
+<main class="h-100" role="main">
+  <div class="container pt-4 pb-6" *ngIf="organizationAddresses$ | async as organizationAddresses">
+    <h1 class="mb-3" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">{{curentCustomerOrganization?.name}}</h1>
+    <div class="d-flex justify-content-between align-items-center pb-3">
+      <h3 class="text-condensed mb-0">Company address</h3>
+      <button class="btn btn-outline-primary">Add new address</button>
+    </div>
+    <div class="table-responsive mb-3">
+      <table class="table table-striped table-borderless small-table-head" aria-label="Company addresses">
+        <thead class="border-top border-bottom border-table-header">
+          <tr>
+            <th scope="col" (click)="applySorting()" [ngClass]="{'desc': sortDirection === sortDescending, 'asc': sortDirection === sortAscending}">Contact name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let address of organizationAddresses.items">
+            <td>{{address.firstName}} {{address.lastName}}</td>
+            <td>{{address.countryCode}},{{address.regionName}},{{address.city}}, {{address.line1}}, {{address.postalCode}}</td>
+            <td>{{address.phone}}</td>
+            <td>{{address.email}}</td>
+            <td class="text-nowrap">
+              <button type="button" class="btn btn-white btn-xs me-3">
+                <img src="assets/images/context-pencil.svg" alt="Edit" />
+              </button>
+              <button type="button" class="btn btn-white btn-xs">
+                <img src="assets/images/context-delete.svg" alt="Delete" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ngb-pagination [collectionSize]="organizationAddresses.totalCount!" [page]="page" [pageSize]="pageSize" (pageChange)="loadPage($event)">
+      <ng-template ngbPaginationPrevious>
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
+      </ng-template>
+      <ng-template ngbPaginationNext>
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </ng-template>
+    </ngb-pagination>
+  </div>
+</main>

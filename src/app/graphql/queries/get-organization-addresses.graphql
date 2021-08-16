@@ -1,0 +1,18 @@
+query getOrganizationAddresses($id: String!, $count: Int, $cursor: String, $sort: String) {
+  organization(id: $id) {
+    addresses(first: $count, after: $cursor, sort: $sort) {
+      totalCount
+      items {
+        firstName
+        lastName
+        line1
+        phone
+        email
+        countryCode
+        postalCode
+        regionName
+        city
+      }
+    }
+  }
+}

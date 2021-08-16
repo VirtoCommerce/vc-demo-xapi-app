@@ -1,49 +1,29 @@
+@use "sass:math";
+
 th {
-  &.col-sortable {
-    background-image: url(~src/assets/images/arrow-inactive-down.svg);
-    background-repeat: no-repeat;
-    background-position: calc(100% - 10px);
-  }
-
-  &.filter {
-    background-repeat: no-repeat;
-    background-position: calc(100% - 10px);
-    background-image: url(~src/assets/images/filter-inactive.svg);
-  }
-
   &.desc,
-  &.asc,
-  &.filtered,
-  &.filter:hover {
+  &.asc {
     background-repeat: no-repeat;
     background-position: calc(100% - 10px);
   }
 
   &.desc {
-    background-image: url(~src/assets/images/arrow-active-down.svg);
+    background-image: url(/assets/images/arrow-down.svg);
   }
 
   &.asc {
-    background-image: url(~src/assets/images/arrow-active-up.svg);
-  }
-
-  &.filtered {
-    background-image: url(~src/assets/images/filter-active.svg);
-  }
-
-  &.filter:hover {
-    background-image: url(~src/assets/images/filter-inactive.svg);
-  }
-}
-
-.table-head-hover {
-  th:hover {
-    cursor: pointer;
-    background-color: $gray-modal-bg;
+    background-image: url(/assets/images/arrow-up.svg);
   }
 }
 
 .table td,
 .table th {
   vertical-align: middle;
+}
+
+.table.small-table-head {
+  > thead > tr > th {
+    padding-top: math.div($table-cell-padding-y, 2);
+    padding-bottom: math.div($table-cell-padding-y, 2);
+  }
 }

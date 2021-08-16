@@ -12,7 +12,8 @@ $theme-colors: map-merge(
     'gray-100': $gray-100,
     'gray-modal': $gray-modal-bg,
     'black': $black,
-    'white': $white
+    'white': $white,
+    'table-header': $gray-modal-border
   )
 );
 
