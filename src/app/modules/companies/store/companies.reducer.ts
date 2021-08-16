@@ -4,6 +4,9 @@ import { PartialDeep } from 'type-fest';
 import { createReducer, on } from '@ngrx/store';
 import * as CompaniesActions from './companies.actions';
 import { updateOrganization_updateOrganization } from '../../../graphql/types/updateOrganization';
+import {
+  updateMemberDynamicProperties_updateMemberDynamicProperties,
+} from 'src/app/graphql/types/updateMemberDynamicProperties';
 
 export const companiesFeatureKey = 'companies';
 
@@ -39,10 +42,17 @@ export const reducer = createReducer(
   })),
   on(CompaniesActions.updateCompany, (state) : State => state),
   on(CompaniesActions.updateCompanySuccess, (state, action): State  =>  {
-    const organization = action.data?.updateOrganization;
+    const organization = {
+      ...action.data?.updateOrganization,
+      ...action.data?.updateMemberDynamicProperties,
+    };
+    delete organization.__typename;
     return {
       ...state,
-      selectedCompany: mapToCompany(organization),
+      selectedCompany: mapToCompany(organization as Omit<(
+        updateOrganization_updateOrganization &
+        updateMemberDynamicProperties_updateMemberDynamicProperties
+      ), '__typename'>),
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state)
@@ -50,13 +60,27 @@ export const reducer = createReducer(
 );
 
 function mapToCompany(
-  organizatin?: getOrganization_organization | updateOrganization_updateOrganization | null
+  organization?: getOrganization_organization |
+  Omit<(
+    updateOrganization_updateOrganization &
+    updateMemberDynamicProperties_updateMemberDynamicProperties
+  ), '__typename'> | null
 ) : Company | null {
-  return !organizatin
+  return !organization
     ? null
     : {
-      id: organizatin.id,
-      name: organizatin.name as string,
+      id: organization.id,
+      name: organization.name as string,
+      shortTextUsual: organization.dynamicProperties.find(x => x?.name === 'Short text | Usual')?.value as string,
+      longTextUsual: organization.dynamicProperties.find(x => x?.name === 'Long text | Usual')?.value as string,
+      integerUsual: Number.parseInt(
+        organization.dynamicProperties.find(x => x?.name === 'Integer | Usual')?.value as string
+      ),
+      decimalNumberUsual: Number.parseFloat(
+        organization.dynamicProperties.find(x => x?.name === 'Decimal number | Usual')?.value as string
+      ),
+      date: new Date(organization.dynamicProperties.find(x => x?.name === 'Date')?.value as string),
+      boolean: new Boolean(organization.dynamicProperties.find(x => x?.name === 'Boolean')).valueOf(),
     };
 }
 

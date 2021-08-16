@@ -12,7 +12,7 @@ import {
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const USUAL_PROPERTIES_INPUTS = {
-  shortText: new DynamicInputModel({
+  shortTextUsual: new DynamicInputModel({
     id: 'shortText',
     label: 'Short text ● Usual',
     validators: {
@@ -22,23 +22,23 @@ export const USUAL_PROPERTIES_INPUTS = {
       maxLength: validationMessages.maxLengthMessage,
     },
   }),
-  longText: new DynamicTextAreaModel({
+  longTextUsual: new DynamicTextAreaModel({
     id: 'longText',
     label: 'Long text ● Usual',
   }),
-  integer: new DynamicInputModel({
+  integerUsual: new DynamicInputModel({
     id: 'integer',
     label: 'Integer ● Usual',
     inputType: 'number',
     step: 1,
     min: 0,
   }),
-  decimalNumber: new DynamicInputModel({
+  decimalNumberUsual: new DynamicInputModel({
     id: 'decimalNumber',
     label: 'Decimal number ● Usual',
     inputType: 'number',
   }),
-  dateTime: new DynamicDateTimePickerModel({
+  date: new DynamicDateTimePickerModel({
     id: 'dateTime',
     label: 'Date',
     toggle: { icon: faCalendarAlt },

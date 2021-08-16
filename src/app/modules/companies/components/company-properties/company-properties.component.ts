@@ -1,19 +1,19 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicFormService, DynamicFormControlEvent } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
-import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
+import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
 import { Company } from 'src/app/models/company.model';
 import { PartialDeep } from 'type-fest';
-import { USUAL_PROPERTIES_INPUTS, USUAL_PROPERTIES_MODEL } from './usual-properties.model';
+import { COMPANY_PROPERTIES_INPUTS, COMPANY_PROPERTIES_MODEL } from './company-properties.model';
 
 @Component({
-  selector: 'vc-usual-properties',
-  templateUrl: './usual-properties.component.html',
+  selector: 'vc-company-properties',
+  templateUrl: './company-properties.component.html',
   styleUrls: [
-    './usual-properties.component.scss',
+    './company-properties.component.scss',
   ],
 })
-export class UsualPropertiesComponent implements AfterViewInit {
+export class CompanyPropertiesComponent implements AfterViewInit {
   @Input()
   company!: PartialDeep<Company>
 
@@ -25,9 +25,9 @@ export class UsualPropertiesComponent implements AfterViewInit {
   })
   formComponent!: DynamicNGBootstrapFormComponent;
 
-  formInputs = USUAL_PROPERTIES_INPUTS;
+  formInputs = COMPANY_PROPERTIES_INPUTS;
 
-  formModel = USUAL_PROPERTIES_MODEL;
+  formModel = COMPANY_PROPERTIES_MODEL;
 
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
 

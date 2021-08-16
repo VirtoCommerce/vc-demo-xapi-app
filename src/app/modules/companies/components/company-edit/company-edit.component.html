@@ -2,21 +2,21 @@
   <div class="container pt-4 pb-6">
     <article class="row g-0">
       <div class="col">
-        <h1 class="mb-4">{{(selectedCompany$ | async)?.name}}</h1>
-        <div class="h3 text-condensed">Company Info</div>
-        <section class="row mt-3">
-          <div class="col col-md-12">
-            <form [formGroup]="formGroup">
-              <dynamic-ng-bootstrap-form [group]="formGroup"
-                                        [layout]="formLayout"
-                                        [model]="formModel"
-                                        (change)="onChange($event)">
-              </dynamic-ng-bootstrap-form>
-            </form>
-            <vc-usual-properties></vc-usual-properties>
-            <button class="btn btn-primary mt-4 px-6" [disabled]="formGroup.invalid" (click)="submit()"> Save</button>
-          </div>
-        </section>
+        <div *ngIf="selectedCompany$ | async as selectedCompany">
+          <h1 class="mb-4">{{selectedCompany?.name}}</h1>
+          <div class="h3 text-condensed">Company Info</div>
+          <section class="row mt-3">
+            <div class="col col-md-12">
+              <vc-company-properties [company]="selectedCompany"
+                                     (changeProperty)="onChange($event)">
+              </vc-company-properties>
+              <vc-usual-properties [company]="selectedCompany"
+                                   (changeProperty)="onChange($event)">
+              </vc-usual-properties>
+              <button class="btn btn-primary px-6" (click)="submit()"> Save</button>
+            </div>
+          </section>
+        </div>
       </div>
     </article>
   </div>
