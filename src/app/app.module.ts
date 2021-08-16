@@ -16,6 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FooterComponent } from './components/footer/footer.component';
 import * as fromCountries from './store/countries/countries.reducer';
+import * as fromRegions from './store/regions/regions.reducer';
 import * as fromSectors from './store/sectors/sectors.reducer';
 import { CountriesEffects } from './store/countries/countries.effects';
 import { NavigationButtonComponent } from './components/navigation-button/navigation-button.component';
@@ -28,6 +29,7 @@ import * as fromLogin from './store/login/login.reducer';
 import { LoginEffects } from './store/login/login.effects';
 import * as fromCurrentCustomer from './store/current-customer/current-customer.reducer';
 import { CompanyNameComponent } from './components/company-name/company-name.component';
+import { RegionsEffects } from './store/regions/regions.effects';
 
 const appInitializerFactory =
   (appInitializer: AppInitializerService) => async (): Promise<void> => await appInitializer.initialize();
@@ -61,12 +63,14 @@ const appInitializerFactory =
     StoreModule.forFeature(fromSectors.sectorsFeatureKey, fromSectors.reducer),
     EffectsModule.forFeature([
       CountriesEffects,
+      RegionsEffects,
       CartEffects,
       SectorsEffects,
       LoginEffects,
       CurrentCustomerEffects,
     ]),
     StoreModule.forFeature(fromCountries.countriesFeatureKey, fromCountries.reducer),
+    StoreModule.forFeature(fromRegions.regionsFeatureKey, fromRegions.reducer),
     StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
     StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer),
     StoreModule.forFeature(fromCurrentCustomer.currentCustomerFeatureKey, fromCurrentCustomer.reducer),

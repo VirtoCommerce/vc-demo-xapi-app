@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, concatMap, tap } from 'rxjs/operators';
+import { catchError, map, concatMap, tap, filter } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { ApolloError } from '@apollo/client/errors';
 
@@ -14,6 +14,7 @@ import updateCartCommentMutation from '../../graphql/mutations/update-cart-comme
 import updateCartDynamicPropertiesMutation from '../../graphql/mutations/update-cart-dynamic-properties.graphql';
 import addCartCouponMutation from '../../graphql/mutations/add-cart-coupon.graphql';
 import removeCartCouponMutation from '../../graphql/mutations/remove-cart-coupon.graphql';
+import addOrUpdateShipment from '../../graphql/mutations/add-or-update-cart-shipment.graphql';
 
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
 import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
@@ -23,6 +24,11 @@ import { updateCartDynamicProperties, updateCartDynamicPropertiesVariables }
 import { addCartCoupon, addCartCouponVariables } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon, removeCartCouponVariables } from 'src/app/graphql/types/removeCartCoupon';
 import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
+import { addOrUpdateCartShipment, addOrUpdateCartShipmentVariables }
+  from 'src/app/graphql/types/addOrUpdateCartShipment';
+import { Store } from '@ngrx/store';
+import { selectCountriesState } from '../countries/countries.selectors';
+import { nonNull } from 'src/app/helpers/nonNull';
 
 @Injectable()
 export class CartEffects {
@@ -184,6 +190,42 @@ export class CartEffects {
     );
   });
 
+  addOrUpdateShippingAddress$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.addOrUpdateShippingAddress),
+      concatLatestFrom(() => [
+        this.store.select(selectCountriesState).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        action,
+        countries,
+      ]) => this.apollo.mutate<addOrUpdateCartShipment, addOrUpdateCartShipmentVariables>({
+        mutation: addOrUpdateShipment,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            shipment: {
+              id: action.shipmentId,
+              deliveryAddress: {
+                ...action.address,
+                addressType: 2,
+                countryName: countries.find(country => {
+                  return country.id === action.address?.countryCode;
+                })?.name as string,
+              },
+            },
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.addOrUpdateShippingAddressSuccess({
+            shipments: result.data?.addOrUpdateCartShipment?.shipments ?? [],
+          }))
+        ))
+    );
+  });
+
   setCartUserId$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.setCartUserId),
@@ -195,6 +237,7 @@ export class CartEffects {
 
   constructor(
     private readonly actions$: Actions,
-    private readonly apollo: Apollo
+    private readonly apollo: Apollo,
+    private readonly store: Store
   ) { }
 }

@@ -1,0 +1,6 @@
+query getRegions($countryId: String!) {
+  regions (countryId: $countryId) {
+    id,
+    name
+  }
+}

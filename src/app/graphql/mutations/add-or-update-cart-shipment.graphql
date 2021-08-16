@@ -1,0 +1,21 @@
+mutation addOrUpdateCartShipment ($command: InputAddOrUpdateCartShipmentType!) {
+    addOrUpdateCartShipment (command: $command) {
+        shipments {
+            id
+            deliveryAddress {
+                addressType
+                firstName
+                lastName
+                email
+                phone
+                countryCode
+                countryName
+                regionId
+                city
+                postalCode
+                line1
+                line2
+            }
+        }
+    }
+}

@@ -12,6 +12,7 @@ import * as fromCart from './cart/cart.reducer'
 import * as fromSectors from './sectors/sectors.reducer';
 import * as fromLogin from './login/login.reducer';
 import * as fromCurrentCustomer from './current-customer/current-customer.reducer';
+import * as fromRegions from './regions/regions.reducer';
 
 export interface State {
 [fromCountries.countriesFeatureKey]: fromCountries.State;
@@ -20,6 +21,7 @@ export interface State {
 [fromSectors.sectorsFeatureKey]: fromSectors.State;
 [fromLogin.loginFeatureKey]: fromLogin.State;
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.State;
+[fromRegions.regionsFeatureKey]: fromRegions.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -29,6 +31,7 @@ export const reducers: ActionReducerMap<State> = {
 [fromSectors.sectorsFeatureKey]: fromSectors.reducer,
 [fromLogin.loginFeatureKey]: fromLogin.reducer,
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.reducer,
+[fromRegions.regionsFeatureKey]: fromRegions.reducer,
 };
 
 

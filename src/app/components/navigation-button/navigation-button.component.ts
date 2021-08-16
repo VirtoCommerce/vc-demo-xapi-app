@@ -10,6 +10,7 @@ import { clearCart, clearCartVariables } from 'src/app/graphql/types/clearCart';
 import { addItemsCart, addItemsCartVariables } from 'src/app/graphql/types/addItemsCart';
 import { me } from 'src/app/graphql/types/me';
 
+import clearShipmentMutation from 'src/app/graphql/mutations/clear-shipments.graphql';
 import clearCartMutation from 'src/app/graphql/mutations/clear-cart.graphql';
 import addItemsCartMutation from 'src/app/graphql/mutations/add-cart-items.graphql';
 import updateCartItemDynamicPropertiesMutation
@@ -20,6 +21,7 @@ import {
   updateCartItemDynamicProperties,
   updateCartItemDynamicPropertiesVariables,
 } from 'src/app/graphql/types/updateCartItemDynamicProperties';
+import { clearShipments, clearShipmentsVariables } from 'src/app/graphql/types/clearShipments';
 
 @Component({
   selector: 'vc-navigation-button',
@@ -39,7 +41,8 @@ export class NavigationButtonComponent implements OnDestroy {
 
   openCheckout(): void {
     this.getMe().pipe(
-      concatMap(getMeResult => this.clearCart(getMeResult.data.me?.id ?? 'Anonymous')),
+      concatMap(getMeResult => this.clearShipments(getMeResult.data.me?.id)),
+      concatMap(clearShipmentsResult => this.clearCart(clearShipmentsResult.data?.clearShipments?.customerId)),
       concatMap(clearCartResult => this.addItemsToCart(
         clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
         clearCartResult.data?.clearCart?.id
@@ -91,12 +94,27 @@ export class NavigationButtonComponent implements OnDestroy {
     return this.apollo.query<me>({ query: getMeQuery });
   }
 
-  clearCart(userId: string): Observable<FetchResult<clearCart>> {
+  clearShipments(userId?: string | null): Observable<FetchResult<clearShipments>> {
+    return this.apollo.mutate<clearShipments, clearShipmentsVariables>({
+      mutation: clearShipmentMutation,
+      variables: {
+        command: {
+          userId: userId ?? 'Anonymous',
+          storeId: 'Electronics',
+          cartName: 'default',
+          currencyCode: 'USD',
+          cultureName: 'en-US',
+        },
+      },
+    });
+  }
+
+  clearCart(userId?: string | null): Observable<FetchResult<clearCart>> {
     return this.apollo.mutate<clearCart, clearCartVariables>({
       mutation: clearCartMutation,
       variables: {
         command: {
-          userId,
+          userId: userId ?? 'Anonymous',
           storeId: 'Electronics',
           cartName: 'default',
           currencyCode: 'USD',
