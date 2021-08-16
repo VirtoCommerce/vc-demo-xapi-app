@@ -7,6 +7,7 @@ import { updateOrganization_updateOrganization } from '../../../graphql/types/up
 import {
   updateMemberDynamicProperties_updateMemberDynamicProperties,
 } from 'src/app/graphql/types/updateMemberDynamicProperties';
+import { nullable } from 'src/app/helpers/nullable';
 
 export const companiesFeatureKey = 'companies';
 
@@ -37,6 +38,7 @@ export const reducer = createReducer(
     ...state,
     editCompany: {
       ...state.selectedCompany,
+      ...state.editCompany,
       ...action.data,
     },
   })),
@@ -70,17 +72,26 @@ function mapToCompany(
     ? null
     : {
       id: organization.id,
-      name: organization.name as string,
-      shortTextUsual: organization.dynamicProperties.find(x => x?.name === 'Short text | Usual')?.value as string,
-      longTextUsual: organization.dynamicProperties.find(x => x?.name === 'Long text | Usual')?.value as string,
-      integerUsual: Number.parseInt(
-        organization.dynamicProperties.find(x => x?.name === 'Integer | Usual')?.value as string
+      name: organization.name,
+      shortTextUsual: organization.dynamicProperties
+        .find(x => x?.name === 'Short text | Usual')?.value as string | null,
+      longTextUsual: organization.dynamicProperties
+        .find(x => x?.name === 'Long text | Usual')?.value as string | null,
+      integerUsual: nullable(
+        organization.dynamicProperties.find(x => x?.name === 'Integer | Usual')?.value as string | null,
+        value => Number.parseInt(value)
       ),
-      decimalNumberUsual: Number.parseFloat(
-        organization.dynamicProperties.find(x => x?.name === 'Decimal number | Usual')?.value as string
+      decimalNumberUsual: nullable(
+        organization.dynamicProperties.find(x => x?.name === 'Decimal number | Usual')?.value as string | null,
+        value => Number.parseFloat(value)
       ),
-      date: new Date(organization.dynamicProperties.find(x => x?.name === 'Date')?.value as string),
-      boolean: new Boolean(organization.dynamicProperties.find(x => x?.name === 'Boolean')).valueOf(),
+      date: nullable(
+        organization.dynamicProperties.find(x => x?.name === 'Date')?.value as string | null,
+        value => new Date(value)
+      ),
+      boolean: nullable(
+        organization.dynamicProperties.find(x => x?.name === 'Boolean')?.value as string | null,
+        value => /$true^/i.test(value)
+      ),
     };
 }
-

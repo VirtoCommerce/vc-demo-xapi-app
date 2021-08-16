@@ -13,7 +13,7 @@ import  * as validationMessages from 'src/app/modules/validation/constants/valid
 
 export const USUAL_PROPERTIES_INPUTS = {
   shortTextUsual: new DynamicInputModel({
-    id: 'shortText',
+    id: 'shortTextUsual',
     label: 'Short text ● Usual',
     validators: {
       maxLength: 512,
@@ -23,23 +23,23 @@ export const USUAL_PROPERTIES_INPUTS = {
     },
   }),
   longTextUsual: new DynamicTextAreaModel({
-    id: 'longText',
+    id: 'longTextUsual',
     label: 'Long text ● Usual',
   }),
   integerUsual: new DynamicInputModel({
-    id: 'integer',
+    id: 'integerUsual',
     label: 'Integer ● Usual',
     inputType: 'number',
     step: 1,
     min: 0,
   }),
   decimalNumberUsual: new DynamicInputModel({
-    id: 'decimalNumber',
+    id: 'decimalNumberUsual',
     label: 'Decimal number ● Usual',
     inputType: 'number',
   }),
   date: new DynamicDateTimePickerModel({
-    id: 'dateTime',
+    id: 'date',
     label: 'Date',
     toggle: { icon: faCalendarAlt },
     additional: {

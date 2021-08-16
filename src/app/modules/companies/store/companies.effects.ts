@@ -97,6 +97,26 @@ export class CompaniesEffects {
               name: 'Short text | Usual',
               value: company.shortTextUsual,
             },
+            {
+              name: 'Long text | Usual',
+              value: company.longTextUsual,
+            },
+            {
+              name: 'Integer | Usual',
+              value: company.integerUsual?.toString(),
+            },
+            {
+              name: 'Decimal number | Usual',
+              value: company.decimalNumberUsual?.toString(),
+            },
+            {
+              name: 'Date',
+              value: company.date?.toUTCString(),
+            },
+            {
+              name: 'Boolean',
+              value: company.boolean?.toString(),
+            },
           ],
         },
       },

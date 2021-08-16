@@ -91,12 +91,6 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
 
   time: NgbTimeStruct | null = null;
 
-  // Input
-
-  get value(): Date | null {
-    return this.model.value as Date | null;
-  }
-
   constructor(
     protected layoutService: DynamicFormLayoutService,
     protected validationService: DynamicFormValidationService,
@@ -117,6 +111,7 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
         this.time.minute,
         this.time.second
       ), 'medium', 'en-US');
+      this.change.emit();
     }
   }
 }

@@ -11,14 +11,16 @@
          (blur)="onBlur($event)"
          (change)="onChange($event)"
          (focus)="onFocus($event)"
-         readonly="true">
+         readonly="true"
+         [required]="model.required">
 
     <button class="btn btn-outline-primary"
             type="button"
             [ngbPopover]="popover"
             popoverClass="no-arrow no-padding"
             autoClose="outside"
-            [placement]="model.getAdditional('placement', 'bottom-left')">
+            [placement]="model.getAdditional('placement', 'bottom-left')"
+            [disabled]="model.readOnly">
 
         <img *ngIf="model.toggle?.image"
              [src]="model.toggle!.image!"
