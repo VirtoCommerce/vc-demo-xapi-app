@@ -14,7 +14,7 @@ import { selectCountryOptions }
   from 'src/app/modules/registration/components/registration-company-address/countries.selector';
 import { getCountries } from 'src/app/store/countries/countries.actions';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
-import { setAddress } from '../../store/addresses.actions';
+import { setAddress, updateAddress } from '../../store/addresses.actions';
 import { selectSelectedAddress } from '../../store/addresses.selectors';
 import { ADDRESS_EDIT_FORM_LAYOUT } from './address-edit-form.layout';
 import { ADDRESS_EDIT_FORM_INPUTS, ADDRESS_EDIT_FORM_MODEL } from './address-edit-form.model';
@@ -93,6 +93,10 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
         data: address,
       }));
     }
+  }
+
+  submit(): void {
+    this.store.dispatch(updateAddress());
   }
 
   ngOnDestroy(): void {
