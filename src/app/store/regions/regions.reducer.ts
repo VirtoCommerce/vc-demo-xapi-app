@@ -12,12 +12,10 @@ export const regionsFeatureKey = 'regions';
 
 export interface State {
   regions: Map<string, Region[]>;
-  // Regs: Region[];
 }
 
 export const initialState: State = {
   regions: new Map<string, Region[]>(),
-  // Regs: []
 };
 
 export const reducer = createReducer<State>(
@@ -33,8 +31,6 @@ export const reducer = createReducer<State>(
         id: region.id,
         name: region.name,
       })) ?? [];
-
-    // State.regs = regions;
 
     if (state?.regions != null && !state.regions.has(action.countryId)) {
       state.regions.set(action.countryId, regions);
