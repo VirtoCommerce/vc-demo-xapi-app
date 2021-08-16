@@ -14,7 +14,6 @@ import { ApolloError } from '@apollo/client/core';
 export class SectorsEffects {
   getSectors$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(SectorActions.getSectors),
       concatMap(() => this.apollo.watchQuery<getDictionaryDynamicPropery>({
         query: getDictionaryDynamicProperty,
@@ -30,8 +29,5 @@ export class SectorsEffects {
     );
   });
 
-  constructor(
-private readonly actions$: Actions,
-    private readonly apollo: Apollo
-  ) {}
+  constructor(private readonly actions$: Actions, private readonly apollo: Apollo) {}
 }
