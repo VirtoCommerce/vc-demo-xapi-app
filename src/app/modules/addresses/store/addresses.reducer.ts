@@ -1,36 +1,43 @@
 import { createReducer, on } from '@ngrx/store';
+import { Address } from 'src/app/models/address.model';
 import * as AddressesActions from './addresses.actions';
 
 export const addressesFeatureKey = 'addresses';
 
 export interface State {
   addresses: {
-    items?: {
-      id?: string,
-      firstName?: string | null,
-      lastName?: string | null,
-      line1?: string | null,
-      phone?: string | null,
-      email?: string | null,
-      regionName?: string | null,
-      countryCode?: string | null,
-      postalCode?: string | null,
-      city?: string | null,
-    } [] | null,
+    items?: Address [] | null,
     totalCount?: number | null
-  } | null
+  } | null,
+  selectedAddress: Address | null,
+  editAddress: Address | null,
 }
 
 export const initialState: State = {
   addresses: null,
+  selectedAddress: null,
+  editAddress: null,
 };
 
 export const reducer = createReducer(
   initialState,
 
   on(AddressesActions.getAddressess, (state): State => state),
-  on(AddressesActions.getAddressessSuccess, (_, action): State => {
+  on(AddressesActions.setSelectedAddress, (state, action): State => {
     return {
+      ...state,
+      selectedAddress: action.address,
+    };
+  }),
+  on(AddressesActions.setEditAddress, (state, action): State => {
+    return {
+      ...state,
+      editAddress: action.address,
+    };
+  }),
+  on(AddressesActions.getAddressessSuccess, (state, action): State => {
+    return {
+      ...state,
       addresses: {
         items: action.data.organization?.addresses?.items?.map(address => ({
           ...address,
@@ -39,7 +46,10 @@ export const reducer = createReducer(
       },
     };
   }),
-  on(AddressesActions.getAddressessFailure, (_): State => ({ addresses: null }))
+  on(AddressesActions.getAddressessFailure, (state): State => ({
+    ...state,
+    addresses: null,
+  }))
 
 );
 
