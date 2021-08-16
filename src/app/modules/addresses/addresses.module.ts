@@ -9,10 +9,12 @@ import { AddressesEffects } from './store/addresses.effects';
 import { StoreModule } from '@ngrx/store';
 import * as fromAddresses from '../addresses/store/addresses.reducer';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AddressEditComponent } from './components/address-edit/address-edit.component';
 
 @NgModule({
   declarations: [
     AddressesComponent,
+    AddressEditComponent,
   ],
   imports: [
     CommonModule,
