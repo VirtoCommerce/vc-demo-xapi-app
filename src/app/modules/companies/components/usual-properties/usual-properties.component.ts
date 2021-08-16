@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
@@ -13,7 +13,7 @@ import { USUAL_PROPERTIES_INPUTS, USUAL_PROPERTIES_MODEL } from './usual-propert
     './usual-properties.component.scss',
   ],
 })
-export class UsualPropertiesComponent implements AfterViewInit {
+export class UsualPropertiesComponent implements DoCheck {
   @Input()
   company!: PartialDeep<Company>
 
@@ -39,7 +39,7 @@ export class UsualPropertiesComponent implements AfterViewInit {
   ) {
   }
 
-  ngAfterViewInit(): void {
+  ngDoCheck(): void {
     patchFormModel(this.formInputs, this.company);
     this.formService.detectChanges(this.formComponent);
     this.validChange.emit(this.formGroup.valid);

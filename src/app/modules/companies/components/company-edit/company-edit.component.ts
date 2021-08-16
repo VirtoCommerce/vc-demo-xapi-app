@@ -2,13 +2,14 @@ import { selectCurrentCustomerOrganization } from './../../../../store/current-c
 import { Company } from '../../../../models/company.model';
 import { selectSelectedCompany } from './../../store/companies.selectors';
 import { getCompany, setCompany, updateCompany } from './../../store/companies.actions';
-import { Component, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { PartialDeep } from 'type-fest';
+import { nonNull } from 'src/app/helpers/nonNull';
 
 @Component({
   selector: 'vc-company-edit',
@@ -18,7 +19,7 @@ import { PartialDeep } from 'type-fest';
   ],
 })
 
-export class CompanyEditComponent implements AfterViewInit, OnDestroy {
+export class CompanyEditComponent implements OnInit, OnDestroy {
   selectedCompany$ = this.store.select(selectSelectedCompany);
 
   isValidForm = {
@@ -37,12 +38,13 @@ export class CompanyEditComponent implements AfterViewInit, OnDestroy {
     private readonly route: ActivatedRoute
   ) {  }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.route.paramMap.pipe(takeUntil(this.unsubscriber)).subscribe(params => {
       const id = params.get('id');
       if (id === 'current') {
         this.store.select(selectCurrentCustomerOrganization)
-          .subscribe(organization => this.store.dispatch(getCompany({ id: organization?.id as string })));
+          .pipe(filter(nonNull))
+          .subscribe(organization => this.store.dispatch(getCompany({ id: organization.id })));
       }
       else {
         this.store.dispatch(getCompany({ id: id as string }));
