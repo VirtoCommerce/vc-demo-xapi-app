@@ -30,6 +30,6 @@ export const setEditAddress = createAction(
 );
 
 export const setAddress = createAction(
-  '[Companies] Set Address',
+  '[Addresses] Set Address',
   props<{ data: Address }>()
 );
