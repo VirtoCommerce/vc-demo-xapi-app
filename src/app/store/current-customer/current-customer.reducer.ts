@@ -16,7 +16,7 @@ export interface State {
     } | null,
     organization: {
       id: string,
-      name: string
+      name: string,
     } | null
   }  | null
 }
