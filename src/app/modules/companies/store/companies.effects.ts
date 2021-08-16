@@ -19,6 +19,7 @@ import {
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
 import { Company } from 'src/app/models/company.model';
+import { nullable } from 'src/app/helpers/nullable';
 
 @Injectable()
 export class CompaniesEffects {
@@ -111,7 +112,7 @@ export class CompaniesEffects {
             },
             {
               name: 'Date',
-              value: company.date?.toUTCString(),
+              value: nullable(company.date, value => new Date(value))?.toUTCString(),
             },
             {
               name: 'Boolean',

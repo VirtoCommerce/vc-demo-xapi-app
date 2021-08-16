@@ -18,7 +18,10 @@ export class CompanyPropertiesComponent implements AfterViewInit {
   company!: PartialDeep<Company>
 
   @Output()
-  changeProperty = new EventEmitter<PartialDeep<Company>>();
+  propertyChange = new EventEmitter<PartialDeep<Company>>();
+
+  @Output()
+  validChange = new EventEmitter<boolean>();
 
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
@@ -39,12 +42,14 @@ export class CompanyPropertiesComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     patchFormModel(this.formInputs, this.company);
     this.formService.detectChanges(this.formComponent);
+    this.validChange.emit(this.formGroup.valid);
   }
 
   onChange(event: DynamicFormControlEvent): void {
     const company = fromFormModel<Company>(event.model);
     if (company != null) {
-      this.changeProperty.emit(company);
+      this.propertyChange.emit(company);
     }
+    this.validChange.emit(this.formGroup.valid);
   }
 }

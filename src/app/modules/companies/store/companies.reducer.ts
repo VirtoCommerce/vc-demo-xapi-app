@@ -85,10 +85,8 @@ function mapToCompany(
         organization.dynamicProperties.find(x => x?.name === 'Decimal number | Usual')?.value as string | null,
         value => Number.parseFloat(value)
       ),
-      date: nullable(
-        organization.dynamicProperties.find(x => x?.name === 'Date')?.value as string | null,
-        value => new Date(value)
-      ),
+      date: organization.dynamicProperties
+        .find(x => x?.name === 'Date')?.value as string | null,
       boolean: nullable(
         organization.dynamicProperties.find(x => x?.name === 'Boolean')?.value as string | null,
         value => /$true^/i.test(value)

@@ -5,6 +5,6 @@ export interface Company {
   longTextUsual: string | null,
   integerUsual: number | null,
   decimalNumberUsual: number | null,
-  date: Date | null,
+  date: string | null,
   boolean: boolean | null
 }

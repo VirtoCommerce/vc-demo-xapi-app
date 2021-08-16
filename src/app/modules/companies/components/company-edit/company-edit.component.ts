@@ -21,6 +21,15 @@ import { PartialDeep } from 'type-fest';
 export class CompanyEditComponent implements AfterViewInit, OnDestroy {
   selectedCompany$ = this.store.select(selectSelectedCompany);
 
+  isValidForm = {
+    properties: false,
+    usualProperties: false,
+  };
+
+  get isValidForms(): boolean {
+    return !Object.values(this.isValidForm).every(x => x === true);
+  }
+
   unsubscriber = new Subject();
 
   constructor(
