@@ -1,0 +1,9 @@
+mutation updateMemberAddresses($command: InputUpdateMemberAddressType!) {
+  updateMemberAddresses(command: $command) {
+    memberType
+    addresses {
+      key
+      line1
+    }
+  }
+}

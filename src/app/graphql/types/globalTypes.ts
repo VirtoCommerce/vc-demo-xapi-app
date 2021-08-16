@@ -272,6 +272,11 @@ export interface InputUpdateCartItemDynamicPropertiesType {
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
 }
 
+export interface InputUpdateMemberAddressType {
+  readonly memberId: string;
+  readonly addresses: ReadonlyArray<(InputMemberAddressType | null)>;
+}
+
 export interface InputUpdateMemberDynamicPropertiesType {
   readonly memberId: string;
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
