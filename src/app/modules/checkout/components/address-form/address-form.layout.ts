@@ -1,5 +1,7 @@
 import { DynamicFormLayout } from '@ng-dynamic-forms/core';
 
+const formControl = 'form-control-lg';
+
 export const CART_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   general: {
     element: {
@@ -20,31 +22,31 @@ export const CART_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   firstName: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
   },
   lastName: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
   },
   email: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
   },
   phone: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
   },
   countryCode: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
     grid: {
@@ -53,7 +55,7 @@ export const CART_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   postalCode: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
     grid: {
@@ -62,7 +64,7 @@ export const CART_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   regionId: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: '',
     },
     grid: {
@@ -71,7 +73,7 @@ export const CART_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   city: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
     grid: {
@@ -80,13 +82,13 @@ export const CART_ADDRESS_FORM_LAYOUT: DynamicFormLayout = {
   },
   line1: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: 'required',
     },
   },
   line2: {
     element: {
-      control: 'form-control-lg',
+      control: formControl,
       label: '',
     },
   },

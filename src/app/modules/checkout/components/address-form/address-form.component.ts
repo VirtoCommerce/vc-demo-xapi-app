@@ -53,11 +53,10 @@ export class AddressFormComponent implements OnInit, OnDestroy {
   ) {}
 
   fromFormModel(): CartAddress {
-    const result: CartAddress = {
+    return {
       ...this.formGroup.value.general.info,
       ...this.formGroup.value.general.address,
-    };
-    return result;
+    } as CartAddress;
   }
 
   updateFormModel(): void {
@@ -89,8 +88,8 @@ export class AddressFormComponent implements OnInit, OnDestroy {
     this.addressFormInputs.countryCode.options$ = this.store.select(selectCountriesState)
       .pipe(
         filter(nonNull),
-        concatMap(country => {
-          const options = country.map(country => new DynamicFormOption({
+        concatMap(countries => {
+          const options = countries.map(country => new DynamicFormOption({
             label: country.name,
             value: country.id,
           }));

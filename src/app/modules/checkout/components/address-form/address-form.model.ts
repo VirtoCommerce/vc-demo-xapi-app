@@ -1,5 +1,7 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 
+const requiredMessage = '{{ label }} is required';
+
 export const GENERAL_FORM_INPUTS = {
   firstName: new DynamicInputModel({
     id: 'firstName',
@@ -8,7 +10,7 @@ export const GENERAL_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -19,7 +21,7 @@ export const GENERAL_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -30,7 +32,7 @@ export const GENERAL_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -41,7 +43,7 @@ export const GENERAL_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -55,7 +57,7 @@ export const ADDRESS_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -66,7 +68,7 @@ export const ADDRESS_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -82,7 +84,7 @@ export const ADDRESS_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 
@@ -93,7 +95,7 @@ export const ADDRESS_FORM_INPUTS = {
       required: null,
     },
     errorMessages: {
-      required: '{{ label }} is required',
+      required: requiredMessage,
     },
   }),
 

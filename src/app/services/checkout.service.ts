@@ -33,7 +33,7 @@ export class CheckoutService implements OnDestroy {
   constructor(private readonly apollo: Apollo, private readonly store: Store) { }
 
   loadSampleData(): Observable<string> {
-    const loadDataObserver = new Observable<string>(observer => {
+    return new Observable<string>(observer => {
       this.getMe()
         .pipe(
           concatMap(getMeResult => this.clearShipments(getMeResult.data.me?.id)),
@@ -87,8 +87,6 @@ export class CheckoutService implements OnDestroy {
           observer.next(userId);
         });
     });
-
-    return loadDataObserver;
   }
 
   getMe(): Observable<ApolloQueryResult<me>> {
