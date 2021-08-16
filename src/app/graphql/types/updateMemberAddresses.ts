@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputUpdateMemberAddressType } from "./../../types/globalTypes";
+import { InputUpdateMemberAddressType } from "./globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: updateMemberAddresses
