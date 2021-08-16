@@ -41,12 +41,10 @@ export const USUAL_PROPERTIES_INPUTS = {
   dateTime: new DynamicDateTimePickerModel({
     id: 'dateTime',
     label: 'Date',
-
-    /*
-     * ToggleLabel: '<fa-icon></fa-icon>',
-     * toggle: { image: 'assets/images/calendar.svg' },
-     */
     toggle: { icon: faCalendarAlt },
+    additional: {
+      placement: 'auto',
+    },
   }),
   boolean: new DynamicSwitchModel({
     id: 'boolean',
