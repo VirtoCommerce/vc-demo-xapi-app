@@ -5,11 +5,6 @@ import * as RegionsActions from './regions.actions';
 
 export const regionsFeatureKey = 'regions';
 
-/*
- * Export type State = { [id: string]: Region[]; } | null;
- * export const initialState: State = {};
- */
-
 export interface State {
   regions: Map<string, Region[]>;
 }
