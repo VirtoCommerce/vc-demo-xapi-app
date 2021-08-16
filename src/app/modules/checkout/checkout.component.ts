@@ -31,13 +31,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.checkoutService.loadSampleData();
-    this.store.dispatch(getCart());
-
-    this.store.select(selectCart)
+    this.checkoutService.loadSampleData()
       .pipe(takeUntil(this.unsubscriber))
-      .subscribe(cart => {
-        this.cart = cart;
+      .subscribe(() => {
+        this.store.dispatch(getCart());
+
+        this.store.select(selectCart)
+          .pipe(takeUntil(this.unsubscriber))
+          .subscribe(cart => {
+            this.cart = cart;
+          });
       });
   }
 

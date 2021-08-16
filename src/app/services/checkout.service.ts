@@ -30,57 +30,65 @@ import { clearShipments, clearShipmentsVariables } from 'src/app/graphql/types/c
 export class CheckoutService implements OnDestroy {
   unsubscriber: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private readonly apollo: Apollo, private readonly store: Store) {}
+  constructor(private readonly apollo: Apollo, private readonly store: Store) { }
 
-  loadSampleData(): void {
-    this.getMe()
-      .pipe(
-        concatMap(getMeResult => this.clearShipments(getMeResult.data.me?.id)),
-        concatMap(clearShipmentsResult => this.clearCart(clearShipmentsResult.data?.clearShipments?.customerId)),
-        concatMap(clearCartResult => this.addItemsToCart(
-          clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
-          clearCartResult.data?.clearCart?.id
-        )),
-        concatMap(lastResult => this.updateCartItemDynamicProperties(
-          lastResult.data?.addItemsCart?.customerId ?? 'Anonymous',
-          lastResult.data?.addItemsCart?.items?.find(x => x?.productId === '9cbd8f316e254a679ba34a900fccb076')?.id ??
+  loadSampleData(): Observable<string> {
+    const loadDataObserver = new Observable<string>(observer => {
+      this.getMe()
+        .pipe(
+          concatMap(getMeResult => this.clearShipments(getMeResult.data.me?.id)),
+          concatMap(clearShipmentsResult => this.clearCart(clearShipmentsResult.data?.clearShipments?.customerId)),
+          concatMap(clearCartResult => this.addItemsToCart(
+            clearCartResult.data?.clearCart?.customerId ?? 'Anonymous',
+            clearCartResult.data?.clearCart?.id
+          )),
+          concatMap(lastResult => this.updateCartItemDynamicProperties(
+            lastResult.data?.addItemsCart?.customerId ?? 'Anonymous',
+            lastResult.data?.addItemsCart?.items?.find(x => x?.productId === '9cbd8f316e254a679ba34a900fccb076')?.id ??
             'id-1',
-          [
-            {
-              name: 'Brand',
-              value: 'Epson',
-            },
-            {
-              name: 'Is alcoholic',
-              value: 'true',
-            },
-          ]
-        )),
-        concatMap(lastResult => this.updateCartItemDynamicProperties(
-          lastResult.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
-          lastResult.data?.updateCartItemDynamicProperties?.items?.find(
-            x => x?.productId === 'e7eee66223da43109502891b54bc33d3'
-          )?.id ?? 'id-2',
-          [
-            {
-              name: 'Production date',
-              value: '2021-07-15',
-            },
-            {
-              name: 'Pack size',
-              value: '123',
-            },
-          ]
-        )),
-        takeUntil(this.unsubscriber)
-      )
-      .subscribe(c => {
-        this.store.dispatch(
-          setCartUserId({
-            userId: c.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
-          })
-        );
-      });
+            [
+              {
+                name: 'Brand',
+                value: 'Epson',
+              },
+              {
+                name: 'Is alcoholic',
+                value: 'true',
+              },
+            ]
+          )),
+          concatMap(lastResult => this.updateCartItemDynamicProperties(
+            lastResult.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous',
+            lastResult.data?.updateCartItemDynamicProperties?.items?.find(
+              x => x?.productId === 'e7eee66223da43109502891b54bc33d3'
+            )?.id ?? 'id-2',
+            [
+              {
+                name: 'Production date',
+                value: '2021-07-15',
+              },
+              {
+                name: 'Pack size',
+                value: '123',
+              },
+            ]
+          )),
+          takeUntil(this.unsubscriber)
+        )
+        .subscribe(c => {
+          const userId = c.data?.updateCartItemDynamicProperties?.customerId ?? 'Anonymous';
+
+          this.store.dispatch(
+            setCartUserId({
+              userId,
+            })
+          );
+
+          observer.next(userId);
+        });
+    });
+
+    return loadDataObserver;
   }
 
   getMe(): Observable<ApolloQueryResult<me>> {
