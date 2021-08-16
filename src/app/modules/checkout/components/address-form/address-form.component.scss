@@ -54,3 +54,7 @@
         outline: 0;
     }
 }
+
+.is-invalid {
+    border-color: $text-danger-alert !important;
+}

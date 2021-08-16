@@ -1,6 +1,6 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 
-const requiredMessage = '{{ label }} is required';
+const requiredMessage = '';
 
 export const GENERAL_FORM_INPUTS = {
   firstName: new DynamicInputModel({
