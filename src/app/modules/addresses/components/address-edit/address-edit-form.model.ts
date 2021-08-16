@@ -1,5 +1,5 @@
 import { requiredMessage } from '../../../validation/constants/validation-messages.constants';
-import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
+import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 
 export const ADDRESS_EDIT_FORM_INPUTS = {
   firstName: new DynamicInputModel({
@@ -12,7 +12,7 @@ export const ADDRESS_EDIT_FORM_INPUTS = {
       required: requiredMessage,
     },
   }),
-  countryCode: new DynamicInputModel({
+  countryCode: new DynamicSelectModel<string|undefined>({
     id: 'countryCode',
     label: 'Country',
     validators: {
