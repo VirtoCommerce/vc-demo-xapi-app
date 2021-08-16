@@ -10,6 +10,7 @@ query getOrganizationAddresses($id: String!, $count: Int, $cursor: String, $sort
         phone
         email
         countryCode
+        countryName
         postalCode
         regionName
         city

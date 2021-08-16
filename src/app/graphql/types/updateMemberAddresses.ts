@@ -19,6 +19,42 @@ export interface updateMemberAddresses_updateMemberAddresses_addresses {
    * Line1
    */
   readonly line1: string | null;
+  /**
+   * First name
+   */
+  readonly firstName: string | null;
+  /**
+   * Last name
+   */
+  readonly lastName: string | null;
+  /**
+   * Phone
+   */
+  readonly phone: string | null;
+  /**
+   * Email
+   */
+  readonly email: string | null;
+  /**
+   * Country code
+   */
+  readonly countryCode: string | null;
+  /**
+   * Country name
+   */
+  readonly countryName: string | null;
+  /**
+   * Postal code
+   */
+  readonly postalCode: string;
+  /**
+   * Region name
+   */
+  readonly regionName: string | null;
+  /**
+   * City
+   */
+  readonly city: string | null;
 }
 
 export interface updateMemberAddresses_updateMemberAddresses {

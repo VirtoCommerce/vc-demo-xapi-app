@@ -36,7 +36,8 @@ export const setAddress = createAction(
 );
 
 export const updateAddress = createAction(
-  '[Addresses] Update Address'
+  '[Addresses] Update Address',
+  props<{ id: string }>()
 );
 
 export const updateAddressSuccess = createAction(

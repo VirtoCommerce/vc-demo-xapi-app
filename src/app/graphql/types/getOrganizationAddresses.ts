@@ -10,6 +10,10 @@
 export interface getOrganizationAddresses_organization_addresses_items {
   readonly __typename: "AddressType";
   /**
+   * Id
+   */
+  readonly id: string | null;
+  /**
    * First name
    */
   readonly firstName: string | null;
@@ -33,6 +37,10 @@ export interface getOrganizationAddresses_organization_addresses_items {
    * Country code
    */
   readonly countryCode: string | null;
+  /**
+   * Country name
+   */
+  readonly countryName: string | null;
   /**
    * Postal code
    */

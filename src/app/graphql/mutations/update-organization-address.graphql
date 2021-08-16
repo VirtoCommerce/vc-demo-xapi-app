@@ -4,6 +4,16 @@ mutation updateMemberAddresses($command: InputUpdateMemberAddressType!) {
     addresses {
       key
       line1
+      firstName
+      lastName
+      line1
+      phone
+      email
+      countryCode
+      countryName
+      postalCode
+      regionName
+      city
     }
   }
 }

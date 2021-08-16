@@ -14,7 +14,7 @@
             </dynamic-ng-bootstrap-form>
             <div class="col mt-4">
               <button class="btn btn-outline-dark px-6" (click)="resetForm()">Cancel</button>
-              <button class="btn btn-primary border border-primary border-2 px-6 ms-3" [disabled]="formGroup.invalid">Save</button>
+              <button class="btn btn-primary border border-primary border-2 px-6 ms-3" [disabled]="formGroup.invalid" (click)="submit()">Save</button>
             </div>
           </form>
         </section>

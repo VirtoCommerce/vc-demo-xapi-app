@@ -14,6 +14,7 @@ import { selectCountryOptions }
   from 'src/app/modules/registration/components/registration-company-address/countries.selector';
 import { getCountries } from 'src/app/store/countries/countries.actions';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
+import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { setAddress, updateAddress } from '../../store/addresses.actions';
 import { selectSelectedAddress } from '../../store/addresses.selectors';
 import { ADDRESS_EDIT_FORM_LAYOUT } from './address-edit-form.layout';
@@ -39,6 +40,10 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
   formLayout = ADDRESS_EDIT_FORM_LAYOUT;
 
   formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+
+  curentCustomerOrganization$ = this.store.select(selectCurrentCustomerOrganization);
+
+  curentCustomerOrganizationId!: string;
 
   countries?: Country[] | null;
 
@@ -78,6 +83,9 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
         patchFormModel(this.formInputs, state);
         this.formService.detectChanges(this.formComponent);
       });
+
+    this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber))
+      .subscribe(value => this.curentCustomerOrganizationId = value?.id);
   }
 
   resetForm(): void {
@@ -96,7 +104,7 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
   }
 
   submit(): void {
-    this.store.dispatch(updateAddress());
+    this.store.dispatch(updateAddress({ id: this.curentCustomerOrganizationId }));
   }
 
   ngOnDestroy(): void {

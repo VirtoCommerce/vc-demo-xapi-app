@@ -8,6 +8,7 @@ export interface Address {
   email?: string | null,
   regionName?: string | null,
   countryCode?: string | null,
+  countryName?: string | null,
   postalCode?: string | null,
   city?: string | null,
 }
