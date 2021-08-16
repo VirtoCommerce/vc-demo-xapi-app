@@ -28,3 +28,8 @@ export const setEditAddress = createAction(
   '[Addresses] Set Edit Address',
   props<{ address: Address }>()
 );
+
+export const setAddress = createAction(
+  '[Companies] Set Address',
+  props<{ data: Address }>()
+);

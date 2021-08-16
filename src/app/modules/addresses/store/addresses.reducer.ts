@@ -35,6 +35,12 @@ export const reducer = createReducer(
       editAddress: action.address,
     };
   }),
+  on(AddressesActions.setAddress, (state, action): State => ({
+    ...state,
+    editAddress: {
+      ...action.data,
+    },
+  })),
   on(AddressesActions.getAddressessSuccess, (state, action): State => {
     return {
       ...state,
