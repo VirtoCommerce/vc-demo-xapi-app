@@ -217,6 +217,16 @@ export interface InputUpdateMemberDynamicPropertiesType {
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
 }
 
+export interface InputUpdateOrganizationType {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly memberType?: string | null;
+  readonly addresses?: ReadonlyArray<(InputMemberAddressType | null)> | null;
+  readonly phones?: ReadonlyArray<(string | null)> | null;
+  readonly emails?: ReadonlyArray<(string | null)> | null;
+  readonly groups?: ReadonlyArray<(string | null)> | null;
+}
+
 export interface InputValidateCouponType {
   readonly cartId?: string | null;
   readonly storeId: string;

@@ -13,6 +13,7 @@ import * as fromSectors from './sectors/sectors.reducer';
 import * as fromLogin from './login/login.reducer';
 import * as fromCurrentCustomer from './current-customer/current-customer.reducer';
 import * as fromAddresses from '../modules/addresses/store/addresses.reducer';
+import * as fromCompanies from '../modules/companies/store/companies.reducer';
 
 
 export interface State {
@@ -23,6 +24,8 @@ export interface State {
 [fromLogin.loginFeatureKey]: fromLogin.State;
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.State;
 [fromAddresses.addressesFeatureKey]: fromAddresses.State;
+[fromCompanies.companiesFeatureKey]: fromCompanies.State;
+
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -33,6 +36,7 @@ export const reducers: ActionReducerMap<State> = {
 [fromLogin.loginFeatureKey]: fromLogin.reducer,
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.reducer,
 [fromAddresses.addressesFeatureKey]: fromAddresses.reducer,
+[fromCompanies.companiesFeatureKey]: fromCompanies.reducer,
 };
 
 
