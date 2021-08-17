@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
-import { getAddressess, setEditAddress, setSelectedAddress } from './store/addresses.actions';
+import { getAddressess, setSelectedAddress } from './store/addresses.actions';
 import { selectOrganizationAddresses } from './store/addresses.selectors';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { sortAscending, sortDescending, pageInfo } from './addresses.constants';
@@ -67,7 +67,6 @@ export class AddressesComponent implements OnInit, OnDestroy {
 
   editAddress(address: Address): void {
     this.store.dispatch(setSelectedAddress({ address }));
-    this.store.dispatch(setEditAddress({ address }));
     this.router.navigate([
       '/addresses',
       address.id,

@@ -25,11 +25,6 @@ export const setSelectedAddress = createAction(
   props<{ address: Address }>()
 );
 
-export const setEditAddress = createAction(
-  '[Addresses] Set Edit Address',
-  props<{ address: Address }>()
-);
-
 export const setAddress = createAction(
   '[Addresses] Set Address',
   props<{ data: Address }>()

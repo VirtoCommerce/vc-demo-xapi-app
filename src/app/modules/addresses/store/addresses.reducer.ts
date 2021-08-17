@@ -27,11 +27,6 @@ export const reducer = createReducer(
     return {
       ...state,
       selectedAddress: action.address,
-    };
-  }),
-  on(AddressesActions.setEditAddress, (state, action): State => {
-    return {
-      ...state,
       editAddress: action.address,
     };
   }),
