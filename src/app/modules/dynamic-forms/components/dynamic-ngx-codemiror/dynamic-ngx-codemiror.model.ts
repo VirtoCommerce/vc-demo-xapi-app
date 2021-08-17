@@ -1,5 +1,5 @@
 import { DynamicFormControlLayout,
-  DynamicFormControlModel, DynamicFormControlModelConfig, DynamicFormValueControlModel, DynamicFormValueControlModelConfig, serializable } from "@ng-dynamic-forms/core"
+  DynamicFormValueControlModel, DynamicFormValueControlModelConfig, serializable } from "@ng-dynamic-forms/core"
 
 export const DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR = 'CODEMIROR';
 
