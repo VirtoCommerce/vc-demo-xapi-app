@@ -14,6 +14,8 @@ import { changeCartItemQuantity_changeCartItemQuantity as changeCartItemQuantity
 import { removeCartItem_removeCartItem as removeCartItemResult } from 'src/app/graphql/types/removeCartItem';
 import { addOrUpdateCartShipment_addOrUpdateCartShipment_shipments as shipmentResult }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
+import { addOrUpdateCartPayment_addOrUpdateCartPayment_payments  as paymentResult }
+  from 'src/app/graphql/types/addOrUpdateCartPayment';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -94,9 +96,24 @@ export const addOrUpdateShippingAddressSuccess = createAction(
   props<{ shipments?: ReadonlyArray<(shipmentResult | null)> | null }>()
 );
 
+export const addOrUpdateBillingAddress = createAction(
+  '[Cart] Add Or Update Cart Billing Address',
+  props<{ paymentId?: string | null, address: CartAddress | null }>()
+);
+
+export const addOrUpdateBillingAddressSuccess = createAction(
+  '[Cart] Add Or Update Cart Billing Address Success',
+  props<{ payments?: ReadonlyArray<(paymentResult | null)> | null }>()
+);
+
 export const updateStoredCart = createAction(
   '[Cart] Update Cart In Store',
   props<{ data: PartialDeep<Cart> }>()
+);
+
+export const setBillingAsShipping = createAction(
+  '[Cart] Update Billing As Shipping In Store',
+  props<{ value: boolean }>()
 );
 
 export const setCartUserId = createAction(

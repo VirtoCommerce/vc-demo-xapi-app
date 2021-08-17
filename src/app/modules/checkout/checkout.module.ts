@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckoutComponent } from './checkout.component';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CartCommentComponent } from './components/cart-comment/cart-comment.component';
@@ -10,8 +12,7 @@ import { CartCouponComponent } from './components/cart-coupon/cart-coupon.compon
 import { LineItemsComponent } from './components/line-items/line-items.component';
 import { ShippingAddressComponent } from './components/shipping-address/shipping-address.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
-import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BillingAddressComponent } from './components/billing-address/billing-address.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CartCouponComponent,
     LineItemsComponent,
     ShippingAddressComponent,
+    BillingAddressComponent,
     AddressFormComponent,
   ],
   imports: [

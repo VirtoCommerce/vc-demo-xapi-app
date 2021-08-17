@@ -21,39 +21,11 @@
     }
   }
 
-.model-header-text {
-    font-family: $font-family-condensed;
-    color: $white;
-}
-
-.model-header-text-2 {
-    font-family: $font-family-condensed;
-    font-size: 22px;
-}
-
-.modal-header-bg {
-    background: #3F3F3F;
-}
-
-.push {
+.push-right {
     margin-left: auto;
 }
 
-.btn-close-custom {
-    color: $white;
-    background: transparent;
-    border: 0;
 
-    &:hover {
-        color: $btn-close-color;
-        text-decoration: none;
-        opacity: $btn-close-hover-opacity;
-      }
-    
-      &:focus {
-        outline: 0;
-    }
-}
 
 .is-invalid {
     border-color: $text-danger-alert !important;

@@ -7,6 +7,14 @@
   .magic-offset-1 {
     margin-left: -82px;
   }
+
+  .modal-custom-size { 
+    max-width: 1040px; 
+  }
+
+  .modal-position {
+    margin-top: 5rem !important; 
+  }
 }
 
 .magic-offset-2 {
@@ -65,4 +73,40 @@
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+
+.media-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.model-header-text {
+  font-family: $font-family-condensed;
+  color: $white;
+}
+
+.model-header-text-2 {
+  font-family: $font-family-condensed;
+  font-size: 22px;
+}
+
+.modal-header-bg {
+  background: #3F3F3F;
+}
+
+.btn-close-custom {
+  color: $white;
+  background: transparent;
+  border: 0;
+
+  &:hover {
+      color: $btn-close-color;
+      text-decoration: none;
+      opacity: $btn-close-hover-opacity;
+    }
+  
+    &:focus {
+      outline: 0;
+  }
 }

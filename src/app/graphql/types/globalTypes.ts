@@ -29,6 +29,17 @@ export interface InputAddItemsType {
   readonly cartItems: ReadonlyArray<(InputNewCartItemType | null)>;
 }
 
+export interface InputAddOrUpdateCartPaymentType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly payment: InputPaymentType;
+}
+
 export interface InputAddOrUpdateCartShipmentType {
   readonly cartId?: string | null;
   readonly storeId: string;
@@ -108,6 +119,16 @@ export interface InputChangeCommentType {
 }
 
 export interface InputClearCartType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+}
+
+export interface InputClearPaymentsType {
   readonly cartId?: string | null;
   readonly storeId: string;
   readonly cartName?: string | null;
@@ -208,6 +229,16 @@ export interface InputMemberAddressType {
 export interface InputNewCartItemType {
   readonly productId: string;
   readonly quantity?: number | null;
+}
+
+export interface InputPaymentType {
+  readonly id?: string | null;
+  readonly outerId?: string | null;
+  readonly paymentGatewayCode?: string | null;
+  readonly billingAddress?: InputAddressType | null;
+  readonly currency?: string | null;
+  readonly price?: any | null;
+  readonly amount?: any | null;
 }
 
 export interface InputRemoveCouponType {

@@ -1,0 +1,6 @@
+mutation clearPayments ($command: InputClearPaymentsType!) {
+    clearPayments (command: $command) {
+        id
+        customerId
+    }
+}
