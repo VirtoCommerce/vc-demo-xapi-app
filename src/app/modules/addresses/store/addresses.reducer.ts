@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { updateMemberAddresses, updateMemberAddresses_updateMemberAddresses, updateMemberAddresses_updateMemberAddresses_addresses } from 'src/app/graphql/types/updateMemberAddresses';
 import { Address } from 'src/app/models/address.model';
 import * as AddressesActions from './addresses.actions';
 
@@ -25,15 +24,17 @@ export const reducer = createReducer(
 
   on(AddressesActions.getAddressess, (state): State => state),
   on(AddressesActions.setSelectedAddress, (state, action): State => {
+    const { __typename, ...selectedAddress } = action.address;
     return {
       ...state,
-      selectedAddress: action.address,
+      selectedAddress: selectedAddress,
     };
   }),
   on(AddressesActions.setEditAddress, (state, action): State => {
+    const { __typename, ...editAddress } = action.address;
     return {
       ...state,
-      editAddress: action.address,
+      editAddress: editAddress,
     };
   }),
   on(AddressesActions.setAddress, (state, action): State => ({
@@ -48,12 +49,17 @@ export const reducer = createReducer(
     const addresses = action.data?.updateMemberAddresses?.addresses?.map(address => ({
       ...address,
     }));
+    const changedAddress = addresses?.find(address => address.key === state.selectedAddress?.id);
+    const changedAddressKey = changedAddress?.key;
+    delete changedAddress?.key;
+    const newAddress = {
+      ...changedAddress,
+      id: changedAddressKey,
+    };
     return {
       ...state,
-      selectedAddress: {
-        id: addresses![0].key,
-        ...addresses,
-      },
+      editAddress: { ...newAddress },
+      selectedAddress: { ...newAddress },
     };
   }),
   on(AddressesActions.getAddressessSuccess, (state, action): State => {

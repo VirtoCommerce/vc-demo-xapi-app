@@ -79,7 +79,7 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
       .select(selectSelectedAddress)
       .pipe(filter(nonNull), takeUntil(this.unsubscriber))
       .subscribe(state => {
-        console.log(state);
+        console.log('address-edit', state);
         patchFormModel(this.formInputs, state);
         this.formService.detectChanges(this.formComponent);
       });
@@ -91,7 +91,12 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
   resetForm(): void {
     this.router.navigate([
       '/addresses',
-    ]).catch(error => console.log(error));
+    ]).then(() => {
+      window.location.reload();
+    })
+      .catch(error => {
+        throw new Error(error);
+      });
   }
 
   onChange(event: DynamicFormControlEvent): void {

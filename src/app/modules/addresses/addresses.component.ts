@@ -71,7 +71,9 @@ export class AddressesComponent implements OnInit, OnDestroy {
     this.router.navigate([
       '/addresses',
       address.id,
-    ]).catch(error => console.log(error));
+    ]).catch(error => {
+      throw new Error(error);
+    });
   }
 
   ngOnDestroy(): void {
