@@ -42,18 +42,12 @@ export const reducer = createReducer(
     const addresses = action.data?.updateMemberAddresses?.addresses?.map(address => ({
       ...address,
     }));
-    const changedAddress = addresses?.find(address => address.key === state.selectedAddress?.id);
-    const changedAddressKey = changedAddress?.key;
-    delete changedAddress?.key;
+    const changedAddress = addresses?.find(address => address.id === state.selectedAddress?.id);
     delete changedAddress?.__typename;
-    const newAddress = {
-      ...changedAddress,
-      id: changedAddressKey,
-    };
     return {
       ...state,
-      editAddress: { ...newAddress },
-      selectedAddress: { ...newAddress },
+      editAddress: { ...changedAddress },
+      selectedAddress: { ...changedAddress },
     };
   }),
   on(AddressesActions.getAddressessSuccess, (state, action): State => {
