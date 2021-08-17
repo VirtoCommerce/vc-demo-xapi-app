@@ -18,10 +18,12 @@ import {
 } from './components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter';
+import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.component';
 
 @NgModule({
   declarations: [
     DynamicNGBootstrapDatetimePickerComponent,
+    DynamicNgxCodemirorComponent,
   ],
   imports: [
     CommonModule,
