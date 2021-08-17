@@ -1,4 +1,4 @@
-import { requiredMessage } from '../../../validation/constants/validation-messages.constants';
+import { requiredMessage, emailIncorrectMessage } from '../../../validation/constants/validation-messages.constants';
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 
 export const ADDRESS_EDIT_FORM_INPUTS = {
@@ -55,6 +55,12 @@ export const ADDRESS_EDIT_FORM_INPUTS = {
   email: new DynamicInputModel({
     id: 'email',
     label: 'Work email',
+    validators: {
+      email: null,
+    },
+    errorMessages: {
+      email: emailIncorrectMessage,
+    },
   }),
   line1: new DynamicInputModel({
     id: 'line1',
