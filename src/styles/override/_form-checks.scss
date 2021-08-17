@@ -3,5 +3,9 @@
 
   .form-check-input {
     height: $form-switch-height;
+
+    &:not(:checked) {
+      background-color: $form-switch-bg;
+    }
   }
 }
