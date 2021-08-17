@@ -27,5 +27,22 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
           code
           isAppliedSuccessfully
         }
+        shipments {
+          id
+          deliveryAddress {
+            addressType
+            firstName
+            lastName
+            email
+            phone
+            countryCode
+            countryName
+            regionId
+            city
+            postalCode
+            line1
+            line2
+          }
+        }
     }
 }

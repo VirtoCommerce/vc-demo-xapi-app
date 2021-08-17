@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
 import { PartialDeep } from 'type-fest';
 
-import { Cart } from 'src/app/models/cart.model';
+import { Cart, CartAddress } from 'src/app/models/cart.model';
 import { cart } from 'src/app/graphql/types/cart';
 
 import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperties as dynamicPropertiesUpdateResult }
@@ -12,6 +12,8 @@ import { removeCartCoupon_removeCoupon as removeCouponResult } from 'src/app/gra
 import { changeCartItemQuantity_changeCartItemQuantity as changeCartItemQuantityResult }
   from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem_removeCartItem as removeCartItemResult } from 'src/app/graphql/types/removeCartItem';
+import { addOrUpdateCartShipment_addOrUpdateCartShipment_shipments as shipmentResult }
+  from 'src/app/graphql/types/addOrUpdateCartShipment';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -80,6 +82,16 @@ export const removeCartCoupon = createAction(
 export const removeCartCouponSuccess = createAction(
   '[Cart] Remove Cart Coupon Success',
   props<{ data: removeCouponResult | null }>()
+);
+
+export const addOrUpdateShippingAddress = createAction(
+  '[Cart] Add Or Update Cart Shipping Address',
+  props<{ shipmentId?: string | null, address: CartAddress | null }>()
+);
+
+export const addOrUpdateShippingAddressSuccess = createAction(
+  '[Cart] Add Or Update Cart Shipping Address Success',
+  props<{ shipments?: ReadonlyArray<(shipmentResult | null)> | null }>()
 );
 
 export const updateStoredCart = createAction(

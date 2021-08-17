@@ -1,0 +1,19 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+
+@include media-breakpoint-up(xl) {
+    .modal-custom-size { 
+      max-width: 1040px; 
+    }
+
+    .modal-position {
+      margin-top: 5rem !important; 
+    }
+  }
+  
+.media-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
