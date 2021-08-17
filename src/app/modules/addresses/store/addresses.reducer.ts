@@ -22,7 +22,6 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(AddressesActions.getAddressess, (state): State => state),
   on(AddressesActions.setSelectedAddress, (state, action): State => {
     return {
       ...state,
@@ -50,6 +49,7 @@ export const reducer = createReducer(
       selectedAddress: { ...changedAddress },
     };
   }),
+  on(AddressesActions.getAddressess, (state): State => state),
   on(AddressesActions.getAddressessSuccess, (state, action): State => {
     const addresses = action.data.organization?.addresses?.items?.map(item => ({
       ...item,
