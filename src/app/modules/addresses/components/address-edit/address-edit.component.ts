@@ -9,7 +9,6 @@ import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { Address } from 'src/app/models/address.model';
 import { Country } from 'src/app/models/country.model';
-import { selectSelectedCompany } from 'src/app/modules/companies/store/companies.selectors';
 import { selectCountryOptions }
   from 'src/app/modules/registration/components/registration-company-address/countries.selector';
 import { getCountries } from 'src/app/store/countries/countries.actions';
@@ -49,8 +48,6 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
 
   unsubscriber = new Subject();
 
-  selectedCompany$ = this.store.select(selectSelectedCompany);
-
   constructor(
     private readonly formService: DynamicFormService,
     private readonly store: Store,
@@ -79,7 +76,6 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
       .select(selectSelectedAddress)
       .pipe(filter(nonNull), takeUntil(this.unsubscriber))
       .subscribe(state => {
-        console.log('address-edit', state);
         patchFormModel(this.formInputs, state);
         this.formService.detectChanges(this.formComponent);
       });

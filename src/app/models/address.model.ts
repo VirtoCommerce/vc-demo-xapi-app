@@ -1,5 +1,4 @@
 export interface Address {
-  __typename?: string | null,
   id?: string | null,
   firstName?: string | null,
   lastName?: string | null,

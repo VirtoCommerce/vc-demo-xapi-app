@@ -24,17 +24,15 @@ export const reducer = createReducer(
 
   on(AddressesActions.getAddressess, (state): State => state),
   on(AddressesActions.setSelectedAddress, (state, action): State => {
-    const { __typename, ...selectedAddress } = action.address;
     return {
       ...state,
-      selectedAddress: selectedAddress,
+      selectedAddress: action.address,
     };
   }),
   on(AddressesActions.setEditAddress, (state, action): State => {
-    const { __typename, ...editAddress } = action.address;
     return {
       ...state,
-      editAddress: editAddress,
+      editAddress: action.address,
     };
   }),
   on(AddressesActions.setAddress, (state, action): State => ({
@@ -52,6 +50,7 @@ export const reducer = createReducer(
     const changedAddress = addresses?.find(address => address.key === state.selectedAddress?.id);
     const changedAddressKey = changedAddress?.key;
     delete changedAddress?.key;
+    delete changedAddress?.__typename;
     const newAddress = {
       ...changedAddress,
       id: changedAddressKey,
@@ -63,12 +62,14 @@ export const reducer = createReducer(
     };
   }),
   on(AddressesActions.getAddressessSuccess, (state, action): State => {
+    const addresses = action.data.organization?.addresses?.items?.map(item => ({
+      ...item,
+    }));
+    addresses?.forEach(address => delete address.__typename);
     return {
       ...state,
       addresses: {
-        items: action.data.organization?.addresses?.items?.map(address => ({
-          ...address,
-        })),
+        items: addresses,
         totalCount: action.data.organization?.addresses?.totalCount,
       },
     };
