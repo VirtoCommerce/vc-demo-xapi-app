@@ -109,6 +109,10 @@ function mapToCompany(
         value => /^true$/i.test(value)
       ),
       shortTextDictionary: getIdByValue(organization, COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary) as string | null,
+      image: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.image)?.value as string | null,
+      htmlUsual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlUsual)?.value as string | null,
     };
 }
 
