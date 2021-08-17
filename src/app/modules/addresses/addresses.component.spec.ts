@@ -5,6 +5,7 @@ import { AddressesComponent } from './addresses.component';
 import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
   from 'src/app/store/current-customer/current-customer.reducer';
 import { addressesFeatureKey, initialState as AddressesInitialState } from './store/addresses.reducer';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddressesComponent', () => {
   let component: AddressesComponent;
@@ -19,6 +20,9 @@ describe('AddressesComponent', () => {
             [currentCustomerFeatureKey]: currentCustomerInitialState,
           },
         }),
+      ],
+      imports: [
+        RouterTestingModule,
       ],
       declarations: [
         AddressesComponent,
