@@ -6,5 +6,6 @@ export interface Company {
   integerUsual: string | null,
   decimalNumberUsual: number | null,
   date: string | null,
-  boolean: boolean | null
+  boolean: boolean | null,
+  dictionary?: { [key: string]: string }
 }

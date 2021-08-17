@@ -1,17 +1,17 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 
-export const COMBINED_PROPERTIES_INPUTS = {
+export const DICTIONARY_INPUTS = {
   sector: new DynamicSelectModel<string|undefined>({
     id: 'sector',
-    label: 'Sector',
+    label: 'Sector Short text ● Dictionary',
   }),
 };
 
-export const COMBINED_PROPERTIES_MODEL: DynamicFormModel = [
+export const DICTIONARY_MODEL: DynamicFormModel = [
   new DynamicFormGroupModel({
     id: 'combinedProperties',
     group: [
-      ...Object.values(COMBINED_PROPERTIES_INPUTS),
+      ...Object.values(DICTIONARY_INPUTS),
     ],
   }),
 ];

@@ -12,7 +12,7 @@ import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstr
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
-import { CombinedProperptiesComponent } from './components/combined-properpties/combined-properpties.component';
+import { DictionaryProperptiesComponent } from './components/dictionary/dictionary.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { CombinedProperptiesComponent } from './components/combined-properpties/
     CompanyEditComponent,
     UsualPropertiesComponent,
     CompanyPropertiesComponent,
-    CombinedProperptiesComponent,
+    DictionaryProperptiesComponent,
   ],
   imports: [
     CommonModule,

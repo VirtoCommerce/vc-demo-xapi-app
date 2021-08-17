@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CombinedProperptiesComponent } from './combined-properpties.component';
+import { DictionaryProperptiesComponent } from './dictionary.component';
 
 describe('ShorttextDictionaryComponent', () => {
-  let component: CombinedProperptiesComponent;
-  let fixture: ComponentFixture<CombinedProperptiesComponent>;
+  let component: DictionaryProperptiesComponent;
+  let fixture: ComponentFixture<DictionaryProperptiesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        CombinedProperptiesComponent,
+        DictionaryProperptiesComponent,
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CombinedProperptiesComponent);
+    fixture = TestBed.createComponent(DictionaryProperptiesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
