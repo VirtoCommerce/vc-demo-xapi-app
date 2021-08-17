@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
@@ -26,7 +26,7 @@ import { ADDRESS_EDIT_FORM_INPUTS, ADDRESS_EDIT_FORM_MODEL } from './address-edi
     './address-edit.component.scss',
   ],
 })
-export class AddressEditComponent implements AfterViewInit, OnDestroy {
+export class AddressEditComponent implements AfterViewInit, AfterViewChecked, OnDestroy {
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
   })
@@ -51,7 +51,8 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
   constructor(
     private readonly formService: DynamicFormService,
     private readonly store: Store,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
@@ -82,6 +83,10 @@ export class AddressEditComponent implements AfterViewInit, OnDestroy {
 
     this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber))
       .subscribe(value => this.curentCustomerOrganizationId = value?.id);
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   resetForm(): void {
