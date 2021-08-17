@@ -21,6 +21,9 @@
             <vc-dictionary [company]="editedCompany"
                            (propertyChange)="onChange($event)"
             ></vc-dictionary>
+
+              <ngx-codemirror [(ngModel)]="content" [options]="{ lineNumbers: true, theme: 'default', mode: 'htmlmixed'  }"></ngx-codemirror>
+
             <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()">Save</button>
           </div>
         </section>
