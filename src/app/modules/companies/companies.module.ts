@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 import { CompaniesRoutingModule } from './companies-routing.module';
 import { CompaniesComponent } from './companies.component';
@@ -13,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 
+
 @NgModule({
   declarations: [
     CompaniesComponent,
@@ -23,6 +26,8 @@ import { CompanyPropertiesComponent } from './components/company-properties/comp
   imports: [
     CommonModule,
     CompaniesRoutingModule,
+    FormsModule,
+    CodemirrorModule,
     ReactiveFormsModule,
     DynamicFormsNGBootstrapUIModule,
     StoreModule.forFeature(fromCompanies.companiesFeatureKey, fromCompanies.reducer),
