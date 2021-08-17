@@ -1,3 +1,4 @@
+import { DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -18,6 +19,7 @@ import {
 } from './components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.component';
 
 @NgModule({
@@ -34,6 +36,7 @@ import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror
     ReactiveFormsModule,
     DynamicFormsCoreModule,
     FontAwesomeModule,
+    CodemirrorModule,
   ],
   providers: [
     NgbDateNativeUTCAdapter,
@@ -44,6 +47,10 @@ import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror
         if (model.type === DYNAMIC_FORM_CONTROL_TYPE_DATETIME_PICKER) {
           return DynamicNGBootstrapDatetimePickerComponent;
         }
+        else if (model.type === DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR) {
+          return DynamicNgxCodemirorComponent;
+        }
+
         return null;
       },
     },

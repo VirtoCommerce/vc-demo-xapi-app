@@ -1,1 +1,12 @@
-<p>dynamic-ngx-codemiror works!</p>
+<ng-container [formGroup]="group">
+
+  <ngx-codemirror [id]="id"
+  [name]="model.name"
+  class="form-control"
+  [ngClass]="getClass('element', 'control')"
+  [formControlName]="model.id"
+  [options]="{ lineNumbers: true, theme: 'default', mode: 'htmlmixed'  }"
+  ></ngx-codemirror>
+
+
+</ng-container>

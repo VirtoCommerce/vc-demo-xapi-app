@@ -1,3 +1,4 @@
+import { DynamicNgxCodemirorModel } from './../../../dynamic-forms/components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import {
   DynamicInputModel,
@@ -57,7 +58,7 @@ export const USUAL_PROPERTIES_INPUTS = {
     label: 'Image',
     inputType: 'file',
   }),
-  htmlUsual: new DynamicTextAreaModel({
+  htmlUsual: new DynamicNgxCodemirorModel({
     id: 'htmlUsual',
     label: 'HTML ● Usual',
   }),
