@@ -107,11 +107,22 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
   }
 
   submit(): void {
-    this.store.dispatch(updateAddress({ id: this.curentCustomerOrganizationId }));
+    if (this.formInputs.countryCode.value) {
+      const countryName = this.getCountryFullName(this.formInputs.countryCode.value);
+      this.store.dispatch(updateAddress({
+        id: this.curentCustomerOrganizationId,
+        countryName,
+      }));
+    }
   }
 
   ngOnDestroy(): void {
     this.unsubscriber.next();
     this.unsubscriber.complete();
+  }
+
+  private getCountryFullName(countryCode?: string | (string | undefined)[]): string {
+    const countryName = this.countries?.find(country => country.id === countryCode)?.name;
+    return countryName!;
   }
 }

@@ -32,7 +32,7 @@ export const setAddress = createAction(
 
 export const updateAddress = createAction(
   '[Addresses] Update Address',
-  props<{ id: string }>()
+  props<{ id: string, countryName: string }>()
 );
 
 export const updateAddressSuccess = createAction(
