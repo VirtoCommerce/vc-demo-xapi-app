@@ -24,12 +24,20 @@ import {
 } from 'src/app/graphql/types/updateCartItemDynamicProperties';
 import { clearShipments, clearShipmentsVariables } from 'src/app/graphql/types/clearShipments';
 import { clearPayments, clearPaymentsVariables } from '../graphql/types/clearPayments';
+import { cartVariables } from '../graphql/types/cart';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class CheckoutService implements OnDestroy {
+  baseCartVariables: cartVariables = {
+    storeId: 'Electronics',
+    cartName: 'default',
+    currencyCode: 'USD',
+    cultureName: 'en-US',
+  }
+
   unsubscriber: Subject<boolean> = new Subject<boolean>();
 
   constructor(private readonly apollo: Apollo, private readonly store: Store) { }
@@ -101,11 +109,8 @@ export class CheckoutService implements OnDestroy {
       mutation: clearPaymentsMutation,
       variables: {
         command: {
+          ...this.baseCartVariables,
           userId: userId ?? 'Anonymous',
-          storeId: 'Electronics',
-          cartName: 'default',
-          currencyCode: 'USD',
-          cultureName: 'en-US',
         },
       },
     });
@@ -116,11 +121,8 @@ export class CheckoutService implements OnDestroy {
       mutation: clearShipmentsMutation,
       variables: {
         command: {
+          ...this.baseCartVariables,
           userId: userId ?? 'Anonymous',
-          storeId: 'Electronics',
-          cartName: 'default',
-          currencyCode: 'USD',
-          cultureName: 'en-US',
         },
       },
     });
@@ -131,11 +133,8 @@ export class CheckoutService implements OnDestroy {
       mutation: clearCartMutation,
       variables: {
         command: {
+          ...this.baseCartVariables,
           userId: userId ?? 'Anonymous',
-          storeId: 'Electronics',
-          cartName: 'default',
-          currencyCode: 'USD',
-          cultureName: 'en-US',
         },
       },
     });
