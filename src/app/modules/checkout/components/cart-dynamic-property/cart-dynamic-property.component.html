@@ -4,7 +4,7 @@
         <input class="form-control me-sm-2" id="purchaseNumberForm" formControlName="purchaseNumberForm" type="text"
             placeholder="Enter purchase order number" [(ngModel)]="purchaseNumber" maxlength="512">
         <button class="btn btn-primary my-sm-0 check" *ngIf="!purchaseOrderNumberExist || purchaseOrderNumberChanged"
-            [disabled]="!purchaseNumberForm.dirty" (click)="updatePurchaseNumber(purchaseNumber)"></button>
+            [disabled]="!purchaseNumberForm.dirty || purchaseNumber===''" (click)="updatePurchaseNumber(purchaseNumber)"></button>
         <button class="btn btn-danger my-sm-0 cross" *ngIf="purchaseOrderNumberExist && !purchaseOrderNumberChanged"
             (click)="clearPurchaseNumber()"></button>
     </div>
