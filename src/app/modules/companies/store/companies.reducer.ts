@@ -8,6 +8,7 @@ import {
   updateMemberDynamicProperties_updateMemberDynamicProperties,
 } from 'src/app/graphql/types/updateMemberDynamicProperties';
 import { nullable } from 'src/app/helpers/nullable';
+import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
 
 export const companiesFeatureKey = 'companies';
 
@@ -74,21 +75,24 @@ function mapToCompany(
       id: organization.id,
       name: organization.name,
       shortTextUsual: organization.dynamicProperties
-        .find(x => x?.name === 'Short text | Usual')?.value as string | null,
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextUsual)?.value as string | null,
       longTextUsual: organization.dynamicProperties
-        .find(x => x?.name === 'Long text | Usual')?.value as string | null,
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.longTextUsual)?.value as string | null,
       integerUsual: nullable(
-        organization.dynamicProperties.find(x => x?.name === 'Integer | Usual')?.value as string | null,
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.integerUsual)?.value as string | null,
         value => Number.parseInt(value)
       ),
       decimalNumberUsual: nullable(
-        organization.dynamicProperties.find(x => x?.name === 'Decimal number | Usual')?.value as string | null,
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.decimalNumberUsual)?.value as string | null,
         value => Number.parseFloat(value)
       ),
       date: organization.dynamicProperties
-        .find(x => x?.name === 'Date')?.value as string | null,
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.date)?.value as string | null,
       boolean: nullable(
-        organization.dynamicProperties.find(x => x?.name === 'Boolean')?.value as string | null,
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
         value => /$true^/i.test(value)
       ),
     };

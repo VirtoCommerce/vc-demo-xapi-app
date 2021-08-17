@@ -20,6 +20,7 @@ import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
 import { Company } from 'src/app/models/company.model';
 import { nullable } from 'src/app/helpers/nullable';
+import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
 
 @Injectable()
 export class CompaniesEffects {
@@ -95,27 +96,27 @@ export class CompaniesEffects {
           memberId: company.id,
           dynamicProperties: [
             {
-              name: 'Short text | Usual',
+              name: COMPANY_DYNAMIC_PROPERTIES.shortTextUsual,
               value: company.shortTextUsual,
             },
             {
-              name: 'Long text | Usual',
+              name: COMPANY_DYNAMIC_PROPERTIES.longTextUsual,
               value: company.longTextUsual,
             },
             {
-              name: 'Integer | Usual',
+              name: COMPANY_DYNAMIC_PROPERTIES.integerUsual,
               value: company.integerUsual?.toString(),
             },
             {
-              name: 'Decimal number | Usual',
+              name: COMPANY_DYNAMIC_PROPERTIES.decimalNumberUsual,
               value: company.decimalNumberUsual?.toString(),
             },
             {
-              name: 'Date',
+              name: COMPANY_DYNAMIC_PROPERTIES.date,
               value: nullable(company.date, value => new Date(value))?.toUTCString(),
             },
             {
-              name: 'Boolean',
+              name: COMPANY_DYNAMIC_PROPERTIES.boolean,
               value: company.boolean?.toString(),
             },
           ],
