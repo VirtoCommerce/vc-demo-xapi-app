@@ -1,8 +1,8 @@
 import { selectCurrentCustomerOrganization } from './../../../../store/current-customer/current-customer.selectors';
 import { Company } from '../../../../models/company.model';
-import { selectSelectedCompany } from './../../store/companies.selectors';
+import { selectEditedCompany, selectSelectedCompany } from './../../store/companies.selectors';
 import { getCompany, setCompany, updateCompany } from './../../store/companies.actions';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -22,6 +22,8 @@ import { nonNull } from 'src/app/helpers/nonNull';
 export class CompanyEditComponent implements OnInit, OnDestroy {
   selectedCompany$ = this.store.select(selectSelectedCompany);
 
+  editedCompany$ = this.store.select(selectEditedCompany);
+
   isValidForm = {
     properties: false,
     usualProperties: false,
@@ -34,6 +36,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   unsubscriber = new Subject();
 
   constructor(
+    private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly store: Store,
     private readonly route: ActivatedRoute
   ) {  }
@@ -58,6 +61,10 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         data: company,
       }));
     }
+  }
+
+  onValidChange(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   submit(): void {

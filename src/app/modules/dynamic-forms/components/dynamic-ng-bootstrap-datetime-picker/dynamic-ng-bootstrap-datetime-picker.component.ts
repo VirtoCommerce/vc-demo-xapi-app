@@ -110,7 +110,7 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
         this.time.hour,
         this.time.minute,
         this.time.second
-      ), 'medium', 'en-US');
+      ), 'short', 'en-US');
       this.change.emit();
     }
   }

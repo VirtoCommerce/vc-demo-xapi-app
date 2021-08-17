@@ -78,11 +78,8 @@ function mapToCompany(
         .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextUsual)?.value as string | null,
       longTextUsual: organization.dynamicProperties
         .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.longTextUsual)?.value as string | null,
-      integerUsual: nullable(
-        organization.dynamicProperties
-          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.integerUsual)?.value as string | null,
-        value => Number.parseInt(value)
-      ),
+      integerUsual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.integerUsual)?.value as string | null,
       decimalNumberUsual: nullable(
         organization.dynamicProperties
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.decimalNumberUsual)?.value as string | null,

@@ -1,13 +1,13 @@
 import {
-  AfterViewChecked,
-  AfterViewInit,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
+  OnChanges,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DynamicFormService, DynamicFormControlEvent } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
@@ -22,7 +22,7 @@ import { COMPANY_PROPERTIES_INPUTS, COMPANY_PROPERTIES_MODEL } from './company-p
     './company-properties.component.scss',
   ],
 })
-export class CompanyPropertiesComponent implements AfterViewInit, AfterViewChecked {
+export class CompanyPropertiesComponent implements OnInit, OnChanges {
   @Input()
   company!: PartialDeep<Company>
 
@@ -41,22 +41,20 @@ export class CompanyPropertiesComponent implements AfterViewInit, AfterViewCheck
 
   formModel = COMPANY_PROPERTIES_MODEL;
 
-  formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+  formGroup!: FormGroup;
 
   constructor(
-    private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly formService: DynamicFormService
   ) {
   }
 
-  ngAfterViewInit(): void {
-    patchFormModel(this.formInputs, this.company);
-    this.formService.detectChanges(this.formComponent);
-    this.validChange.emit(this.formGroup.valid);
+  ngOnInit(): void {
+    this.formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
   }
 
-  ngAfterViewChecked(): void {
-    this.changeDetectorRef.detectChanges();
+  ngOnChanges(): void {
+    patchFormModel(this.formInputs, this.company);
+    this.validChange.emit(this.formGroup.valid);
   }
 
   onChange(event: DynamicFormControlEvent): void {

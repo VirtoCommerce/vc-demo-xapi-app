@@ -29,9 +29,11 @@ export const USUAL_PROPERTIES_INPUTS = {
   integerUsual: new DynamicInputModel({
     id: 'integerUsual',
     label: 'Integer ● Usual',
-    inputType: 'number',
-    step: 1,
-    min: 0,
+    inputType: 'text',
+    mask: 'separator.0',
+    maskConfig: {
+      allowNegativeNumbers: true,
+    },
   }),
   decimalNumberUsual: new DynamicInputModel({
     id: 'decimalNumberUsual',

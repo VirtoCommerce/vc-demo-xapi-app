@@ -105,7 +105,7 @@ export class CompaniesEffects {
             },
             {
               name: COMPANY_DYNAMIC_PROPERTIES.integerUsual,
-              value: company.integerUsual?.toString(),
+              value: company.integerUsual,
             },
             {
               name: COMPANY_DYNAMIC_PROPERTIES.decimalNumberUsual,

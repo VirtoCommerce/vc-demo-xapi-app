@@ -3,7 +3,7 @@ export interface Company {
   name: string | null
   shortTextUsual: string | null,
   longTextUsual: string | null,
-  integerUsual: number | null,
+  integerUsual: string | null,
   decimalNumberUsual: number | null,
   date: string | null,
   boolean: boolean | null
