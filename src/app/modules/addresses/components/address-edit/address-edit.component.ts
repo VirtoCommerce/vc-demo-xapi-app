@@ -92,12 +92,9 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
   resetForm(): void {
     this.router.navigate([
       '/addresses',
-    ]).then(() => {
-      window.location.reload();
-    })
-      .catch(error => {
-        throw new Error(error);
-      });
+    ]).catch(error => {
+      throw new Error(error);
+    });
   }
 
   onChange(event: DynamicFormControlEvent): void {
