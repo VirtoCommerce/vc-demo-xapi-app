@@ -3,7 +3,7 @@ import { DynamicFormLayout } from '@ng-dynamic-forms/core';
 export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
   addressEditFormGroup: {
     element: {
-      control: 'row',
+      control: 'row gx-5',
     },
   },
   firstName: {
@@ -11,7 +11,7 @@ export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
       label: 'required',
     },
     grid: {
-      host: 'col-xs-24 col-md-12',
+      host: 'col-xs-24 col-md-12 grid-divider',
     },
   },
   lastName: {
@@ -19,7 +19,7 @@ export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
       label: 'required',
     },
     grid: {
-      host: 'col-xs-24 col-md-12',
+      host: 'col-xs-24 col-md-12 grid-divider',
     },
   },
   countryCode: {
@@ -56,12 +56,12 @@ export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
   },
   email: {
     grid: {
-      host: 'col-xs-24 col-md-12',
+      host: 'col-xs-24 col-md-12 grid-divider',
     },
   },
   phone: {
     grid: {
-      host: 'col-xs-24 col-md-12',
+      host: 'col-xs-24 col-md-12 grid-divider',
     },
   },
   line2: {
