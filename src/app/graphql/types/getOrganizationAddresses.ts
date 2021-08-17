@@ -14,6 +14,10 @@ export interface getOrganizationAddresses_organization_addresses_items {
    */
   readonly id: string | null;
   /**
+   * Id
+   */
+  readonly key: string | null;
+  /**
    * First name
    */
   readonly firstName: string | null;

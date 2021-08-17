@@ -16,6 +16,10 @@ export interface updateMemberAddresses_updateMemberAddresses_addresses {
    */
   readonly id: string | null;
   /**
+   * Id
+   */
+  readonly key: string | null;
+  /**
    * Line1
    */
   readonly line1: string | null;

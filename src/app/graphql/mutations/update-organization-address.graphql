@@ -3,6 +3,7 @@ mutation updateMemberAddresses($command: InputUpdateMemberAddressType!) {
     memberType
     addresses {
       id
+      key
       line1
       firstName
       lastName

@@ -1,5 +1,6 @@
 export interface Address {
   id?: string | null,
+  key?: string | null,
   firstName?: string | null,
   lastName?: string | null,
   line1?: string | null,

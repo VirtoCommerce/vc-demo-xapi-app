@@ -58,7 +58,6 @@ export class AddressesEffects {
                 countryName: state.editAddress?.countryName as string,
                 line1: state.editAddress?.line1 as string,
                 postalCode: state.editAddress?.postalCode as string,
-                key: state.editAddress?.id,
               },
             ],
           },

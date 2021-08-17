@@ -4,6 +4,7 @@ query getOrganizationAddresses($id: String!, $count: Int, $cursor: String, $sort
       totalCount
       items {
         id
+        key
         firstName
         lastName
         line1
