@@ -26,6 +26,10 @@ export interface getOrganizationAddresses_organization_addresses_items {
    */
   readonly line1: string | null;
   /**
+   * Line2
+   */
+  readonly line2: string | null;
+  /**
    * Phone
    */
   readonly phone: string | null;

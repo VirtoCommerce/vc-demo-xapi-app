@@ -6,7 +6,7 @@ mutation updateMemberAddresses($command: InputUpdateMemberAddressType!) {
       line1
       firstName
       lastName
-      line1
+      line2
       phone
       email
       countryCode

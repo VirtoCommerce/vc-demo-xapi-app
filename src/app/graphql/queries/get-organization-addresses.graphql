@@ -7,6 +7,7 @@ query getOrganizationAddresses($id: String!, $count: Int, $cursor: String, $sort
         firstName
         lastName
         line1
+        line2
         phone
         email
         countryCode
