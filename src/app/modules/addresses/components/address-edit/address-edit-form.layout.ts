@@ -11,7 +11,7 @@ export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
       label: 'required',
     },
     grid: {
-      host: 'col-xs-24 col-md-12 grid-divider',
+      host: 'col-xs-24 col-md-12 border-end border-primary',
     },
   },
   lastName: {
@@ -19,7 +19,7 @@ export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
       label: 'required',
     },
     grid: {
-      host: 'col-xs-24 col-md-12 grid-divider',
+      host: 'col-xs-24 col-md-12 border-end border-primary',
     },
   },
   countryCode: {
@@ -56,12 +56,12 @@ export const ADDRESS_EDIT_FORM_LAYOUT: DynamicFormLayout = {
   },
   email: {
     grid: {
-      host: 'col-xs-24 col-md-12 grid-divider',
+      host: 'col-xs-24 col-md-12 border-end border-primary',
     },
   },
   phone: {
     grid: {
-      host: 'col-xs-24 col-md-12 grid-divider',
+      host: 'col-xs-24 col-md-12 border-end border-primary',
     },
   },
   line2: {
