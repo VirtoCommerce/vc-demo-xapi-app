@@ -1,7 +1,6 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/forms";
 
 @include media-breakpoint-up(xl) {
     .modal-custom-size { 
@@ -17,11 +16,4 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.block-label {
-  @extend .form-label;
-  font-weight: 800 !important;
-  font-size: 17px;
-  letter-spacing: 0.01em;
 }
