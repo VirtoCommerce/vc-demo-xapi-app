@@ -2,14 +2,14 @@ import { DynamicFormGroupModel, DynamicFormModel, DynamicSelectModel } from '@ng
 
 export const DICTIONARY_INPUTS = {
   sector: new DynamicSelectModel<string|undefined>({
-    id: 'sector',
-    label: 'Sector Short text ● Dictionary',
+    id: 'dictionary',
+    label: 'Dictionary',
   }),
 };
 
 export const DICTIONARY_MODEL: DynamicFormModel = [
   new DynamicFormGroupModel({
-    id: 'combinedProperties',
+    id: 'dictionaryProperty',
     group: [
       ...Object.values(DICTIONARY_INPUTS),
     ],

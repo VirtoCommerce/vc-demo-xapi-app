@@ -99,6 +99,5 @@ function mapToCompany(
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
         value => /$true^/i.test(value)
       ),
-      dictionary: { Sector: organization.dynamicProperties.find(x => x?.name === 'Sector')?.value as string },
     };
 }

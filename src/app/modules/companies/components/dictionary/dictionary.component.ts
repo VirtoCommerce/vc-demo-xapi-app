@@ -17,7 +17,7 @@ import { DICTIONARY_INPUTS, DICTIONARY_MODEL } from './dictionary.model';
     './dictionary.component.scss',
   ],
 })
-export class DictionaryProperptiesComponent implements AfterViewInit, OnDestroy {
+export class DictionaryComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly formService: DynamicFormService, private readonly store: Store) {}
 
   @Input()
@@ -48,6 +48,7 @@ export class DictionaryProperptiesComponent implements AfterViewInit, OnDestroy 
       );
     this.formInputs.sector.options$
       .pipe(takeUntil(this.unsubscriber)).subscribe(() => {
+        console.log(this.company);
         if (this.company.dictionary?.Sector) {
           this.formInputs.sector.value = this.company.dictionary?.Sector;
         }

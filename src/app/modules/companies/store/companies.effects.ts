@@ -119,10 +119,6 @@ export class CompaniesEffects {
               name: COMPANY_DYNAMIC_PROPERTIES.boolean,
               value: company.boolean?.toString(),
             },
-            {
-              name: 'Sector',
-              value: company.dictionary?.Sector.toString(),
-            },
           ],
         },
       },
