@@ -1,12 +1,10 @@
-<ng-container [formGroup]="group">
-
+<div [formGroup]="group" class="form-control p-0">
   <ngx-codemirror [id]="id"
   [name]="model.name"
-  class="form-control"
   [ngClass]="getClass('element', 'control')"
   [formControlName]="model.id"
   [options]="{ lineNumbers: true, theme: 'default', mode: 'htmlmixed'  }"
+  (focusChange)="focusChenged($event)"
+  (ngModelChange)="onChange($event)"
   ></ngx-codemirror>
-
-
-</ng-container>
+</div>
