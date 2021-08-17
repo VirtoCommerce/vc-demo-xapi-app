@@ -98,5 +98,9 @@ function mapToCompany(
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
         value => /$true^/i.test(value)
       ),
+      image: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.image)?.value as string | null,
+      htmlUsual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlUsual)?.value as string | null,
     };
 }

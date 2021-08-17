@@ -119,6 +119,14 @@ export class CompaniesEffects {
               name: COMPANY_DYNAMIC_PROPERTIES.boolean,
               value: company.boolean?.toString(),
             },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.image,
+              value: company.image,
+            },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.htmlUsual,
+              value: company.htmlUsual,
+            },
           ],
         },
       },
