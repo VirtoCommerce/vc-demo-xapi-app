@@ -19,8 +19,6 @@
                                   (validChange)="isValidForm.usualProperties = $event; onValidChange();">
             </vc-usual-properties>
 
-              <ngx-codemirror [(ngModel)]="content" [options]="{ lineNumbers: true, theme: 'default', mode: 'htmlmixed'  }"></ngx-codemirror>
-
             <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()"> Save</button>
           </div>
         </section>
