@@ -9,6 +9,7 @@ import {
 } from 'src/app/graphql/types/updateMemberDynamicProperties';
 import { nullable } from 'src/app/helpers/nullable';
 import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
+import { formatDate } from '@angular/common';
 
 export const companiesFeatureKey = 'companies';
 
@@ -50,12 +51,14 @@ export const reducer = createReducer(
       ...action.data?.updateMemberDynamicProperties,
     };
     delete organization.__typename;
+    const company = mapToCompany(organization as Omit<(
+      updateOrganization_updateOrganization &
+      updateMemberDynamicProperties_updateMemberDynamicProperties
+    ), '__typename'>);
     return {
       ...state,
-      selectedCompany: mapToCompany(organization as Omit<(
-        updateOrganization_updateOrganization &
-        updateMemberDynamicProperties_updateMemberDynamicProperties
-      ), '__typename'>),
+      selectedCompany: company,
+      editCompany: company,
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state)
@@ -85,8 +88,11 @@ function mapToCompany(
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.decimalNumberUsual)?.value as string | null,
         value => Number.parseFloat(value)
       ),
-      date: organization.dynamicProperties
-        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.date)?.value as string | null,
+      date: nullable(
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.date)?.value as string | null,
+        value => formatDate(value, 'medium', 'en-US')
+      ),
       boolean: nullable(
         organization.dynamicProperties
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,

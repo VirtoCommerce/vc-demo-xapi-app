@@ -113,7 +113,7 @@ export class CompaniesEffects {
             },
             {
               name: COMPANY_DYNAMIC_PROPERTIES.date,
-              value: nullable(company.date, value => new Date(value))?.toUTCString(),
+              value: nullable(company.date, value => new Date(value))?.toISOString(),
             },
             {
               name: COMPANY_DYNAMIC_PROPERTIES.boolean,

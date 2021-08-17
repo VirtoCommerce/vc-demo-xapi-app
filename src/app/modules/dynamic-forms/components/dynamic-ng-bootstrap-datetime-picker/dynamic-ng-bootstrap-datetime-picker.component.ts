@@ -5,7 +5,7 @@ import { formatDate } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
-  NgbDateAdapter,
+  NgbDateNativeUTCAdapter,
   NgbDatepicker,
   NgbDatepickerConfig,
   NgbDateStruct,
@@ -22,6 +22,7 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService,
 } from '@ng-dynamic-forms/core';
+import { NgbTimeNativeUTCAdapter } from '../../adapters/ngb-time-native-utc-adapter';
 import { DynamicDateTimePickerModel } from './dynamic-datetime-picker.model';
 
 @Component({
@@ -76,25 +77,50 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
   month: number;
   day?: number;
   } {
-    return this.dynamicDateAdapter.fromModel(this.model.focusedDate) ?? this.datepickerConfig.startDate;
+    return this.convertToNgbDateStruct(this.model.focusedDate) ?? this.datepickerConfig.startDate;
   }
 
   get minDate(): NgbDateStruct {
-    return this.dynamicDateAdapter.fromModel(this.model.min) ?? this.datepickerConfig.minDate;
+    return this.convertToNgbDateStruct(this.model.min) ?? this.datepickerConfig.minDate;
   }
 
   get maxDate(): NgbDateStruct {
-    return this.dynamicDateAdapter.fromModel(this.model.max) ?? this.datepickerConfig.maxDate;
+    return this.convertToNgbDateStruct(this.model.max) ?? this.datepickerConfig.maxDate;
   }
 
-  date: NgbDateStruct | null = null;
+  private _date: NgbDateStruct | null = null;
 
-  time: NgbTimeStruct | null = null;
+  get date(): NgbDateStruct {
+    console.log('date');
+    if (this._date === null) {
+      this._date = this.convertToNgbDateStruct(this.model.value);
+    }
+    return this._date as NgbDateStruct;
+  }
+
+  set date(value: NgbDateStruct) {
+    this._date = value;
+  }
+
+  private _time: NgbTimeStruct | null = null;
+
+  get time(): NgbTimeStruct {
+    console.log('time');
+    if (this._time === null) {
+      this._time = this.convertToNgbTimeStruct(this.model.value);
+    }
+    return this._time as NgbTimeStruct;
+  }
+
+  set time(value: NgbTimeStruct) {
+    this._time = value;
+  }
 
   constructor(
     protected layoutService: DynamicFormLayoutService,
     protected validationService: DynamicFormValidationService,
-    protected dynamicDateAdapter: NgbDateAdapter<DynamicDateControlValue>,
+    protected dynamicDateAdapter: NgbDateNativeUTCAdapter,
+    protected dynamicTimeAdapter: NgbTimeNativeUTCAdapter,
     public datepickerConfig: NgbDatepickerConfig,
     public timepickerConfig: NgbTimepickerConfig
   ) {
@@ -110,8 +136,32 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
         this.time.hour,
         this.time.minute,
         this.time.second
-      ), 'short', 'en-US');
+      ), 'medium', 'en-US');
       this.change.emit();
     }
+  }
+
+  convertToNgbDateStruct(value: DynamicDateControlValue | null): NgbDateStruct | null {
+    const date = this.convertToDate<NgbDateStruct>(value);
+    return date instanceof Date ? this.dynamicDateAdapter.fromModel(date) : date;
+  }
+
+  convertToNgbTimeStruct(value: DynamicDateControlValue | null): NgbTimeStruct | null {
+    const date = this.convertToDate<NgbTimeStruct>(value);
+    return date instanceof Date ? this.dynamicTimeAdapter.fromModel(date) : date;
+  }
+
+  convertToDate<Fallback>(value: DynamicDateControlValue | null): Date | Fallback | null {
+    let date: Date;
+    if (typeof value === 'string') {
+      date = new Date(value);
+    }
+    else if (value instanceof Date) {
+      date = value;
+    }
+    else {
+      return value as unknown as Fallback;
+    }
+    return date;
   }
 }

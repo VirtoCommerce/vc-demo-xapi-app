@@ -50,11 +50,12 @@ export class CompanyPropertiesComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+    this.validChange.emit(this.formGroup.valid);
   }
 
   ngOnChanges(): void {
     patchFormModel(this.formInputs, this.company);
-    this.validChange.emit(this.formGroup.valid);
+    this.validChange.emit(this.formGroup?.valid);
   }
 
   onChange(event: DynamicFormControlEvent): void {
