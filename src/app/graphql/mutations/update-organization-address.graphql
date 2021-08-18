@@ -1,0 +1,20 @@
+mutation updateMemberAddresses($command: InputUpdateMemberAddressType!) {
+  updateMemberAddresses(command: $command) {
+    memberType
+    addresses {
+      id
+      key
+      line1
+      firstName
+      lastName
+      line2
+      phone
+      email
+      countryCode
+      countryName
+      postalCode
+      regionName
+      city
+    }
+  }
+}

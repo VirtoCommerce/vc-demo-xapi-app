@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-
-import { AddressesComponent } from './addresses.component';
 import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
   from 'src/app/store/current-customer/current-customer.reducer';
-import { addressesFeatureKey, initialState as AddressesInitialState } from './store/addresses.reducer';
-import { RouterTestingModule } from '@angular/router/testing';
+import { addressesFeatureKey, initialState as AddressesInitialState } from '../../store/addresses.reducer';
 
-describe('AddressesComponent', () => {
-  let component: AddressesComponent;
-  let fixture: ComponentFixture<AddressesComponent>;
+import { AddressEditComponent } from './address-edit.component';
+
+describe('AddressEditComponent', () => {
+  let component: AddressEditComponent;
+  let fixture: ComponentFixture<AddressEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,18 +21,18 @@ describe('AddressesComponent', () => {
           },
         }),
       ],
+      declarations: [
+        AddressEditComponent,
+      ],
       imports: [
         RouterTestingModule,
-      ],
-      declarations: [
-        AddressesComponent,
       ],
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddressesComponent);
+    fixture = TestBed.createComponent(AddressEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

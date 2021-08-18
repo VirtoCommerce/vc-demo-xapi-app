@@ -3,12 +3,16 @@ query getOrganizationAddresses($id: String!, $count: Int, $cursor: String, $sort
     addresses(first: $count, after: $cursor, sort: $sort) {
       totalCount
       items {
+        id
+        key
         firstName
         lastName
         line1
+        line2
         phone
         email
         countryCode
+        countryName
         postalCode
         regionName
         city

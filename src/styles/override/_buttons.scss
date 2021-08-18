@@ -7,20 +7,17 @@ $override-variant-names: ("primary", "success", "info", "warning", "danger");
   .btn-outline-#{$name} {
     @include button-outline-variant($color: $theme-color, $color-hover: $white, $active-color: $white);
   }
-}
-
-.btn {
-  &.disabled,
-  &[disabled],
-  fieldset[disabled] & {
-    &,
-    &:hover,
-    &:focus,
-    &.focus {
-      background-color: $primary;
-      border: none;
-      color: $white;
-      cursor: default;
+  .btn-#{$name},
+  .btn-outline-#{$name} {
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      &,
+      &:hover,
+      &:focus,
+      &.focus {
+        color: $white;
+      }
     }
   }
 }

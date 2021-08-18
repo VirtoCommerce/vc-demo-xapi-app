@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
-import { getAddressess } from './store/addresses.actions';
+import { getAddressess, setSelectedAddress } from './store/addresses.actions';
 import { selectOrganizationAddresses } from './store/addresses.selectors';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { sortAscending, sortDescending, pageInfo } from './addresses.constants';
 import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
+import { Address } from 'src/app/models/address.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'vc-addresses',
@@ -41,7 +43,7 @@ export class AddressesComponent implements OnInit, OnDestroy {
 
   sortDirection = this.sortDescending;
 
-  constructor(private readonly store: Store) { }
+  constructor(private readonly store: Store, private readonly router: Router) { }
 
   ngOnInit(): void {
     this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber))
@@ -61,6 +63,16 @@ export class AddressesComponent implements OnInit, OnDestroy {
     this.sortDirection = this.invertSortDirection(this.sortDirection);
     const sortigExpression = this.getSortingExpression();
     this.loadAddresses(this.curentCustomerOrganizationId, this.pageSize, this.cursor, sortigExpression);
+  }
+
+  editAddress(address: Address): void {
+    this.store.dispatch(setSelectedAddress({ address }));
+    this.router.navigate([
+      '/addresses',
+      address.id,
+    ]).catch(error => {
+      throw new Error(error);
+    });
   }
 
   ngOnDestroy(): void {
