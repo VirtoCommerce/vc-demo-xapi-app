@@ -1,0 +1,10 @@
+<ng-container [formGroup]="group" class="form-control p-0">
+  <vc-image-uploader
+  [id]="id"
+  [ngClass]="getClass('element', 'control')"
+  [formControlName]="model.id"
+  (blur)="onBlur($event)"
+  (imageUrlChange)="onChange($event)"
+  (focus)="onFocus($event)"
+  ></vc-image-uploader>
+</ng-container>

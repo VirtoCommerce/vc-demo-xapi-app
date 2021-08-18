@@ -18,7 +18,6 @@
                                   (propertyChange)="onChange($event)"
                                   (validChange)="isValidForm.usualProperties = $event; onValidChange();">
             </vc-usual-properties>
-            <div>{{editedCompany.image}}</div>
             <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()"> Save</button>
           </div>
         </section>

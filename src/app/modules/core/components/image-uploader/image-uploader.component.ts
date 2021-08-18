@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
-// Const URL = '/api/';
-const UPLOAD_URL =
-      `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
+// const UPLOAD_URL =
+//       `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
 
 interface uploadResponse {
   name: string;
@@ -26,7 +25,9 @@ interface uploadResponse {
     },
   ],
 })
-export class ImageUploaderComponent implements ControlValueAccessor  {
+export class ImageUploaderComponent implements ControlValueAccessor, OnInit  {
+  uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
+
   @Input()
   imageUrl: string | null = null;
 
@@ -34,6 +35,9 @@ export class ImageUploaderComponent implements ControlValueAccessor  {
   imageUrlChange = new EventEmitter<string | null>();
 
   constructor(private readonly http: HttpClient) {
+  }
+  ngOnInit(): void {
+
   }
 
   propagateChange = (_: any) => {};
@@ -58,7 +62,7 @@ export class ImageUploaderComponent implements ControlValueAccessor  {
       const formData = new FormData();
       formData.append('file', file);
 
-      this.http.post<uploadResponse[]>(UPLOAD_URL, formData).subscribe(items => {
+      this.http.post<uploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
         if (items.length > 0) {
           const url = items[0].url;
           this.imageUrl = url;
