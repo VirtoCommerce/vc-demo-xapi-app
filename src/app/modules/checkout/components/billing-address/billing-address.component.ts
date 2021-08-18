@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart, CartAddress } from 'src/app/models/cart.model';
-import { addOrUpdateBillingAddress, setBillingAsShipping } from 'src/app/store/cart/cart.actions';
+import { Cart, CartAddress, Payment } from 'src/app/models/cart.model';
+import { addOrUpdatePayment, setBillingAsShipping } from 'src/app/store/cart/cart.actions';
 import { selectIsBillingAddressAsShipping } from 'src/app/store/cart/cart.selectors';
 import { AddressFormComponent } from '../address-form/address-form.component';
 
@@ -61,14 +61,11 @@ export class BillingAddressComponent implements OnDestroy {
       .subscribe(address => {
         this.addressHidden = false;
 
-        const paymentId: string | null = this.cart?.payments?.length
-          ? this.cart.payments[0].id
-          : null;
-
-        this.store.dispatch(addOrUpdateBillingAddress({
-          paymentId,
-          address,
-        }));
+        const payment: Payment = this.cart?.payments?.length ? this.cart.payments[0] : {};
+        this.store.dispatch(addOrUpdatePayment({ payment: {
+          ...payment,
+          billingAddress: { ...address },
+        } }));
       });
   }
 

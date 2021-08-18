@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart, CartAddress } from 'src/app/models/cart.model';
-import { addOrUpdateBillingAddress, addOrUpdateShippingAddress } from 'src/app/store/cart/cart.actions';
+import { Cart, CartAddress, Payment, Shipment } from 'src/app/models/cart.model';
+import { addOrUpdatePayment, addOrUpdateShipment } from 'src/app/store/cart/cart.actions';
 import { selectIsBillingAddressAsShipping } from 'src/app/store/cart/cart.selectors';
 import { AddressFormComponent } from '../address-form/address-form.component';
 
@@ -46,24 +46,20 @@ export class ShippingAddressComponent implements OnInit, OnDestroy {
     addressForm.addressUpdated
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(address => {
-        const shipmentId: string | null = this.cart?.shipments?.length
-          ? this.cart.shipments[0].id
-          : null;
+        const shipment: Shipment = this.cart?.shipments?.length ? this.cart.shipments[0] : {};
 
-        this.store.dispatch(addOrUpdateShippingAddress({
-          shipmentId,
-          address,
-        }));
+        this.store.dispatch(addOrUpdateShipment({ shipment: {
+          ...shipment,
+          deliveryAddress: { ...address },
+        } }));
 
         if (this.billingAddressAsShipping) {
-          const paymentId: string | null = this.cart?.payments?.length
-            ? this.cart.payments[0].id
-            : null;
+          const payment: Payment = this.cart?.payments?.length ? this.cart.payments[0] : {};
 
-          this.store.dispatch(addOrUpdateBillingAddress({
-            paymentId,
-            address,
-          }));
+          this.store.dispatch(addOrUpdatePayment({ payment: {
+            ...payment,
+            billingAddress: { ...address },
+          } }));
         }
       });
   }

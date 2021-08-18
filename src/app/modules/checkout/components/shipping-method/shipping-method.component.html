@@ -1,0 +1,26 @@
+<div>
+    <label class="form-label checkout-form-label">Shipping method</label>
+    <div class="card card-body py-0">
+        <div class="row" style="height: 5.5rem;">
+            <div class="col-lg-18 media-center">
+                <div class="media" *ngIf="!shippingMethod">
+                    <img class="user-select-none" src="assets/images/danger.svg" alt="dangerIcon">
+                    <div class="media-body" >
+                        <div class="mx-3 text-danger">Please select a shipping method.</div>
+                    </div>
+                </div>
+                <div class="media" *ngIf="shippingMethod">
+                    <img class="user-select-none" [src]="shippingMethod.logoUrl" class="img-fluid" [alt]="shippingMethod.code">
+                    <div class="media-body" >
+                        <div class="mx-3">
+                            {{shippingMethod.code}} - {{ shippingMethod.optionName }} ({{ shippingMethod.price?.formattedAmount }})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 media-center">
+                <button type="button" class="btn btn-outline-primary" (click)="openChangeShippingMethod()">CHANGE</button>
+            </div>
+        </div>
+    </div>
+</div>

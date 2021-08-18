@@ -1,0 +1,45 @@
+<div class="modal-header modal-header-custom-height modal-header-bg">
+    <h4 class="modal-title model-header-text">
+        Select shipping method
+    </h4>
+    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')">
+        <fa-icon [icon]="faTimes" size="lg" style="color: white;"></fa-icon>
+        <span aria-hidden="true"></span>
+    </button>
+</div>
+<div class="">
+    <div class="table-responsive">
+        <table class="table table-striped table-borderless small-table-head" style="margin-bottom: 3px;"
+            aria-label="Shipping methods">
+            <thead class="border-bottom border-table-header">
+                <tr>
+                    <th style="width: 70%;" scope="col">Method type</th>
+                    <th style="text-align:center; width: 15%" scope="col" style="text-align:center">Price</th>
+                    <th style="text-align:center; width: 15%" scope="col">Active method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let method of methods">
+                    <td [ngClass]="{'font-weight-bold': method.isActive}">
+                        <img vcImageFallback="assets/images/shipping-method.svg" [src]="method.logoUrl"
+                            class="img-fluid" [alt]="method.code" />
+                        {{method.code}} - {{ method.optionName }}
+                    </td>
+                    <td [ngClass]="{'font-weight-bold': method.isActive}" style="text-align:center;">
+                        {{method.price?.formattedAmount}}</td>
+                    <td style="text-align:center;">
+                        <div *ngIf="method.isActive">
+                            <fa-icon [icon]="faCheck" size="lg" style="color: #F0AD4E;"></fa-icon>
+                            <strong>Active</strong>
+                        </div>
+                        <div *ngIf="!method.isActive">
+                            <a href="javascript: void(0)" style="border-bottom: 1px dashed #5D94BC"
+                                (click)="selectMethod(method)">Choose</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
