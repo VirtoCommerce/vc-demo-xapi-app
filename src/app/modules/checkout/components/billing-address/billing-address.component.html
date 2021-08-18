@@ -32,8 +32,8 @@
                 </div>
                 <div class="col-lg-6 media-center">
                     <button type="button" class="btn btn-outline-primary" (click)="openCreateAddress()">
-                        <ng-template [ngIf]="!address">NEW ADDRESS</ng-template>
-                        <ng-template [ngIf]="address">CHANGE</ng-template>
+                        <ng-template [ngIf]="!address || addressHidden">NEW ADDRESS</ng-template>
+                        <ng-template [ngIf]="address && !addressHidden">CHANGE</ng-template>
                     </button>
                 </div>
             </div>

@@ -198,9 +198,7 @@ export class CartEffects {
   addOrUpdateShippingAddress$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.addOrUpdateShippingAddress),
-      concatLatestFrom(() => [
-        this.getCountries,
-      ]),
+      concatLatestFrom(() => this.getCountries),
       concatMap(([
         action,
         countries,
@@ -232,9 +230,7 @@ export class CartEffects {
   addOrUpdateBillingAddress$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.addOrUpdateBillingAddress),
-      concatLatestFrom(() => [
-        this.getCountries,
-      ]),
+      concatLatestFrom(() => this.getCountries),
       concatMap(([
         action,
         countries,
@@ -272,7 +268,9 @@ export class CartEffects {
     );
   }, { dispatch: false });
 
-  private readonly getCountries = this.store.select(selectCountriesState).pipe(filter(nonNull));
+  private readonly getCountries = [
+    this.store.select(selectCountriesState).pipe(filter(nonNull)),
+  ];
 
   getCountryName(countries: Country[], countryCode?: string | null): string {
     return countries.find(country => {
