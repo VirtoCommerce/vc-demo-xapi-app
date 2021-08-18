@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 // Const URL = '/api/';
@@ -17,8 +18,15 @@ interface uploadResponse {
   styleUrls: [
     './image-uploader.component.scss',
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ImageUploaderComponent),
+      multi: true,
+    },
+  ],
 })
-export class ImageUploaderComponent {
+export class ImageUploaderComponent implements ControlValueAccessor  {
   @Input()
   imageUrl: string | null = null;
 
@@ -27,6 +35,21 @@ export class ImageUploaderComponent {
 
   constructor(private readonly http: HttpClient) {
   }
+
+  propagateChange = (_: any) => {};
+
+  writeValue(obj: any): void {
+    if (obj !== undefined) {
+      this.imageUrl = obj as string;
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void
+  {}
 
   onFileSelected(event: any): void {
     const file:File = event.target.files[0];
@@ -41,7 +64,7 @@ export class ImageUploaderComponent {
           this.imageUrl = url;
           console.log(this.imageUrl);
           this.imageUrlChange.emit(url);
-          console.log(items);
+          this.propagateChange(this.imageUrl);
         }
       });
     }
@@ -50,5 +73,6 @@ export class ImageUploaderComponent {
   removeAsset(): void {
     this.imageUrl = null;
     this.imageUrlChange.emit(null);
+    this.propagateChange(this.imageUrl);
   }
 }

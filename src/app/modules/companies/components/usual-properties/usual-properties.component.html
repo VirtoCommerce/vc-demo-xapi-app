@@ -4,6 +4,9 @@
                              [model]="formModel"
                              (change)="onChange($event)">
   </dynamic-ng-bootstrap-form>
+
+
+<vc-image-uploader formControlName="image"></vc-image-uploader>
+
 </form>
 
-<vc-image-uploader [imageUrl]="company.image ?? null"></vc-image-uploader>
