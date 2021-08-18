@@ -1,4 +1,3 @@
-import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +14,7 @@ import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstr
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,6 @@ import { CompanyPropertiesComponent } from './components/company-properties/comp
     CompanyEditComponent,
     UsualPropertiesComponent,
     CompanyPropertiesComponent,
-    ImageUploaderComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +34,7 @@ import { CompanyPropertiesComponent } from './components/company-properties/comp
     EffectsModule.forFeature([
       CompaniesEffects,
     ]),
+    CoreModule,
   ],
 })
 export class CompaniesModule { }

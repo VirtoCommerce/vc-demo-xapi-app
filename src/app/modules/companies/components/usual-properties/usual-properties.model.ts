@@ -53,11 +53,11 @@ export const USUAL_PROPERTIES_INPUTS = {
     id: 'boolean',
     label: 'Boolean',
   }),
-  image: new DynamicInputModel({
-    id: 'image',
-    label: 'Image',
-    inputType: 'file',
-  }),
+  // image: new DynamicInputModel({
+  //   id: 'image',
+  //   label: 'Image',
+  //   inputType: 'file',
+  // }),
   htmlUsual: new DynamicNgxCodemirorModel({
     id: 'htmlUsual',
     label: 'HTML ● Usual',
