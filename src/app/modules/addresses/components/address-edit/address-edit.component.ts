@@ -124,6 +124,7 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
   }
 
   submit(): void {
+    this.formGroup.reset();
     this.store.dispatch(updateAddress({
       memberId: this.curentCustomerOrganizationId,
     }));
