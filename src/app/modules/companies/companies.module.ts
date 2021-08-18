@@ -1,3 +1,4 @@
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,6 @@ import { UsualPropertiesComponent } from './components/usual-properties/usual-pr
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
 
-
 @NgModule({
   declarations: [
     CompaniesComponent,
@@ -24,6 +24,7 @@ import { DictionaryComponent } from './components/dictionary/dictionary.componen
     UsualPropertiesComponent,
     CompanyPropertiesComponent,
     DictionaryComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     CommonModule,
