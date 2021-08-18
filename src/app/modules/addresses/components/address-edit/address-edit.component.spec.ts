@@ -34,7 +34,7 @@ describe('AddressEditComponent', () => {
   });
 
   beforeEach(() => {
-    router = TestBed.get(Router);
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     spyOn(router, 'getCurrentNavigation').and.returnValue({ extras: { state: { createNew: false } } } as any);
     fixture = TestBed.createComponent(AddressEditComponent);
     component = fixture.componentInstance;
