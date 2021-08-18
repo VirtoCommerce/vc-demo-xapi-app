@@ -15,7 +15,6 @@ import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstr
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
-import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { FileUploadModule } from 'ng2-file-upload';
   imports: [
     CommonModule,
     CompaniesRoutingModule,
-    FileUploadModule,
     FormsModule,
     CodemirrorModule,
     ReactiveFormsModule,
