@@ -1,3 +1,4 @@
+import { DynamicImageUploaderModel } from './../../../dynamic-forms/components/dynamic-image-uploader/dynamic-image-uploader.model';
 import { DynamicNgxCodemirorModel } from './../../../dynamic-forms/components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -53,11 +54,10 @@ export const USUAL_PROPERTIES_INPUTS = {
     id: 'boolean',
     label: 'Boolean',
   }),
-  // image: new DynamicInputModel({
-  //   id: 'image',
-  //   label: 'Image',
-  //   inputType: 'file',
-  // }),
+  image: new DynamicImageUploaderModel({
+    id: 'image',
+    label: 'Image',
+  }),
   htmlUsual: new DynamicNgxCodemirorModel({
     id: 'htmlUsual',
     label: 'HTML ● Usual',

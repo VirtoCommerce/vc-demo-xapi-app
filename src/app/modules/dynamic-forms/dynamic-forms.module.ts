@@ -1,3 +1,5 @@
+import { CoreModule } from './../core/core.module';
+import { DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER } from './components/dynamic-image-uploader/dynamic-image-uploader.model';
 import { DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,11 +23,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.component';
+import { DynamicImageUploaderComponent } from './components/dynamic-image-uploader/dynamic-image-uploader.component';
 
 @NgModule({
   declarations: [
     DynamicNGBootstrapDatetimePickerComponent,
     DynamicNgxCodemirorComponent,
+    DynamicImageUploaderComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,7 @@ import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror
     DynamicFormsCoreModule,
     FontAwesomeModule,
     CodemirrorModule,
+    CoreModule,
   ],
   providers: [
     NgbDateNativeUTCAdapter,
@@ -49,6 +54,9 @@ import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror
         }
         else if (model.type === DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR) {
           return DynamicNgxCodemirorComponent;
+        }
+        else if (model.type === DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER) {
+          return DynamicImageUploaderComponent;
         }
 
         return null;
