@@ -1,10 +1,7 @@
 <div>
   <img class="rounded w-50 d-block" src="{{ !!imageUrl ? imageUrl : 'assets/images/no-image.svg'}}" alt="image preview">
   <input #fileUpload type="file" class="d-none" accept="image/*"
-      (change)="onFileSelected($event)"
-    >
-    <!-- [uploader]="uploader"
-        -->
+      (change)="onFileSelected($event)">
   <div class="d-flex flex-row">
     <button class="btn"
     (click)="fileUpload.click()">Upload</button>
