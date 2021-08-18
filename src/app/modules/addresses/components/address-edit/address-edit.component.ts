@@ -69,32 +69,22 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
         this.countries = countries;
       });
 
-    if (this.createAddressMode === false) {
-      this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions).pipe(
-        filter(nonNull),
-        concatMap(options => {
-          return of([
-            ...options,
-          ]);
-        })
-      );
-    }
-    else {
-      this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions)
-        .pipe(filter(nonNull), concatMap(options => {
-          return of([
-            new DynamicFormOption({
-              label: undefined,
-              value: undefined,
-              disabled: true,
-            }),
-            ...options,
-          ]);
-        }));
-      this.formInputs.countryCode.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
+    this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions)
+      .pipe(filter(nonNull), concatMap(options => {
+        return of([
+          new DynamicFormOption({
+            label: undefined,
+            value: undefined,
+            disabled: true,
+          }),
+          ...options,
+        ]);
+      }));
+    this.formInputs.countryCode.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
+      if (!this.formInputs.countryCode.value) {
         this.formInputs.countryCode.value = undefined;
-      });
-    }
+      }
+    });
 
     this.store.dispatch(getCountries());
 
@@ -134,22 +124,13 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
   }
 
   submit(): void {
-    if (this.formInputs.countryCode.value) {
-      const countryName = this.getCountryFullName(this.formInputs.countryCode.value);
-      this.store.dispatch(updateAddress({
-        id: this.curentCustomerOrganizationId,
-        countryName,
-      }));
-    }
+    this.store.dispatch(updateAddress({
+      memberId: this.curentCustomerOrganizationId,
+    }));
   }
 
   ngOnDestroy(): void {
     this.unsubscriber.next();
     this.unsubscriber.complete();
-  }
-
-  private getCountryFullName(countryCode?: string | (string | undefined)[]): string {
-    const countryName = this.countries?.find(country => country.id === countryCode)?.name;
-    return countryName as string;
   }
 }

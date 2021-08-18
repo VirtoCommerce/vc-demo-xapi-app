@@ -32,16 +32,12 @@ export const setAddress = createAction(
 
 export const updateAddress = createAction(
   '[Addresses] Update Address',
-  props<{ id: string, countryName: string }>()
+  props<{ memberId: string }>()
 );
 
 export const updateAddressSuccess = createAction(
   '[Addresses] Update Address Success',
   props<{ data: updateMemberAddresses | null | undefined }>()
-);
-
-export const createAddressSuccess = createAction(
-  '[Addressses] Create Address'
 );
 
 export const updateAddressFailure = createAction(

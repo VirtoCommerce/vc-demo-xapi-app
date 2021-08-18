@@ -37,18 +37,6 @@ export const reducer = createReducer(
     },
   })),
   on(AddressesActions.updateAddress, (state) : State => state),
-  on(AddressesActions.updateAddressSuccess, (state, action): State  => {
-    const addresses = action.data?.updateMemberAddresses?.addresses?.map(address => ({
-      ...address,
-    }));
-    const changedAddress = addresses?.find(address => address.id === state.selectedAddress?.id);
-    delete changedAddress?.__typename;
-    return {
-      ...state,
-      editAddress: { ...changedAddress },
-      selectedAddress: { ...changedAddress },
-    };
-  }),
   on(AddressesActions.getAddressess, (state): State => state),
   on(AddressesActions.getAddressessSuccess, (state, action): State => {
     const addresses = action.data.organization?.addresses?.items?.map(item => ({
