@@ -7,6 +7,7 @@ export const cartFeatureKey = 'cart';
 
 export interface State {
   cart: PartialDeep<Cart>;
+  billingAddressAsShipping: boolean;
 }
 
 export const initialState: State = {
@@ -15,7 +16,9 @@ export const initialState: State = {
     coupons: [],
     items: [],
     shipments: [],
+    payments: [],
   },
+  billingAddressAsShipping: true,
 };
 
 export const reducer = createReducer(
@@ -39,6 +42,10 @@ export const reducer = createReducer(
       shipments: customMap(action?.data?.cart?.shipments, x => ({
         ...x,
         deliveryAddress: { ...x.deliveryAddress },
+      })),
+      payments: customMap(action?.data?.cart?.payments, x => ({
+        ...x,
+        billingAddress: { ...x.billingAddress },
       })),
     },
   })),
@@ -84,7 +91,21 @@ export const reducer = createReducer(
       })),
     },
   })),
-  on(CartActions.setCartUserId, (state): State => state)
+  on(CartActions.addOrUpdateBillingAddressSuccess, (state, action): State => ({
+    ...state,
+    cart: {
+      ...state.cart,
+      payments: customMap(action?.payments, x => ({
+        ...x,
+        billingAddress: { ...x.billingAddress },
+      })),
+    },
+  })),
+  on(CartActions.setCartUserId, (state): State => state),
+  on(CartActions.setBillingAsShipping, ((state, action): State => ({
+    ...state,
+    billingAddressAsShipping: action.value,
+  })))
 );
 
 export function customMap<T, P>(input: readonly (T | null)[] | null | undefined, callback: (value: T) => P): P[] {

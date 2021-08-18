@@ -44,5 +44,22 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             line2
           }
         }
+        payments {
+          id
+          billingAddress {
+            firstName
+            lastName
+            email
+            phone
+            countryCode
+            countryName
+            regionId
+            city
+            postalCode
+            addressType
+            line1
+            line2
+          }
+        }
     }
 }

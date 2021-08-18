@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, concatMap, tap, filter } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
 import { ApolloError } from '@apollo/client/errors';
 
+import { nonNull } from 'src/app/helpers/nonNull';
+import { Country } from 'src/app/models/country.model';
+
 import * as CartActions from './cart.actions';
+import { selectCountriesState } from '../countries/countries.selectors';
 
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
 import changeCartItemQuantityMutation from '../../graphql/mutations/change-cart-item-quantity.graphql';
@@ -15,6 +20,7 @@ import updateCartDynamicPropertiesMutation from '../../graphql/mutations/update-
 import addCartCouponMutation from '../../graphql/mutations/add-cart-coupon.graphql';
 import removeCartCouponMutation from '../../graphql/mutations/remove-cart-coupon.graphql';
 import addOrUpdateShipment from '../../graphql/mutations/add-or-update-cart-shipment.graphql';
+import addOrUpdatePayment from '../../graphql/mutations/add-or-update-cart-payment.graphql';
 
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
 import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
@@ -26,9 +32,8 @@ import { removeCartCoupon, removeCartCouponVariables } from 'src/app/graphql/typ
 import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 import { addOrUpdateCartShipment, addOrUpdateCartShipmentVariables }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
-import { Store } from '@ngrx/store';
-import { selectCountriesState } from '../countries/countries.selectors';
-import { nonNull } from 'src/app/helpers/nonNull';
+import { addOrUpdateCartPayment, addOrUpdateCartPaymentVariables }
+  from 'src/app/graphql/types/addOrUpdateCartPayment';
 
 @Injectable()
 export class CartEffects {
@@ -193,9 +198,7 @@ export class CartEffects {
   addOrUpdateShippingAddress$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.addOrUpdateShippingAddress),
-      concatLatestFrom(() => [
-        this.store.select(selectCountriesState).pipe(filter(nonNull)),
-      ]),
+      concatLatestFrom(() => this.getCountries),
       concatMap(([
         action,
         countries,
@@ -210,9 +213,7 @@ export class CartEffects {
               deliveryAddress: {
                 ...action.address,
                 addressType: 2,
-                countryName: countries.find(country => {
-                  return country.id === action.address?.countryCode;
-                })?.name as string,
+                countryName: this.getCountryName(countries, action.address?.countryCode),
               },
             },
           },
@@ -226,6 +227,38 @@ export class CartEffects {
     );
   });
 
+  addOrUpdateBillingAddress$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.addOrUpdateBillingAddress),
+      concatLatestFrom(() => this.getCountries),
+      concatMap(([
+        action,
+        countries,
+      ]) => this.apollo.mutate<addOrUpdateCartPayment, addOrUpdateCartPaymentVariables>({
+        mutation: addOrUpdatePayment,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            payment: {
+              id: action.paymentId,
+              billingAddress: {
+                ...action.address,
+                addressType: 1,
+                countryName: this.getCountryName(countries, action.address?.countryCode),
+              },
+            },
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.addOrUpdateBillingAddressSuccess({
+            payments: result.data?.addOrUpdateCartPayment?.payments ?? [],
+          }))
+        ))
+    );
+  });
+
   setCartUserId$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.setCartUserId),
@@ -234,6 +267,16 @@ export class CartEffects {
       })
     );
   }, { dispatch: false });
+
+  private readonly getCountries = [
+    this.store.select(selectCountriesState).pipe(filter(nonNull)),
+  ];
+
+  getCountryName(countries: Country[], countryCode?: string | null): string {
+    return countries.find(country => {
+      return country.id === countryCode;
+    })?.name as string;
+  }
 
   constructor(
     private readonly actions$: Actions,

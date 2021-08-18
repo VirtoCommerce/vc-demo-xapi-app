@@ -53,6 +53,7 @@ export const ADDRESS_FORM_INPUTS = {
   countryCode: new DynamicSelectModel<string|undefined>({
     id: 'countryCode',
     label: 'Country',
+    placeholder: 'Select...',
     validators: {
       required: null,
     },
@@ -75,6 +76,7 @@ export const ADDRESS_FORM_INPUTS = {
   regionId: new DynamicSelectModel<string|undefined>({
     id: 'regionId',
     label: 'Region',
+    placeholder: 'Select...',
   }),
 
   city: new DynamicInputModel({
