@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicFormOption, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { patchFormModel } from 'src/app/helpers/dynamic-forms';
+import { nonNull } from 'src/app/helpers/nonNull';
 import { Company } from 'src/app/models/company.model';
 import { PartialDeep } from 'type-fest';
-import { selectEditedCompany } from '../../store/companies.selectors';
+import { selectDictionaryItems, selectEditedCompany } from '../../store/companies.selectors';
 import { DICTIONARY_INPUTS, DICTIONARY_MODEL } from './dictionary.model';
 
 @Component({
@@ -44,19 +45,20 @@ export class DictionaryComponent implements AfterViewInit, OnDestroy {
         this.formService.detectChanges(this.formComponent);
       });
 
-    /*
-     * This.formInputs.dictionary.options$ = this.store.select(selectEditedCompany)
-     *   .pipe(filter(nonNull), concatMap(options => {
-     *     return of([
-     *       new DynamicFormOption({
-     *         label: undefined,
-     *         value: undefined,
-     *         disabled: true,
-     *       }),
-     *       ...options,
-     *     ]);
-     *   }));
-     */
+    this.formInputs.dictionary.options$ = this.store.select(selectDictionaryItems).pipe(
+      filter(nonNull),
+      concatMap(items => {
+        return of([
+          new DynamicFormOption({
+            label: undefined,
+            value: undefined,
+            disabled: true,
+          }),
+          ...items,
+        ]);
+      })
+    );
+
     this.formInputs.dictionary.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
       this.formInputs.dictionary.value = undefined;
     });
