@@ -195,40 +195,6 @@ export class CartEffects {
     );
   });
 
-  /*
-   *  AddOrUpdateShippingAddress$ = createEffect(() => {
-   *    return this.actions$.pipe(
-   *      ofType(CartActions.addOrUpdateShippingAddress),
-   *      concatLatestFrom(() => this.getCountries),
-   *      concatMap(([
-   *        action,
-   *        countries,
-   *      ]) => this.apollo.mutate<addOrUpdateCartShipment, addOrUpdateCartShipmentVariables>({
-   *        mutation: addOrUpdateShipment,
-   *        variables: {
-   *          command: {
-   *            ...this.baseCartVariables,
-   *            userId: localStorage.getItem('cartUserId') ?? '',
-   *            shipment: {
-   *              id: action.shipmentId,
-   *              deliveryAddress: {
-   *                ...action.address,
-   *                addressType: 2,
-   *                countryName: this.getCountryName(countries, action.address?.countryCode),
-   *              },
-   *            },
-   *          },
-   *        },
-   *      })
-   *        .pipe(
-   *          map(result => CartActions.addOrUpdateShippingAddressSuccess({
-   *            shipments: result.data?.addOrUpdateCartShipment?.shipments ?? [],
-   *          }))
-   *        ))
-   *    );
-   * });
-   */
-
   addOrUpdateShipment$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartActions.addOrUpdateShipment),
@@ -317,40 +283,6 @@ export class CartEffects {
         ))
     );
   });
-
-  /*
-   * AddOrUpdateBillingAddress$ = createEffect(() => {
-   *   return this.actions$.pipe(
-   *     ofType(CartActions.addOrUpdateBillingAddress),
-   *     concatLatestFrom(() => this.getCountries),
-   *     concatMap(([
-   *       action,
-   *       countries,
-   *     ]) => this.apollo.mutate<addOrUpdateCartPayment, addOrUpdateCartPaymentVariables>({
-   *       mutation: addOrUpdatePayment,
-   *       variables: {
-   *         command: {
-   *           ...this.baseCartVariables,
-   *           userId: localStorage.getItem('cartUserId') ?? '',
-   *           payment: {
-   *             id: action.paymentId,
-   *             billingAddress: {
-   *               ...action.address,
-   *               addressType: 1,
-   *               countryName: this.getCountryName(countries, action.address?.countryCode),
-   *             },
-   *           },
-   *         },
-   *       },
-   *     })
-   *       .pipe(
-   *         map(result => CartActions.addOrUpdateBillingAddressSuccess({
-   *           payments: result.data?.addOrUpdateCartPayment?.payments ?? [],
-   *         }))
-   *       ))
-   *   );
-   * });
-   */
 
   setCartUserId$ = createEffect(() => {
     return this.actions$.pipe(

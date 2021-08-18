@@ -40,7 +40,7 @@ export class ShippingMethodComponent implements OnDestroy {
     methodsComponent.methods = this.cart?.shippingMethods?.map<ShippingMethodRecord>(x => {
       return {
         ...x,
-        isActive: this.shipment?.shipmentMethodCode === x.code && this.shipment?.shipmentMethodOption == x.optionName,
+        isActive: this.shipment?.shipmentMethodCode === x.code && this.shipment?.shipmentMethodOption === x.optionName,
       };
     }) ?? [];
 
