@@ -66,6 +66,11 @@ export const reducer = createReducer(
   on(AddressesActions.getAddressessFailure, (state): State => ({
     ...state,
     addresses: null,
+  })),
+  on(AddressesActions.resetAddressForm, (state): State => ({
+    ...state,
+    editAddress: null,
+    selectedAddress: null,
   }))
 
 );

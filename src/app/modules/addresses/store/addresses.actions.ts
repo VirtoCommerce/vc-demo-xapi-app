@@ -40,7 +40,15 @@ export const updateAddressSuccess = createAction(
   props<{ data: updateMemberAddresses | null | undefined }>()
 );
 
+export const createAddressSuccess = createAction(
+  '[Addressses] Create Address'
+);
+
 export const updateAddressFailure = createAction(
   '[Addresses] Update Address Failure',
   props<{ error: ApolloError }>()
+);
+
+export const resetAddressForm = createAction(
+  '[Addresses] Reset Address Form'
 );

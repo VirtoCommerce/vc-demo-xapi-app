@@ -8,10 +8,13 @@ const routes: Routes = [
     path: '',
     component: AddressesComponent,
   },
-  {
-    path: ':id',
+  ...[
+    'create',
+    ':id',
+  ].map(path => ({
+    path,
     component: AddressEditComponent,
-  },
+  })),
 ];
 
 @NgModule({

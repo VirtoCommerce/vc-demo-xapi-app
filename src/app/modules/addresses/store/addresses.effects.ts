@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { from, of } from 'rxjs';
 
 import * as AddressesActions from './addresses.actions';
 import { getOrganizationAddresses } from 'src/app/graphql/types/getOrganizationAddresses';
@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { selectAddressesState } from './addresses.selectors';
 import { updateMemberAddresses, updateMemberAddressesVariables } from 'src/app/graphql/types/updateMemberAddresses';
 import updateAddressMutation from '../../../graphql/mutations/update-organization-address.graphql';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AddressesEffects {
@@ -63,13 +64,34 @@ export class AddressesEffects {
           },
         },
       }).pipe(
-        map(result => AddressesActions.updateAddressSuccess({
-          data: result.data,
-        })),
+        map(result => {
+          if (state.selectedAddress !== null) {
+            return AddressesActions.updateAddressSuccess({
+              data: result.data,
+            });
+          }
+          else {
+            return AddressesActions.createAddressSuccess();
+          }
+        }),
         catchError((error: ApolloError) => of(AddressesActions.updateAddressFailure({ error })))
       ))
     );
   });
 
-  constructor(private readonly actions$: Actions, private readonly apollo: Apollo, private readonly store: Store) {}
+  redirectToAddressesPage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AddressesActions.createAddressSuccess),
+      concatMap(() => from(this.router.navigate([
+        'addresses',
+      ])))
+    );
+  }, { dispatch: false });
+
+  constructor(
+    private readonly actions$: Actions,
+    private readonly apollo: Apollo,
+    private readonly store: Store,
+    private readonly router: Router
+  ) {}
 }
