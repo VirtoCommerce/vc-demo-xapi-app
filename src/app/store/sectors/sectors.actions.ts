@@ -1,6 +1,6 @@
 import { ApolloError } from '@apollo/client/core';
 import { createAction, props } from '@ngrx/store';
-import { getDictionaryDynamicPropery } from 'src/app/graphql/types/getDictionaryDynamicPropery';
+import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 
 export const getSectors = createAction(
   '[Sectors] Get Sectors'
@@ -8,7 +8,7 @@ export const getSectors = createAction(
 
 export const getSectorsSuccess = createAction(
   '[Sectors] Get Sectors Success',
-  props<{ data: getDictionaryDynamicPropery }>()
+  props<{ data: getDictionaryDynamicProperty }>()
 );
 
 export const getSectorsFailure = createAction(

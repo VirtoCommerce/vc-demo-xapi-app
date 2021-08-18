@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { DynamicFormOption, DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { of, Subject } from 'rxjs';
-import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import { nonNull } from 'src/app/helpers/nonNull';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { Company } from 'src/app/models/company.model';
-import { selectSectorOptions } from 'src/app/modules/registration/components/company-details/countries.selector';
-import { getSectors } from 'src/app/store/sectors/sectors.actions';
 import { PartialDeep } from 'type-fest';
+import { selectEditedCompany } from '../../store/companies.selectors';
 import { DICTIONARY_INPUTS, DICTIONARY_MODEL } from './dictionary.model';
 
 @Component({
@@ -21,7 +21,10 @@ export class DictionaryComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly formService: DynamicFormService, private readonly store: Store) {}
 
   @Input()
-  company!: PartialDeep<Company>
+  formComponent!: DynamicNGBootstrapFormComponent;
+
+  @Input()
+  company!: PartialDeep<Company>;
 
   formInputs = DICTIONARY_INPUTS;
 
@@ -32,31 +35,31 @@ export class DictionaryComponent implements AfterViewInit, OnDestroy {
   unsubscriber = new Subject();
 
   ngAfterViewInit(): void {
-    this.formInputs.sector.options$ = this.store.select(selectSectorOptions)
-      .pipe(
-        filter(nonNull),
-        concatMap(options => {
-          return of([
-            new DynamicFormOption({
-              label: undefined,
-              value: undefined,
-              disabled: true,
-            }),
-            ...options,
-          ]);
-        })
-      );
-    this.formInputs.sector.options$
-      .pipe(takeUntil(this.unsubscriber)).subscribe(() => {
-        console.log(this.company);
-        if (this.company.dictionary?.Sector) {
-          this.formInputs.sector.value = this.company.dictionary?.Sector;
-        }
-        else {
-          this.formInputs.sector.value = undefined;
-        }
+    console.log(this.company);
+    this.store
+      .select(selectEditedCompany)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(companyRegistration => {
+        patchFormModel(this.formInputs, companyRegistration);
+        this.formService.detectChanges(this.formComponent);
       });
-    this.store.dispatch(getSectors());
+
+    /*
+     * This.formInputs.dictionary.options$ = this.store.select(selectEditedCompany)
+     *   .pipe(filter(nonNull), concatMap(options => {
+     *     return of([
+     *       new DynamicFormOption({
+     *         label: undefined,
+     *         value: undefined,
+     *         disabled: true,
+     *       }),
+     *       ...options,
+     *     ]);
+     *   }));
+     */
+    this.formInputs.dictionary.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
+      this.formInputs.dictionary.value = undefined;
+    });
   }
 
   ngOnDestroy(): void {

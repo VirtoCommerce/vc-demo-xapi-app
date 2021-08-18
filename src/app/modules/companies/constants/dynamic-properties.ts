@@ -13,7 +13,7 @@ export const COMPANY_DYNAMIC_PROPERTIES = {
   shortTextMultivalue: 'Short text | Multivalue',
   decimalNumberMultivalue: 'Decimal number | Multivalue',
   integerMultivalue: 'Integer | Multivalue',
-  shortTextDictionary: 'Short text | Dictionary',
+  shortTextDictionary: 'Dictionary',
   shortTextDictionaryMultilingual: 'Short text | Dictionary + Multilingual',
   shortTextDictionaryMultivalue: 'Short text | Dictionary + Multivalue',
   shortTextMultivalueDictionaryMultilingual: 'Short text | Multivalue + Dictionary + Multilingual',

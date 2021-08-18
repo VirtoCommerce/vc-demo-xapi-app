@@ -10,17 +10,20 @@ import {
 import { nullable } from 'src/app/helpers/nullable';
 import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
 import { formatDate } from '@angular/common';
+import { DictionaryItem } from 'src/app/models/dictionary-item';
 
 export const companiesFeatureKey = 'companies';
 
 export interface State {
   selectedCompany: PartialDeep<Company> | null,
   editCompany: PartialDeep<Company> | null,
+  dictionaryItems: DictionaryItem[] | null,
 }
 
 export const initialState: State = {
   selectedCompany: null,
   editCompany: null,
+  dictionaryItems: null,
 };
 
 export const reducer = createReducer(
@@ -29,6 +32,7 @@ export const reducer = createReducer(
   on(CompaniesActions.getCompany, (state) : State => state),
   on(CompaniesActions.getCompanySuccess, (state, action): State  =>  {
     const organization = action.data?.organization;
+
     return {
       ...state,
       selectedCompany: mapToCompany(organization),
@@ -99,5 +103,10 @@ function mapToCompany(
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
         value => /$true^/i.test(value)
       ),
+      dictionary: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary)
+        ?.dynamicProperty
+        ?.dictionaryItems
+        ?.items as DictionaryItem[] | null,
     };
 }

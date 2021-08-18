@@ -5,9 +5,9 @@ import { of } from 'rxjs';
 
 import * as SectorActions from './sectors.actions';
 
-import getDictionaryDynamicProperty from '../../graphql/queries/get-dictionaryDynamicProperty.graphql';
+import getDictionaryDynamicPropertyQuery from '../../graphql/queries/get-dictionaryDynamicProperty.graphql';
 import { Apollo } from 'apollo-angular';
-import { getDictionaryDynamicPropery } from 'src/app/graphql/types/getDictionaryDynamicPropery';
+import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { ApolloError } from '@apollo/client/core';
 
 @Injectable()
@@ -15,8 +15,8 @@ export class SectorsEffects {
   getSectors$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SectorActions.getSectors),
-      concatMap(() => this.apollo.watchQuery<getDictionaryDynamicPropery>({
-        query: getDictionaryDynamicProperty,
+      concatMap(() => this.apollo.watchQuery<getDictionaryDynamicProperty>({
+        query: getDictionaryDynamicPropertyQuery,
         variables: {
           idOrName: 'Sector',
         },

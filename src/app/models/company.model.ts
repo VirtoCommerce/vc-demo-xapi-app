@@ -1,3 +1,4 @@
+import { DictionaryItem } from './dictionary-item';
 export interface Company {
   id: string,
   name: string | null
@@ -7,5 +8,5 @@ export interface Company {
   decimalNumberUsual: number | null,
   date: string | null,
   boolean: boolean | null,
-  dictionary?: { [key: string]: string }
+  dictionary?: DictionaryItem[] | null
 }
