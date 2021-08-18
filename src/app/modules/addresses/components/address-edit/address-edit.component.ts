@@ -150,6 +150,6 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
 
   private getCountryFullName(countryCode?: string | (string | undefined)[]): string {
     const countryName = this.countries?.find(country => country.id === countryCode)?.name;
-    return countryName!;
+    return countryName as string;
   }
 }
