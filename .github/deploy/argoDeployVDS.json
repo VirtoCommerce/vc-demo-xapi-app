@@ -1,0 +1,17 @@
+{
+    "artifactKey": "ghcr.io/virtocommerce/demo-xapi-app",
+    "deployRepo": "vc-webstore-deploy",
+    "dev": {
+        "deployAppName": "webstore-dev",
+        "deployBranch": "dev"
+    },
+    "qa": {
+        "deployAppName": "webstore-qa",
+        "deployBranch": "qa"
+    },
+    "prod": {
+        "deployAppName": "webstore-demo",
+        "deployBranch": "master"
+    },
+    "cmPath": "webstore-app/resources/kustomization.yaml"
+}
