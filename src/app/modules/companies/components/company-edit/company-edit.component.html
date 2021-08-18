@@ -19,6 +19,8 @@
                                   (validChange)="isValidForm.usualProperties = $event; onValidChange();">
             </vc-usual-properties>
 
+            <vc-image-uploader [imagePath]="editedCompany.image"></vc-image-uploader>
+
             <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()"> Save</button>
           </div>
         </section>

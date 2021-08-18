@@ -1,3 +1,4 @@
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,13 +16,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 
-
 @NgModule({
   declarations: [
     CompaniesComponent,
     CompanyEditComponent,
     UsualPropertiesComponent,
     CompanyPropertiesComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     CommonModule,
