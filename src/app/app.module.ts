@@ -16,11 +16,13 @@ import { NgbDropdownModule, NgbNavModule, NgbPaginationModule } from '@ng-bootst
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AppRoutingModule } from './app-routing.module';
 import { GraphQLModule } from './graphql.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { ValidationModule } from './modules/validation/validation.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DynamicFormsModule } from './modules/dynamic-forms/dynamic-forms.module';
 
 import { metaReducers, reducers } from './store';
 import { CountriesEffects } from './store/countries/countries.effects';
@@ -83,6 +85,7 @@ const appInitializerFactory =
     StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
     StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer),
     StoreModule.forFeature(fromCurrentCustomer.currentCustomerFeatureKey, fromCurrentCustomer.reducer),
+    DynamicFormsModule,
   ],
   providers: [
     {

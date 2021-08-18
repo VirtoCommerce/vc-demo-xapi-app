@@ -7,6 +7,18 @@
 // GraphQL query operation: getOrganization
 // ====================================================
 
+export interface getOrganization_organization_dynamicProperties {
+  readonly __typename: "DynamicPropertyValueType";
+  /**
+   * Property Name
+   */
+  readonly name: string | null;
+  /**
+   * Property Value
+   */
+  readonly value: string | null;
+}
+
 export interface getOrganization_organization {
   readonly __typename: "Organization";
   readonly id: string;
@@ -14,6 +26,10 @@ export interface getOrganization_organization {
    * Name
    */
   readonly name: string | null;
+  /**
+   * Organization's dynamic property values
+   */
+  readonly dynamicProperties: ReadonlyArray<(getOrganization_organization_dynamicProperties | null)>;
 }
 
 export interface getOrganization {

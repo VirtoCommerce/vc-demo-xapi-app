@@ -4,6 +4,12 @@ import { PartialDeep } from 'type-fest';
 import { createReducer, on } from '@ngrx/store';
 import * as CompaniesActions from './companies.actions';
 import { updateOrganization_updateOrganization } from '../../../graphql/types/updateOrganization';
+import {
+  updateMemberDynamicProperties_updateMemberDynamicProperties,
+} from 'src/app/graphql/types/updateMemberDynamicProperties';
+import { nullable } from 'src/app/helpers/nullable';
+import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
+import { formatDate } from '@angular/common';
 
 export const companiesFeatureKey = 'companies';
 
@@ -34,15 +40,25 @@ export const reducer = createReducer(
     ...state,
     editCompany: {
       ...state.selectedCompany,
+      ...state.editCompany,
       ...action.data,
     },
   })),
   on(CompaniesActions.updateCompany, (state) : State => state),
   on(CompaniesActions.updateCompanySuccess, (state, action): State  =>  {
-    const organization = action.data?.updateOrganization;
+    const organization = {
+      ...action.data?.updateOrganization,
+      ...action.data?.updateMemberDynamicProperties,
+    };
+    delete organization.__typename;
+    const company = mapToCompany(organization as Omit<(
+      updateOrganization_updateOrganization &
+      updateMemberDynamicProperties_updateMemberDynamicProperties
+    ), '__typename'>);
     return {
       ...state,
-      selectedCompany: mapToCompany(organization),
+      selectedCompany: company,
+      editCompany: company,
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state)
@@ -50,13 +66,37 @@ export const reducer = createReducer(
 );
 
 function mapToCompany(
-  organizatin?: getOrganization_organization | updateOrganization_updateOrganization | null
+  organization?: getOrganization_organization |
+  Omit<(
+    updateOrganization_updateOrganization &
+    updateMemberDynamicProperties_updateMemberDynamicProperties
+  ), '__typename'> | null
 ) : Company | null {
-  return !organizatin
+  return !organization
     ? null
     : {
-      id: organizatin.id,
-      name: organizatin.name as string,
+      id: organization.id,
+      name: organization.name,
+      shortTextUsual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextUsual)?.value as string | null,
+      longTextUsual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.longTextUsual)?.value as string | null,
+      integerUsual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.integerUsual)?.value as string | null,
+      decimalNumberUsual: nullable(
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.decimalNumberUsual)?.value as string | null,
+        value => Number.parseFloat(value)
+      ),
+      date: nullable(
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.date)?.value as string | null,
+        value => formatDate(value, 'medium', 'en-US')
+      ),
+      boolean: nullable(
+        organization.dynamicProperties
+          .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
+        value => /$true^/i.test(value)
+      ),
     };
 }
-

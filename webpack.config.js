@@ -12,6 +12,9 @@ module.exports = (config) => {
     config.plugins = config.plugins || [];
     config.plugins.push(
       new PurgeCSSPlugin({
+        safelist: {
+          deep: [/^dynamic-ng-/]
+        },
         paths: require('glob').sync(`${path.join(__dirname, 'src')}/**/*`,
           { nodir: true }),
       }));

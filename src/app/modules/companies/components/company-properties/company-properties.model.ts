@@ -1,7 +1,7 @@
 import { requiredMessage } from './../../../validation/constants/validation-messages.constants';
 import { DynamicFormGroupModel, DynamicFormModel, DynamicInputModel } from '@ng-dynamic-forms/core';
 
-export const COMPANY_EDIT_FORM_INPUTS = {
+export const COMPANY_PROPERTIES_INPUTS = {
   name: new DynamicInputModel({
     id: 'name',
     label: 'Company Name',
@@ -14,11 +14,11 @@ export const COMPANY_EDIT_FORM_INPUTS = {
   }),
 };
 
-export const COMPANY_EDIT_FORM_MODEL: DynamicFormModel = [
+export const COMPANY_PROPERTIES_MODEL: DynamicFormModel = [
   new DynamicFormGroupModel({
     id: 'companyEditFormGroup',
     group: [
-      ...Object.values(COMPANY_EDIT_FORM_INPUTS),
+      ...Object.values(COMPANY_PROPERTIES_INPUTS),
     ],
   }),
 ];

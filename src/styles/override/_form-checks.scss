@@ -1,0 +1,11 @@
+.form-switch {
+  min-height: $form-switch-height;
+
+  .form-check-input {
+    height: $form-switch-height;
+
+    &:not(:checked) {
+      background-color: $form-switch-bg;
+    }
+  }
+}

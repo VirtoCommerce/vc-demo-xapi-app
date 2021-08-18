@@ -4,6 +4,7 @@ import { Company } from '../../../models/company.model';
 import { ApolloError } from '@apollo/client/core';
 import { createAction, props } from '@ngrx/store';
 import { getOrganization } from 'src/app/graphql/types/getOrganization';
+import { updateMemberDynamicProperties } from 'src/app/graphql/types/updateMemberDynamicProperties';
 
 export const getCompany = createAction(
   '[Companies] Get Company',
@@ -31,7 +32,7 @@ export const updateCompany = createAction(
 
 export const updateCompanySuccess = createAction(
   '[Companies] Update Company Success',
-  props<{ data: updateOrganization | null | undefined }>()
+  props<{ data: updateOrganization & updateMemberDynamicProperties }>()
 );
 
 export const updateCompanyFailure = createAction(

@@ -1,6 +1,10 @@
 mutation  updateOrganization($command: InputUpdateOrganizationType!) {
   updateOrganization(command: $command) {
     id,
-    name
+    name,
+    dynamicProperties {
+      name
+      value
+    }
   }
 }

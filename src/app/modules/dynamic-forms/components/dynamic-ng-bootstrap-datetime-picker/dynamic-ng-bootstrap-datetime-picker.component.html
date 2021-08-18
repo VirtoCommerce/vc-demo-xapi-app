@@ -1,0 +1,74 @@
+<div [formGroup]="group"
+     class="input-group">
+
+  <input [id]="id"
+         [name]="model.name"
+         class="form-control"
+         [class.is-invalid]="showErrorMessages"
+         [ngClass]="getClass('element', 'control')"
+         [formControlName]="model.id"
+         [placeholder]="model.placeholder"
+         (blur)="onBlur($event)"
+         (change)="onChange($event)"
+         (focus)="onFocus($event)"
+         readonly="true"
+         [required]="model.required">
+
+    <button class="btn btn-outline-primary"
+            type="button"
+            [ngbPopover]="popover"
+            popoverClass="no-arrow no-padding"
+            autoClose="outside"
+            [placement]="model.getAdditional('placement', 'bottom-left')"
+            [disabled]="model.readOnly">
+
+        <img *ngIf="model.toggle?.image"
+             [src]="model.toggle!.image!"
+             style="cursor: pointer;"
+             alt=""/>
+        <fa-icon *ngIf="model.toggle?.icon"
+                 [icon]="model.toggle!.icon!"
+                 size="lg">
+        </fa-icon>
+        <span *ngIf="model.toggle?.class"
+              ngClass=[model.toggle!.class!]>
+        </span>
+        <span *ngIf="model.toggle?.label">{{ model.toggle!.label! }}</span>
+
+    </button>
+
+</div>
+
+<ng-template #popover>
+  <ngb-datepicker [(ngModel)]="date"
+                  (ngModelChange)="onDateTimeChange()"
+                  [startDate]="startDate"
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                  [navigation]="model.getAdditional('navigation', datepickerConfig['navigation'])"
+                  [displayMonths]="model.getAdditional('displayMonths', datepickerConfig['displayMonths'])"
+                  [outsideDays]="model.getAdditional('outsideDays', datepickerConfig['outsideDays'])"
+                  [firstDayOfWeek]="model.getAdditional('firstDayOfWeek', datepickerConfig['firstDayOfWeek'])"
+                  [showWeekNumbers]="model.getAdditional('showWeekNumbers', datepickerConfig['showWeekNumbers'])"
+                  [weekdays]="model.getAdditional('weekdays', datepickerConfig['weekdays'])"
+                  (dateSelect)="onCustomEvent($event, 'dateSelect')"
+                  (closed)="onCustomEvent($event, 'closed')"
+                  [footerTemplate]="datepickerFooter">
+  </ngb-datepicker>
+</ng-template>
+<ng-template #datepickerFooter>
+  <div class="text-center">
+    <div class="d-inline-block">
+      <ngb-timepicker [(ngModel)]="time"
+                      (ngModelChange)="onDateTimeChange()"
+                      [meridian]="model.meridian"
+                      [seconds]="model.showSeconds"
+                      [secondStep]="model.getAdditional('secondStep', timepickerConfig['secondStep'])"
+                      [minuteStep]="model.getAdditional('minuteStep', timepickerConfig['minuteStep'])"
+                      [hourStep]="model.getAdditional('hourStep', timepickerConfig['hourStep'])"
+                      [size]="model.getAdditional('size', timepickerConfig['size'])"
+                      [spinners]="model.getAdditional('spinners', timepickerConfig['spinners'])">
+      </ngb-timepicker>
+    </div>
+  </div>
+</ng-template>

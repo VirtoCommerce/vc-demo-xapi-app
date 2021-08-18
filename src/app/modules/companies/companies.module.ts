@@ -10,11 +10,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { CompaniesEffects } from './store/companies.effects';
 import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
+import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 
 @NgModule({
   declarations: [
     CompaniesComponent,
     CompanyEditComponent,
+    UsualPropertiesComponent,
+    CompanyPropertiesComponent,
   ],
   imports: [
     CommonModule,

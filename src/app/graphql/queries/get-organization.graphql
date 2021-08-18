@@ -2,5 +2,9 @@ query getOrganization ($id: String!) {
   organization(id: $id) {
     id,
     name,
+    dynamicProperties {
+      name
+      value
+    }
   }
 }

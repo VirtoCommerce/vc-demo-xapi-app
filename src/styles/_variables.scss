@@ -43,8 +43,8 @@ $yiq-contrasted-threshold: 200;
 
 $grid-columns: 24;
 
-$font-family-sans-serif: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-condensed: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-condensed: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-weight-bold: 700;
 $font-size-base: 0.875rem;
 $font-size-sm: $font-size-base * .85;
@@ -55,7 +55,7 @@ $line-height-lg: 1.176470588;
 
 $small-font-size: 85%;
 
-$headings-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headings-font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $headings-font-weight: $font-weight-bold;
 $h1-font-size: $font-size-base * 2.428571429;
 $h2-font-size: $font-size-base * 1.75;
@@ -104,21 +104,31 @@ $paragraph-margin-bottom: 0.625rem;
 
 $pagination-color: $gray-800;
 
-$custom-control-cursor: pointer;
-$custom-control-indicator-size: 1.2rem;
-$custom-control-indicator-bg-size: 45% 35%;
-$custom-control-indicator-border-width: 2px;
-$custom-control-indicator-border-color: $gray-400;
-$custom-control-indicator-checked-bg: $secondary;
-$custom-control-indicator-checked-border-color: $secondary;
-$custom-control-indicator-focus-box-shadow: $secondary;
-$custom-control-margin-bottom: divide($spacer, 2);
+// $form-check-input-width: 1.2em;
+// $form-check-min-height: divide($font-size-base * $line-height-base, 1.5);
+// $form-check-margin-bottom: divide($spacer, 2);
+// $form-check-label-cursor: pointer;
 
-$custom-checkbox-indicator-border-radius: 0;
+// $form-check-input-bg: #928D86;
+// $form-check-input-border: 2px solid $gray-400;
+// $form-check-input-border-radius: 0;
+// $form-check-input-checked-bg-color: $secondary;
+// $form-check-input-checked-border-color: $secondary;
+// $form-check-input-focus-box-shadow: $secondary;
+
+$form-switch-bg: #928D86;
+$form-switch-color: $white;
+$form-switch-width: 5.5em;
+$form-switch-height: 2.1429em;
+$form-switch-border-radius: 4px;
+$form-switch-padding-start: $form-switch-border-radius;
+$form-switch-bg-image: url("data:image/svg+xml,<svg width='77' height='30' viewBox='0 0 77 30' fill='none' xmlns='http://www.w3.org/2000/svg'><rect width='77' height='30' rx='4' fill='#928D86'/><rect x='3.98102' y='4' width='34.5513' height='22' rx='2' fill='white'/><path fill-rule='evenodd' clip-rule='evenodd' d='M55.8318 14.9998L55.4547 15.3768L55.4552 15.3805L52.3544 18.4802C52.1243 18.7101 52.1243 19.083 52.3544 19.3129L53.1874 20.1457C53.4175 20.3756 53.7905 20.3756 54.0205 20.1457L57.5001 16.6675L60.9797 20.1457C61.2098 20.3756 61.5828 20.3756 61.8128 20.1457L62.6459 19.3129C62.8759 19.083 62.8759 18.7101 62.6459 18.4802L59.5452 15.3807L59.5458 15.3768L59.1686 14.9997L59.5453 14.6231L59.5448 14.6194L62.6456 11.5197C62.8757 11.2898 62.8757 10.9169 62.6456 10.687L61.8126 9.85422C61.5825 9.62428 61.2095 9.62428 60.9795 9.85422L57.5002 13.3321L54.021 9.85422C53.7909 9.62428 53.4179 9.62428 53.1879 9.85422L52.3548 10.687C52.1248 10.9169 52.1248 11.2898 52.3548 11.5197L55.4555 14.6192L55.4549 14.6231L55.8318 14.9998Z' fill='#{$form-switch-color}'/></svg>");
+$form-switch-focus-bg-image: $form-switch-bg-image;
+$form-switch-checked-bg-image: url("data:image/svg+xml,<svg  xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 36 22'><rect width='30' height='18' rx='2' fill='#{$form-switch-color}'/></svg>");
 
 $btn-border-width: 2px;
 $btn-height-border: $btn-border-width * 2;
-$btn-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$btn-font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $btn-font-weight: $font-weight-bold;
 $btn-box-shadow: false;
 $btn-padding-y: $input-padding-y;
