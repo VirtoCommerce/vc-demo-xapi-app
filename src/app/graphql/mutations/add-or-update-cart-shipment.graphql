@@ -1,5 +1,11 @@
 mutation addOrUpdateCartShipment ($command: InputAddOrUpdateCartShipmentType!) {
     addOrUpdateCartShipment (command: $command) {
+        total {
+            formattedAmount
+        }
+        shippingTotal {
+            formattedAmount
+        }
         shipments {
             id
             shipmentMethodCode

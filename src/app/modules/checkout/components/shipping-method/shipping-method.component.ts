@@ -27,17 +27,20 @@ export class ShippingMethodComponent implements OnDestroy {
     private readonly store: Store
   ) { }
 
+  get shipment(): Shipment {
+    return this.cart?.shipments?.length ? this.cart.shipments[0] : {};
+  }
+
   openChangeShippingMethod(): void {
     const modal = this.modalService.open(ShippingMethodSelectComponent, {
       modalDialogClass: 'modal-custom-size-2 modal-position',
     });
     const methodsComponent = modal.componentInstance as ShippingMethodSelectComponent;
 
-    const shipment: Shipment = this.cart?.shipments?.length ? this.cart.shipments[0] : {};
     methodsComponent.methods = this.cart?.shippingMethods?.map<ShippingMethodRecord>(x => {
       return {
         ...x,
-        isActive: shipment?.shipmentMethodCode === x.code && shipment?.shipmentMethodOption == x.optionName,
+        isActive: this.shipment?.shipmentMethodCode === x.code && this.shipment?.shipmentMethodOption == x.optionName,
       };
     }) ?? [];
 
@@ -48,7 +51,7 @@ export class ShippingMethodComponent implements OnDestroy {
 
         this.store.dispatch(addOrUpdateShipment({
           shipment: {
-            ...shipment,
+            ...this.shipment,
             price: { ...method.price },
             shipmentMethodCode: method.code,
             shipmentMethodOption: method.optionName,

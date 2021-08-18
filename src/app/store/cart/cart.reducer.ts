@@ -48,7 +48,6 @@ export const reducer = createReducer(
         ...x,
         billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
-
       shippingMethods: customMap(action?.data?.cart?.availableShippingMethods, x => ({ ...x })),
     },
   })),
@@ -88,7 +87,9 @@ export const reducer = createReducer(
     ...state,
     cart: {
       ...state.cart,
-      shipments: customMap(action?.shipments, x => ({
+      total: action?.shipmentResult?.total,
+      shippingTotal: action?.shipmentResult?.shippingTotal,
+      shipments: customMap(action?.shipmentResult?.shipments, x => ({
         ...x,
         deliveryAddress: x.deliveryAddress ? { ...x.deliveryAddress } : undefined,
       })),

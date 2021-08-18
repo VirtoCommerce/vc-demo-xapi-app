@@ -9,6 +9,22 @@ import { InputAddOrUpdateCartShipmentType } from "./globalTypes";
 // GraphQL mutation operation: addOrUpdateCartShipment
 // ====================================================
 
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_total {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shippingTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
 export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_price {
   readonly __typename: "MoneyType";
   /**
@@ -116,6 +132,8 @@ export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments {
 
 export interface addOrUpdateCartShipment_addOrUpdateCartShipment {
   readonly __typename: "CartType";
+  readonly total: addOrUpdateCartShipment_addOrUpdateCartShipment_total | null;
+  readonly shippingTotal: addOrUpdateCartShipment_addOrUpdateCartShipment_shippingTotal | null;
   readonly shipments: ReadonlyArray<(addOrUpdateCartShipment_addOrUpdateCartShipment_shipments | null)> | null;
 }
 

@@ -12,7 +12,7 @@ import { removeCartCoupon_removeCoupon as removeCouponResult } from 'src/app/gra
 import { changeCartItemQuantity_changeCartItemQuantity as changeCartItemQuantityResult }
   from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem_removeCartItem as removeCartItemResult } from 'src/app/graphql/types/removeCartItem';
-import { addOrUpdateCartShipment_addOrUpdateCartShipment_shipments as shipmentResult }
+import { addOrUpdateCartShipment_addOrUpdateCartShipment as shipmentResult }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
 import { addOrUpdateCartPayment_addOrUpdateCartPayment_payments  as paymentResult }
   from 'src/app/graphql/types/addOrUpdateCartPayment';
@@ -93,7 +93,7 @@ export const addOrUpdateShipment = createAction(
 
 export const addOrUpdateShipmentSuccess = createAction(
   '[Cart] Add Or Update Cart Shipment Success',
-  props<{ shipments?: ReadonlyArray<(shipmentResult | null)> | null }>()
+  props<{ shipmentResult?: shipmentResult | null }>()
 );
 
 export const addOrUpdatePayment = createAction(

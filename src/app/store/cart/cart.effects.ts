@@ -269,7 +269,7 @@ export class CartEffects {
       })
         .pipe(
           map(result => CartActions.addOrUpdateShipmentSuccess({
-            shipments: result.data?.addOrUpdateCartShipment?.shipments ?? [],
+            shipmentResult: result.data?.addOrUpdateCartShipment,
           }))
         ))
     );
