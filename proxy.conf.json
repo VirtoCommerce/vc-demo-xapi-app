@@ -4,6 +4,11 @@
       "secure": false,
       "logLevel": "debug"
   },
+  "/api/platform/*": {
+    "target": "http://localhost:10645/",
+    "secure": false,
+    "logLevel": "debug"
+},
   "/graphql/*": {
       "target": "http://localhost:10645/",
       "secure": false,

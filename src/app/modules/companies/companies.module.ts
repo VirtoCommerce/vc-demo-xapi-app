@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DictionaryComponent } from './components/dictionary/dictionary.componen
   imports: [
     CommonModule,
     CompaniesRoutingModule,
+    FileUploadModule,
     FormsModule,
     CodemirrorModule,
     ReactiveFormsModule,
