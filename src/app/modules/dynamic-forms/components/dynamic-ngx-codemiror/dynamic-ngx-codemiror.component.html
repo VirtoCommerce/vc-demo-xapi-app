@@ -4,7 +4,8 @@
   [ngClass]="getClass('element', 'control')"
   [formControlName]="model.id"
   [options]="{ lineNumbers: true, theme: 'default', mode: 'htmlmixed'  }"
-  (focusChange)="focusChenged($event)"
-  (ngModelChange)="onChange($event)"
+  (blur)="onBlur($event)"
+  (change)="onChange($event)"
+  (focus)="onFocus($event)"
   ></ngx-codemirror>
 </div>

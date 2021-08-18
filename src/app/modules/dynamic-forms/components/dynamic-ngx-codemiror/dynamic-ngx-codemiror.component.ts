@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
 import {
   DynamicFormControlComponent,
-  DynamicFormControlCustomEvent,
   DynamicFormLayout,
   DynamicFormLayoutService,
   DynamicFormValidationService,
@@ -15,7 +14,7 @@ import { DynamicNgxCodemirorModel } from './dynamic-ngx-codemiror.model';
   templateUrl: './dynamic-ngx-codemiror.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicNgxCodemirorComponent extends DynamicFormControlComponent implements AfterViewInit {
+export class DynamicNgxCodemirorComponent extends DynamicFormControlComponent {
     @Input() group!: FormGroup;
 
     @Input() formLayout?: DynamicFormLayout;
@@ -26,31 +25,14 @@ export class DynamicNgxCodemirorComponent extends DynamicFormControlComponent im
 
     @Output() change: EventEmitter<any> = new EventEmitter();
 
-    @Output() customEvent: EventEmitter<DynamicFormControlCustomEvent> = new EventEmitter();
-
     @Output() focus: EventEmitter<any> = new EventEmitter();
 
     @ViewChild(CodemirrorComponent, {static: false}) codemiroroComponent!: CodemirrorComponent;
 
     constructor(
 protected layoutService: DynamicFormLayoutService,
-          private renderer: Renderer2,
           protected validationService: DynamicFormValidationService
     ) {
       super(layoutService, validationService);
-    }
-
-  ngAfterViewInit(): void {
-    //this.codemiroroComponent?.ref?.nativeElement?.onblur((_, ev) => this.blur.emit(ev));
-    // this.renderer.listen(this.codemiroroComponent.ref.nativeElement, "click", (event)=>console.log(event));
-
-  }
-
-    focusChenged(focused: boolean){
-      if(focused) {
-        this.focus.emit(focused);
-      } else {
-        this.blur.emit(focused);
-      }
     }
 }
