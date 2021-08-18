@@ -6,21 +6,29 @@
              class="mb-4">
           {{selectedCompany?.name}}
         </h1>
-        <div class="h3 text-condensed">Company Info</div>
-        <section  *ngIf="editedCompany$ | async as editedCompany"
-                  class="row mt-3">
-          <div class="col col-md-12">
+        <section *ngIf="editedCompany$ | async as editedCompany"
+                class="row my-3">
+          <div class="col col-md-12 mt-3">
             <vc-company-properties [company]="editedCompany"
-                                    (propertyChange)="onChange($event)"
-                                    (validChange)="isValidForm.properties = $event; onValidChange();">
+                                   (propertyChange)="onChange($event)"
+                                   (validChange)="isValidForm.properties = $event; onValidChange();">
             </vc-company-properties>
+          </div>
+          <div class="w-100 border-top my-5"></div>
+          <div class="col col-md-12">
             <vc-usual-properties [company]="editedCompany"
-                                  (propertyChange)="onChange($event)"
-                                  (validChange)="isValidForm.usualProperties = $event; onValidChange();">
+                                 (propertyChange)="onChange($event)"
+                                 (validChange)="isValidForm.usualProperties = $event; onValidChange();">
             </vc-usual-properties>
-            <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()"> Save</button>
+          </div>
+          <div class="col col-md-12">
+            <vc-multivalue-properties [company]="editedCompany"
+                                      (propertyChange)="onChange($event)"
+                                      (validChange)="isValidForm.usualProperties = $event; onValidChange();">
+            </vc-multivalue-properties>
           </div>
         </section>
+        <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()"> Save</button>
       </div>
     </article>
   </div>

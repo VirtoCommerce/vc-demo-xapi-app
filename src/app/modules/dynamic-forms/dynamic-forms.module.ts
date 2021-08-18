@@ -18,16 +18,25 @@ import {
 } from './components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter';
+import {
+  DynamicNgBootstrapMultivalueInputComponent,
+} from './components/dynamic-ng-bootstrap-multivalue-input/dynamic-ng-bootstrap-multivalue-input.component';
+import {
+  DYNAMIC_FORM_CONTROL_TYPE_MULTIVALUE_INPUT,
+} from './components/dynamic-ng-bootstrap-multivalue-input/dynamic-multivalue-input.model';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
     DynamicNGBootstrapDatetimePickerComponent,
+    DynamicNgBootstrapMultivalueInputComponent,
   ],
   imports: [
     CommonModule,
     NgbDatepickerModule,
     NgbTimepickerModule,
     NgbPopoverModule,
+    NgxMaskModule,
     FormsModule,
     ReactiveFormsModule,
     DynamicFormsCoreModule,
@@ -41,6 +50,9 @@ import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter'
       useValue: (model: DynamicFormControlModel): Type<DynamicFormControl> | null => {
         if (model.type === DYNAMIC_FORM_CONTROL_TYPE_DATETIME_PICKER) {
           return DynamicNGBootstrapDatetimePickerComponent;
+        }
+        if (model.type === DYNAMIC_FORM_CONTROL_TYPE_MULTIVALUE_INPUT) {
+          return DynamicNgBootstrapMultivalueInputComponent;
         }
         return null;
       },
