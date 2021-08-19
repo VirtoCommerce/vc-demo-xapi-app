@@ -3,9 +3,6 @@ import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/cor
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
-// const UPLOAD_URL =
-//       `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
-
 interface uploadResponse {
   name: string;
   url: string;
@@ -37,7 +34,9 @@ export class ImageUploaderComponent implements ControlValueAccessor {
   constructor(private readonly http: HttpClient) {
   }
 
-  propagateChange = (_: any): void => { return };
+  propagateChange = (_: any): void => {
+    return;
+  };
 
   writeValue(obj: any): void {
     if (obj !== undefined) {
