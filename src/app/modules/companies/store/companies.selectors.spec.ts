@@ -10,6 +10,7 @@ describe('Companies Selectors', () => {
     expect(result).toEqual({
       selectedCompany: null,
       editCompany: null,
+      dictionaryItems: null,
     });
   });
 });
