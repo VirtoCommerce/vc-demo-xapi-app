@@ -1,7 +1,7 @@
 # v1.0
 
 name: Deploy to environments
-on: 
+on:
   pull_request:
     paths-ignore:
       - '.github/**'
@@ -17,13 +17,26 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      DEPLOY_CONFIG_PATH: ""
 
     steps:
+
+    - name: Set DEPLOY_CONFIG_PATH for PT project
+      if: startsWith(github.event.pull_request.title, 'PT-')
+      run: |
+        echo "DEPLOY_CONFIG_PATH='.github/deploy/argoDeployPT.json'" >> $GITHUB_ENV
+
+    - name: Set DEPLOY_CONFIG_PATH for VDS project
+      if: startsWith(github.event.pull_request.title, 'VDS-')
+      run: |
+        echo "DEPLOY_CONFIG_PATH='.github/deploy/argoDeployVDS.json'" >> $GITHUB_ENV
 
     - name: Read deployment config
       if: contains(github.event.pull_request.labels.*.name, 'deploy-demo') || contains(github.event.pull_request.labels.*.name, 'deploy-qa')
       uses: VirtoCommerce/vc-github-actions/get-deploy-param@master
       id: deployConfig
+      with:
+        deployConfigPath: ${{ env.DEPLOY_CONFIG_PATH }}
 
     - name: Gets artifact link
       if: contains(github.event.pull_request.labels.*.name, 'deploy-demo') || contains(github.event.pull_request.labels.*.name, 'deploy-qa')
