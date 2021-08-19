@@ -1,4 +1,7 @@
-<dynamic-ng-bootstrap-form
-  [group]="formGroup"
-  [model]="formModel">
-</dynamic-ng-bootstrap-form>
+<form [formGroup]="formGroup">
+  <dynamic-ng-bootstrap-form
+    [group]="formGroup"
+    [model]="formModel"
+    (change)="onChange($event)">
+  </dynamic-ng-bootstrap-form>
+</form>

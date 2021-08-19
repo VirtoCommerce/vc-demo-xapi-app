@@ -8,8 +8,8 @@ query getOrganization($id: String!) {
       dynamicProperty {
         dictionaryItems {
           items {
-            name
             id
+            name
           }
         }
       }

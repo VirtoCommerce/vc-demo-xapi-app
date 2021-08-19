@@ -1,15 +1,15 @@
 import { DynamicFormGroupModel, DynamicFormModel, DynamicSelectModel } from '@ng-dynamic-forms/core';
 
 export const DICTIONARY_INPUTS = {
-  dictionary: new DynamicSelectModel<string|undefined>({
-    id: 'dictionary',
-    label: 'Dictionary',
+  shortTextDictionary: new DynamicSelectModel<string|undefined>({
+    id: 'shortTextDictionary',
+    label: 'Short text ● Dictionary',
   }),
 };
 
 export const DICTIONARY_MODEL: DynamicFormModel = [
   new DynamicFormGroupModel({
-    id: 'dictionaryProperty',
+    id: 'shortTextDictionary',
     group: [
       ...Object.values(DICTIONARY_INPUTS),
     ],

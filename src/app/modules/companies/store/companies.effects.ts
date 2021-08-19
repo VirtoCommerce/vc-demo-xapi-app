@@ -119,6 +119,10 @@ export class CompaniesEffects {
               name: COMPANY_DYNAMIC_PROPERTIES.boolean,
               value: company.boolean?.toString(),
             },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary,
+              value: company.shortTextDictionary,
+            },
           ],
         },
       },

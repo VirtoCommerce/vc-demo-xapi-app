@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { DynamicFormOption, DynamicFormService } from '@ng-dynamic-forms/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { DynamicFormControlEvent, DynamicFormOption, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { of, Subject } from 'rxjs';
-import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import { patchFormModel } from 'src/app/helpers/dynamic-forms';
+import { filter, takeUntil } from 'rxjs/operators';
+import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { Company } from 'src/app/models/company.model';
 import { PartialDeep } from 'type-fest';
-import { selectDictionaryItems, selectEditedCompany } from '../../store/companies.selectors';
+import { selectDictionaryOptions } from '../../store/companies.selectors';
 import { DICTIONARY_INPUTS, DICTIONARY_MODEL } from './dictionary.model';
 
 @Component({
@@ -18,7 +19,7 @@ import { DICTIONARY_INPUTS, DICTIONARY_MODEL } from './dictionary.model';
     './dictionary.component.scss',
   ],
 })
-export class DictionaryComponent implements AfterViewInit, OnDestroy {
+export class DictionaryComponent implements OnChanges, OnDestroy, OnInit {
   constructor(private readonly formService: DynamicFormService, private readonly store: Store) {}
 
   @Input()
@@ -27,28 +28,37 @@ export class DictionaryComponent implements AfterViewInit, OnDestroy {
   @Input()
   company!: PartialDeep<Company>;
 
+  @Output()
+  propertyChange = new EventEmitter<PartialDeep<Company>>();
+
   formInputs = DICTIONARY_INPUTS;
 
   formModel = DICTIONARY_MODEL;
 
-  formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'blur' });
+  formGroup!: FormGroup;
 
   unsubscriber = new Subject();
 
-  ngAfterViewInit(): void {
-    console.log(this.company);
-    this.store
-      .select(selectEditedCompany)
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe(companyRegistration => {
-        patchFormModel(this.formInputs, companyRegistration);
-        this.formService.detectChanges(this.formComponent);
-      });
+  onChange(event: DynamicFormControlEvent): void {
+    const company = fromFormModel<Company>(event.model);
+    if (company != null) {
+      this.propertyChange.emit(company);
+    }
+  }
 
-    this.formInputs.dictionary.options$ = this.store.select(selectDictionaryItems).pipe(
-      filter(nonNull),
-      concatMap(items => {
-        return of([
+  ngOnInit(): void {
+    this.formGroup = this.formService.createFormGroup(this.formModel, { updateOn: 'change' });
+  }
+
+  ngOnChanges(): void {
+    this.store
+      .select(selectDictionaryOptions)
+      .pipe(
+        takeUntil(this.unsubscriber),
+        filter(nonNull)
+      )
+      .subscribe(items => {
+        this.formInputs.shortTextDictionary.options$ = of([
           new DynamicFormOption({
             label: undefined,
             value: undefined,
@@ -56,12 +66,9 @@ export class DictionaryComponent implements AfterViewInit, OnDestroy {
           }),
           ...items,
         ]);
-      })
-    );
-
-    this.formInputs.dictionary.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
-      this.formInputs.dictionary.value = undefined;
-    });
+        patchFormModel(this.formInputs, this.company);
+        this.formService.detectChanges(this.formComponent);
+      });
   }
 
   ngOnDestroy(): void {

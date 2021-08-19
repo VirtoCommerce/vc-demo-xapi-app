@@ -91,7 +91,6 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
   private _date: NgbDateStruct | null = null;
 
   get date(): NgbDateStruct {
-    console.log('date');
     if (this._date === null) {
       this._date = this.convertToNgbDateStruct(this.model.value);
     }
@@ -105,7 +104,6 @@ export class DynamicNGBootstrapDatetimePickerComponent extends DynamicFormContro
   private _time: NgbTimeStruct | null = null;
 
   get time(): NgbTimeStruct {
-    console.log('time');
     if (this._time === null) {
       this._time = this.convertToNgbTimeStruct(this.model.value);
     }

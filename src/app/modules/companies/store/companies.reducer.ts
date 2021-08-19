@@ -10,14 +10,14 @@ import {
 import { nullable } from 'src/app/helpers/nullable';
 import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
 import { formatDate } from '@angular/common';
-import { DictionaryItem } from 'src/app/models/dictionary-item';
+import { nonNull } from 'src/app/helpers/nonNull';
 
 export const companiesFeatureKey = 'companies';
 
 export interface State {
   selectedCompany: PartialDeep<Company> | null,
   editCompany: PartialDeep<Company> | null,
-  dictionaryItems: DictionaryItem[] | null,
+  dictionaryItems: Record<string, string[]> | null,
 }
 
 export const initialState: State = {
@@ -31,12 +31,14 @@ export const reducer = createReducer(
 
   on(CompaniesActions.getCompany, (state) : State => state),
   on(CompaniesActions.getCompanySuccess, (state, action): State  =>  {
-    const organization = action.data?.organization;
-
+    const organization = action.data.organization as getOrganization_organization;
+    const company = mapToCompany(organization);
+    const items = takeDictionaryItems(organization);
     return {
       ...state,
-      selectedCompany: mapToCompany(organization),
-      editCompany: mapToCompany(organization),
+      selectedCompany: company,
+      editCompany: company,
+      dictionaryItems: items,
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
@@ -76,7 +78,6 @@ function mapToCompany(
     updateMemberDynamicProperties_updateMemberDynamicProperties
   ), '__typename'> | null
 ) : Company | null {
-  console.log(organization);
   return !organization
     ? null
     : {
@@ -103,10 +104,27 @@ function mapToCompany(
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
         value => /$true^/i.test(value)
       ),
-      dictionary: organization.dynamicProperties
-        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary)
-        ?.dynamicProperty
-        ?.dictionaryItems
-        ?.items as DictionaryItem[] | null,
+      shortTextDictionary: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary)?.value as string | null,
     };
 }
+
+function takeDictionaryItems(organization?: getOrganization_organization |
+  Omit<(
+    updateOrganization_updateOrganization &
+    updateMemberDynamicProperties_updateMemberDynamicProperties
+  ), '__typename'> | null): Record<string, string[]> | null {
+  return !organization
+    ? null
+    : organization?.dynamicProperties
+      ?.filter(nonNull)
+      .map(dynamicPropertyValue => ({
+        [dynamicPropertyValue.name as string]:
+        dynamicPropertyValue.dynamicProperty?.dictionaryItems?.items?.map(item => item?.name) as string[],
+      }))
+      .reduce((acc, item) => ({
+        ...acc,
+        ...item,
+      }), {});
+}
+
