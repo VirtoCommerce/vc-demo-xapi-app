@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { GraphQLModule } from './graphql.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { ValidationModule } from './modules/validation/validation.module';
-import { DynamicFormsModule } from './modules/dynamic-forms/dynamic-forms.module';
+import { CustomDynamicFormsModule } from './modules/custom-dynamic-forms/custom-dynamic-forms.module';
 
 import { metaReducers, reducers } from './store';
 import { CountriesEffects } from './store/countries/countries.effects';
@@ -85,7 +85,7 @@ const appInitializerFactory =
     StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
     StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer),
     StoreModule.forFeature(fromCurrentCustomer.currentCustomerFeatureKey, fromCurrentCustomer.reducer),
-    DynamicFormsModule,
+    CustomDynamicFormsModule,
   ],
   providers: [
     {

@@ -1,7 +1,7 @@
 import { DynamicImageUploaderModel }
-  from './../../../dynamic-forms/components/dynamic-image-uploader/dynamic-image-uploader.model';
+  from './../../../custom-dynamic-forms/components/dynamic-image-uploader/dynamic-image-uploader.model';
 import { DynamicNgxCodemirorModel }
-  from './../../../dynamic-forms/components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
+  from './../../../custom-dynamic-forms/components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import {
   DynamicInputModel,
@@ -12,7 +12,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import {
   DynamicDateTimePickerModel,
-} from 'src/app/modules/dynamic-forms/components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
+} from 'src/app/modules/custom-dynamic-forms/components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const USUAL_PROPERTIES_INPUTS = {

@@ -65,4 +65,4 @@ import { DynamicImageUploaderComponent } from './components/dynamic-image-upload
     },
   ],
 })
-export class DynamicFormsModule { }
+export class CustomDynamicFormsModule { }
