@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { UploadResponse } from '../../models/upload-response';
@@ -21,59 +21,68 @@ type fnType = (_: string | null) => void;
   ],
 })
 export class ImageUploaderComponent implements ControlValueAccessor {
-  uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
+  private readonly uploadUrl =
+    `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
 
-  @Input()
-  imageUrl: string | null = null;
+  private _value: string | null = null;
 
-  @Output()
-  imageUrlChange = new EventEmitter<string | null>();
-
-  constructor(private readonly http: HttpClient) {
+  get value(): string | null {
+    return this._value;
   }
 
-  propagateChange = (_: string | null): void => {
+  set value(value: string | null) {
+    if (value !== undefined && this._value !== value) {
+      this._value = value;
+      this.onChange(value);
+      this.onTouched(value);
+      this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  onChange = (_: string | null): void => {
     return;
   };
 
-  writeValue(obj: string | null): void {
-    if (obj !== undefined) {
-      this.imageUrl = obj as string;
-    }
-  }
-
-  registerOnChange(fn: fnType): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(_: fnType): void {
+  onTouched = (_: string | null): void => {
     return;
   }
 
-  onFileSelected(event: Event): void {
+  constructor(
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly http: HttpClient
+  ) {
+  }
+
+  writeValue(value: string | null): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: fnType): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: fnType): void {
+    this.onTouched = fn;
+  }
+
+  onUpload(event: Event): void {
     const files = (event.target as HTMLInputElement).files;
     if (!!files && files.length > 0) {
-      const file:File = files[0];
+      const file = files[0];
 
-      if (file) {
-        const formData = new FormData();
-        formData.append('file', file);
+      const formData = new FormData();
+      formData.append('file', file);
 
-        this.http.post<UploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
-          if (items.length > 0) {
-            const url = items[0].url;
-            this.imageUrl = url;
-            this.propagateChange(this.imageUrl);
-            this.imageUrlChange.emit(this.imageUrl);
-          }
-        });
-      }
+      this.http.post<UploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
+        if (items.length > 0) {
+          const url = items[0].url;
+          this.value = url;
+        }
+      });
     }
   }
 
-  removeAsset(): void {
-    this.imageUrl = null;
-    this.propagateChange(this.imageUrl);
-    this.imageUrlChange.emit(this.imageUrl);
+  onDelete(): void {
+    this.value = null;
   }
 }
