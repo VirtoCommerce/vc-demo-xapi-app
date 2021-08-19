@@ -31,7 +31,7 @@ export const reducer = createReducer(
 
   on(CompaniesActions.getCompany, (state) : State => state),
   on(CompaniesActions.getCompanySuccess, (state, action): State  =>  {
-    const organization = action.data.organization as getOrganization_organization;
+    const organization = action.data.organization;
     const company = mapToCompany(organization);
     const items = takeDictionaryItems(organization);
     return {
@@ -109,11 +109,7 @@ function mapToCompany(
     };
 }
 
-function takeDictionaryItems(organization?: getOrganization_organization |
-  Omit<(
-    updateOrganization_updateOrganization &
-    updateMemberDynamicProperties_updateMemberDynamicProperties
-  ), '__typename'> | null): Record<string, string[]> | null {
+function takeDictionaryItems(organization: getOrganization_organization | null): Record<string, string[]> | null {
   return !organization
     ? null
     : organization?.dynamicProperties

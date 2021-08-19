@@ -62,7 +62,6 @@ export class DictionaryComponent implements OnChanges, OnDestroy, OnInit {
           new DynamicFormOption({
             label: undefined,
             value: undefined,
-            disabled: true,
           }),
           ...items,
         ]);
