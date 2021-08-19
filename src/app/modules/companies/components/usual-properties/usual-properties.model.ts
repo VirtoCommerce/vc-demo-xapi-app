@@ -1,5 +1,7 @@
-import { DynamicImageUploaderModel } from './../../../dynamic-forms/components/dynamic-image-uploader/dynamic-image-uploader.model';
-import { DynamicNgxCodemirorModel } from './../../../dynamic-forms/components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
+import { DynamicImageUploaderModel }
+  from './../../../dynamic-forms/components/dynamic-image-uploader/dynamic-image-uploader.model';
+import { DynamicNgxCodemirorModel }
+  from './../../../dynamic-forms/components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import {
   DynamicInputModel,

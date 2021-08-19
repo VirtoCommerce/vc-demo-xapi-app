@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +25,7 @@ interface uploadResponse {
     },
   ],
 })
-export class ImageUploaderComponent implements ControlValueAccessor, OnInit  {
+export class ImageUploaderComponent implements ControlValueAccessor {
   uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
 
   @Input()
@@ -36,11 +36,8 @@ export class ImageUploaderComponent implements ControlValueAccessor, OnInit  {
 
   constructor(private readonly http: HttpClient) {
   }
-  ngOnInit(): void {
 
-  }
-
-  propagateChange = (_: any) => {};
+  propagateChange = (_: any): void => { return };
 
   writeValue(obj: any): void {
     if (obj !== undefined) {
@@ -52,8 +49,9 @@ export class ImageUploaderComponent implements ControlValueAccessor, OnInit  {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void
-  {}
+  registerOnTouched(_: any): void {
+    return;
+  }
 
   onFileSelected(event: any): void {
     const file:File = event.target.files[0];

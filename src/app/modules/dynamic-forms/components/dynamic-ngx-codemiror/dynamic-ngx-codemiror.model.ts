@@ -1,10 +1,9 @@
 import { DynamicFormControlLayout,
-  DynamicFormValueControlModel, DynamicFormValueControlModelConfig, serializable } from "@ng-dynamic-forms/core"
+  DynamicFormValueControlModel, DynamicFormValueControlModelConfig, serializable } from '@ng-dynamic-forms/core';
 
 export const DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR = 'CODEMIROR';
 
-export interface DynamicNgxCodemirorModelConfig extends DynamicFormValueControlModelConfig<string>{
-}
+export type DynamicNgxCodemirorModelConfig = DynamicFormValueControlModelConfig<string>
 
 export class DynamicNgxCodemirorModel extends DynamicFormValueControlModel<string> {
   @serializable()

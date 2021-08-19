@@ -1,5 +1,6 @@
 import { CoreModule } from './../core/core.module';
-import { DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER } from './components/dynamic-image-uploader/dynamic-image-uploader.model';
+import { DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER }
+  from './components/dynamic-image-uploader/dynamic-image-uploader.model';
 import { DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
