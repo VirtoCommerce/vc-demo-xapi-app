@@ -23,15 +23,20 @@
                 <tr *ngFor="let method of methods">
                     <td [ngClass]="{'font-weight-bold': method.isActive}">
                         <div class="media">
-                            <img vcImageFallback="assets/images/shipping-method.svg" [src]="method.logoUrl"
-                                class="img-fluid" [alt]="method.code" />
+                            <img style="min-width: 40px; min-height: 40px;" vcImageFallback="assets/images/shipping-method.svg" [src]="method.logoUrl"/>
                             <div class="media-body mx-3">
                                 {{method.code}} - {{ method.optionName }}
                             </div>
                         </div>
                     </td>
                     <td [ngClass]="{'font-weight-bold': method.isActive}" style="text-align:center;">
-                        {{method.price?.formattedAmount}}</td>
+                        <ng-template [ngIf]="method.price?.amount === 0"> 
+                            Free
+                        </ng-template>
+                        <ng-template [ngIf]="method.price?.amount !== 0"> 
+                            {{method.price?.formattedAmount}}
+                        </ng-template>
+                    </td>
                     <td style="text-align:center;">
                         <div *ngIf="method.isActive">
                             <fa-icon [icon]="faCheck" size="lg" style="color: #F0AD4E;"></fa-icon>
