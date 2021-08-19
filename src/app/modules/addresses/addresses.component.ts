@@ -70,7 +70,15 @@ export class AddressesComponent implements OnInit, OnDestroy {
     this.router.navigate([
       '/addresses',
       address.id,
-    ]).catch(error => {
+    ], { state: { createNew: false } }).catch(error => {
+      throw new Error(error);
+    });
+  }
+
+  createAddress(): void {
+    this.router.navigate([
+      '/addresses/create',
+    ], { state: { createNew: true } }).catch(error => {
       throw new Error(error);
     });
   }

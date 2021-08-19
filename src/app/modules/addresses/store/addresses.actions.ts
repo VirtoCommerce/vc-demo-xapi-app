@@ -32,7 +32,7 @@ export const setAddress = createAction(
 
 export const updateAddress = createAction(
   '[Addresses] Update Address',
-  props<{ id: string, countryName: string }>()
+  props<{ memberId: string }>()
 );
 
 export const updateAddressSuccess = createAction(
@@ -43,4 +43,8 @@ export const updateAddressSuccess = createAction(
 export const updateAddressFailure = createAction(
   '[Addresses] Update Address Failure',
   props<{ error: ApolloError }>()
+);
+
+export const resetAddressForm = createAction(
+  '[Addresses] Reset Address Form'
 );

@@ -1,6 +1,6 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
+import { DynamicFormControlEvent, DynamicFormOption, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { of, Subject } from 'rxjs';
@@ -14,7 +14,7 @@ import { selectCountryOptions }
 import { getCountries } from 'src/app/store/countries/countries.actions';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
-import { setAddress, updateAddress } from '../../store/addresses.actions';
+import { resetAddressForm, setAddress, updateAddress } from '../../store/addresses.actions';
 import { selectSelectedAddress } from '../../store/addresses.selectors';
 import { ADDRESS_EDIT_FORM_LAYOUT } from './address-edit-form.layout';
 import { ADDRESS_EDIT_FORM_INPUTS, ADDRESS_EDIT_FORM_MODEL } from './address-edit-form.model';
@@ -48,12 +48,18 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
 
   unsubscriber = new Subject();
 
+  createAddressMode = false;
+
   constructor(
     private readonly formService: DynamicFormService,
     private readonly store: Store,
     private readonly router: Router,
     private readonly changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as {createNew: boolean};
+    this.createAddressMode = state.createNew;
+  }
 
   ngAfterViewInit(): void {
     this.store
@@ -63,14 +69,23 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
         this.countries = countries;
       });
 
-    this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions).pipe(
-      filter(nonNull),
-      concatMap(options => {
+    this.formInputs.countryCode.options$ = this.store.select(selectCountryOptions)
+      .pipe(filter(nonNull), concatMap(options => {
         return of([
+          new DynamicFormOption({
+            label: undefined,
+            value: undefined,
+            disabled: true,
+          }),
           ...options,
         ]);
-      })
-    );
+      }));
+    this.formInputs.countryCode.options$.pipe(takeUntil(this.unsubscriber)).subscribe(() => {
+      if (!this.formInputs.countryCode.value) {
+        this.formInputs.countryCode.value = undefined;
+      }
+    });
+
     this.store.dispatch(getCountries());
 
     this.store
@@ -90,6 +105,8 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
   }
 
   resetForm(): void {
+    this.formGroup.reset();
+    this.store.dispatch(resetAddressForm());
     this.router.navigate([
       '/addresses',
     ]).catch(error => {
@@ -107,22 +124,14 @@ export class AddressEditComponent implements AfterViewInit, AfterViewChecked, On
   }
 
   submit(): void {
-    if (this.formInputs.countryCode.value) {
-      const countryName = this.getCountryFullName(this.formInputs.countryCode.value);
-      this.store.dispatch(updateAddress({
-        id: this.curentCustomerOrganizationId,
-        countryName,
-      }));
-    }
+    this.formGroup.reset();
+    this.store.dispatch(updateAddress({
+      memberId: this.curentCustomerOrganizationId,
+    }));
   }
 
   ngOnDestroy(): void {
     this.unsubscriber.next();
     this.unsubscriber.complete();
-  }
-
-  private getCountryFullName(countryCode?: string | (string | undefined)[]): string {
-    const countryName = this.countries?.find(country => country.id === countryCode)?.name;
-    return countryName!;
   }
 }

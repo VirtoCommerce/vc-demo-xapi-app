@@ -3,7 +3,7 @@
     <h1 class="mb-3" *ngIf="curentCustomerOrganization$ | async as curentCustomerOrganization">{{curentCustomerOrganization?.name}}</h1>
     <div class="d-flex justify-content-between align-items-center pb-3">
       <h3 class="text-condensed mb-0">Company address</h3>
-      <button class="btn btn-outline-primary">Add new address</button>
+      <button class="btn btn-outline-primary" (click)="createAddress()">Add new address</button>
     </div>
     <div class="table-responsive mb-3">
       <table class="table table-striped table-borderless small-table-head" aria-label="Company addresses">
