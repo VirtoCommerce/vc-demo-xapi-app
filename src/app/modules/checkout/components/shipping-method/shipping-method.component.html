@@ -10,8 +10,8 @@
                     </div>
                 </div>
                 <div class="media" *ngIf="shippingMethod">
-                    <img class="user-select-none" [src]="shippingMethod.logoUrl" class="img-fluid" [alt]="shippingMethod.code">
-                    <div class="media-body" >
+                    <img class="user-select-none" vcImageFallback="assets/images/shipping-method.svg" [src]="shippingMethod.logoUrl" class="img-fluid" [alt]="shippingMethod.code">
+                    <div class="media-body">
                         <div class="mx-3">
                             {{shippingMethod.code}} - {{ shippingMethod.optionName }} ({{ shippingMethod.price?.formattedAmount }})
                         </div>

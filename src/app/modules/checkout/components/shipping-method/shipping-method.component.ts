@@ -37,7 +37,7 @@ export class ShippingMethodComponent implements OnDestroy {
     });
     const methodsComponent = modal.componentInstance as ShippingMethodSelectComponent;
 
-    methodsComponent.methods = this.cart?.shippingMethods?.map<ShippingMethodRecord>(x => {
+    methodsComponent.methods = this.cart?.availableShippingMethods?.map<ShippingMethodRecord>(x => {
       return {
         ...x,
         isActive: this.shipment?.shipmentMethodCode === x.code && this.shipment?.shipmentMethodOption === x.optionName,

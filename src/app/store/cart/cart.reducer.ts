@@ -17,7 +17,7 @@ export const initialState: State = {
     items: [],
     shipments: [],
     payments: [],
-    shippingMethods: [],
+    availableShippingMethods: [],
   },
   billingAddressAsShipping: true,
 };
@@ -48,7 +48,7 @@ export const reducer = createReducer(
         ...x,
         billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
-      shippingMethods: customMap(action?.data?.cart?.availableShippingMethods, x => ({ ...x })),
+      availableShippingMethods: customMap(action?.data?.cart?.availableShippingMethods, x => ({ ...x })),
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),
