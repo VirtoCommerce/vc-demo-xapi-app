@@ -4,7 +4,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import {
   DynamicMultivalueInputModel,
-} from 'src/app/modules/dynamic-forms/components/dynamic-ng-bootstrap-multivalue-input/dynamic-multivalue-input.model';
+} from '../../../custom-dynamic-forms/components/dynamic-ng-bootstrap-multivalue-input/dynamic-multivalue-input.model';
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const MULTIVALUE_PROPERTIES_INPUTS = {
@@ -18,7 +18,7 @@ export const MULTIVALUE_PROPERTIES_INPUTS = {
       maxLength: validationMessages.maxLengthMessage,
     },
   }),
-  integerMultivalue: new DynamicMultivalueInputModel({
+  IntegerMultivalue: new DynamicMultivalueInputModel({
     id: 'integerMultivalue',
     label: 'Integer ● Multivalue',
     inputType: 'text',

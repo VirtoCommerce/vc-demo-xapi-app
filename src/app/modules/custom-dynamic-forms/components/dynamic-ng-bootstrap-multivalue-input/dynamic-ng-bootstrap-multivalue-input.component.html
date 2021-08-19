@@ -1,0 +1,36 @@
+<div [formGroup]="group" [class.input-group]="model.prefix || model.suffix">
+
+  <div *ngIf="model.prefix" class="input-group-prepend">
+      <span class="input-group-text" [innerHTML]="model.prefix"></span>
+  </div>
+
+  <vc-multivalue-input  [max]="model.max"
+                        [min]="model.min"
+                        [step]="model.step"
+                        [autocomplete]="model.autoComplete"
+                        [autofocus]="model.autoFocus"
+                        [class.is-invalid]="showErrorMessages"
+                        [formControlName]="model.id"
+                        [id]="id"
+                        [maxlength]="model.maxLength"
+                        [minlength]="model.minLength"
+                        [name]="model.name"
+                        [ngClass]="getClass('element', 'control')"
+                        [placeholder]="model.placeholder"
+                        [readonly]="model.readOnly"
+                        [required]="model.required"
+                        [spellcheck]="model.spellCheck"
+                        [tabindex]="model.tabIndex"
+                        [mask]="model.mask"
+                        [maskConfig]="model.maskConfig"
+                        [type]="model.inputType"
+                        (blur)="onBlur($event)"
+                        (change)="onChange($event)"
+                        (focus)="onFocus($event)">
+  </vc-multivalue-input>
+
+  <div *ngIf="model.suffix" class="input-group-append">
+      <span class="input-group-text" [innerHTML]="model.suffix"></span>
+  </div>
+
+</div>

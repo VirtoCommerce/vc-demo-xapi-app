@@ -8,6 +8,8 @@
 
 // Include variables
 @import "bootstrap/scss/variables";
+
+// Include overriden & custom maps
 @import "styles/maps";
 
 // Include utilities to be able override them
@@ -19,6 +21,8 @@
 // Include Bootstrap stylesheets
 @import "bootstrap/scss/bootstrap";
 
-// Custom code, including which one override Bootstrap
+// Code which override Bootstrap styles
 @import "styles/override";
+
+// Code with custom classes
 @import "styles/custom";

@@ -1,0 +1,49 @@
+<span
+  *ngFor="let value of values"
+  class="badge bg-primary border border-2 border-primary fw-normal me-2 py-2">
+  {{ value }}
+</span>
+<input
+  *ngIf="adding; else add"
+  [(ngModel)]="newValue"
+  class="border-0 outline-0"
+  [attr.max]="max"
+  [attr.min]="min"
+  [attr.step]="step"
+  [autocomplete]="autocomplete"
+  autofocus="true"
+  [maxlength]="maxlength"
+  [minlength]="minlength"
+  [placeholder]="placeholder"
+  [readonly]="readonly"
+  [required]="required"
+  [spellcheck]="spellcheck"
+  [tabindex]="tabindex"
+  [mask]="mask"
+  [specialCharacters]="maskConfig.specialCharacters"
+  [patterns]="maskConfig.patterns"
+  [prefix]="maskConfig.prefix"
+  [suffix]="maskConfig.suffix"
+  [thousandSeparator]="maskConfig.thousandSeparator"
+  [decimalMarker]="maskConfig.decimalMarker"
+  [dropSpecialCharacters]="maskConfig.dropSpecialCharacters"
+  [hiddenInput]="maskConfig.hiddenInput"
+  [showMaskTyped]="maskConfig.showMaskTyped"
+  [placeHolderCharacter]="maskConfig.placeHolderCharacter"
+  [shownMaskExpression]="maskConfig.shownMaskExpression"
+  [showTemplate]="maskConfig.showTemplate"
+  [clearIfNotMatch]="maskConfig.clearIfNotMatch"
+  [validation]="maskConfig.validation"
+  [separatorLimit]="maskConfig.separatorLimit"
+  [allowNegativeNumbers]="maskConfig.allowNegativeNumbers"
+  [leadZeroDateTime]="maskConfig.leadZeroDateTime"
+  [type]="type"
+  (keyup.enter)="onAdd()" />
+<ng-template #add>
+  <button
+    class="badge btn btn-outline-primary text-sans-serif fw-normal me-2 py-2"
+    (click)="adding = true">
+    <span class="me-2">Add</span>
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+</ng-template>

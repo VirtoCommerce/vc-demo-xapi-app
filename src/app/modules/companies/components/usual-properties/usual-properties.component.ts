@@ -14,6 +14,7 @@ import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstr
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { Company } from 'src/app/models/company.model';
 import { PartialDeep } from 'type-fest';
+import { USUAL_PROPERTIES_LAYOUT } from './usual-properties.layout';
 import { USUAL_PROPERTIES_INPUTS, USUAL_PROPERTIES_MODEL } from './usual-properties.model';
 
 @Component({
@@ -42,6 +43,8 @@ export class UsualPropertiesComponent implements OnInit, OnChanges {
   formInputs = USUAL_PROPERTIES_INPUTS;
 
   formModel = USUAL_PROPERTIES_MODEL;
+
+  formLayout = USUAL_PROPERTIES_LAYOUT;
 
   formGroup!: FormGroup;
 

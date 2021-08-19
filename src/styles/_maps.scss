@@ -50,3 +50,6 @@ $spacers: map-merge(
 );
 
 $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
+
+$outline-widths: $border-widths;
+$outline-offsets: $outline-widths;

@@ -23,6 +23,33 @@ $utilities: map-merge(
         ),
       ),
     ),
+    "outline": (
+      property: outline,
+      values: (
+        null: $outline-color solid $outline-width,
+        0: 0,
+      )
+    ),
+    "outline-color": (
+      property: outline-color,
+      class: outline,
+      values: $theme-colors
+    ),
+    "outline-offset": (
+      property: outline-offset,
+      class: outline,
+      values: $outline-offsets
+    ),
+    "outline-style": (
+      property: outline-style,
+      class: outline,
+      values: auto none dotted dashed solid double groove ridge inset outset
+    ),
+    "outline-width": (
+      property: outline-width,
+      class: outline,
+      values: $outline-widths
+    ),
     "width": map-merge(
       map-get($utilities, "width"),
       (

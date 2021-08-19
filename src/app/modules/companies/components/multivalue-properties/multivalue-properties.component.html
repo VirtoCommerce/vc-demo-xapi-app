@@ -2,6 +2,7 @@
 <form [formGroup]="formGroup"
       class="col">
   <dynamic-ng-bootstrap-form [group]="formGroup"
+                             [layout]="formLayout"
                              [model]="formModel"
                              (change)="onChange($event)">
   </dynamic-ng-bootstrap-form>

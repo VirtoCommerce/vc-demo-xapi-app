@@ -38,9 +38,6 @@ export class DynamicMultivalueInputModel extends DynamicInputControlModel<string
     min: number | string | null;
 
     @serializable()
-    pattern: string | null;
-
-    @serializable()
     step: number | null;
 
     @serializable()
@@ -59,7 +56,6 @@ export class DynamicMultivalueInputModel extends DynamicInputControlModel<string
         : initialConfig;
       this.max = config.max !== undefined ? config.max : null;
       this.min = config.min !== undefined ? config.min : null;
-      this.pattern = config.pattern ?? null;
       this.step = isNumber(config.step) ? config.step : null;
     }
 }

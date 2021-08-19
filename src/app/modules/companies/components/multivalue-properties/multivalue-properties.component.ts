@@ -11,9 +11,10 @@ import {
 import { FormGroup } from '@angular/forms';
 import { DynamicFormService, DynamicFormControlEvent } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
-import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
+import { fromFormModel } from 'src/app/helpers/dynamic-forms';
 import { Company } from 'src/app/models/company.model';
 import { PartialDeep } from 'type-fest';
+import { MULTIVALUE_PROPERTIES_LAYOUT } from './multivalue-properties.layout';
 import { MULTIVALUE_PROPERTIES_INPUTS, MULTIVALUE_PROPERTIES_MODEL } from './multivalue-properties.model';
 
 @Component({
@@ -43,6 +44,8 @@ export class MultivaluePropertiesComponent implements OnInit, OnChanges {
 
   formModel = MULTIVALUE_PROPERTIES_MODEL;
 
+  formLayout = MULTIVALUE_PROPERTIES_LAYOUT;
+
   formGroup!: FormGroup;
 
   constructor(
@@ -56,7 +59,7 @@ export class MultivaluePropertiesComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    patchFormModel(this.formInputs, this.company);
+    // PatchFormModel(this.formInputs, this.company);
     this.validChange.emit(this.formGroup?.valid);
   }
 

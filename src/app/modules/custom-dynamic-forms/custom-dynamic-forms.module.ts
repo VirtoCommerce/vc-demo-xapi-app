@@ -25,6 +25,7 @@ import {
   DYNAMIC_FORM_CONTROL_TYPE_MULTIVALUE_INPUT,
 } from './components/dynamic-ng-bootstrap-multivalue-input/dynamic-multivalue-input.model';
 import { NgxMaskModule } from 'ngx-mask';
+import { CustomFormsModule } from '../custom-forms/custom-forms.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     DynamicFormsCoreModule,
     FontAwesomeModule,
+    CustomFormsModule,
   ],
   providers: [
     NgbDateNativeUTCAdapter,
@@ -59,4 +61,4 @@ import { NgxMaskModule } from 'ngx-mask';
     },
   ],
 })
-export class DynamicFormsModule { }
+export class CustomDynamicFormsModule { }

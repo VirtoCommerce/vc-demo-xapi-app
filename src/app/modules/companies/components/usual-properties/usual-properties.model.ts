@@ -8,7 +8,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import {
   DynamicDateTimePickerModel,
-} from 'src/app/modules/dynamic-forms/components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
+} from '../../../custom-dynamic-forms/components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 export const USUAL_PROPERTIES_INPUTS = {

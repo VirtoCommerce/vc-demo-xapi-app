@@ -8,8 +8,8 @@ import {
   DynamicFormLayout,
   DynamicFormLayoutService,
   DynamicFormValidationService,
-  DynamicInputModel,
 } from '@ng-dynamic-forms/core';
+import { DynamicMultivalueInputModel } from './dynamic-multivalue-input.model';
 
 @Component({
   selector: 'vc-dynamic-ng-bootstrap-multivalue-input',
@@ -30,7 +30,7 @@ export class DynamicNgBootstrapMultivalueInputComponent extends DynamicFormContr
   layout?: DynamicFormControlLayout;
 
   @Input()
-  model!: DynamicInputModel;
+  model!: DynamicMultivalueInputModel;
 
   @Output()
   blur: EventEmitter<any> = new EventEmitter();

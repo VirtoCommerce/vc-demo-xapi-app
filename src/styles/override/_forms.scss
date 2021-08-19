@@ -4,6 +4,14 @@
   &:focus {
     box-shadow: 0 0 0 1px $input-focus-border-color inset;
   }
+
+  &:focus-within {
+    color: $input-focus-color;
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    outline: 0;
+    box-shadow: 0 0 0 1px $input-focus-border-color inset;
+  }
 }
 
 form label.required:after {

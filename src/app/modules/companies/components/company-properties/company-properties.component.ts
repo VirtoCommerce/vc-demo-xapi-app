@@ -14,6 +14,7 @@ import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
 import { Company } from 'src/app/models/company.model';
 import { PartialDeep } from 'type-fest';
 import { COMPANY_PROPERTIES_INPUTS, COMPANY_PROPERTIES_MODEL } from './company-properties.model';
+import { COMPANY_PROPERTIES_LAYOUT } from './company-propertis.layout';
 
 @Component({
   selector: 'vc-company-properties',
@@ -40,6 +41,8 @@ export class CompanyPropertiesComponent implements OnInit, OnChanges {
   formInputs = COMPANY_PROPERTIES_INPUTS;
 
   formModel = COMPANY_PROPERTIES_MODEL;
+
+  formLayout = COMPANY_PROPERTIES_LAYOUT;
 
   formGroup!: FormGroup;
 

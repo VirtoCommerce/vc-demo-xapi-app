@@ -1,0 +1,17 @@
+@import "~bootstrap/scss/functions";
+@import "~src/styles/variables";
+@import "~bootstrap/scss/variables";
+
+:host {
+  padding-top: $input-padding-y;
+  padding-bottom: $input-padding-y;
+}
+
+.badge {
+  font-size: 1em;
+}
+
+.btn {
+  font-size: 1em;
+  text-transform: none;
+}
