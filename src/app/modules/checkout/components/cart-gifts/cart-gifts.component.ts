@@ -48,7 +48,7 @@ export class CartGiftsComponent implements OnInit, OnDestroy {
       }));
     }
     else {
-      const cartItemToRemove = this.cartItems.find(li => li.productId == item.productId);
+      const cartItemToRemove = this.cartItems.find(li => li.productId === item.productId);
       if (cartItemToRemove) {
         this.store.dispatch(removeCartItem({
           lineItemId: cartItemToRemove.id,
