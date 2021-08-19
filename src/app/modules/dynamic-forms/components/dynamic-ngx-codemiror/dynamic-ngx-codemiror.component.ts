@@ -12,6 +12,7 @@ import { DynamicNgxCodemirorModel } from './dynamic-ngx-codemiror.model';
 @Component({
   selector: 'vc-dynamic-ngx-codemiror',
   templateUrl: './dynamic-ngx-codemiror.component.html',
+  styleUrls: ['./dynamic-ngx-codemiror.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicNgxCodemirorComponent extends DynamicFormControlComponent {
