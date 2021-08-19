@@ -2,11 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-
-interface uploadResponse {
-  name: string;
-  url: string;
-}
+import { UploadResponse } from '../../models/upload-response';
 
 type fnType = (_: string | null) => void;
 
@@ -63,7 +59,7 @@ export class ImageUploaderComponent implements ControlValueAccessor {
         const formData = new FormData();
         formData.append('file', file);
 
-        this.http.post<uploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
+        this.http.post<UploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
           if (items.length > 0) {
             const url = items[0].url;
             this.imageUrl = url;
