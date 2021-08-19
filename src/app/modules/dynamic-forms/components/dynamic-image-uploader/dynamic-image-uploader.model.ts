@@ -1,10 +1,9 @@
 import { DynamicFormControlLayout,
-  DynamicFormValueControlModel, DynamicFormValueControlModelConfig, serializable } from "@ng-dynamic-forms/core"
+  DynamicFormValueControlModel, DynamicFormValueControlModelConfig, serializable } from '@ng-dynamic-forms/core';
 
 export const DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER = 'IMAGE_UPLOADER';
 
-export interface DynamicImageUploaderModelConfig extends DynamicFormValueControlModelConfig<string>{
-}
+export type DynamicImageUploaderModelConfig = DynamicFormValueControlModelConfig<string>
 
 export class DynamicImageUploaderModel extends DynamicFormValueControlModel<string> {
   @serializable()

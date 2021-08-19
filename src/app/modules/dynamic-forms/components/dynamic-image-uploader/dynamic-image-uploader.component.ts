@@ -1,6 +1,7 @@
 import { DynamicImageUploaderModel } from './dynamic-image-uploader.model';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { DynamicFormControlComponent, DynamicFormLayout, DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
+import { DynamicFormControlComponent, DynamicFormLayout, DynamicFormLayoutService, DynamicFormValidationService }
+  from '@ng-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
 import { ImageUploaderComponent } from 'src/app/modules/core/components/image-uploader/image-uploader.component';
 
@@ -27,8 +28,10 @@ export class DynamicImageUploaderComponent extends DynamicFormControlComponent {
 
   @ViewChild(ImageUploaderComponent) impageUploaderComponent!: ImageUploaderComponent;
 
-  constructor(protected layoutService: DynamicFormLayoutService,
-    protected validationService: DynamicFormValidationService) {
+  constructor(
+protected layoutService: DynamicFormLayoutService,
+    protected validationService: DynamicFormValidationService
+  ) {
     super(layoutService, validationService);
   }
 }
