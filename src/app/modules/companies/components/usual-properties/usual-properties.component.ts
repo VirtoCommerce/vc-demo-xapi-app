@@ -1,3 +1,4 @@
+import { USUAL_PROPERTIES_FORM_LAYOUT as USUAL_PROPERTIES_LAYOUT } from './usual-properties.layout';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -42,6 +43,8 @@ export class UsualPropertiesComponent implements OnInit, OnChanges {
   formInputs = USUAL_PROPERTIES_INPUTS;
 
   formModel = USUAL_PROPERTIES_MODEL;
+
+  formLayout = USUAL_PROPERTIES_LAYOUT;
 
   formGroup!: FormGroup;
 
