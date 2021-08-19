@@ -15,6 +15,7 @@ import updateAddressMutation from '../../../graphql/mutations/update-organizatio
 import { Router } from '@angular/router';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
 import { nonNull } from 'src/app/helpers/nonNull';
+import { pageInfo } from '../addresses.constants';
 
 @Injectable()
 export class AddressesEffects {
@@ -69,6 +70,15 @@ export class AddressesEffects {
             ],
           },
         },
+        refetchQueries: [
+          {
+            query: getOrganizationAddressesQuery,
+            variables: {
+              id: action.memberId,
+              count: pageInfo.pageSize,
+            },
+          },
+        ],
       }).pipe(
         map(result => AddressesActions.updateAddressSuccess({
           data: result.data,
