@@ -16,7 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
-import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +37,6 @@ import { CoreModule } from '../core/core.module';
     EffectsModule.forFeature([
       CompaniesEffects,
     ]),
-    CoreModule,
   ],
 })
 export class CompaniesModule { }

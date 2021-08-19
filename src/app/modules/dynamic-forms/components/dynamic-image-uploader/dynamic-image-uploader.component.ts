@@ -5,7 +5,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewCh
 import { DynamicFormControlComponent, DynamicFormLayout, DynamicFormLayoutService, DynamicFormValidationService }
   from '@ng-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
-import { ImageUploaderComponent } from 'src/app/modules/core/components/image-uploader/image-uploader.component';
+import { ImageUploaderComponent }
+  from 'src/app/modules/custom-forms/components/image-uploader/image-uploader.component';
 
 @Component({
   selector: 'vc-dynamic-image-uploader',
