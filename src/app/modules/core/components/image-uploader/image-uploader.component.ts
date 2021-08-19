@@ -66,9 +66,8 @@ export class ImageUploaderComponent implements ControlValueAccessor, OnInit  {
         if (items.length > 0) {
           const url = items[0].url;
           this.imageUrl = url;
-          console.log(this.imageUrl);
-          this.imageUrlChange.emit(url);
           this.propagateChange(this.imageUrl);
+          this.imageUrlChange.emit(this.imageUrl);
         }
       });
     }
@@ -76,7 +75,7 @@ export class ImageUploaderComponent implements ControlValueAccessor, OnInit  {
 
   removeAsset(): void {
     this.imageUrl = null;
-    this.imageUrlChange.emit(null);
     this.propagateChange(this.imageUrl);
+    this.imageUrlChange.emit(this.imageUrl);
   }
 }
