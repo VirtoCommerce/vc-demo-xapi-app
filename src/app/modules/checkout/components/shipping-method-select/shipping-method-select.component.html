@@ -23,7 +23,8 @@
                 <tr *ngFor="let method of methods">
                     <td [ngClass]="{'font-weight-bold': method.isActive}">
                         <div class="media">
-                            <img style="min-width: 40px; min-height: 40px;" vcImageFallback="assets/images/shipping-method.svg" [src]="method.logoUrl"/>
+                            <img style="min-width: 40px; min-height: 40px;" vcImageFallback="assets/images/shipping-method.svg" [src]="method.logoUrl"
+                                alt="code"/>
                             <div class="media-body mx-3">
                                 {{method.code}} - {{ method.optionName }}
                             </div>
