@@ -3,9 +3,10 @@
     <textarea class="form-control no-resize" 
         id="comment" 
         name="comment" 
-        maxlength="1024"
+        maxlength={{maxLength}}
         rows="5"
         [ngModel]='cartCommentText'
         (ngModelChange)='onModelChange($event)'>
     </textarea>
+    <label class="form-label float-end">{{cartCommentText?.length??0}}/{{maxLength}}</label>
 </div>

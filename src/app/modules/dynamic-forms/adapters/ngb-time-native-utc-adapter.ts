@@ -24,7 +24,7 @@ export class NgbTimeNativeUTCAdapter extends NgbTimeAdapter<Date> {
 
   protected _toNativeDate(date: NgbTimeStruct): Date {
     const today = new Date();
-    const jsDate = new Date(Date.UTC(
+    return new Date(Date.UTC(
       today.getUTCFullYear(),
       today.getUTCMonth() - 1,
       today.getUTCDay(),
@@ -32,6 +32,5 @@ export class NgbTimeNativeUTCAdapter extends NgbTimeAdapter<Date> {
       date.minute,
       date.second
     ));
-    return jsDate;
   }
 }

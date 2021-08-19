@@ -9,3 +9,8 @@ export const selectOrganizationAddresses = createSelector(
   selectAddressesState,
   (state: fromAddresses.State) => state.addresses
 );
+
+export const selectSelectedAddress = createSelector(
+  selectAddressesState,
+  (state: fromAddresses.State) => state.selectedAddress
+);

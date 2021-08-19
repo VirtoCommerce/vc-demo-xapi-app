@@ -14,6 +14,7 @@ import * as fromLogin from './login/login.reducer';
 import * as fromCurrentCustomer from './current-customer/current-customer.reducer';
 import * as fromAddresses from '../modules/addresses/store/addresses.reducer';
 import * as fromCompanies from '../modules/companies/store/companies.reducer';
+import * as fromRegions from './regions/regions.reducer';
 
 export interface State {
 [fromCountries.countriesFeatureKey]: fromCountries.State;
@@ -24,6 +25,7 @@ export interface State {
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.State;
 [fromAddresses.addressesFeatureKey]: fromAddresses.State;
 [fromCompanies.companiesFeatureKey]: fromCompanies.State;
+[fromRegions.regionsFeatureKey]: fromRegions.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -35,6 +37,7 @@ export const reducers: ActionReducerMap<State> = {
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.reducer,
 [fromAddresses.addressesFeatureKey]: fromAddresses.reducer,
 [fromCompanies.companiesFeatureKey]: fromCompanies.reducer,
+[fromRegions.regionsFeatureKey]: fromRegions.reducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

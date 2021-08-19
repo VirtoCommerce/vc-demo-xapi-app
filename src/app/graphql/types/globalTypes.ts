@@ -29,6 +29,50 @@ export interface InputAddItemsType {
   readonly cartItems: ReadonlyArray<(InputNewCartItemType | null)>;
 }
 
+export interface InputAddOrUpdateCartPaymentType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly payment: InputPaymentType;
+}
+
+export interface InputAddOrUpdateCartShipmentType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly shipment: InputShipmentType;
+}
+
+export interface InputAddressType {
+  readonly id?: string | null;
+  readonly city?: string | null;
+  readonly countryCode?: string | null;
+  readonly countryName?: string | null;
+  readonly email?: string | null;
+  readonly firstName?: string | null;
+  readonly key?: string | null;
+  readonly lastName?: string | null;
+  readonly line1?: string | null;
+  readonly line2?: string | null;
+  readonly middleName?: string | null;
+  readonly name?: string | null;
+  readonly organization?: string | null;
+  readonly phone?: string | null;
+  readonly postalCode?: string | null;
+  readonly regionId?: string | null;
+  readonly regionName?: string | null;
+  readonly zip?: string | null;
+  readonly addressType?: number | null;
+}
+
 export interface InputApplicationUserLoginType {
   readonly loginProvider: string;
   readonly providerKey: string;
@@ -75,6 +119,26 @@ export interface InputChangeCommentType {
 }
 
 export interface InputClearCartType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+}
+
+export interface InputClearPaymentsType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+}
+
+export interface InputClearShipmentsType {
   readonly cartId?: string | null;
   readonly storeId: string;
   readonly cartName?: string | null;
@@ -167,6 +231,16 @@ export interface InputNewCartItemType {
   readonly quantity?: number | null;
 }
 
+export interface InputPaymentType {
+  readonly id?: string | null;
+  readonly outerId?: string | null;
+  readonly paymentGatewayCode?: string | null;
+  readonly billingAddress?: InputAddressType | null;
+  readonly currency?: string | null;
+  readonly price?: any | null;
+  readonly amount?: any | null;
+}
+
 export interface InputRemoveCouponType {
   readonly cartId?: string | null;
   readonly storeId: string;
@@ -187,6 +261,23 @@ export interface InputRemoveItemType {
   readonly cultureName?: string | null;
   readonly cartType?: string | null;
   readonly lineItemId: string;
+}
+
+export interface InputShipmentType {
+  readonly id?: string | null;
+  readonly fulfillmentCenterId?: string | null;
+  readonly height?: any | null;
+  readonly length?: any | null;
+  readonly measureUnit?: string | null;
+  readonly shipmentMethodCode?: string | null;
+  readonly shipmentMethodOption?: string | null;
+  readonly volumetricWeight?: any | null;
+  readonly weight?: any | null;
+  readonly weightUnit?: string | null;
+  readonly width?: any | null;
+  readonly deliveryAddress?: InputAddressType | null;
+  readonly currency?: string | null;
+  readonly price?: any | null;
 }
 
 export interface InputUpdateCartDynamicPropertiesType {
@@ -210,6 +301,11 @@ export interface InputUpdateCartItemDynamicPropertiesType {
   readonly cartType?: string | null;
   readonly lineItemId: string;
   readonly dynamicProperties: ReadonlyArray<(InputDynamicPropertyValueType | null)>;
+}
+
+export interface InputUpdateMemberAddressType {
+  readonly memberId: string;
+  readonly addresses: ReadonlyArray<(InputMemberAddressType | null)>;
 }
 
 export interface InputUpdateMemberDynamicPropertiesType {

@@ -1,44 +1,64 @@
 import { createReducer, on } from '@ngrx/store';
+import { Address } from 'src/app/models/address.model';
 import * as AddressesActions from './addresses.actions';
 
 export const addressesFeatureKey = 'addresses';
 
 export interface State {
   addresses: {
-    items?: {
-      firstName?: string | null,
-      lastName?: string | null,
-      line1?: string | null,
-      phone?: string | null,
-      email?: string | null,
-      regionName?: string | null,
-      countryCode?: string | null,
-      postalCode?: string | null,
-      city?: string | null,
-    } [] | null,
+    items?: Address [] | null,
     totalCount?: number | null
-  } | null
+  } | null,
+  selectedAddress: Address | null,
+  editAddress: Address | null,
 }
 
 export const initialState: State = {
   addresses: null,
+  selectedAddress: null,
+  editAddress: null,
 };
 
 export const reducer = createReducer(
   initialState,
 
-  on(AddressesActions.getAddressess, (state): State => state),
-  on(AddressesActions.getAddressessSuccess, (_, action): State => {
+  on(AddressesActions.setSelectedAddress, (state, action): State => {
     return {
+      ...state,
+      selectedAddress: action.address,
+      editAddress: action.address,
+    };
+  }),
+  on(AddressesActions.setAddress, (state, action): State => ({
+    ...state,
+    editAddress: {
+      ...state.editAddress,
+      ...action.data,
+    },
+  })),
+  on(AddressesActions.updateAddress, (state) : State => state),
+  on(AddressesActions.getAddressess, (state): State => state),
+  on(AddressesActions.getAddressessSuccess, (state, action): State => {
+    const addresses = action.data.organization?.addresses?.items?.map(item => ({
+      ...item,
+    }));
+    addresses?.forEach(address => delete address.__typename);
+    return {
+      ...state,
       addresses: {
-        items: action.data.organization?.addresses?.items?.map(address => ({
-          ...address,
-        })),
+        items: addresses,
         totalCount: action.data.organization?.addresses?.totalCount,
       },
     };
   }),
-  on(AddressesActions.getAddressessFailure, (_): State => ({ addresses: null }))
+  on(AddressesActions.getAddressessFailure, (state): State => ({
+    ...state,
+    addresses: null,
+  })),
+  on(AddressesActions.resetAddressForm, (state): State => ({
+    ...state,
+    editAddress: null,
+    selectedAddress: null,
+  }))
 
 );
-

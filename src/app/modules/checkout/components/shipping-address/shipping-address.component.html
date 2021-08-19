@@ -1,0 +1,27 @@
+<div>
+    <label class="form-label checkout-form-label">Shipping address</label>
+    <div class="card card-body py-0">
+        <div class="row" style="height: 7.5rem;">
+            <div class="col-lg-18 media-center">
+                <div class="media" *ngIf="!address">
+                    <img class="user-select-none" src="assets/images/danger.svg" alt="dangerIcon">
+                    <div class="media-body" >
+                        <div class="mx-3 text-danger">You do not have a shipping address. Please create a new one.</div>
+                    </div>
+                </div>
+                <div *ngIf="address">
+                    <div><strong>{{ address.firstName }} {{ address.lastName }}</strong></div>
+                    <div>{{ address.line1 }} {{ address.line2 }}, {{ address.countryName }} {{ address.postalCode }}</div>
+                    <div><strong>Phone:</strong> {{ address.phone }}</div>
+                    <div><strong>Email:</strong> {{ address.email }}</div>
+                </div>
+            </div>
+            <div class="col-lg-6 media-center">
+                <button type="button" class="btn btn-outline-primary" (click)="openCreateAddress()">
+                    <ng-template [ngIf]="!address">NEW ADDRESS</ng-template>
+                    <ng-template [ngIf]="address">CHANGE</ng-template>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

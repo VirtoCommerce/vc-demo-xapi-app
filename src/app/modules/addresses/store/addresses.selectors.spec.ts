@@ -7,6 +7,10 @@ describe('Addresses Selectors', () => {
       [fromAddresses.addressesFeatureKey]: fromAddresses.initialState,
     });
 
-    expect(result).toEqual({ addresses: null });
+    expect(result).toEqual({
+      addresses: null,
+      selectedAddress: null,
+      editAddress: null,
+    });
   });
 });

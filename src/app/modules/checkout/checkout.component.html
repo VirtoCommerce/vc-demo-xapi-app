@@ -1,47 +1,74 @@
 <main class="h-100" role="main">
-  <div class="container pt-4 pb-6">
-    <div class="page-header" id="header">
+    <div class="container pt-4 pb-6">
+      <div class="page-header" id="header">
+        <div class="row">
+          <div class="col-lg-16 col-md-14 col-sm-12">
+            <h1 class="mb-4 magic-offset-1">Checkout</h1>
+          </div>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-lg-16 col-md-14 col-sm-12">
-          <h1 class="mb-4 magic-offset-1">CHECKOUT</h1>
+        <div class="col-lg-17">
+          <div class="row mb-3">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/checkout-products-icon.svg" alt="productsLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">My products</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <vc-line-items></vc-line-items>
+            </div>
+          </div>
+          <div class="row mt-4 mb-1">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/extra.svg" alt="extraLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Shipping details</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <vc-shipping-address [cart]="cart"></vc-shipping-address>
+            </div>
+          </div>
+          <div class="row mt-4 mb-1">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/billing.svg" alt="extraLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Payment details</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <vc-billing-address [cart]="cart"></vc-billing-address>
+            </div>
+          </div>
+          <div class="row mt-4 mb-1">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/shipping.svg" alt="shippingLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Extra</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <vc-cart-comment [cartCommentText]="cart?.comment" (commentUpdateEvent)="onCommentUpdate($event)">
+              </vc-cart-comment>
+            </div>
+          </div>
+  
+        </div>
+        <div class="col-lg-7">
+          <div class="mt-5 mb-1">
+            <vc-cart-summary [cart]="cart"></vc-cart-summary>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-17">
-        <div class="row mb-3">
-          <div class="media magic-offset-1">
-            <img class="user-select-none" src="assets/images/checkout-products-icon.svg" alt="productsLogo">
-            <div class="media-body magic-offset-2">
-              <h2 class="mb-0 text-condensed">MY PRODUCTS</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <vc-line-items></vc-line-items>
-          </div>
-        </div>
-        <div class="row mt-4 mb-1">
-          <div class="media magic-offset-1">
-            <img class="user-select-none" src="assets/images/extra.svg" alt="extraLogo">
-            <div class="media-body magic-offset-2">
-              <h2 class="mb-0 text-condensed">EXTRA</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <vc-cart-comment [cartCommentText]="cart?.comment" (commentUpdateEvent)="onCommentUpdate($event)">
-            </vc-cart-comment>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-7">
-        <div class="mt-5 mb-1">
-          <vc-cart-summary [cart]="cart"></vc-cart-summary>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+  </main>

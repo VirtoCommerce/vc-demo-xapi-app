@@ -1,0 +1,32 @@
+<div class="modal-header modal-header-custom-height modal-header-bg">
+    <h4 class="modal-title model-header-text">
+        <ng-template [ngIf]="isShippingMode && !cartAddress">Create shipping address</ng-template>
+        <ng-template [ngIf]="!isShippingMode && !cartAddress">Create billing address</ng-template>
+        <ng-template [ngIf]="isShippingMode && cartAddress">Change shipping address</ng-template>
+        <ng-template [ngIf]="!isShippingMode && cartAddress">Change billing address</ng-template>
+    </h4>
+    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <fa-icon [icon]="faTimes" size="lg" style="color: white;"></fa-icon>
+        <span aria-hidden="true"></span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <h2 class="model-header-text-2">
+            <ng-template [ngIf]="!cartAddress">Add New Address</ng-template>
+            <ng-template [ngIf]="cartAddress">Change Address</ng-template>
+        </h2>
+        <form [formGroup]="formGroup">
+            <dynamic-ng-bootstrap-form [group]="formGroup" [layout]="formLayout" [model]="formModel">
+            </dynamic-ng-bootstrap-form>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <div>
+        <button type="button" class="btn btn-dark" (click)="activeModal.dismiss('Close button')">Cancel</button>
+    </div>
+    <div class="push-right">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submit()" [disabled]="formGroup.invalid">Save</button>
+    </div>
+</div>
