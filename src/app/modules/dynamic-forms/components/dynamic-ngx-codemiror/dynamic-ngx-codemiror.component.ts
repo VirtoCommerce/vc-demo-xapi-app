@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @angular-eslint/no-output-native */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
@@ -33,8 +35,8 @@ export class DynamicNgxCodemirorComponent extends DynamicFormControlComponent {
     @ViewChild(CodemirrorComponent, { static: false }) codemiroroComponent!: CodemirrorComponent;
 
     constructor(
-protected layoutService: DynamicFormLayoutService,
-          protected validationService: DynamicFormValidationService
+        protected layoutService: DynamicFormLayoutService,
+        protected validationService: DynamicFormValidationService
     ) {
       super(layoutService, validationService);
     }

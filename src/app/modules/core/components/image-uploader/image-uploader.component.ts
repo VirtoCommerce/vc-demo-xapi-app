@@ -8,6 +8,8 @@ interface uploadResponse {
   url: string;
 }
 
+type fnType = (_: string | null) => void;
+
 @Component({
   selector: 'vc-image-uploader',
   templateUrl: './image-uploader.component.html',
@@ -34,39 +36,42 @@ export class ImageUploaderComponent implements ControlValueAccessor {
   constructor(private readonly http: HttpClient) {
   }
 
-  propagateChange = (_: any): void => {
+  propagateChange = (_: string | null): void => {
     return;
   };
 
-  writeValue(obj: any): void {
+  writeValue(obj: string | null): void {
     if (obj !== undefined) {
       this.imageUrl = obj as string;
     }
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: fnType): void {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(_: any): void {
+  registerOnTouched(_: fnType): void {
     return;
   }
 
-  onFileSelected(event: any): void {
-    const file:File = event.target.files[0];
+  onFileSelected(event: Event): void {
+    const files = (event.target as HTMLInputElement).files;
+    if (!!files && files.length > 0) {
+      const file:File = files[0];
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
 
-      this.http.post<uploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
-        if (items.length > 0) {
-          const url = items[0].url;
-          this.imageUrl = url;
-          this.propagateChange(this.imageUrl);
-          this.imageUrlChange.emit(this.imageUrl);
-        }
-      });
+        this.http.post<uploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
+          if (items.length > 0) {
+            const url = items[0].url;
+            this.imageUrl = url;
+            this.propagateChange(this.imageUrl);
+            this.imageUrlChange.emit(this.imageUrl);
+          }
+        });
+      }
     }
   }
 
