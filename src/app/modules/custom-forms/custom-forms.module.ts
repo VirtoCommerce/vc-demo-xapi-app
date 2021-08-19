@@ -15,4 +15,4 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
 })
-export class CoreModule { }
+export class CustomFormsModule { }
