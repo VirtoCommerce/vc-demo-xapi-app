@@ -106,6 +106,10 @@ export interface cart_cart_items {
    */
   readonly imageUrl: string | null;
   /**
+   * flag of line item is a gift
+   */
+  readonly isGift: boolean | null;
+  /**
    * Cart line item dynamic property values
    */
   readonly dynamicProperties: ReadonlyArray<(cart_cart_items_dynamicProperties | null)> | null;
@@ -135,6 +139,26 @@ export interface cart_cart_coupons {
    * Is coupon was applied successfully
    */
   readonly isAppliedSuccessfully: boolean | null;
+}
+
+export interface cart_cart_availableGifts {
+  readonly __typename: "GiftItemType";
+  /**
+   * Associated product name
+   */
+  readonly name: string;
+  /**
+   * Product id
+   */
+  readonly productId: string;
+  /**
+   * Product image absolute URL
+   */
+  readonly imageUrl: string | null;
+  /**
+   * Flag whether this gift was added into cart
+   */
+  readonly isAccepted: boolean;
 }
 
 export interface cart_cart_shipments_deliveryAddress {
@@ -278,6 +302,7 @@ export interface cart_cart {
    */
   readonly dynamicProperties: ReadonlyArray<(cart_cart_dynamicProperties | null)> | null;
   readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
+  readonly availableGifts: ReadonlyArray<(cart_cart_availableGifts | null)> | null;
   readonly shipments: ReadonlyArray<(cart_cart_shipments | null)> | null;
   readonly payments: ReadonlyArray<(cart_cart_payments | null)> | null;
 }

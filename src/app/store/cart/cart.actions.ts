@@ -9,6 +9,7 @@ import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperti
   from 'src/app/graphql/types/updateCartDynamicProperties';
 import { addCartCoupon_addCoupon as addCouponResult } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon_removeCoupon as removeCouponResult } from 'src/app/graphql/types/removeCartCoupon';
+import { addItem_addItem as addItemResult } from 'src/app/graphql/types/addItem';
 import { changeCartItemQuantity_changeCartItemQuantity as changeCartItemQuantityResult }
   from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem_removeCartItem as removeCartItemResult } from 'src/app/graphql/types/removeCartItem';
@@ -29,6 +30,19 @@ export const getCartSuccess = createAction(
 export const getCartFailure = createAction(
   '[Cart] Get Cart Failure',
   props<{ error: ApolloError }>()
+);
+
+export const addCartItem = createAction(
+  '[Cart] Add CartItem',
+  props<{ productId: string,
+     quantity: number,
+     isGift: boolean,
+     }>()
+);
+
+export const addCartItemSuccess = createAction(
+  '[Cart] Add CartItem Success',
+  props<{ data: addItemResult | null }>()
 );
 
 export const removeCartItem = createAction(

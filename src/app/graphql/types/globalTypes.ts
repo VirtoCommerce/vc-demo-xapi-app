@@ -18,6 +18,21 @@ export interface InputAddCouponType {
   readonly couponCode: string;
 }
 
+export interface InputAddItemType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly productId: string;
+  readonly quantity: number;
+  readonly price?: any | null;
+  readonly comment?: string | null;
+  readonly isGift?: boolean | null;
+}
+
 export interface InputAddItemsType {
   readonly cartId?: string | null;
   readonly storeId: string;

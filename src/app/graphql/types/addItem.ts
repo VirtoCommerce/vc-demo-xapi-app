@@ -3,13 +3,13 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { InputRemoveItemType } from "./globalTypes";
+import { InputAddItemType } from "./globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: removeCartItem
+// GraphQL mutation operation: addItem
 // ====================================================
 
-export interface removeCartItem_removeCartItem_subTotal {
+export interface addItem_addItem_subTotal {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -17,7 +17,7 @@ export interface removeCartItem_removeCartItem_subTotal {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_total {
+export interface addItem_addItem_total {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -25,7 +25,7 @@ export interface removeCartItem_removeCartItem_total {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_discountTotal {
+export interface addItem_addItem_discountTotal {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -33,7 +33,7 @@ export interface removeCartItem_removeCartItem_discountTotal {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_taxTotal {
+export interface addItem_addItem_taxTotal {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -41,7 +41,7 @@ export interface removeCartItem_removeCartItem_taxTotal {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_shippingTotal {
+export interface addItem_addItem_shippingTotal {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -49,7 +49,7 @@ export interface removeCartItem_removeCartItem_shippingTotal {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_items_dynamicProperties {
+export interface addItem_addItem_items_dynamicProperties {
   readonly __typename: "DynamicPropertyValueType";
   /**
    * Property Name
@@ -65,7 +65,7 @@ export interface removeCartItem_removeCartItem_items_dynamicProperties {
   readonly valueType: string | null;
 }
 
-export interface removeCartItem_removeCartItem_items_extendedPrice {
+export interface addItem_addItem_items_extendedPrice {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -73,7 +73,7 @@ export interface removeCartItem_removeCartItem_items_extendedPrice {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_items_placedPrice {
+export interface addItem_addItem_items_placedPrice {
   readonly __typename: "MoneyType";
   /**
    * Formatted amount.
@@ -81,7 +81,7 @@ export interface removeCartItem_removeCartItem_items_placedPrice {
   readonly formattedAmount: string;
 }
 
-export interface removeCartItem_removeCartItem_items {
+export interface addItem_addItem_items {
   readonly __typename: "LineItemType";
   /**
    * Line item id
@@ -114,12 +114,12 @@ export interface removeCartItem_removeCartItem_items {
   /**
    * Cart line item dynamic property values
    */
-  readonly dynamicProperties: ReadonlyArray<(removeCartItem_removeCartItem_items_dynamicProperties | null)> | null;
-  readonly extendedPrice: removeCartItem_removeCartItem_items_extendedPrice | null;
-  readonly placedPrice: removeCartItem_removeCartItem_items_placedPrice | null;
+  readonly dynamicProperties: ReadonlyArray<(addItem_addItem_items_dynamicProperties | null)> | null;
+  readonly extendedPrice: addItem_addItem_items_extendedPrice | null;
+  readonly placedPrice: addItem_addItem_items_placedPrice | null;
 }
 
-export interface removeCartItem_removeCartItem_availableGifts {
+export interface addItem_addItem_availableGifts {
   readonly __typename: "GiftItemType";
   /**
    * Associated product name
@@ -139,29 +139,21 @@ export interface removeCartItem_removeCartItem_availableGifts {
   readonly isAccepted: boolean;
 }
 
-export interface removeCartItem_removeCartItem {
+export interface addItem_addItem {
   readonly __typename: "CartType";
-  /**
-   * Shopping cart Id
-   */
-  readonly id: string | null;
-  /**
-   * Shopping cart user id
-   */
-  readonly customerId: string | null;
-  readonly subTotal: removeCartItem_removeCartItem_subTotal | null;
-  readonly total: removeCartItem_removeCartItem_total | null;
-  readonly discountTotal: removeCartItem_removeCartItem_discountTotal | null;
-  readonly taxTotal: removeCartItem_removeCartItem_taxTotal | null;
-  readonly shippingTotal: removeCartItem_removeCartItem_shippingTotal | null;
-  readonly items: ReadonlyArray<(removeCartItem_removeCartItem_items | null)> | null;
-  readonly availableGifts: ReadonlyArray<(removeCartItem_removeCartItem_availableGifts | null)> | null;
+  readonly subTotal: addItem_addItem_subTotal | null;
+  readonly total: addItem_addItem_total | null;
+  readonly discountTotal: addItem_addItem_discountTotal | null;
+  readonly taxTotal: addItem_addItem_taxTotal | null;
+  readonly shippingTotal: addItem_addItem_shippingTotal | null;
+  readonly items: ReadonlyArray<(addItem_addItem_items | null)> | null;
+  readonly availableGifts: ReadonlyArray<(addItem_addItem_availableGifts | null)> | null;
 }
 
-export interface removeCartItem {
-  readonly removeCartItem: removeCartItem_removeCartItem | null;
+export interface addItem {
+  readonly addItem: addItem_addItem | null;
 }
 
-export interface removeCartItemVariables {
-  readonly command: InputRemoveItemType;
+export interface addItemVariables {
+  readonly command: InputAddItemType;
 }

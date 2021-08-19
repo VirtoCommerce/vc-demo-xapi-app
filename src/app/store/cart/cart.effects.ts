@@ -13,6 +13,7 @@ import * as CartActions from './cart.actions';
 import { selectCountriesState } from '../countries/countries.selectors';
 
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
+import addCartItemMutation from '../../graphql/mutations/add-cart-item.graphql';
 import changeCartItemQuantityMutation from '../../graphql/mutations/change-cart-item-quantity.graphql';
 import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
@@ -23,13 +24,14 @@ import addOrUpdateShipment from '../../graphql/mutations/add-or-update-cart-ship
 import addOrUpdatePayment from '../../graphql/mutations/add-or-update-cart-payment.graphql';
 
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
+import { addItem, addItemVariables } from 'src/app/graphql/types/addItem';
+import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
 import { updateCartDynamicProperties, updateCartDynamicPropertiesVariables }
   from 'src/app/graphql/types/updateCartDynamicProperties';
 import { addCartCoupon, addCartCouponVariables } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon, removeCartCouponVariables } from 'src/app/graphql/types/removeCartCoupon';
-import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 import { addOrUpdateCartShipment, addOrUpdateCartShipmentVariables }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
 import { addOrUpdateCartPayment, addOrUpdateCartPaymentVariables }
@@ -57,6 +59,29 @@ export class CartEffects {
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CartActions.getCartFailure({ error })))
+        ))
+    );
+  });
+
+  addCartItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.addCartItem),
+      concatMap(action => this.apollo.mutate<addItem, addItemVariables>({
+        mutation: addCartItemMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            productId: action.productId,
+            quantity: action.quantity,
+            isGift: action.isGift,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.addCartItemSuccess({
+            data: result.data?.addItem ?? null,
+          }))
         ))
     );
   });

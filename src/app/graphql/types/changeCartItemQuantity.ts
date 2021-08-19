@@ -108,11 +108,35 @@ export interface changeCartItemQuantity_changeCartItemQuantity_items {
    */
   readonly imageUrl: string | null;
   /**
+   * flag of line item is a gift
+   */
+  readonly isGift: boolean | null;
+  /**
    * Cart line item dynamic property values
    */
   readonly dynamicProperties: ReadonlyArray<(changeCartItemQuantity_changeCartItemQuantity_items_dynamicProperties | null)> | null;
   readonly extendedPrice: changeCartItemQuantity_changeCartItemQuantity_items_extendedPrice | null;
   readonly placedPrice: changeCartItemQuantity_changeCartItemQuantity_items_placedPrice | null;
+}
+
+export interface changeCartItemQuantity_changeCartItemQuantity_availableGifts {
+  readonly __typename: "GiftItemType";
+  /**
+   * Associated product name
+   */
+  readonly name: string;
+  /**
+   * Product id
+   */
+  readonly productId: string;
+  /**
+   * Product image absolute URL
+   */
+  readonly imageUrl: string | null;
+  /**
+   * Flag whether this gift was added into cart
+   */
+  readonly isAccepted: boolean;
 }
 
 export interface changeCartItemQuantity_changeCartItemQuantity {
@@ -131,6 +155,7 @@ export interface changeCartItemQuantity_changeCartItemQuantity {
   readonly taxTotal: changeCartItemQuantity_changeCartItemQuantity_taxTotal | null;
   readonly shippingTotal: changeCartItemQuantity_changeCartItemQuantity_shippingTotal | null;
   readonly items: ReadonlyArray<(changeCartItemQuantity_changeCartItemQuantity_items | null)> | null;
+  readonly availableGifts: ReadonlyArray<(changeCartItemQuantity_changeCartItemQuantity_availableGifts | null)> | null;
 }
 
 export interface changeCartItemQuantity {

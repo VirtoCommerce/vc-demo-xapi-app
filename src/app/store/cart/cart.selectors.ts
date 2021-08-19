@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { cart_cart_availableGifts } from 'src/app/graphql/types/cart';
 import { Cart, CartItem, Coupon, DynamicProperty } from 'src/app/models/cart.model';
 import * as fromCart from './cart.reducer';
 
@@ -43,4 +44,9 @@ export const selectCoupons = createSelector(
 export const selectItems = createSelector(
   selectCartState,
   (state: fromCart.State) => state.cart.items as CartItem[]
+);
+
+export const selectGifts = createSelector(
+  selectCartState,
+  (state: fromCart.State) => state.cart.availableGifts as cart_cart_availableGifts[]
 );
