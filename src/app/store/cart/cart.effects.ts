@@ -220,9 +220,9 @@ export class CartEffects {
     );
   });
 
-  addOrUpdateShippingAddress$ = createEffect(() => {
+  addOrUpdateShipment$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CartActions.addOrUpdateShippingAddress),
+      ofType(CartActions.addOrUpdateShipment),
       concatLatestFrom(() => this.getCountries),
       concatMap(([
         action,
@@ -234,27 +234,41 @@ export class CartEffects {
             ...this.baseCartVariables,
             userId: localStorage.getItem('cartUserId') ?? '',
             shipment: {
-              id: action.shipmentId,
-              deliveryAddress: {
-                ...action.address,
-                addressType: 2,
-                countryName: this.getCountryName(countries, action.address?.countryCode),
-              },
+              id: action.shipment?.id,
+              shipmentMethodCode: action.shipment?.shipmentMethodCode,
+              shipmentMethodOption: action.shipment?.shipmentMethodOption,
+              price: action.shipment?.price?.amount as number,
+              deliveryAddress: action.shipment?.deliveryAddress
+                ? {
+                  addressType: 2,
+                  firstName: action.shipment.deliveryAddress.firstName,
+                  lastName: action.shipment.deliveryAddress.lastName,
+                  email: action.shipment.deliveryAddress.email,
+                  phone: action.shipment.deliveryAddress.phone,
+                  city: action.shipment.deliveryAddress.city,
+                  line1: action.shipment.deliveryAddress.line1,
+                  line2: action.shipment.deliveryAddress.line2,
+                  postalCode: action.shipment.deliveryAddress.postalCode,
+                  regionId: action.shipment.deliveryAddress.regionId,
+                  countryCode: action.shipment?.deliveryAddress.countryCode,
+                  countryName: this.getCountryName(countries, action.shipment.deliveryAddress.countryCode),
+                }
+                : null,
             },
           },
         },
       })
         .pipe(
-          map(result => CartActions.addOrUpdateShippingAddressSuccess({
-            shipments: result.data?.addOrUpdateCartShipment?.shipments ?? [],
+          map(result => CartActions.addOrUpdateShipmentSuccess({
+            shipmentResult: result.data?.addOrUpdateCartShipment,
           }))
         ))
     );
   });
 
-  addOrUpdateBillingAddress$ = createEffect(() => {
+  addOrUpdatePayment$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CartActions.addOrUpdateBillingAddress),
+      ofType(CartActions.addOrUpdatePayment),
       concatLatestFrom(() => this.getCountries),
       concatMap(([
         action,
@@ -266,18 +280,29 @@ export class CartEffects {
             ...this.baseCartVariables,
             userId: localStorage.getItem('cartUserId') ?? '',
             payment: {
-              id: action.paymentId,
-              billingAddress: {
-                ...action.address,
-                addressType: 1,
-                countryName: this.getCountryName(countries, action.address?.countryCode),
-              },
+              id: action.payment?.id,
+              billingAddress: action.payment?.billingAddress
+                ? {
+                  addressType: 1,
+                  firstName: action.payment?.billingAddress.firstName,
+                  lastName: action.payment?.billingAddress.lastName,
+                  email: action.payment?.billingAddress.email,
+                  phone: action.payment?.billingAddress.phone,
+                  city: action.payment?.billingAddress.city,
+                  line1: action.payment?.billingAddress.line1,
+                  line2: action.payment?.billingAddress.line2,
+                  postalCode: action.payment?.billingAddress.postalCode,
+                  regionId: action.payment?.billingAddress.regionId,
+                  countryCode: action.payment?.billingAddress.countryCode,
+                  countryName: this.getCountryName(countries, action.payment.billingAddress.countryCode),
+                }
+                : null,
             },
           },
         },
       })
         .pipe(
-          map(result => CartActions.addOrUpdateBillingAddressSuccess({
+          map(result => CartActions.addOrUpdatePaymentSuccess({
             payments: result.data?.addOrUpdateCartPayment?.payments ?? [],
           }))
         ))

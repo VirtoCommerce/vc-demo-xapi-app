@@ -18,6 +18,7 @@ export const initialState: State = {
     availableGifts: [],
     shipments: [],
     payments: [],
+    availableShippingMethods: [],
   },
   billingAddressAsShipping: true,
 };
@@ -43,12 +44,13 @@ export const reducer = createReducer(
       availableGifts: customMap(action?.data?.cart?.availableGifts, x => ({ ...x })),
       shipments: customMap(action?.data?.cart?.shipments, x => ({
         ...x,
-        deliveryAddress: { ...x.deliveryAddress },
+        deliveryAddress: x.deliveryAddress ? { ...x.deliveryAddress } : undefined,
       })),
       payments: customMap(action?.data?.cart?.payments, x => ({
         ...x,
-        billingAddress: { ...x.billingAddress },
+        billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
+      availableShippingMethods: customMap(action?.data?.cart?.availableShippingMethods, x => ({ ...x })),
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),
@@ -85,23 +87,25 @@ export const reducer = createReducer(
       },
     })
   ),
-  on(CartActions.addOrUpdateShippingAddressSuccess, (state, action): State => ({
+  on(CartActions.addOrUpdateShipmentSuccess, (state, action): State => ({
     ...state,
     cart: {
       ...state.cart,
-      shipments: customMap(action?.shipments, x => ({
+      total: action?.shipmentResult?.total,
+      shippingTotal: action?.shipmentResult?.shippingTotal,
+      shipments: customMap(action?.shipmentResult?.shipments, x => ({
         ...x,
-        deliveryAddress: { ...x.deliveryAddress },
+        deliveryAddress: x.deliveryAddress ? { ...x.deliveryAddress } : undefined,
       })),
     },
   })),
-  on(CartActions.addOrUpdateBillingAddressSuccess, (state, action): State => ({
+  on(CartActions.addOrUpdatePaymentSuccess, (state, action): State => ({
     ...state,
     cart: {
       ...state.cart,
       payments: customMap(action?.payments, x => ({
         ...x,
-        billingAddress: { ...x.billingAddress },
+        billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
     },
   })),

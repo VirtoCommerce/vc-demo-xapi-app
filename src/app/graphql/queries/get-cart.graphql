@@ -4,7 +4,7 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
         customerId
         comment
         subTotal { formattedAmount }
-    	total { formattedAmount }
+    	  total { formattedAmount }
         discountTotal { formattedAmount }
         taxTotal { formattedAmount }
         shippingTotal { formattedAmount }
@@ -28,8 +28,40 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
           isAppliedSuccessfully
         }
         availableGifts { name productId imageUrl isAccepted }
+        availableShippingMethods {
+          code
+          optionName
+          priority
+          logoUrl
+          price {
+      	    amount
+            formattedAmount
+          }
+          discountAmount {
+            amount
+            formattedAmount
+          }
+          total {
+            amount
+            formattedAmount
+          }
+        }
         shipments {
           id
+          shipmentMethodCode
+          shipmentMethodOption
+          price {
+      	    amount
+            formattedAmount
+          }
+          discountAmount {
+      	    amount
+            formattedAmount
+          }
+          total {
+      	    amount
+            formattedAmount
+          }
           deliveryAddress {
             addressType
             firstName
