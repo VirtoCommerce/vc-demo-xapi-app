@@ -40,4 +40,13 @@ export class DynamicNgxCodemirorComponent extends DynamicFormControlComponent {
     ) {
       super(layoutService, validationService);
     }
+
+    focusChanged(focused: boolean): void {
+      if (focused) {
+        this.onFocus(focused);
+      }
+      else {
+        this.onBlur(focused);
+      }
+    }
 }
