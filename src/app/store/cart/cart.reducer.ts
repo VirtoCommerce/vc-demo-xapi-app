@@ -62,28 +62,26 @@ export const reducer = createReducer(
   on(
     CartActions.addCartCouponSuccess,
     CartActions.removeCartCouponSuccess,
-    (state, action): State => {
-      return ({
-        ...state,
-        cart: {
-          ...state.cart,
-          ...action?.data,
-          items: state.cart.items
-            ? state.cart.items.map(item => {
-              const discountedItem = action?.data?.items?.find(x => x && item ? x.id === item.id : false);
-              if (discountedItem) {
-                item = { ...item };
-                item.extendedPrice = discountedItem.extendedPrice;
-                item.placedPrice = discountedItem.placedPrice;
-              }
+    (state, action): State => ({
+      ...state,
+      cart: {
+        ...state.cart,
+        ...action?.data,
+        items: state.cart.items
+          ? state.cart.items.map(item => {
+            const discountedItem = action?.data?.items?.find(x => x && item ? x.id === item.id : false);
+            if (discountedItem) {
+              item = { ...item };
+              item.extendedPrice = discountedItem.extendedPrice;
+              item.placedPrice = discountedItem.placedPrice;
+            }
 
-              return item;
-            })
-            : [],
-          coupons: customMap(action?.data?.coupons, x => ({ ...x })),
-        },
-      });
-    }
+            return item;
+          })
+          : [],
+        coupons: customMap(action?.data?.coupons, x => ({ ...x })),
+      },
+    })
   ),
   on(
     CartActions.changeCartItemQuantitySuccess,
