@@ -13,6 +13,9 @@ import { LineItemsComponent } from './components/line-items/line-items.component
 import { ShippingAddressComponent } from './components/shipping-address/shipping-address.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { BillingAddressComponent } from './components/billing-address/billing-address.component';
+import { ShippingMethodComponent } from './components/shipping-method/shipping-method.component';
+import { ShippingMethodSelectComponent } from './components/shipping-method-select/shipping-method-select.component';
+import { ImageFallbackDirective } from 'src/app/directives/image-fallback.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { BillingAddressComponent } from './components/billing-address/billing-ad
     ShippingAddressComponent,
     BillingAddressComponent,
     AddressFormComponent,
+    ShippingMethodComponent,
+    ShippingMethodSelectComponent,
+    ImageFallbackDirective,
   ],
   imports: [
     CommonModule,

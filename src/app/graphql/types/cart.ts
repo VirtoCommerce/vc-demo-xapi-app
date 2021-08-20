@@ -137,6 +137,101 @@ export interface cart_cart_coupons {
   readonly isAppliedSuccessfully: boolean | null;
 }
 
+export interface cart_cart_availableShippingMethods_price {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_availableShippingMethods_discountAmount {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_availableShippingMethods_total {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_availableShippingMethods {
+  readonly __typename: "ShippingMethodType";
+  /**
+   * Value of shipping gateway code
+   */
+  readonly code: string | null;
+  /**
+   * Value of shipping method option name
+   */
+  readonly optionName: string | null;
+  /**
+   * Value of shipping method priority
+   */
+  readonly priority: number | null;
+  /**
+   * Value of shipping method logo absolute URL
+   */
+  readonly logoUrl: string | null;
+  readonly price: cart_cart_availableShippingMethods_price | null;
+  readonly discountAmount: cart_cart_availableShippingMethods_discountAmount | null;
+  readonly total: cart_cart_availableShippingMethods_total | null;
+}
+
+export interface cart_cart_shipments_price {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_shipments_discountAmount {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface cart_cart_shipments_total {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
 export interface cart_cart_shipments_deliveryAddress {
   readonly __typename: "AddressType";
   readonly addressType: number | null;
@@ -192,6 +287,17 @@ export interface cart_cart_shipments {
    * Shipment Id
    */
   readonly id: string | null;
+  /**
+   * Shipment method code
+   */
+  readonly shipmentMethodCode: string | null;
+  /**
+   * Shipment method option
+   */
+  readonly shipmentMethodOption: string | null;
+  readonly price: cart_cart_shipments_price | null;
+  readonly discountAmount: cart_cart_shipments_discountAmount | null;
+  readonly total: cart_cart_shipments_total | null;
   readonly deliveryAddress: cart_cart_shipments_deliveryAddress | null;
 }
 
@@ -278,6 +384,7 @@ export interface cart_cart {
    */
   readonly dynamicProperties: ReadonlyArray<(cart_cart_dynamicProperties | null)> | null;
   readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
+  readonly availableShippingMethods: ReadonlyArray<(cart_cart_availableShippingMethods | null)> | null;
   readonly shipments: ReadonlyArray<(cart_cart_shipments | null)> | null;
   readonly payments: ReadonlyArray<(cart_cart_payments | null)> | null;
 }
