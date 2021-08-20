@@ -4,6 +4,11 @@ mutation addCartCoupon ($command: InputAddCouponType!) {
         code
         isAppliedSuccessfully
       }
+      items {
+        id
+        extendedPrice{ formattedAmount }
+        placedPrice { formattedAmount }
+      }
       subTotal { formattedAmount }
     	total { formattedAmount }
       discountTotal { formattedAmount }
