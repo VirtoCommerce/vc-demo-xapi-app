@@ -76,8 +76,15 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             line2
           }
         }
+        availablePaymentMethods
+          {
+            code
+            logoUrl
+            priority
+          }
         payments {
           id
+          paymentGatewayCode
           billingAddress {
             firstName
             lastName

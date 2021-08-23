@@ -301,6 +301,22 @@ export interface cart_cart_shipments {
   readonly deliveryAddress: cart_cart_shipments_deliveryAddress | null;
 }
 
+export interface cart_cart_availablePaymentMethods {
+  readonly __typename: "PaymentMethodType";
+  /**
+   * Value of payment gateway code
+   */
+  readonly code: string | null;
+  /**
+   * Value of payment method logo absolute URL
+   */
+  readonly logoUrl: string | null;
+  /**
+   * Value of payment method priority
+   */
+  readonly priority: number | null;
+}
+
 export interface cart_cart_payments_billingAddress {
   readonly __typename: "AddressType";
   /**
@@ -356,6 +372,10 @@ export interface cart_cart_payments {
    * Payment Id
    */
   readonly id: string | null;
+  /**
+   * Value of payment gateway code
+   */
+  readonly paymentGatewayCode: string | null;
   readonly billingAddress: cart_cart_payments_billingAddress | null;
 }
 
@@ -386,6 +406,7 @@ export interface cart_cart {
   readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
   readonly availableShippingMethods: ReadonlyArray<(cart_cart_availableShippingMethods | null)> | null;
   readonly shipments: ReadonlyArray<(cart_cart_shipments | null)> | null;
+  readonly availablePaymentMethods: ReadonlyArray<(cart_cart_availablePaymentMethods | null)> | null;
   readonly payments: ReadonlyArray<(cart_cart_payments | null)> | null;
 }
 

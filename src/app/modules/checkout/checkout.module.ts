@@ -16,6 +16,7 @@ import { BillingAddressComponent } from './components/billing-address/billing-ad
 import { ShippingMethodComponent } from './components/shipping-method/shipping-method.component';
 import { ShippingMethodSelectComponent } from './components/shipping-method-select/shipping-method-select.component';
 import { ImageFallbackDirective } from 'src/app/directives/image-fallback.directive';
+import { PaymentMethodComponent } from './components/payment-method/payment-method.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ImageFallbackDirective } from 'src/app/directives/image-fallback.direct
     ShippingMethodComponent,
     ShippingMethodSelectComponent,
     ImageFallbackDirective,
+    PaymentMethodComponent,
   ],
   imports: [
     CommonModule,

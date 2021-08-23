@@ -11,6 +11,7 @@ export interface Cart extends Mutable<Omit<graphql.cart_cart,
   shipments: Shipment[];
   payments: Payment[];
   shippingMethods: ShippingMethod[];
+  paymentMethods: PaymentMethod[];
 }
 
 export type DynamicProperty = Mutable<Omit<graphql.cart_cart_dynamicProperties, typeNameTemplate>>
@@ -34,5 +35,11 @@ export type CartAddress = Partial<Mutable<Omit<graphql.cart_cart_shipments_deliv
 export type ShippingMethod = Partial<Mutable<Omit<graphql.cart_cart_availableShippingMethods, typeNameTemplate>>>
 
 export interface ShippingMethodRecord extends ShippingMethod {
+  isActive: boolean;
+}
+
+export type PaymentMethod = Partial<Mutable<Omit<graphql.cart_cart_availablePaymentMethods, typeNameTemplate>>>
+
+export interface PaymentMethodRecord extends PaymentMethod {
   isActive: boolean;
 }

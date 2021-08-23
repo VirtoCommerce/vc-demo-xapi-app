@@ -1,0 +1,26 @@
+<div>
+    <label class="form-label checkout-form-label">Payment method</label>
+    <div class="card card-body py-0">
+        <div class="row" style="height: 5.5rem;">
+            <div class="col-lg-18 media-center">
+                <div class="media" *ngIf="!paymentMethod">
+                    <img class="user-select-none" src="assets/images/danger.svg" alt="dangerIcon">
+                    <div class="media-body" >
+                        <div class="mx-3 text-danger">Please select a payment method.</div>
+                    </div>
+                </div>
+                <div class="media" *ngIf="paymentMethod">
+                    <img class="user-select-none" vcImageFallback="assets/images/payment-method.svg" [src]="paymentMethod.logoUrl" class="img-fluid" [alt]="paymentMethod.code">
+                    <div class="media-body">
+                        <div class="mx-3">
+                            {{paymentMethod.code}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 media-center">
+                <button type="button" class="btn btn-outline-primary" (click)="openChangePaymentMethod()">CHANGE</button>
+            </div>
+        </div>
+    </div>
+</div>
