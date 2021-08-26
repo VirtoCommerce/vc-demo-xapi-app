@@ -26,6 +26,7 @@ export function createApollo(
     switch (operation.operationName) {
     case 'createUser':
     case 'updateMemberDynamicProperties':
+    case 'order':
     {
       token = (await httpClient.post<{access_token: string}>(
         `${environment.variables.platformUrl}/connect/token`,

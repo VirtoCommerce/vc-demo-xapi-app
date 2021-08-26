@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { PartialDeep } from 'type-fest';
+import { customMap } from 'src/app/helpers/custom-map';
 import { Cart } from 'src/app/models/cart.model';
 import * as CartActions from './cart.actions';
 
@@ -123,12 +124,3 @@ export const reducer = createReducer(
     billingAddressAsShipping: action.value,
   })))
 );
-
-export function customMap<T, P>(input: readonly (T | null)[] | null | undefined, callback: (value: T) => P): P[] {
-  return input?.filter(x => x != null)
-    .map(x => x as T)
-    .map<P>(x => {
-      return callback(x);
-    }) ?? [];
-}
-

@@ -1,0 +1,93 @@
+query order ($number: String, $cultureName: String) {
+    order (number: $number, cultureName: $cultureName) {
+        id
+        number
+    	status
+    	createdDate
+        storeId
+        customerId
+        customerName
+        comment
+        subTotal { formattedAmount }
+    	total { formattedAmount }
+        discountTotal { formattedAmount }
+        taxTotal { formattedAmount }
+        shippingTotal { formattedAmount }
+        items {
+            id
+            productId
+            name
+            sku
+            quantity
+            imageUrl
+            dynamicProperties { name value valueType}
+            extendedPrice { 
+              amount
+              formattedAmount
+            }
+            placedPrice { 
+              amount
+              formattedAmount
+            }
+        }
+        dynamicProperties {
+            name
+            value
+        }
+        shipments {
+          id
+          shipmentMethodCode
+          shipmentMethodOption
+          price {
+      	    amount
+            formattedAmount
+          }
+          discountAmount {
+      	    amount
+            formattedAmount
+          }
+          total {
+      	    amount
+            formattedAmount
+          }
+          deliveryAddress {
+            addressType
+            firstName
+            lastName
+            email
+            phone
+            countryCode
+            countryName
+            regionId
+            city
+            postalCode
+            line1
+            line2
+          }
+        }
+        inPayments {
+          id
+          paymentMethod {
+            code
+            price {
+              amount
+              formattedAmount
+            }
+          }
+          billingAddress {
+            firstName
+            lastName
+            email
+            phone
+            countryCode
+            countryName
+            regionId
+            city
+            postalCode
+            addressType
+            line1
+            line2
+          }
+        }
+    }
+}
