@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { OrdersComponent } from './orders.component';
+import { ordersFeatureKey, initialState } from 'src/app/store/order/orders.reducer';
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -15,8 +16,7 @@ describe('OrdersComponent', () => {
       providers: [
         provideMockStore({
           initialState: {
-            orders: null,
-            user: null,
+            [ordersFeatureKey]: initialState,
           },
         }),
       ],

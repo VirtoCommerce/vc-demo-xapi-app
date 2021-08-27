@@ -32,7 +32,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   pageSize = pageInfo.pageSize;
 
-  statuses = 'New Pending Paid Complete'.split(' ');
+  statuses = 'New Pending Paid Processing Cancelled Completed'.split(' ');
 
   faChevronLeft = faChevronLeft;
 
@@ -42,7 +42,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   sortAscending = sortAscending;
 
-  sortDirection = this.sortDescending;
+  sort: SortInfo = {
+    column: 'createdDate',
+    direction: sortDescending,
+  };
 
   private keyword: string | undefined;
 
@@ -79,8 +82,15 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.page = page;
   }
 
-  applySorting(): void {
-    this.sortDirection = this.invertSortDirection(this.sortDirection);
+  applySorting(column: string): void {
+    if (this.sort.column === column) {
+      this.sort.direction = this.sort.direction === sortDescending ? sortAscending : sortDescending;
+    }
+    else {
+      this.sort.column = column;
+      this.sort.direction = sortDescending;
+    }
+
     this.loadItems();
   }
 
@@ -100,11 +110,12 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }));
   }
 
-  private invertSortDirection(sortDirection: string): string {
-    return sortDirection === sortAscending ? sortDescending : sortAscending;
-  }
-
   private getSortingExpression(): string {
-    return `createdDate:${this.sortDirection}`;
+    return `${this.sort.column}:${this.sort.direction}`;
   }
+}
+
+interface SortInfo {
+  column: string;
+  direction: string;
 }

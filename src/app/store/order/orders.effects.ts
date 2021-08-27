@@ -17,7 +17,7 @@ export class OrdersEffects {
       switchMap(action => this.apollo.watchQuery<orders>({
         query: loadOrdersQuery,
         variables: {
-          customerId: '',
+          customerId: action.currentCustomerId,
           filter: action.filter,
           first: action.count,
           after: action.cursor,

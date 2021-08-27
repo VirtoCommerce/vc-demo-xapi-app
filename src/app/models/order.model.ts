@@ -3,8 +3,6 @@ import * as graphql from '../graphql/types/orders';
 
 type typeNameTemplate = '__typename'
 
-// Export interface Order extends graphql.orders_orders_items { }
-
 export interface Order extends Mutable<Omit<graphql.orders_orders_items,
     'dynamicProperties' |
     typeNameTemplate>> {
