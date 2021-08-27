@@ -3,6 +3,8 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { OrdersComponent } from './orders.component';
 import { ordersFeatureKey, initialState } from 'src/app/store/order/orders.reducer';
+import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
+  from 'src/app/store/current-customer/current-customer.reducer';
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -17,6 +19,7 @@ describe('OrdersComponent', () => {
         provideMockStore({
           initialState: {
             [ordersFeatureKey]: initialState,
+            [currentCustomerFeatureKey]: currentCustomerInitialState,
           },
         }),
       ],
