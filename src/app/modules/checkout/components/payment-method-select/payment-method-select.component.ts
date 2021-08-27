@@ -9,6 +9,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: [
     './payment-method-select.component.scss',
   ],
+  providers: [
+    NgbActiveModal,
+  ],
 })
 export class PaymentMethodSelectComponent {
   constructor(

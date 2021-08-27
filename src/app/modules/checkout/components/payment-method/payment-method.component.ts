@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart, PaymentMethod, PaymentMethodRecord } from 'src/app/models/cart.model';
@@ -15,8 +14,7 @@ import { PaymentMethodSelectComponent } from '../payment-method-select/payment-m
 })
 export class PaymentMethodComponent implements OnInit {
   constructor(
-    private readonly modalService: NgbModal,
-    private readonly store: Store
+    private readonly modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
