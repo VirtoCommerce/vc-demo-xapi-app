@@ -1,7 +1,7 @@
 export const sortDescending = 'desc';
 export const sortAscending = 'asc';
 export const pageInfo = {
-  pageSize: 4,
+  pageSize: 6,
   cursor: '0',
   page: 1,
 };
