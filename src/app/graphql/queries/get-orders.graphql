@@ -1,0 +1,13 @@
+query orders ($after: String, $first: Int, $filter: String, $sort: String, $cultureName: String, $userId: String) {
+    orders (after: $after, first: $first, filter: $filter, sort: $sort, cultureName: $cultureName, userId: $userId) {
+        items {
+            id
+            number
+            dynamicProperties { name value }
+      	    createdDate
+            status
+            total { formattedAmount }
+        }
+        totalCount
+    }
+}

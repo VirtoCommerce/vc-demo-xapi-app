@@ -1,0 +1,18 @@
+.navbar {
+    height: 84px;
+}
+
+.form-select {
+    padding: 12px;
+    &.label {
+        color: #939da4;
+    }
+}
+
+select option:first-child {
+    color: #939da4;
+}
+
+select option {
+    color: #444;
+}
