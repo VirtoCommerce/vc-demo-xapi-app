@@ -100,13 +100,13 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   private loadItems(): void {
-    const sort = this.getSortingExpression();
+    const statusFilter = this.status ? `status:${this.status}` : '';
     this.store.dispatch(loadOrders({
       currentCustomerId: this.currentCustomerId,
-      filter: `${this.keyword ?? ''} ${this.status ? `status:${this.status}` : ''}`,
+      filter: `${this.keyword ?? ''} ${statusFilter}`,
       count: this.pageSize,
       cursor: this.cursor,
-      sort,
+      sort: this.getSortingExpression(),
     }));
   }
 
