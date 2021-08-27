@@ -48,6 +48,7 @@ export const reducer = createReducer(
         ...x,
         billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
+      availablePaymentMethods: customMap(action?.data?.cart?.availablePaymentMethods, x => ({ ...x })),
       availableShippingMethods: customMap(action?.data?.cart?.availableShippingMethods, x => ({ ...x })),
     },
   })),
