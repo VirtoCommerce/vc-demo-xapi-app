@@ -9,8 +9,3 @@ export class PropertyValuePipe implements PipeTransform {
     return items?.find(x => x.name === name)?.value ?? '';
   }
 }
-
-export interface dynamicProperty {
-  readonly name: string | null;
-  readonly value: string | null;
-}
