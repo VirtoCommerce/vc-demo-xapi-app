@@ -1,0 +1,8 @@
+query shippingMethods ($storeId: String!) {
+    shippingMethods (storeId: $storeId) {
+        items {
+          code
+          logoUrl
+        }
+    }
+}

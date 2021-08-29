@@ -1,18 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { OrderPayment } from 'src/app/models/order.model';
 
 @Component({
   selector: 'vc-order-payment-method',
   templateUrl: './order-payment-method.component.html',
   styleUrls: [
     './order-payment-method.component.scss',
+    '../../order-details.component.scss',
   ],
 })
-export class OrderPaymentMethodComponent implements OnInit {
-  constructor() {
-    console.log('on init');
-  }
-
-  ngOnInit(): void {
-    console.log('on init');
-  }
+export class OrderPaymentMethodComponent {
+  @Input() payment?: OrderPayment | null;
 }

@@ -1,1 +1,16 @@
-<p>order-payment-method works!</p>
+<div class="component">
+    <div class="card">
+        <h3 class="card-header summary-header-sm">Payment details</h3>
+        <div class="card-body">
+            <div class="media" *ngIf="payment">
+                <img class="user-select-none" vcImageFallback="assets/images/payment-method.svg"
+                    [src]="payment.iconUrl" class="img-fluid" alt="code">
+                <div class="media-body">
+                    <div class="mx-3" style="font-size: 14px;">
+                        {{payment?.paymentMethod?.code}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

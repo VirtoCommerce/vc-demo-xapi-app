@@ -5,10 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { OrderDetailsRoutingModule } from './order-details-routing.module';
-import { OrderBillingAddressComponent } from './components/order-billing-address/order-billing-address.component';
+import { OrderDetailsAddressComponent } from './components/order-details-address/order-details-address.component';
 import { OrderGiftsComponent } from './components/order-gifts/order-gifts.component';
 import { OrderPaymentMethodComponent } from './components/order-payment-method/order-payment-method.component';
-import { OrderShippingAddressComponent } from './components/order-shipping-address/order-shipping-address.component';
 import { OrderShippingMethodComponent } from './components/order-shipping-method/order-shipping-method.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderLineItemsComponent } from './components/order-line-items/order-line-items.component';
@@ -19,10 +18,10 @@ import { OrderLineItemsComponent } from './components/order-line-items/order-lin
     OrderLineItemsComponent,
     OrderGiftsComponent,
     OrderSummaryComponent,
-    OrderBillingAddressComponent,
-    OrderShippingAddressComponent,
+    OrderDetailsAddressComponent,
     OrderShippingMethodComponent,
     OrderPaymentMethodComponent,
+    // ImageFallbackDirective,
   ],
   imports: [
     CommonModule,

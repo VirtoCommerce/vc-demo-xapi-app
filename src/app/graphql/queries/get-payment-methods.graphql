@@ -1,0 +1,8 @@
+query paymentMethods ($storeId: String!) {
+    paymentMethods (storeId: $storeId) {
+        items {
+          code
+          logoUrl
+        }
+    }
+}

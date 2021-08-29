@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Order } from 'src/app/models/order.model';
 
 @Component({
   selector: 'vc-order-summary',
   templateUrl: './order-summary.component.html',
   styleUrls: [
     './order-summary.component.scss',
+    '../../order-details.component.scss',
   ],
 })
-export class OrderSummaryComponent implements OnInit {
-  constructor() {
-    console.log('on init');
-  }
+export class OrderSummaryComponent {
+  @Input() order?: Order | null;
 
-  ngOnInit(): void {
-    console.log('on init');
-  }
+  @Input() isDetailsMode = true;
 }

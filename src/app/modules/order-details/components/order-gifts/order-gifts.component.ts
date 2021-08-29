@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { OrderItem } from 'src/app/models/order.model';
 
 @Component({
   selector: 'vc-order-gifts',
@@ -7,12 +8,6 @@ import { Component, OnInit } from '@angular/core';
     './order-gifts.component.scss',
   ],
 })
-export class OrderGiftsComponent implements OnInit {
-  constructor() {
-    console.log('on init');
-  }
-
-  ngOnInit(): void {
-    console.log('on init');
-  }
+export class OrderGiftsComponent {
+  @Input() gifts?: OrderItem[] | null;
 }

@@ -1,1 +1,50 @@
-<p>order-summary works!</p>
+<div class="component">
+    <div class="card">
+      <h3 class="card-header summary-header">Order Summary</h3>
+      <div class="card-body">
+        <div class="row pb-3">
+            <div class="col">
+                <p class="summary-item">Subtotal</p>
+              </div>
+              <div class="col">
+                <p class="summary-value">{{ order?.subTotal?.formattedAmount }}</p>
+              </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <p class="summary-item">Discount</p>
+              </div>
+              <div class="col">
+                <p class="summary-value">-{{ order?.discountTotal?.formattedAmount }}</p>
+              </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <p class="summary-item">Tax</p>
+              </div>
+              <div class="col">
+                <p class="summary-value">+{{ order?.taxTotal?.formattedAmount }}</p>
+              </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <p class="summary-item">Shipping cost</p>
+              </div>
+              <div class="col">
+                <p class="summary-value">+{{ order?.shippingTotal?.formattedAmount }}</p>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="summary-item">Total</p>
+              </div>
+              <div class="col">
+                <p class="summary-total">{{ order?.total?.formattedAmount }}</p>
+              </div>
+        </div>
+        <div *ngIf="isDetailsMode" class="card-text summary-footer pt-3">
+            Availability, shipping, tax & promotions are not final until you complete your order.
+        </div>
+      </div>
+    </div>
+  </div>
