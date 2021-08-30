@@ -57,8 +57,8 @@ export class OrderService implements OnDestroy {
 
             const result: Order = {
               ...order,
-              items: customMap(order.items, x => ({ ...x })),
-              gifts: customMap(order.items, x => ({ ...x })),
+              items: customMap(order.items?.filter(x => !x?.isGift), x => ({ ...x })),
+              gifts: customMap(order.items?.filter(x => x?.isGift), x => ({ ...x })),
             };
 
             const shipment = order.shipments?.find(x => x != null);

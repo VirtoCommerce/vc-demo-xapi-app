@@ -90,6 +90,7 @@ export interface order_order_items_placedPrice {
 export interface order_order_items {
   readonly __typename: "OrderLineItemType";
   readonly id: string;
+  readonly isGift: boolean | null;
   readonly productId: string;
   readonly name: string;
   readonly sku: string;

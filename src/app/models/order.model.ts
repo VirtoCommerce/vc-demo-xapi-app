@@ -26,5 +26,3 @@ export interface OrderPayment extends PartialDeep<Mutable<Omit<graphql.order_ord
     billingAddress?: Address;
     iconUrl?: string | null;
 }
-
-export type OrderPaymentMethod = Mutable<Omit<graphql.order_order_inPayments_paymentMethod, typeNameTemplate>>

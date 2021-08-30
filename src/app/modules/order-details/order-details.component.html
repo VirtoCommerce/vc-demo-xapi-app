@@ -19,34 +19,37 @@
 
     <div class="row">
       <div class="col-lg-17">
-        <div class="row mb-3 mt-5">
-          <div class="media magic-offset-1">
-            <img class="user-select-none" src="assets/images/checkout-products-icon.svg" alt="productsLogo">
-            <div class="media-body magic-offset-2">
-              <h2 class="mb-0 text-condensed">Purchased products</h2>
+        <span *ngIf="order.items && order.items.length">
+          <div class="row mb-3 mt-5">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/checkout-products-icon.svg" alt="productsLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Purchased products</h2>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <vc-order-line-items [items]="order.items"></vc-order-line-items>
-          </div>
-        </div>
-
-        <div class="row mt-4 mb-1">
-          <div class="media magic-offset-1">
-            <img class="user-select-none" src="assets/images/gifts.svg" alt="extraLogo">
-            <div class="media-body magic-offset-2">
-              <h2 class="mb-0 text-condensed">Accepted gifts</h2>
+          <div class="row">
+            <div class="col">
+              <vc-order-line-items [items]="order.items"></vc-order-line-items>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <vc-order-gifts [gifts]="order.gifts"></vc-order-gifts>
+        </span>
+        
+        <span *ngIf="order.gifts && order.gifts.length">
+          <div class="row mt-4 mb-1">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/gifts.svg" alt="extraLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Accepted gifts</h2>
+              </div>
+            </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="col">
+              <vc-order-gifts [gifts]="order.gifts"></vc-order-gifts>
+            </div>
+          </div>
+        </span>
 
         <span *ngIf="order.comment">
           <div class="row mt-4 mb-1">

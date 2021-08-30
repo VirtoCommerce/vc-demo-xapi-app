@@ -15,6 +15,7 @@ query order ($number: String, $cultureName: String) {
         shippingTotal { formattedAmount }
         items {
             id
+            isGift
             productId
             name
             sku
