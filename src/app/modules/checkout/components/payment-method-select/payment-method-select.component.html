@@ -8,7 +8,7 @@
         <span aria-hidden="true"></span>
     </button>
 </div>
-<div class="">
+<div>
     <div class="table-responsive">
         <table class="table table-striped table-borderless small-table-head"
             style="margin-bottom: 3px; font-size: 15px;" aria-label="Shipping methods">
@@ -35,7 +35,7 @@
                         </div>
                         <div *ngIf="!method.isActive">
                             <a href="javascript: void(0)" style="border-bottom: 1px dashed #5D94BC"
-                                (click)="selectMethod(method)">Choose</a>
+                                (click)="selectMethod(method)">Choose</a>   
                         </div>
                     </td>
                 </tr>
