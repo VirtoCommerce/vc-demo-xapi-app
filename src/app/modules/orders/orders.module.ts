@@ -9,18 +9,18 @@ import { StoreModule } from '@ngrx/store';
 import { OrdersComponent } from './orders.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersEffects } from '../../store/order/orders.effects';
-import { SearchComponent } from 'src/app/components/search/search.component';
 import * as fromOrders from '../../store/order/orders.reducer';
 import { PropertyValuePipe } from './pipes/property-value.pipe';
+import { VcCommonModule } from '../vc-common/vc-common.module';
 
 @NgModule({
   declarations: [
     OrdersComponent,
-    SearchComponent,
     PropertyValuePipe,
   ],
   imports: [
     CommonModule,
+    VcCommonModule,
     OrdersRoutingModule,
     NgbPaginationModule,
     FormsModule,
