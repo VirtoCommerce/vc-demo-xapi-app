@@ -53,15 +53,13 @@ export class OrderService implements OnDestroy {
               return;
             }
 
-            const order = o.data.order;
-
             const result: Order = {
-              ...order,
-              items: customMap(order.items?.filter(x => !x?.isGift), x => ({ ...x })),
-              gifts: customMap(order.items?.filter(x => x?.isGift), x => ({ ...x })),
+              ...o.data.order,
+              items: customMap(o.data.order.items?.filter(x => !x?.isGift), x => ({ ...x })),
+              gifts: customMap(o.data.order.items?.filter(x => x?.isGift), x => ({ ...x })),
             };
 
-            const shipment = order.shipments?.find(x => x != null);
+            const shipment = o.data.order.shipments?.find(x => x != null);
             if (shipment) {
               result.shipment = {
                 ...shipment,
@@ -82,7 +80,7 @@ export class OrderService implements OnDestroy {
               };
             }
 
-            const payment = order.inPayments?.find(x => x != null);
+            const payment = o.data.order.inPayments?.find(x => x != null);
             if (payment) {
               result.payment = {
                 ...payment,

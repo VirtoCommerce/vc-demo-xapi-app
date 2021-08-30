@@ -115,7 +115,6 @@
   }
 }
 
-//---------------------------
 .card {
     .summary-header {
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -162,7 +161,7 @@
   
 
 .order-details-sm-font {
-  font-family: Lato;
+  font-family: $font-family-sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
