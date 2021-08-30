@@ -11,6 +11,7 @@ import { OrderPaymentMethodComponent } from './components/order-payment-method/o
 import { OrderShippingMethodComponent } from './components/order-shipping-method/order-shipping-method.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderLineItemsComponent } from './components/order-line-items/order-line-items.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,6 @@ import { OrderLineItemsComponent } from './components/order-line-items/order-lin
     OrderDetailsAddressComponent,
     OrderShippingMethodComponent,
     OrderPaymentMethodComponent,
-    // ImageFallbackDirective,
   ],
   imports: [
     CommonModule,
@@ -30,6 +30,7 @@ import { OrderLineItemsComponent } from './components/order-line-items/order-lin
     DynamicFormsNGBootstrapUIModule,
     OrderDetailsRoutingModule,
     FontAwesomeModule,
+    DirectivesModule,
   ],
 })
 export class OrderDetailsModule { }
