@@ -79,28 +79,27 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="order.payment?.billingAddress">
           <div class="mt-3">
             <vc-order-details-address [address]="order.payment?.billingAddress" [isShippingMode]="false">
             </vc-order-details-address>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="order.shipment">
           <div class="mt-3">
             <vc-order-shipping-method [shipment]="order.shipment"></vc-order-shipping-method>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="order.shipment?.deliveryAddress">
           <div class="mt-3">
             <vc-order-details-address [address]="order.shipment?.deliveryAddress" [isShippingMode]="true">
             </vc-order-details-address>
           </div>
         </div>
 
-        <!-- *ngIf="order.payment?.paymentMethod" -->
-        <div class="row">
+        <div class="row" *ngIf="order.payment?.paymentMethod">
           <div class="mt-3">
             <vc-order-payment-method [payment]="order.payment"></vc-order-payment-method>
           </div>
