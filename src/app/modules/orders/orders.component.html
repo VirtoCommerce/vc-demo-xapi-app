@@ -37,12 +37,12 @@
             <tr>
               <th class="sortable" scope="col" (click)="applySorting('number')" [ngClass]="{'desc': sort.column === 'number' && sort.direction === sortDescending,
                            'asc': sort.column === 'number' && sort.direction === sortAscending}">Order number</th>
-              <th scope="col">Purchase number</th>
-              <th class="sortable" scope="col" (click)="applySorting('createdDate')" [ngClass]="{'desc': sort.column === 'createdDate' && sort.direction === sortDescending,
+              <th style="width: 25%" scope="col">Purchase number</th>
+              <th style="width: 14%" class="sortable" scope="col" (click)="applySorting('createdDate')" [ngClass]="{'desc': sort.column === 'createdDate' && sort.direction === sortDescending,
                            'asc': sort.column === 'createdDate' && sort.direction === sortAscending}">Date</th>
-              <th class="sortable" scope="col" (click)="applySorting('status')" [ngClass]="{'desc': sort.column === 'status' && sort.direction === sortDescending,
+              <th style="width: 13%" class="sortable" scope="col" (click)="applySorting('status')" [ngClass]="{'desc': sort.column === 'status' && sort.direction === sortDescending,
                            'asc': sort.column === 'status' && sort.direction === sortAscending}">Status</th>
-              <th class="sortable" scope="col" (click)="applySorting('total')" [ngClass]="{'desc': sort.column === 'total' && sort.direction === sortDescending,
+              <th style="width: 13%" class="sortable" scope="col" (click)="applySorting('total')" [ngClass]="{'desc': sort.column === 'total' && sort.direction === sortDescending,
                            'asc': sort.column === 'total' && sort.direction === sortAscending}">Total</th>
             </tr>
           </thead>
