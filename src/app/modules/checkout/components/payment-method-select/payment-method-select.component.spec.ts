@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PaymentMethodSelectComponent } from './payment-method-select.component';
 
@@ -10,6 +11,9 @@ describe('PaymentMethodSelectComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         PaymentMethodSelectComponent,
+      ],
+      providers: [
+        NgbActiveModal,
       ],
     })
       .compileComponents();
