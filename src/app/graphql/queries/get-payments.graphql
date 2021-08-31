@@ -1,0 +1,15 @@
+query payments ($after: String, $first: Int, $filter: String, $sort: String, $cultureName: String, $userId: String!) {
+  payments (after: $after, first: $first, filter: $filter, sort: $sort, cultureName: $cultureName, userId: $userId) {
+    items {
+	    id
+      number
+      order { number }
+      customerName
+      status
+      gatewayCode
+      sum { formattedAmount }
+      price { formattedAmount }
+    }
+    totalCount
+  }
+}
