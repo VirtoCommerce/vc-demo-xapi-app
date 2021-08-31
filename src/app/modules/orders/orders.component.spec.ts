@@ -5,6 +5,7 @@ import { OrdersComponent } from './orders.component';
 import { ordersFeatureKey, initialState } from 'src/app/store/order/orders.reducer';
 import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
   from 'src/app/store/current-customer/current-customer.reducer';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -14,6 +15,9 @@ describe('OrdersComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         OrdersComponent,
+      ],
+      imports: [
+        RouterTestingModule,
       ],
       providers: [
         provideMockStore({
