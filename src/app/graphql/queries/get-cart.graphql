@@ -45,6 +45,13 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             formattedAmount
           }
         }
+        availablePaymentMethods { 
+          code 
+          name
+          paymentMethodType
+          logoUrl
+          priority
+        }
         shipments {
           id
           shipmentMethodCode
