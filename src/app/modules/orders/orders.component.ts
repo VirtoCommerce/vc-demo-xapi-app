@@ -7,8 +7,10 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { loadOrders } from 'src/app/store/order/orders.actions';
 import { selectCurrentCustomer } from 'src/app/store/current-customer/current-customer.selectors';
 import { selectOrders } from 'src/app/store/order/orders.selectors';
-import { pageInfo, sortAscending, sortDescending } from './orders.constants';
+import { getSortingExpression, pageInfo, sortAscending, sortDescending, SortInfo } from 'src/app/helpers/listBrowsing';
 import { nonNull } from 'src/app/helpers/nonNull';
+
+const pageSize = 6;
 
 @Component({
   selector: 'vc-orders',
@@ -30,7 +32,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   page = pageInfo.page;
 
-  pageSize = pageInfo.pageSize;
+  pageSize = pageSize;
 
   statuses = 'New Pending Paid Processing Cancelled Completed'.split(' ');
 
@@ -62,22 +64,16 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   onSearchChange(keyword: string): void {
     this.keyword = keyword;
-
-    if (this.page > 1) {
-      this.loadPage(1);
-    }
-    else {
-      this.loadItems();
-    }
+    this.loadPage(1);
   }
 
   onStatusChange(status: string | undefined): void {
     this.status = status;
-    this.loadItems();
+    this.loadPage(1);
   }
 
   loadPage(page: number): void {
-    this.cursor = (page * this.pageSize - this.pageSize).toString();
+    this.cursor = (page * pageSize - pageSize).toString();
     this.loadItems();
     this.page = page;
   }
@@ -104,18 +100,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.store.dispatch(loadOrders({
       currentCustomerId: this.currentCustomerId,
       filter: `${this.keyword ?? ''} ${statusFilter}`,
-      count: this.pageSize,
+      count: pageSize,
       cursor: this.cursor,
-      sort: this.getSortingExpression(),
+      sort: getSortingExpression(this.sort),
     }));
   }
-
-  private getSortingExpression(): string {
-    return `${this.sort.column}:${this.sort.direction}`;
-  }
-}
-
-interface SortInfo {
-  column: string;
-  direction: string;
 }
