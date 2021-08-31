@@ -27,11 +27,11 @@ export type OrderItem = Mutable<Omit<graphqlOrder.order_order_items, typeNameTem
 export interface OrderShipment extends PartialDeep<Mutable<Omit<graphqlOrder.order_order_shipments,
   typeNameTemplate | 'deliveryAddress'>>> {
     deliveryAddress?: Address;
-    iconUrl?: string | null;
+    logoUrl?: string | null;
 }
 
 export interface OrderPayment extends PartialDeep<Mutable<Omit<graphqlOrder.order_order_inPayments,
   typeNameTemplate | 'billingAddress'>>> {
     billingAddress?: Address;
-    iconUrl?: string | null;
+    logoUrl?: string | null;
 }

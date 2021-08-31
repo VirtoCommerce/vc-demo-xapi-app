@@ -116,6 +116,11 @@ export interface order_order_dynamicProperties {
   readonly value: string | null;
 }
 
+export interface order_order_shipments_shippingMethod {
+  readonly __typename: "OrderShippingMethodType";
+  readonly logoUrl: string;
+}
+
 export interface order_order_shipments_price {
   readonly __typename: "MoneyType";
   /**
@@ -204,6 +209,7 @@ export interface order_order_shipments_deliveryAddress {
 export interface order_order_shipments {
   readonly __typename: "OrderShipmentType";
   readonly id: string;
+  readonly number: string;
   /**
    * Current shipment method code
    */
@@ -212,6 +218,7 @@ export interface order_order_shipments {
    * Current shipment option code
    */
   readonly shipmentMethodOption: string | null;
+  readonly shippingMethod: order_order_shipments_shippingMethod | null;
   readonly price: order_order_shipments_price | null;
   readonly discountAmount: order_order_shipments_discountAmount | null;
   readonly total: order_order_shipments_total | null;
@@ -233,6 +240,7 @@ export interface order_order_inPayments_paymentMethod_price {
 export interface order_order_inPayments_paymentMethod {
   readonly __typename: "OrderPaymentMethodType";
   readonly code: string;
+  readonly logoUrl: string;
   readonly price: order_order_inPayments_paymentMethod_price | null;
 }
 
@@ -288,6 +296,7 @@ export interface order_order_inPayments_billingAddress {
 export interface order_order_inPayments {
   readonly __typename: "PaymentInType";
   readonly id: string;
+  readonly number: string;
   readonly paymentMethod: order_order_inPayments_paymentMethod | null;
   readonly billingAddress: order_order_inPayments_billingAddress | null;
 }

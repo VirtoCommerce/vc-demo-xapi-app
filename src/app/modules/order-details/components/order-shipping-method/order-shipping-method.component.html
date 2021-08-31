@@ -4,7 +4,7 @@
         <div class="card-body">
             <div class="media" *ngIf="shipment">
                 <img class="user-select-none" vcImageFallback="assets/images/shipping-method.svg"
-                    [src]="shipment.iconUrl" class="img-fluid" alt="code">
+                    [src]="shipment.logoUrl" class="img-fluid" alt="code">
                 <div class="media-body">
                     <div class="mx-3" style="font-size: 14px;">
                         {{shipment.shipmentMethodCode}} - {{ shipment.shipmentMethodOption }} ({{

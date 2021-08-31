@@ -4,12 +4,10 @@
             <div class="col-lg-3 px-3 fw-strong item-header">
                 Product
             </div>
-            <div class="col-lg-12 px-0">
-            </div>
-            <div class="col-lg-3 center-text fw-strong item-header">
+            <div class="col-lg-3 offset-lg-12 center-text fw-strong item-header">
                 Quantity
             </div>
-            <div class="col-lg-6 center-text fw-strong item-header">
+            <div class="col-lg-3 right-text fw-strong item-header">
                 Total
             </div>
         </div>
@@ -38,7 +36,7 @@
             <div class="col-lg-3 center-text">
                 {{lineItem.quantity}}
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 right-text">
                 <span class="fw-bold price-total">{{ lineItem.extendedPrice!.formattedAmount }}</span>
             </div>
             <div class="col-lg-3">
