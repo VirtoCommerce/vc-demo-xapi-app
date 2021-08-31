@@ -8,7 +8,7 @@
 
     <ng-container *ngFor="let section of dashboardContent">
       <vc-dashboard-section
-        *ngIf="(currentCustomer$ | async) || section.header === 'LOGIN & REGISTRATION' || section.header === 'CHECKOUT'"
+        *ngIf="(currentCustomer$ | async) || section.header === 'LOGIN & REGISTRATION' || section.header === 'CHECKOUT & ORDERS'"
         [currentSection]="section"
       ></vc-dashboard-section>
     </ng-container>

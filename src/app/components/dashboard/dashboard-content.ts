@@ -37,13 +37,18 @@ export const dashboardContent: DashboardContentType = [
     ],
   },
   {
-    header: 'CHECKOUT',
+    header: 'CHECKOUT & ORDERS',
     iconSrc: '../../../assets/images/dash-checkout.svg',
     content: [
       {
         link: '/checkout',
         caption: 'CHECKOUT',
         description: 'Checkout script demo',
+      },
+      {
+        link: '/orders',
+        caption: 'ORDERS',
+        description: 'Orders script demo',
       },
     ],
   },
