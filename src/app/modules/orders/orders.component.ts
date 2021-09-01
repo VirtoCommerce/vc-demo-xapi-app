@@ -96,8 +96,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   openOrderDetails(number: string): void {
     void this.router.navigate([
-      '/order',
-    ], { queryParams: { number } });
+      `/thank-you/${number}`,
+    ]);
   }
 
   ngOnDestroy(): void {

@@ -34,7 +34,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       });
 
     this.route
-      .queryParamMap
+      .paramMap
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(params => {
         if (params.has('number')) {

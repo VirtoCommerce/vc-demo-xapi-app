@@ -4,7 +4,7 @@ import { OrderComponent } from '../order/order.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':number',
     data: { isDetailsMode: true },
     component: OrderComponent,
   },

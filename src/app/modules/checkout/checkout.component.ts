@@ -39,9 +39,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.checkoutService.createOrder(this.cart.id)
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(number => {
-        void this.router.navigate([
-          '/order',
-        ], { queryParams: { number } });
+        if (number) {
+          void this.router.navigate([
+            `/thank-you/${number}`,
+          ]);
+        }
       });
   }
 
