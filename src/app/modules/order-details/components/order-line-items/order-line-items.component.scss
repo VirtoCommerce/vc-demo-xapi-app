@@ -1,0 +1,36 @@
+.vertical-line {
+    border-left: 1px solid #b6b6b6;
+}
+
+.fw-strong {
+    font-weight: 800;
+}
+
+.fs-label{
+    font-size: 13px;
+}
+
+$dark-green: #3c763d;
+
+.price-item {
+  color: $dark-green !important;
+}
+
+.price-total {
+  color: $dark-green !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.item-header {
+  font-size: 15px;
+  line-height: 20px;
+  color: #111111;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.right-text {
+  text-align: right;
+}

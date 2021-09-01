@@ -1,14 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
+import { customMap } from 'src/app/helpers/custom-map';
 
-import { Order } from 'src/app/models/order.model';
+import { OrderRecord } from 'src/app/models/order.model';
 import * as OrdersActions from './orders.actions';
-import { customMap } from '../cart/cart.reducer';
 
 export const ordersFeatureKey = 'orders';
 
 export interface State {
   orders: {
-    items?: Order[] | null,
+    items?: OrderRecord[] | null,
     totalCount?: number | null
   } | null,
 }
