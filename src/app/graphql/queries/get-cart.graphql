@@ -85,6 +85,7 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
         }
         payments {
           id
+          paymentGatewayCode
           billingAddress {
             firstName
             lastName

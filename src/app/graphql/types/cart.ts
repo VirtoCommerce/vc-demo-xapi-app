@@ -196,6 +196,30 @@ export interface cart_cart_availableShippingMethods {
   readonly total: cart_cart_availableShippingMethods_total | null;
 }
 
+export interface cart_cart_availablePaymentMethods {
+  readonly __typename: "PaymentMethodType";
+  /**
+   * Value of payment gateway code
+   */
+  readonly code: string | null;
+  /**
+   * Value of payment method name
+   */
+  readonly name: string | null;
+  /**
+   * Value of payment method type
+   */
+  readonly paymentMethodType: string | null;
+  /**
+   * Value of payment method logo absolute URL
+   */
+  readonly logoUrl: string | null;
+  /**
+   * Value of payment method priority
+   */
+  readonly priority: number | null;
+}
+
 export interface cart_cart_shipments_price {
   readonly __typename: "MoneyType";
   /**
@@ -356,25 +380,11 @@ export interface cart_cart_payments {
    * Payment Id
    */
   readonly id: string | null;
-  readonly billingAddress: cart_cart_payments_billingAddress | null;
-}
-
-export interface cart_cart_availablePaymentMethods {
-  readonly __typename: "PaymentMethodType";
-  readonly name: string | null;
   /**
    * Value of payment gateway code
    */
-  readonly code: string | null;
-  readonly paymentMethodType: string | null;
-  /**
-   * Value of payment method logo absolute URL
-   */
-   readonly logoUrl: string | null;
-   /**
-    * Value of payment method priority
-    */
-   readonly priority: number | null;
+  readonly paymentGatewayCode: string | null;
+  readonly billingAddress: cart_cart_payments_billingAddress | null;
 }
 
 export interface cart_cart {
@@ -403,9 +413,9 @@ export interface cart_cart {
   readonly dynamicProperties: ReadonlyArray<(cart_cart_dynamicProperties | null)> | null;
   readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
   readonly availableShippingMethods: ReadonlyArray<(cart_cart_availableShippingMethods | null)> | null;
+  readonly availablePaymentMethods: ReadonlyArray<(cart_cart_availablePaymentMethods | null)> | null;
   readonly shipments: ReadonlyArray<(cart_cart_shipments | null)> | null;
   readonly payments: ReadonlyArray<(cart_cart_payments | null)> | null;
-  readonly availablePaymentMethods: ReadonlyArray<(cart_cart_availablePaymentMethods | null)> | null;
 }
 
 export interface cart {
