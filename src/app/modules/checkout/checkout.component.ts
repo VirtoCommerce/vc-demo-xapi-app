@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,6 +22,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly store: Store,
+    private readonly router: Router,
     private readonly checkoutService: CheckoutService
   ) { }
 
@@ -28,6 +30,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.store.dispatch(updateCartComment({
       comment,
     }));
+  }
+
+  submitOrder(): void {
+    if (!this.cart?.id)
+      return;
+
+    this.checkoutService.createOrder(this.cart.id)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(number => {
+        void this.router.navigate([
+          '/order',
+        ], { queryParams: { number } });
+      });
   }
 
   ngOnInit(): void {
