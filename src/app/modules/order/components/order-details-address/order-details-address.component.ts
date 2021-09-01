@@ -6,7 +6,7 @@ import { Address } from 'src/app/models/address.model';
   templateUrl: './order-details-address.component.html',
   styleUrls: [
     './order-details-address.component.scss',
-    '../../order-details.component.scss',
+    '../../order.component.scss',
   ],
 })
 export class OrderDetailsAddressComponent {

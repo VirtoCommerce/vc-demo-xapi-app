@@ -6,7 +6,7 @@ import { OrderPayment } from 'src/app/models/order.model';
   templateUrl: './order-payment-method.component.html',
   styleUrls: [
     './order-payment-method.component.scss',
-    '../../order-details.component.scss',
+    '../../order.component.scss',
   ],
 })
 export class OrderPaymentMethodComponent {
