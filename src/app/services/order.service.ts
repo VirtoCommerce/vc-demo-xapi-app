@@ -48,18 +48,20 @@ export class OrderService implements OnDestroy {
             if (shipment) {
               result.shipment = {
                 ...shipment,
-                deliveryAddress: {
-                  firstName: shipment.deliveryAddress?.firstName,
-                  lastName: shipment.deliveryAddress?.lastName,
-                  phone: shipment.deliveryAddress?.phone,
-                  email: shipment.deliveryAddress?.email,
-                  countryCode: shipment.deliveryAddress?.countryCode,
-                  countryName: shipment.deliveryAddress?.countryName,
-                  regionName: shipment.deliveryAddress?.regionId,
-                  postalCode: shipment.deliveryAddress?.postalCode,
-                  line1: shipment.deliveryAddress?.line1,
-                  line2: shipment.deliveryAddress?.line2,
-                },
+                deliveryAddress: shipment.deliveryAddress
+                  ? {
+                    firstName: shipment.deliveryAddress.firstName,
+                    lastName: shipment.deliveryAddress.lastName,
+                    phone: shipment.deliveryAddress.phone,
+                    email: shipment.deliveryAddress.email,
+                    countryCode: shipment.deliveryAddress.countryCode,
+                    countryName: shipment.deliveryAddress.countryName,
+                    regionName: shipment.deliveryAddress.regionId,
+                    postalCode: shipment.deliveryAddress.postalCode,
+                    line1: shipment.deliveryAddress.line1,
+                    line2: shipment.deliveryAddress.line2,
+                  }
+                  : undefined,
                 logoUrl: shipment.shippingMethod?.logoUrl ?? null,
               };
             }
@@ -68,18 +70,20 @@ export class OrderService implements OnDestroy {
             if (payment) {
               result.payment = {
                 ...payment,
-                billingAddress: {
-                  firstName: payment.billingAddress?.firstName,
-                  lastName: payment.billingAddress?.lastName,
-                  phone: payment.billingAddress?.phone,
-                  email: payment.billingAddress?.email,
-                  countryCode: payment.billingAddress?.countryCode,
-                  countryName: payment.billingAddress?.countryName,
-                  regionName: payment.billingAddress?.regionId,
-                  postalCode: payment.billingAddress?.postalCode,
-                  line1: payment.billingAddress?.line1,
-                  line2: payment.billingAddress?.line2,
-                },
+                billingAddress: payment.billingAddress
+                  ? {
+                    firstName: payment.billingAddress.firstName,
+                    lastName: payment.billingAddress.lastName,
+                    phone: payment.billingAddress.phone,
+                    email: payment.billingAddress.email,
+                    countryCode: payment.billingAddress.countryCode,
+                    countryName: payment.billingAddress.countryName,
+                    regionName: payment.billingAddress.regionId,
+                    postalCode: payment.billingAddress.postalCode,
+                    line1: payment.billingAddress.line1,
+                    line2: payment.billingAddress.line2,
+                  }
+                  : undefined,
                 logoUrl: payment.paymentMethod?.logoUrl ?? null,
               };
             }
