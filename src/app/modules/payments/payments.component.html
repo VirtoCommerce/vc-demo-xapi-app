@@ -41,14 +41,16 @@
                                 [ngClass]="{'desc': sort.column === 'number' && sort.direction === sortDescending,
                                 'asc': sort.column === 'number' && sort.direction === sortAscending}">Payment number</th>
                             <th style="width: 15%" scope="col">Order number</th>
-                            <th style="width: 10%" scope="col">From</th>
+                            <th style="width: 10%" class="sortable" scope="col" (click)="applySorting('createdDate')"
+                                [ngClass]="{'desc': sort.column === 'createdDate' && sort.direction === sortDescending,
+                                'asc': sort.column === 'createdDate' && sort.direction === sortAscending}">From</th>
                             <th style="width: 10%" class="sortable" scope="col" (click)="applySorting('status')"
                                 [ngClass]="{'desc': sort.column === 'status' && sort.direction === sortDescending,
                                 'asc': sort.column === 'status' && sort.direction === sortAscending}">Status</th>
                             <th style="width: 8%" class="sortable" scope="col" (click)="applySorting('sum')"
                                 [ngClass]="{'desc': sort.column === 'sum' && sort.direction === sortDescending,
                                 'asc': sort.column === 'sum' && sort.direction === sortAscending}">Amount</th>
-                            <th style="width: 12%" class="sortable" scope="col" (click)="applySorting('gatewayCode')"
+                            <th style="width: 17%" class="sortable" scope="col" (click)="applySorting('gatewayCode')"
                                 [ngClass]="{'desc': sort.column === 'gatewayCode' && sort.direction === sortDescending,
                                 'asc': sort.column === 'gatewayCode' && sort.direction === sortAscending}">Payment method</th>
                             <th style="width: 10%" class="sortable" scope="col" (click)="applySorting('price')"
@@ -60,7 +62,7 @@
                         <tr *ngFor="let item of payments.items">
                             <td>{{item.number}}</td>
                             <td>{{item.order.number}}</td>
-                            <td>{{item.customerName}}</td>
+                            <td>{{item.createdDate | date: 'y-MM-dd'}}</td>
                             <td>{{item.status}}</td>
                             <td>{{item.sum?.formattedAmount}}</td>
                             <td>{{item.gatewayCode}}</td>

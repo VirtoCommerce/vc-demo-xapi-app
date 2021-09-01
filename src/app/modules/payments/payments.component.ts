@@ -49,7 +49,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   sortAscending = sortAscending;
 
   sort: SortInfo = {
-    column: 'number',
+    column: 'createdDate',
     direction: sortDescending,
   };
 

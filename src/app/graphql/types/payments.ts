@@ -36,7 +36,7 @@ export interface payments_payments_items {
    * Associated Order
    */
   readonly order: payments_payments_items_order;
-  readonly customerName: string | null;
+  readonly createdDate: any;
   readonly status: string | null;
   /**
    * Payment method (gateway) code
