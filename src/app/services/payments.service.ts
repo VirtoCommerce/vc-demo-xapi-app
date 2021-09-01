@@ -3,11 +3,10 @@ import { Apollo } from 'apollo-angular';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { customMap } from '../helpers/custom-map';
 import getPaymentsQuery from '../graphql/queries/get-payments.graphql';
-
 import { payments, paymentsVariables } from '../graphql/types/payments';
 import { PaymentResult } from '../models/payment.model';
-import { customMap } from '../store/cart/cart.reducer';
 
 @Injectable({
   providedIn: 'root',

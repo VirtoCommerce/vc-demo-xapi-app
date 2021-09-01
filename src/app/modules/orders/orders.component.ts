@@ -9,6 +9,7 @@ import { selectCurrentCustomer } from 'src/app/store/current-customer/current-cu
 import { selectOrders } from 'src/app/store/order/orders.selectors';
 import { getSortingExpression, pageInfo, sortAscending, sortDescending, SortInfo } from 'src/app/helpers/listBrowsing';
 import { nonNull } from 'src/app/helpers/nonNull';
+import { Router } from '@angular/router';
 
 const pageSize = 6;
 
@@ -53,7 +54,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   private status: string | undefined;
 
-  constructor(private readonly store: Store) { }
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
     this.currentCustomer$.pipe(filter(nonNull), takeUntil(this.unsubscriber))
@@ -88,6 +92,12 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
 
     this.loadItems();
+  }
+
+  openOrderDetails(number: string): void {
+    void this.router.navigate([
+      '/order',
+    ], { queryParams: { number } });
   }
 
   ngOnDestroy(): void {

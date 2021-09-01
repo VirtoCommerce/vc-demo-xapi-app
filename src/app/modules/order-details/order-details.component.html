@@ -1,0 +1,114 @@
+<main class="h-100" role="main">
+  <div class="container pt-4 pb-6">
+    <div class="page-header" id="header">
+      <div class="row">
+        <div class="col-lg-16 col-md-14 col-sm-12">
+          <h1 class="mb-4 magic-offset-1">Order #{{ order.number }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-16 col-md-14 col-sm-12 magic-offset-1">
+        <div class="media">
+          <div><strong>STATUS: </strong>{{ order.status | uppercase }}</div>
+          <div class="px-4"><strong>PLACED ON: </strong>{{ order.createdDate | date:'medium' | uppercase }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-17">
+        <span *ngIf="order.items && order.items.length">
+          <div class="row mb-3 mt-5">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/checkout-products-icon.svg" alt="productsLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Purchased products</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <vc-order-line-items [items]="order.items"></vc-order-line-items>
+            </div>
+          </div>
+        </span>
+        
+        <span *ngIf="order.gifts && order.gifts.length">
+          <div class="row mt-4 mb-1">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/gifts.svg" alt="extraLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Accepted gifts</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <vc-order-gifts [gifts]="order.gifts"></vc-order-gifts>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="order.comment">
+          <div class="row mt-4 mb-1">
+            <div class="media magic-offset-1">
+              <img class="user-select-none" src="assets/images/extra.svg" alt="extraLogo">
+              <div class="media-body magic-offset-2">
+                <h2 class="mb-0 text-condensed">Order comment</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <p style="font-size: 15px;">{{ order.comment }}</p>
+            </div>
+          </div>
+        </span>
+
+      </div>
+      <div class="col-lg-7">
+
+        <div class="row">
+          <div class="mt-5">
+            <vc-order-summary [order]="order"></vc-order-summary>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="mt-3">
+            <button class="btn btn-primary" style="width: 100%;">Reorder all</button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="order.payment?.billingAddress">
+          <div class="mt-3">
+            <vc-order-details-address [address]="order.payment?.billingAddress" [isShippingMode]="false">
+            </vc-order-details-address>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="order.shipment">
+          <div class="mt-3">
+            <vc-order-shipping-method [shipment]="order.shipment"></vc-order-shipping-method>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="order.shipment?.deliveryAddress">
+          <div class="mt-3">
+            <vc-order-details-address [address]="order.shipment?.deliveryAddress" [isShippingMode]="true">
+            </vc-order-details-address>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="order.payment?.paymentMethod">
+          <div class="mt-3">
+            <vc-order-payment-method [payment]="order.payment"></vc-order-payment-method>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
