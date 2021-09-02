@@ -1,0 +1,86 @@
+<main class="h-100" role="main">
+    <div class="container pt-4 pb-6">
+        <div class="page-header" id="header">
+            <div class="row">
+                <div class="col-lg-16 col-md-14 col-sm-12">
+                    <h1 class="mb-4 magic-offset-1">Payments list</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="component">
+                <nav class="navbar navbar-expand-lg bg-light justify-content-md-center"
+                    aria-label="Light navigation bar">
+                    <div class="row w-100">
+                        <vc-search (searchUpdateEvent)="onSearchChange($event)" class="my-1 ps-3 pe-1 col-18">
+                        </vc-search>
+
+                        <div class="my-1 pe-3 col-6">
+                            <select required class="form-select" [ngClass]="{label: status.value==='All statuses'}"
+                                id="StatusSelect" aria-label="Filter by status" #status
+                                (change)="onStatusChange(status.value==='All statuses' ? undefined : status.value)">
+                                <option selected>All statuses</option>
+                                <option *ngFor="let i of statuses">{{i}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngIf="!payments.totalCount" class="component">
+                <div class="alert alert-info my-5">
+                  <strong>Nothing found!</strong>
+                </div>
+              </div>
+            <div *ngIf="payments.totalCount" class="table-responsive mb-3">
+                <table class="table table-striped table-borderless small-table-head" aria-label="Company addresses">
+                    <thead class="border-top border-bottom border-table-header">
+                        <tr>
+                            <th style="width: 15%" class="sortable" scope="col" (click)="applySorting('number')"
+                                [ngClass]="{'desc': sort.column === 'number' && sort.direction === sortDescending,
+                                'asc': sort.column === 'number' && sort.direction === sortAscending}">Payment number</th>
+                            <th style="width: 15%" scope="col">Order number</th>
+                            <th style="width: 10%" class="sortable" scope="col" (click)="applySorting('createdDate')"
+                                [ngClass]="{'desc': sort.column === 'createdDate' && sort.direction === sortDescending,
+                                'asc': sort.column === 'createdDate' && sort.direction === sortAscending}">From</th>
+                            <th style="width: 10%" class="sortable" scope="col" (click)="applySorting('status')"
+                                [ngClass]="{'desc': sort.column === 'status' && sort.direction === sortDescending,
+                                'asc': sort.column === 'status' && sort.direction === sortAscending}">Status</th>
+                            <th style="width: 8%" class="sortable" scope="col" (click)="applySorting('sum')"
+                                [ngClass]="{'desc': sort.column === 'sum' && sort.direction === sortDescending,
+                                'asc': sort.column === 'sum' && sort.direction === sortAscending}">Amount</th>
+                            <th style="width: 17%" class="sortable" scope="col" (click)="applySorting('gatewayCode')"
+                                [ngClass]="{'desc': sort.column === 'gatewayCode' && sort.direction === sortDescending,
+                                'asc': sort.column === 'gatewayCode' && sort.direction === sortAscending}">Payment method</th>
+                            <th style="width: 10%" class="sortable" scope="col" (click)="applySorting('price')"
+                                [ngClass]="{'desc': sort.column === 'price' && sort.direction === sortDescending,
+                                'asc': sort.column === 'price' && sort.direction === sortAscending}">Payment fees</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of payments.items">
+                            <td>{{item.number}}</td>
+                            <td>{{item.order.number}}</td>
+                            <td>{{item.createdDate | date: 'y-MM-dd'}}</td>
+                            <td>{{item.status}}</td>
+                            <td>{{item.sum?.formattedAmount}}</td>
+                            <td>{{item.gatewayCode}}</td>
+                            <td>{{item.price?.formattedAmount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <ngb-pagination *ngIf="payments.totalCount! > pageSize" [collectionSize]="payments.totalCount!" [page]="page" [pageSize]="pageSize"
+                (pageChange)="loadPage($event)">
+                <ng-template ngbPaginationPrevious>
+                    <fa-icon [icon]="faChevronLeft"></fa-icon>
+                </ng-template>
+                <ng-template ngbPaginationNext>
+                    <fa-icon [icon]="faChevronRight"></fa-icon>
+                </ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+</main>
