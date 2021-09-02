@@ -34,56 +34,58 @@ export class PaymentDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const number = this.route.snapshot.paramMap.get('number') as string;
 
-    const currentCustomer$ = this.store.select(selectCurrentCustomer);
-    currentCustomer$.pipe(filter(nonNull), takeUntil(this.unsubscriber))
-      .subscribe(x => {
-        let currentCustomerId = x.userName !== 'Anonymous' ? x.id : '';
+    this.store.select(selectCurrentCustomer)
+      .pipe(filter(nonNull), takeUntil(this.unsubscriber))
+      .subscribe(state => {
+        let currentCustomerId = state.userName !== 'Anonymous' ? state.id : '';
         // Security workaround for demo purposes. TODO: prepare demo data and pass currentCustomerId
-        currentCustomerId = '',
+        currentCustomerId = '';
 
         // Load payment
         this.paymentsService.getPayment(number, currentCustomerId)
           .pipe(takeUntil(this.unsubscriber))
           .subscribe(x => {
-            if (x != null) {
-              this.payment = x;
-
-              const none = '-';
-              this.fieldsToDisplay = [
-                {
-                  label: 'Payment number',
-                  value: x.number,
-                },
-                {
-                  label: 'Amount',
-                  value: x.sum?.formattedAmount,
-                },
-                {
-                  label: 'Payment fees',
-                  value: x.price?.formattedAmount,
-                },
-                {
-                  label: 'Status',
-                  value: x.status ?? none,
-                },
-                {
-                  label: 'Payment date',
-                  value: formatDate(x.createdDate, 'MMM d, y h:mm a', this.locale),
-                },
-                {
-                  label: 'Payment method',
-                  value: x.gatewayCode ?? none,
-                },
-                {
-                  label: 'Purpose',
-                  value: x.purpose ?? none,
-                },
-                {
-                  label: 'Comment',
-                  value: x.comment ?? none,
-                },
-              ];
+            if (!x) {
+              return;
             }
+
+            this.payment = x;
+
+            const none = '-';
+            this.fieldsToDisplay = [
+              {
+                label: 'Payment number',
+                value: x.number,
+              },
+              {
+                label: 'Amount',
+                value: x.sum?.formattedAmount,
+              },
+              {
+                label: 'Payment fees',
+                value: x.price?.formattedAmount,
+              },
+              {
+                label: 'Status',
+                value: x.status ?? none,
+              },
+              {
+                label: 'Payment date',
+                value: formatDate(x.createdDate, 'MMM d, y h:mm a', this.locale),
+              },
+              {
+                label: 'Payment method',
+                value: x.gatewayCode ?? none,
+              },
+              {
+                label: 'Purpose',
+                value: x.purpose ?? none,
+              },
+              {
+                label: 'Comment',
+                value: x.comment ?? none,
+              },
+            ];
           });
       });
   }

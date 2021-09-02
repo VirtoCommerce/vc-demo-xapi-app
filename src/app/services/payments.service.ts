@@ -5,13 +5,11 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { customMap } from '../helpers/custom-map';
-import getPaymentsQuery from '../graphql/queries/get-payments.graphql';
-import { payments, paymentsVariables } from '../graphql/types/payments';
-import { PaymentsResult } from '../models/payments.model';
-
 import getPaymentQuery from 'src/app/graphql/queries/get-payment.graphql';
+import getPaymentsQuery from '../graphql/queries/get-payments.graphql';
 import { payment } from '../graphql/types/payment';
-import { Payment } from '../models/payments.model';
+import { payments, paymentsVariables } from '../graphql/types/payments';
+import { PaymentsResult, Payment } from '../models/payments.model';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +41,7 @@ export class PaymentsService implements OnDestroy {
   getPayment(number: string, userId: string): Observable<Payment | null> {
     const queryFilter = {
       filter: `number:${number}`,
-      userId: userId,
+      userId,
       after: '0',
       first: 1,
     };
