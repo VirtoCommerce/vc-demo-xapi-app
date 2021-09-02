@@ -26,10 +26,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private readonly checkoutService: CheckoutService
   ) { }
 
-  onCommentUpdate(comment: string | null): void {
-    this.store.dispatch(updateCartComment({
-      comment,
-    }));
+  get canSubmitOrder(): boolean {
+    return !!this.cart?.payments?.length &&
+      !!this.cart.payments[0].billingAddress &&
+      !!this.cart.payments[0].paymentGatewayCode &&
+      !!this.cart.shipments?.length &&
+      !!this.cart.shipments[0].deliveryAddress &&
+      !!this.cart.shipments[0].shipmentMethodCode;
   }
 
   submitOrder(): void {
@@ -45,6 +48,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           ]);
         }
       });
+  }
+
+  onCommentUpdate(comment: string | null): void {
+    this.store.dispatch(updateCartComment({
+      comment,
+    }));
   }
 
   ngOnInit(): void {

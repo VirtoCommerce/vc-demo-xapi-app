@@ -82,7 +82,7 @@
         </div>
         <div class="row">
           <div class="mt-3">
-            <button class="btn btn-primary" (click)="submitOrder()" style="width: 100%;">Submit order</button>
+            <button class="btn btn-primary" (click)="submitOrder()" [disabled]="!canSubmitOrder" style="width: 100%;">Submit order</button>
           </div>
         </div>
       </div>
