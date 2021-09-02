@@ -36,8 +36,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   submitOrder(): void {
-    if (!this.cart?.id)
+    if (!this.cart?.id) {
       return;
+    }
 
     this.checkoutService.createOrder(this.cart.id)
       .pipe(takeUntil(this.unsubscriber))

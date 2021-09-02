@@ -199,7 +199,7 @@ export class CheckoutService implements OnDestroy {
       mutation: createOrderMutation,
       variables: {
         command: {
-          cartId: cartId,
+          cartId,
         },
       },
     });
