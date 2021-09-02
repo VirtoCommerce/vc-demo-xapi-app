@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of payments.items">
+                        <tr *ngFor="let item of payments.items" style="cursor: pointer;" [routerLink]="['.', item.number]">
                             <td>{{item.number}}</td>
                             <td>{{item.order.number}}</td>
                             <td>{{item.createdDate | date: 'y-MM-dd'}}</td>

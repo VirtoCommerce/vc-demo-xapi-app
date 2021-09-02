@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-
-import { PaymentsComponent } from './payments.component';
 import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
   from 'src/app/store/current-customer/current-customer.reducer';
-import { RouterTestingModule } from '@angular/router/testing';
 
-describe('PaymentsComponent', () => {
-  let component: PaymentsComponent;
-  let fixture: ComponentFixture<PaymentsComponent>;
+import { PaymentDetailsComponent } from './payment-details.component';
+
+describe('PaymentDetailsComponent', () => {
+  let component: PaymentDetailsComponent;
+  let fixture: ComponentFixture<PaymentDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        PaymentsComponent,
+        PaymentDetailsComponent,
       ],
       imports: [
         RouterTestingModule,
@@ -31,7 +31,7 @@ describe('PaymentsComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaymentsComponent);
+    fixture = TestBed.createComponent(PaymentDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

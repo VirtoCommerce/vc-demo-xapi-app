@@ -5,12 +5,14 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 
 import { PaymentsComponent } from './payments.component';
+import { PaymentDetailsComponent } from './payment-details.component';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { VcCommonModule } from '../vc-common/vc-common.module';
 
 @NgModule({
   declarations: [
     PaymentsComponent,
+    PaymentDetailsComponent,
   ],
   imports: [
     CommonModule,

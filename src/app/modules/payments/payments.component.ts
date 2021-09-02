@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import { selectCurrentCustomer } from 'src/app/store/current-customer/current-customer.selectors';
-import { PaymentResult } from 'src/app/models/payment.model';
+import { PaymentsResult } from 'src/app/models/payments.model';
 import { PaymentsService } from 'src/app/services/payments.service';
 import { getSortingExpression, pageInfo, sortAscending, sortDescending, SortInfo } from 'src/app/helpers/listBrowsing';
 import { nonNull } from 'src/app/helpers/nonNull';
@@ -27,7 +27,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
   currentCustomerId!: string;
 
-  payments: PaymentResult = {
+  payments: PaymentsResult = {
     items: [],
     totalCount: 0,
   };
