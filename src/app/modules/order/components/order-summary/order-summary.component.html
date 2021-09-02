@@ -42,7 +42,7 @@
                 <p class="summary-total">{{ order?.total?.formattedAmount }}</p>
               </div>
         </div>
-        <div *ngIf="isDetailsMode" class="card-text summary-footer pt-3">
+        <div *ngIf="showFooter" class="card-text summary-footer pt-3">
             Availability, shipping, tax & promotions are not final until you complete your order.
         </div>
       </div>

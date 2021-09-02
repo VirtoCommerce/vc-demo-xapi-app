@@ -6,11 +6,11 @@ import { Order } from 'src/app/models/order.model';
   templateUrl: './order-summary.component.html',
   styleUrls: [
     './order-summary.component.scss',
-    '../../order-details.component.scss',
+    '../../order.component.scss',
   ],
 })
 export class OrderSummaryComponent {
   @Input() order?: Order | null;
 
-  @Input() isDetailsMode = true;
+  @Input() showFooter = true;
 }

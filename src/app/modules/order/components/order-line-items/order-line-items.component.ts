@@ -12,6 +12,8 @@ import { OrderItem } from 'src/app/models/order.model';
 export class OrderLineItemsComponent {
   @Input() items?: OrderItem[] | null;
 
+  @Input() reorderAllowed = true;
+
   private readonly typesToCheck: string[] = [
     'Integer',
     'ShortText',

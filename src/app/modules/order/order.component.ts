@@ -6,14 +6,16 @@ import { Order } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
-  selector: 'vc-order-details',
-  templateUrl: './order-details.component.html',
+  selector: 'vc-order',
+  templateUrl: './order.component.html',
   styleUrls: [
-    './order-details.component.scss',
+    './order.component.scss',
   ],
 })
-export class OrderDetailsComponent implements OnInit, OnDestroy {
+export class OrderComponent implements OnInit, OnDestroy {
   unsubscriber = new Subject();
+
+  isDetailsMode = true;
 
   orderNumber?: string | null;
 
@@ -25,8 +27,14 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.route.data
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(data=> {
+        this.isDetailsMode = data?.isDetailsMode as boolean ?? true;
+      });
+
     this.route
-      .queryParamMap
+      .paramMap
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(params => {
         if (params.has('number')) {

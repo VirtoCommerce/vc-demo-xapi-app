@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart, PaymentMethod, PaymentMethodRecord } from 'src/app/models/cart.model';
+import { Cart, Payment, PaymentMethod, PaymentMethodRecord } from 'src/app/models/cart.model';
+import { addOrUpdatePayment } from 'src/app/store/cart/cart.actions';
 import { PaymentMethodSelectComponent } from '../payment-method-select/payment-method-select.component';
 
 @Component({
@@ -13,14 +15,6 @@ import { PaymentMethodSelectComponent } from '../payment-method-select/payment-m
   ],
 })
 export class PaymentMethodComponent implements OnInit {
-  constructor(
-    private readonly modalService: NgbModal
-  ) { }
-
-  ngOnInit(): void {
-    this.availablePaymentMethods = this.cart?.availablePaymentMethods;
-  }
-
   @Input() cart?: Cart | null;
 
   unsubscriber = new Subject();
@@ -28,6 +22,15 @@ export class PaymentMethodComponent implements OnInit {
   availablePaymentMethods?: PaymentMethod[] | null;
 
   @Output() paymentMethod?: PaymentMethodRecord | null;
+
+  constructor(
+    private readonly modalService: NgbModal,
+    private readonly store: Store
+  ) { }
+
+  get payment(): Payment {
+    return this.cart?.payments?.length ? this.cart.payments[0] : {};
+  }
 
   openChangePaymentMethod(): void {
     const modal = this.modalService.open(PaymentMethodSelectComponent, {
@@ -46,6 +49,17 @@ export class PaymentMethodComponent implements OnInit {
       .pipe(takeUntil(this.unsubscriber))
       .subscribe((method: PaymentMethodRecord) => {
         this.paymentMethod = method;
+
+        this.store.dispatch(addOrUpdatePayment({
+          payment: {
+            ...this.payment,
+            paymentGatewayCode: method.code,
+          },
+        }));
       });
+  }
+
+  ngOnInit(): void {
+    this.availablePaymentMethods = this.cart?.availablePaymentMethods;
   }
 }

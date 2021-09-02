@@ -3,16 +3,23 @@
     <div class="page-header" id="header">
       <div class="row">
         <div class="col-lg-16 col-md-14 col-sm-12">
-          <h1 class="mb-4 magic-offset-1">Order #{{ order.number }}</h1>
+          <h1 class="mb-4 magic-offset-1">
+            <ng-template [ngIf]="isDetailsMode">Order #{{ order.number }}</ng-template>
+            <ng-template [ngIf]="!isDetailsMode">Order complete</ng-template>
+          </h1>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-16 col-md-14 col-sm-12 magic-offset-1">
-        <div class="media">
+        <div class="media" *ngIf="isDetailsMode">
           <div><strong>STATUS: </strong>{{ order.status | uppercase }}</div>
           <div class="px-4"><strong>PLACED ON: </strong>{{ order.createdDate | date:'medium' | uppercase }}</div>
+        </div>
+        <div *ngIf="!isDetailsMode" class="order-submitted-font">
+          <div>Order #{{ order.number }} has be successfully submitted.</div>
+          <div>You will be notified via email when your order is ready for shipping.</div>
         </div>
       </div>
     </div>
@@ -24,13 +31,16 @@
             <div class="media magic-offset-1">
               <img class="user-select-none" src="assets/images/checkout-products-icon.svg" alt="productsLogo">
               <div class="media-body magic-offset-2">
-                <h2 class="mb-0 text-condensed">Purchased products</h2>
+                <h2 class="mb-0 text-condensed">
+                  <ng-template [ngIf]="isDetailsMode">Purchased products</ng-template>
+                  <ng-template [ngIf]="!isDetailsMode">My purchased products</ng-template>
+                </h2>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <vc-order-line-items [items]="order.items"></vc-order-line-items>
+              <vc-order-line-items [items]="order.items" [reorderAllowed]="isDetailsMode"></vc-order-line-items>
             </div>
           </div>
         </span>
@@ -72,11 +82,11 @@
 
         <div class="row">
           <div class="mt-5">
-            <vc-order-summary [order]="order"></vc-order-summary>
+            <vc-order-summary [order]="order" [showFooter]="isDetailsMode"></vc-order-summary>
           </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="isDetailsMode" class="row">
           <div class="mt-3">
             <button class="btn btn-primary" style="width: 100%;">Reorder all</button>
           </div>

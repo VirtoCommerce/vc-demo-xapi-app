@@ -6,7 +6,7 @@ import { OrderShipment } from 'src/app/models/order.model';
   templateUrl: './order-shipping-method.component.html',
   styleUrls: [
     './order-shipping-method.component.scss',
-    '../../order-details.component.scss',
+    '../../order.component.scss',
   ],
 })
 export class OrderShippingMethodComponent {

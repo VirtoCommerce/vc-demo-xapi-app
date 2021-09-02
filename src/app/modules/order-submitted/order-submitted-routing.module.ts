@@ -5,7 +5,7 @@ import { OrderComponent } from '../order/order.component';
 const routes: Routes = [
   {
     path: ':number',
-    data: { isDetailsMode: true },
+    data: { isDetailsMode: false },
     component: OrderComponent,
   },
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
     RouterModule,
   ],
 })
-export class OrderDetailsRoutingModule { }
+export class OrderSubmittedRoutingModule { }

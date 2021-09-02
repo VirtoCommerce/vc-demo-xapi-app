@@ -380,6 +380,10 @@ export interface cart_cart_payments {
    * Payment Id
    */
   readonly id: string | null;
+  /**
+   * Value of payment gateway code
+   */
+  readonly paymentGatewayCode: string | null;
   readonly billingAddress: cart_cart_payments_billingAddress | null;
 }
 
