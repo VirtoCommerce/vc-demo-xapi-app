@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'thank-you',
     loadChildren: () => import('./modules/order-submitted/order-submitted.module').then(m => m.OrderSubmittedModule),
   },
+  {
+    path: 'payments',
+    loadChildren: () => import('./modules/payments/payments.module').then(m => m.PaymentsModule),
+  },
 ];
 
 @NgModule({

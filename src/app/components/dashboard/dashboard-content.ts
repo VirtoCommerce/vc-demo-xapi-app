@@ -50,6 +50,11 @@ export const dashboardContent: DashboardContentType = [
         caption: 'ORDERS',
         description: 'Orders script demo',
       },
+      {
+        link: '/payments',
+        caption: 'PAYMENTS',
+        description: 'Payments demo',
+      },
     ],
   },
   {
