@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { getDictionaryDynamicPropery_dynamicProperty_dictionaryItems_items
-as GetDictionaryItem } from 'src/app/graphql/types/getDictionaryDynamicPropery';
+import { getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items
+as GetDictionaryItem } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { Sector } from 'src/app/models/sector.model';
 import * as SectorActions from './sectors.actions';
 

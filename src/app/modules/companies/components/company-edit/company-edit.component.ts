@@ -47,7 +47,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       if (id === 'current') {
         this.store.select(selectCurrentCustomerOrganization)
           .pipe(filter(nonNull))
-          .subscribe(organization => this.store.dispatch(getCompany({ id: organization.id })));
+          .subscribe(organization => {
+            this.store.dispatch(getCompany({ id: organization.id }));
+          });
       }
       else {
         this.store.dispatch(getCompany({ id: id as string }));

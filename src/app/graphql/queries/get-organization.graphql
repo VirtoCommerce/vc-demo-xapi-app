@@ -1,10 +1,18 @@
-query getOrganization ($id: String!) {
+query getOrganization($id: String!) {
   organization(id: $id) {
-    id,
-    name,
+    id
+    name
     dynamicProperties {
       name
       value
+      dynamicProperty {
+        dictionaryItems {
+          items {
+            id
+            name
+          }
+        }
+      }
     }
   }
 }

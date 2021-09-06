@@ -17,7 +17,6 @@ import * as fromCompanies from '../modules/companies/store/companies.reducer';
 import * as fromRegions from './regions/regions.reducer';
 import * as fromOrders from './order/orders.reducer';
 
-
 export interface State {
 [fromCountries.countriesFeatureKey]: fromCountries.State;
 [fromCompany.companyRegistrationFeatureKey]: fromCompany.State;
@@ -27,7 +26,8 @@ export interface State {
 [fromCurrentCustomer.currentCustomerFeatureKey]: fromCurrentCustomer.State;
 [fromAddresses.addressesFeatureKey]: fromAddresses.State;
 [fromCompanies.companiesFeatureKey]: fromCompanies.State;
-[fromRegions.regionsFeatureKey]: fromRegions.State;[fromOrders.ordersFeatureKey]: fromOrders.State;
+[fromRegions.regionsFeatureKey]: fromRegions.State;
+[fromOrders.ordersFeatureKey]: fromOrders.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -42,6 +42,5 @@ export const reducers: ActionReducerMap<State> = {
 [fromRegions.regionsFeatureKey]: fromRegions.reducer,
 [fromOrders.ordersFeatureKey]: fromOrders.reducer,
 };
-
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

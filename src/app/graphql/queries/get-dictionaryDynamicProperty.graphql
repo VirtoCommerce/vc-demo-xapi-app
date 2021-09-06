@@ -1,4 +1,4 @@
-query getDictionaryDynamicPropery($idOrName: String!) {
+query getDictionaryDynamicProperty($idOrName: String!) {
   dynamicProperty(idOrName: $idOrName) {
     dictionaryItems {
       items {
