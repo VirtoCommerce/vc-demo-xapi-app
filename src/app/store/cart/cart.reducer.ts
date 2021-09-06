@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { PartialDeep } from 'type-fest';
+import { customMap } from 'src/app/helpers/custom-map';
 import { Cart } from 'src/app/models/cart.model';
 import * as CartActions from './cart.actions';
 
@@ -17,6 +18,7 @@ export const initialState: State = {
     items: [],
     shipments: [],
     payments: [],
+    availableShippingMethods: [],
   },
   billingAddressAsShipping: true,
 };
@@ -41,12 +43,14 @@ export const reducer = createReducer(
       items: customMap(action?.data?.cart?.items, x => ({ ...x })),
       shipments: customMap(action?.data?.cart?.shipments, x => ({
         ...x,
-        deliveryAddress: { ...x.deliveryAddress },
+        deliveryAddress: x.deliveryAddress ? { ...x.deliveryAddress } : undefined,
       })),
       payments: customMap(action?.data?.cart?.payments, x => ({
         ...x,
-        billingAddress: { ...x.billingAddress },
+        billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
+      availablePaymentMethods: customMap(action?.data?.cart?.availablePaymentMethods, x => ({ ...x })),
+      availableShippingMethods: customMap(action?.data?.cart?.availableShippingMethods, x => ({ ...x })),
     },
   })),
   on(CartActions.getCartFailure, (state): State => state),
@@ -65,6 +69,18 @@ export const reducer = createReducer(
       cart: {
         ...state.cart,
         ...action?.data,
+        items: state.cart.items
+          ? state.cart.items.map(item => {
+            const discountedItem = action?.data?.items?.find(x => x && item ? x.id === item.id : false);
+            if (discountedItem) {
+              item = { ...item };
+              item.extendedPrice = discountedItem.extendedPrice;
+              item.placedPrice = discountedItem.placedPrice;
+            }
+
+            return item;
+          })
+          : [],
         coupons: customMap(action?.data?.coupons, x => ({ ...x })),
       },
     })
@@ -81,23 +97,25 @@ export const reducer = createReducer(
       },
     })
   ),
-  on(CartActions.addOrUpdateShippingAddressSuccess, (state, action): State => ({
+  on(CartActions.addOrUpdateShipmentSuccess, (state, action): State => ({
     ...state,
     cart: {
       ...state.cart,
-      shipments: customMap(action?.shipments, x => ({
+      total: action?.shipmentResult?.total,
+      shippingTotal: action?.shipmentResult?.shippingTotal,
+      shipments: customMap(action?.shipmentResult?.shipments, x => ({
         ...x,
-        deliveryAddress: { ...x.deliveryAddress },
+        deliveryAddress: x.deliveryAddress ? { ...x.deliveryAddress } : undefined,
       })),
     },
   })),
-  on(CartActions.addOrUpdateBillingAddressSuccess, (state, action): State => ({
+  on(CartActions.addOrUpdatePaymentSuccess, (state, action): State => ({
     ...state,
     cart: {
       ...state.cart,
       payments: customMap(action?.payments, x => ({
         ...x,
-        billingAddress: { ...x.billingAddress },
+        billingAddress: x.billingAddress ? { ...x.billingAddress } : undefined,
       })),
     },
   })),
@@ -107,11 +125,3 @@ export const reducer = createReducer(
     billingAddressAsShipping: action.value,
   })))
 );
-
-export function customMap<T, P>(input: readonly (T | null)[] | null | undefined, callback: (value: T) => P): P[] {
-  return input?.filter(x => x != null)
-    .map(x => x as T)
-    .map<P>(x => {
-      return callback(x);
-    }) ?? [];
-}

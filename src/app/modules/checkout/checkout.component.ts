@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,8 +22,34 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly store: Store,
+    private readonly router: Router,
     private readonly checkoutService: CheckoutService
   ) { }
+
+  get canSubmitOrder(): boolean {
+    return !!this.cart?.payments?.length &&
+      !!this.cart.payments[0].billingAddress &&
+      !!this.cart.payments[0].paymentGatewayCode &&
+      !!this.cart.shipments?.length &&
+      !!this.cart.shipments[0].deliveryAddress &&
+      !!this.cart.shipments[0].shipmentMethodCode;
+  }
+
+  submitOrder(): void {
+    if (!this.cart?.id) {
+      return;
+    }
+
+    this.checkoutService.createOrder(this.cart.id)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(number => {
+        if (number) {
+          void this.router.navigate([
+            `/thank-you/${number}`,
+          ]);
+        }
+      });
+  }
 
   onCommentUpdate(comment: string | null): void {
     this.store.dispatch(updateCartComment({

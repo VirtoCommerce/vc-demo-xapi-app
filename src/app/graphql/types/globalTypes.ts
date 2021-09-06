@@ -167,6 +167,10 @@ export interface InputCreateContactType {
   readonly organizations?: ReadonlyArray<(string | null)> | null;
 }
 
+export interface InputCreateOrderFromCartType {
+  readonly cartId?: string | null;
+}
+
 export interface InputCreateOrganizationType {
   readonly id?: string | null;
   readonly name?: string | null;
