@@ -1,0 +1,20 @@
+<div class="component">
+    <div class="card">
+        <h3 class="card-header summary-header-sm">
+            <ng-template [ngIf]="isShippingMode">Shipping address</ng-template>
+            <ng-template [ngIf]="!isShippingMode">Billing address</ng-template>
+        </h3>
+        <div class="card-body">
+            <div class="order-details-sm-font">
+                <div>
+                    <strong style="font-size: 13px;">{{ address?.firstName }} {{ address?.lastName }}</strong>
+                </div>
+                <div class="pt-1" style="width: 100%;"></div>
+                <div>{{ address?.line1 }} {{ address?.line2 }}, {{
+                    address?.countryName }} {{ address?.postalCode }}</div>
+                <div><strong>Phone:</strong> {{ address?.phone }}</div>
+                <div><strong>Email:</strong> {{ address?.email }}</div>
+            </div>
+        </div>
+    </div>
+</div>

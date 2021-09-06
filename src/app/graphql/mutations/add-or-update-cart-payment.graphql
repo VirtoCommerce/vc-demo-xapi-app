@@ -2,6 +2,7 @@ mutation addOrUpdateCartPayment ($command: InputAddOrUpdateCartPaymentType!) {
     addOrUpdateCartPayment (command: $command) {
     	payments {
         id
+        paymentGatewayCode
         billingAddress {
            addressType
            firstName

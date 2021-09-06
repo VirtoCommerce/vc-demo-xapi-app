@@ -12,6 +12,10 @@
     max-width: 1040px; 
   }
 
+  .modal-custom-size-2 { 
+    max-width: 760px; 
+  }
+
   .modal-position {
     margin-top: 5rem !important; 
   }
@@ -109,4 +113,8 @@
     &:focus {
       outline: 0;
   }
+}
+
+.danger-icon {
+  min-width: 30px;
 }

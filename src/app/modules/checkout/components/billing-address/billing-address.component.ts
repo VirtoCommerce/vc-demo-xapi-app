@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart, CartAddress } from 'src/app/models/cart.model';
-import { addOrUpdateBillingAddress, setBillingAsShipping } from 'src/app/store/cart/cart.actions';
+import { Cart, CartAddress, Payment, Shipment } from 'src/app/models/cart.model';
+import { addOrUpdatePayment, setBillingAsShipping } from 'src/app/store/cart/cart.actions';
 import { selectIsBillingAddressAsShipping } from 'src/app/store/cart/cart.selectors';
 import { AddressFormComponent } from '../address-form/address-form.component';
 
@@ -20,14 +20,24 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 export class BillingAddressComponent implements OnDestroy {
   @Input() cart?: Cart | null;
 
-  addressHidden = false;
-
   billingAddressAsShipping$ = this.store.select(selectIsBillingAddressAsShipping);
 
-  public get address(): CartAddress | null {
+  addressHidden = false;
+
+  previousAddress: CartAddress | null = null;
+
+  get address(): CartAddress | null {
     return this.cart?.payments?.length
       ? this.cart.payments[0]?.billingAddress ?? null
       : null;
+  }
+
+  get payment(): Payment {
+    return this.cart?.payments?.length ? this.cart.payments[0] : {};
+  }
+
+  get shipment(): Shipment {
+    return this.cart?.shipments?.length ? this.cart.shipments[0] : {};
   }
 
   unsubscriber = new Subject();
@@ -44,6 +54,30 @@ export class BillingAddressComponent implements OnDestroy {
 
     if (!value) {
       this.addressHidden = true;
+
+      // Remember the address if it's present
+      this.previousAddress = this.address;
+
+      if (this.previousAddress) {
+        this.store.dispatch(addOrUpdatePayment({
+          payment: {
+            ...this.payment,
+            billingAddress: undefined,
+          },
+        }));
+      }
+    }
+    else {
+      const address = this.previousAddress ?? this.shipment.deliveryAddress;
+      if (address) {
+        this.store.dispatch(addOrUpdatePayment({
+          payment: {
+            ...this.payment,
+            billingAddress: address,
+          },
+        }));
+      }
+      this.previousAddress = null;
     }
   }
 
@@ -61,13 +95,12 @@ export class BillingAddressComponent implements OnDestroy {
       .subscribe(address => {
         this.addressHidden = false;
 
-        const paymentId: string | null = this.cart?.payments?.length
-          ? this.cart.payments[0].id
-          : null;
-
-        this.store.dispatch(addOrUpdateBillingAddress({
-          paymentId,
-          address,
+        const payment: Payment = this.cart?.payments?.length ? this.cart.payments[0] : {};
+        this.store.dispatch(addOrUpdatePayment({
+          payment: {
+            ...payment,
+            billingAddress: { ...address },
+          },
         }));
       });
   }

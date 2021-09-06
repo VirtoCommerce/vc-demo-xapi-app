@@ -9,6 +9,58 @@ import { InputAddOrUpdateCartShipmentType } from "./globalTypes";
 // GraphQL mutation operation: addOrUpdateCartShipment
 // ====================================================
 
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_total {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shippingTotal {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_price {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_discountAmount {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_total {
+  readonly __typename: "MoneyType";
+  /**
+   * A decimal with the amount rounded to the significant number of decimal digits.
+   */
+  readonly amount: any;
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
 export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_deliveryAddress {
   readonly __typename: "AddressType";
   readonly addressType: number | null;
@@ -64,11 +116,24 @@ export interface addOrUpdateCartShipment_addOrUpdateCartShipment_shipments {
    * Shipment Id
    */
   readonly id: string | null;
+  /**
+   * Shipment method code
+   */
+  readonly shipmentMethodCode: string | null;
+  /**
+   * Shipment method option
+   */
+  readonly shipmentMethodOption: string | null;
+  readonly price: addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_price | null;
+  readonly discountAmount: addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_discountAmount | null;
+  readonly total: addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_total | null;
   readonly deliveryAddress: addOrUpdateCartShipment_addOrUpdateCartShipment_shipments_deliveryAddress | null;
 }
 
 export interface addOrUpdateCartShipment_addOrUpdateCartShipment {
   readonly __typename: "CartType";
+  readonly total: addOrUpdateCartShipment_addOrUpdateCartShipment_total | null;
+  readonly shippingTotal: addOrUpdateCartShipment_addOrUpdateCartShipment_shippingTotal | null;
   readonly shipments: ReadonlyArray<(addOrUpdateCartShipment_addOrUpdateCartShipment_shipments | null)> | null;
 }
 

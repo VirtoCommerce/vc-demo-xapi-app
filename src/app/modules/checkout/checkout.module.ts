@@ -13,6 +13,11 @@ import { LineItemsComponent } from './components/line-items/line-items.component
 import { ShippingAddressComponent } from './components/shipping-address/shipping-address.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { BillingAddressComponent } from './components/billing-address/billing-address.component';
+import { ShippingMethodComponent } from './components/shipping-method/shipping-method.component';
+import { ShippingMethodSelectComponent } from './components/shipping-method-select/shipping-method-select.component';
+import { PaymentMethodComponent } from './components/payment-method/payment-method.component';
+import { PaymentMethodSelectComponent } from './components/payment-method-select/payment-method-select.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,10 @@ import { BillingAddressComponent } from './components/billing-address/billing-ad
     ShippingAddressComponent,
     BillingAddressComponent,
     AddressFormComponent,
+    ShippingMethodComponent,
+    ShippingMethodSelectComponent,
+    PaymentMethodComponent,
+    PaymentMethodSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +42,7 @@ import { BillingAddressComponent } from './components/billing-address/billing-ad
     DynamicFormsNGBootstrapUIModule,
     CheckoutRoutingModule,
     FontAwesomeModule,
+    DirectivesModule,
   ],
 })
 export class CheckoutModule { }
