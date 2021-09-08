@@ -17,7 +17,7 @@ export const companiesFeatureKey = 'companies';
 export interface State {
   selectedCompany: PartialDeep<Company> | null,
   editCompany: PartialDeep<Company> | null,
-  dictionaryItems: Record<string, string[]> | null,
+  dictionaryItems: Record<string, Record<string, string>[]> | null,
 }
 
 export const initialState: State = {
@@ -104,19 +104,33 @@ function mapToCompany(
           .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.boolean)?.value as string | null,
         value => /^true$/i.test(value)
       ),
-      shortTextDictionary: organization.dynamicProperties
-        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary)?.value as string | null,
+      shortTextDictionary: getIdByValue(organization, COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary) as string | null,
     };
 }
 
-function takeDictionaryItems(organization: getOrganization_organization | null): Record<string, string[]> | null {
+/*
+ * Use this workaround because platform uses the one incoming value
+ * for patch value and value id properties of dictionary item
+ */
+function getIdByValue(company: getOrganization_organization | Omit<never, '__typename'>, property: string) {
+  const dictProperty = company.dynamicProperties?.find(x => x?.name === property);
+  const dictValue = dictProperty?.value;
+  const dictItems = dictProperty?.dynamicProperty?.dictionaryItems?.items;
+  return dictItems?.find(item => item?.name === dictValue)?.id || dictValue;
+}
+
+function takeDictionaryItems(organization: getOrganization_organization | null)
+  : Record<string, Record<string, string>[]> | null {
   return !organization
     ? null
     : organization?.dynamicProperties
       ?.filter(nonNull)
       .map(dynamicPropertyValue => ({
         [dynamicPropertyValue.name as string]:
-        dynamicPropertyValue.dynamicProperty?.dictionaryItems?.items?.map(item => item?.name) as string[],
+        dynamicPropertyValue.dynamicProperty?.dictionaryItems?.items?.map(item => ({
+          name: item?.name as string,
+          id: item?.id as string,
+        })) as Record<string, string>[],
       }))
       .reduce((acc, item) => ({
         ...acc,
