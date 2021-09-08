@@ -1,4 +1,4 @@
-import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +23,6 @@ import { DictionaryComponent } from './components/dictionary/dictionary.componen
     UsualPropertiesComponent,
     CompanyPropertiesComponent,
     DictionaryComponent,
-    ImageUploaderComponent,
   ],
   imports: [
     CommonModule,
