@@ -10,13 +10,13 @@
 export interface getOrganization_organization_dynamicProperties_dynamicProperty_dictionaryItems_items {
   readonly __typename: "DictionaryItemType";
   /**
-   * Name
-   */
-  readonly name: string;
-  /**
    * Id
    */
   readonly id: string;
+  /**
+   * Name
+   */
+  readonly name: string;
 }
 
 export interface getOrganization_organization_dynamicProperties_dynamicProperty_dictionaryItems {
@@ -67,4 +67,5 @@ export interface getOrganization {
 
 export interface getOrganizationVariables {
   readonly id: string;
+  readonly cultureName?: string | null;
 }

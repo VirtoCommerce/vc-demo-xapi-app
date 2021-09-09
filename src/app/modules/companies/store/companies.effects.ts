@@ -1,4 +1,4 @@
-import { selectEditedCompany } from './companies.selectors';
+import { selectCurrentCulture, selectEditedCompany } from './companies.selectors';
 import { updateOrganization, updateOrganizationVariables } from './../../../graphql/types/updateOrganization';
 import { getOrganization } from './../../../graphql/types/getOrganization';
 import { Injectable } from '@angular/core';
@@ -32,10 +32,19 @@ export class CompaniesEffects {
 
   getCompany$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CompaniesActions.getCompany),
-      switchMap(action => this.apollo.watchQuery<getOrganization>({
+      ofType(CompaniesActions.getCompany, CompaniesActions.setActiveCulture),
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCulture),
+      ]),
+      switchMap(([
+        action,
+        cultureName,
+      ]) => this.apollo.watchQuery<getOrganization>({
         query: getOrganizationQuery,
-        variables: { id: action.id },
+        variables: {
+          id: action.id,
+          cultureName: cultureName,
+        },
       })
         .valueChanges
         .pipe(
@@ -50,13 +59,15 @@ export class CompaniesEffects {
       ofType(CompaniesActions.updateCompany),
       concatLatestFrom(() => [
         this.store.select(selectEditedCompany),
+        this.store.select(selectCurrentCulture),
       ]),
       concatMap(([
         _,
         company,
+        cultureName,
       ]) => forkJoin([
         this.updateOrganization(company),
-        this.updateMemberDynamicProperties(company),
+        this.updateMemberDynamicProperties(company, cultureName),
       ]).pipe(
         map(([
           updateOrganizationResult,
@@ -87,7 +98,8 @@ export class CompaniesEffects {
   }
 
   updateMemberDynamicProperties(
-    company: Company
+    company: Company,
+    cultureName: string
   ): Observable<FetchResult<updateMemberDynamicProperties>> {
     return this.apollo.mutate<updateMemberDynamicProperties, updateMemberDynamicPropertiesVariables>({
       mutation: updateMemberDynamicPropertiesMutation,
@@ -131,9 +143,33 @@ export class CompaniesEffects {
               name: COMPANY_DYNAMIC_PROPERTIES.htmlUsual,
               value: company.htmlUsual,
             },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.shortTextMultilingual,
+              value: company.shortTextMultilingual,
+              locale: cultureName,
+            },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.longTextMultilingual,
+              value: company.longTextMultilingual,
+              locale: cultureName,
+            },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.htmlMultilingual,
+              value: company.htmlMultilingual,
+              locale: cultureName,
+            },
           ],
         },
       },
+      refetchQueries: [
+        {
+          query: getOrganizationQuery,
+          variables: {
+            id: company.id,
+            cultureName,
+          },
+        },
+      ],
     });
   }
 }

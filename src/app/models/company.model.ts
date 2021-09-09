@@ -10,4 +10,7 @@ export interface Company {
   shortTextDictionary: string | null,
   image: string | null,
   htmlUsual: string | null,
+  shortTextMultilingual: string | null,
+  longTextMultilingual: string | null,
+  htmlMultilingual: string | null,
 }

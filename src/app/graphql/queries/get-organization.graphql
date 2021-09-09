@@ -1,8 +1,8 @@
-query getOrganization($id: String!) {
+query getOrganization($id: String!, $cultureName: String) {
   organization(id: $id) {
     id
     name
-    dynamicProperties {
+    dynamicProperties(cultureName: $cultureName) {
       name
       value
       dynamicProperty {

@@ -22,12 +22,19 @@ export interface State {
   selectedCompany: PartialDeep<Company> | null,
   editCompany: PartialDeep<Company> | null,
   dictionaryItems: Record<string, DictionaryItem[]> | null,
+  availableCultures: string[],
+  activeCulture: string,
 }
 
 export const initialState: State = {
   selectedCompany: null,
   editCompany: null,
   dictionaryItems: null,
+  availableCultures: [
+    'en-US',
+    'de-DE',
+  ],
+  activeCulture: 'de-DE',
 };
 
 export const reducer = createReducer(
@@ -71,7 +78,11 @@ export const reducer = createReducer(
       editCompany: company,
     };
   }),
-  on(CompaniesActions.getCompanyFailure, (state, _): State => state)
+  on(CompaniesActions.getCompanyFailure, (state, _): State => state),
+  on(CompaniesActions.setActiveCulture, (state, action): State => ({
+    ...state,
+    activeCulture: action.culture,
+  }))
 
 );
 
@@ -113,6 +124,12 @@ function mapToCompany(
         .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.image)?.value as string | null,
       htmlUsual: organization.dynamicProperties
         .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlUsual)?.value as string | null,
+      shortTextMultilingual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.shortTextMultilingual)?.value as string | null,
+      longTextMultilingual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.longTextMultilingual)?.value as string | null,
+      htmlMultilingual: organization.dynamicProperties
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlMultilingual)?.value as string | null,
     };
 }
 

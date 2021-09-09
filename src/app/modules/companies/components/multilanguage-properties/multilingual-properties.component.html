@@ -1,0 +1,11 @@
+<label for="culture-selector" class="form-label">Culture for multilingual dynamic properties</label>
+<select class="form-select mb-3" id="culture-selector" aria-label="Current culture" [ngModel]="activeCulture$ | async" (ngModelChange)="onCultureChange($event)">
+  <option *ngFor="let option of cultureOptions$ | async" [ngValue]="option">{{option}}</option>
+</select>
+<form [formGroup]="formGroup"
+      class="col">
+  <dynamic-ng-bootstrap-form [group]="formGroup"
+                             [model]="formModel"
+                             (change)="onChange($event)">
+  </dynamic-ng-bootstrap-form>
+</form>
