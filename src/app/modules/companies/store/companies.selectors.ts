@@ -30,7 +30,6 @@ export const selectDictionaryOptions = createSelector(
     )
 );
 
-
 export const selectCurrentCulture = createSelector(
   selectCompaniesState,
   (state: fromCompanies.State) => state.activeCulture

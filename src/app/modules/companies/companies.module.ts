@@ -14,7 +14,8 @@ import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstr
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
-import { MultilingualPropertiesComponent } from './components/multilanguage-properties/multilingual-properties.component';
+import { MultilingualPropertiesComponent } from
+  './components/multilanguage-properties/multilingual-properties.component';
 
 @NgModule({
   declarations: [
