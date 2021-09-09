@@ -11,6 +11,11 @@ describe('Companies Selectors', () => {
       selectedCompany: null,
       editCompany: null,
       dictionaryItems: null,
+      availableCultures: [
+        'en-US',
+        'de-DE',
+      ],
+      activeCulture: 'de-DE',
     });
   });
 });
