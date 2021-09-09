@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { companiesFeatureKey, initialState } from '../../store/companies.reducer';
 
 import { MultilingualPropertiesComponent } from './multilingual-properties.component';
 
@@ -10,6 +13,16 @@ describe('MultilanguagePropertiesComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         MultilingualPropertiesComponent,
+      ],
+      imports: [
+        RouterTestingModule,
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            [companiesFeatureKey]: initialState,
+          },
+        }),
       ],
     })
       .compileComponents();
