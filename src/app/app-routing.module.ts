@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'members',
     loadChildren: () => import('./modules/members/members.module').then(m => m.MembersModule),
   },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
+  },
 ];
 
 @NgModule({
