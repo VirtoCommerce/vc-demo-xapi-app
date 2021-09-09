@@ -14,10 +14,14 @@ import { nonNull } from 'src/app/helpers/nonNull';
 
 export const companiesFeatureKey = 'companies';
 
+export interface DictionaryItem {
+  value: string,
+  valueId: string
+}
 export interface State {
   selectedCompany: PartialDeep<Company> | null,
   editCompany: PartialDeep<Company> | null,
-  dictionaryItems: Record<string, Record<string, string>[]> | null,
+  dictionaryItems: Record<string, DictionaryItem[]> | null,
 }
 
 export const initialState: State = {
@@ -120,7 +124,7 @@ function getIdByValue(company: getOrganization_organization | Omit<never, '__typ
 }
 
 function takeDictionaryItems(organization: getOrganization_organization | null)
-  : Record<string, Record<string, string>[]> | null {
+  : Record<string, DictionaryItem[]> | null {
   return !organization
     ? null
     : organization?.dynamicProperties
@@ -128,9 +132,9 @@ function takeDictionaryItems(organization: getOrganization_organization | null)
       .map(dynamicPropertyValue => ({
         [dynamicPropertyValue.name as string]:
         dynamicPropertyValue.dynamicProperty?.dictionaryItems?.items?.map(item => ({
-          name: item?.name as string,
-          id: item?.id as string,
-        })) as Record<string, string>[],
+          value: item?.name as string,
+          valueId: item?.id as string,
+        })) as DictionaryItem[],
       }))
       .reduce((acc, item) => ({
         ...acc,

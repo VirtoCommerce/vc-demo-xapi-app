@@ -24,8 +24,8 @@ export const selectDictionaryOptions = createSelector(
     ?.[COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary]
     .map(
       item => new DynamicFormOption({
-        label: item.name,
-        value: item.id,
+        label: item.value,
+        value: item.valueId,
       })
     )
 );
