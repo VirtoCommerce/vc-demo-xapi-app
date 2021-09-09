@@ -8,4 +8,6 @@ export interface Company {
   date: string | null,
   boolean: boolean | null,
   shortTextDictionary: string | null,
+  image: string | null,
+  htmlUsual: string | null,
 }

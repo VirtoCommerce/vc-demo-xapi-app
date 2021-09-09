@@ -1,3 +1,7 @@
+import { CustomFormsModule } from './../custom-forms/custom-forms.module';
+import { DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER }
+  from './components/dynamic-image-uploader/dynamic-image-uploader.model';
+import { DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.model';
 import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -18,10 +22,15 @@ import {
 } from './components/dynamic-ng-bootstrap-datetime-picker/dynamic-datetime-picker.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { DynamicNgxCodemirorComponent } from './components/dynamic-ngx-codemiror/dynamic-ngx-codemiror.component';
+import { DynamicImageUploaderComponent } from './components/dynamic-image-uploader/dynamic-image-uploader.component';
 
 @NgModule({
   declarations: [
     DynamicNGBootstrapDatetimePickerComponent,
+    DynamicNgxCodemirorComponent,
+    DynamicImageUploaderComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +41,8 @@ import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter'
     ReactiveFormsModule,
     DynamicFormsCoreModule,
     FontAwesomeModule,
+    CodemirrorModule,
+    CustomFormsModule,
   ],
   providers: [
     NgbDateNativeUTCAdapter,
@@ -42,9 +53,16 @@ import { NgbTimeNativeUTCAdapter } from './adapters/ngb-time-native-utc-adapter'
         if (model.type === DYNAMIC_FORM_CONTROL_TYPE_DATETIME_PICKER) {
           return DynamicNGBootstrapDatetimePickerComponent;
         }
+        else if (model.type === DYNAMIC_FORM_CONTROL_TYPE_CODEMIROR) {
+          return DynamicNgxCodemirorComponent;
+        }
+        else if (model.type === DYNAMIC_FORM_CONTROL_TYPE_IMAGE_UPLOADER) {
+          return DynamicImageUploaderComponent;
+        }
+
         return null;
       },
     },
   ],
 })
-export class DynamicFormsModule { }
+export class CustomDynamicFormsModule { }

@@ -6,15 +6,15 @@ import { setContext } from '@apollo/client/link/context';
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 import { NormalizedCacheObject } from '@apollo/client/cache';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { selectLoginState } from './store/login/login.selectors';
 import { take } from 'rxjs/operators';
 import { State } from './store/login/login.reducer';
+import { AdminTokenService } from './services/admin-token.service';
 
 export function createApollo(
   httpLink: HttpLink,
-  httpClient: HttpClient,
-  store: Store
+  store: Store,
+  adminToken: AdminTokenService
 ): ApolloClientOptions<NormalizedCacheObject>  {
   const basic = setContext(() => ({
     headers: {
@@ -28,19 +28,7 @@ export function createApollo(
     case 'updateMemberDynamicProperties':
     case 'order':
     {
-      token = (await httpClient.post<{access_token: string}>(
-        `${environment.variables.platformUrl}/connect/token`,
-        new HttpParams({ fromObject: {
-          grant_type: 'password',
-          username: 'admin',
-          password: 'store',
-        } }).toString(),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        }
-      ).toPromise()).access_token;
+      token = (await (adminToken.getToken())).access_token;
       break;
     }
 
@@ -83,8 +71,8 @@ export function createApollo(
       useFactory: createApollo,
       deps: [
         HttpLink,
-        HttpClient,
         Store,
+        AdminTokenService,
       ],
     },
   ],

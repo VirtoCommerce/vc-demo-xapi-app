@@ -123,6 +123,14 @@ export class CompaniesEffects {
               name: COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary,
               value: company.shortTextDictionary,
             },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.image,
+              value: company.image,
+            },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.htmlUsual,
+              value: company.htmlUsual,
+            },
           ],
         },
       },

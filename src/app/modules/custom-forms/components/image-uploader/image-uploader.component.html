@@ -1,0 +1,11 @@
+<div class="image-uploader">
+  <img class="rounded w-100 d-block" src="{{ !!imageUrl ? imageUrl : 'assets/images/no-image.svg'}}" alt="image preview">
+  <input #fileUpload type="file" class="d-none" accept="image/*"
+      (change)="onFileSelected($event)">
+  <div class="d-flex flex-row">
+    <a class="btn btn-link text-primary ps-0"
+    (click)="fileUpload.click()">Upload</a>
+    <a class="btn btn-link text-primary ps-0"
+    (click)="removeAsset()">Delete</a>
+  </div>
+</div>

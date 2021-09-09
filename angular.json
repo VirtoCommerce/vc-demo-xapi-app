@@ -51,7 +51,8 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  // TODO: Revert back limits after finding the way to reduce dependencies size
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
