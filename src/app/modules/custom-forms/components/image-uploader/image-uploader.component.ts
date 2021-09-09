@@ -22,7 +22,9 @@ type fnType = (_: string | null) => void;
   ],
 })
 export class ImageUploaderComponent implements ControlValueAccessor, OnInit {
-  uploadUrl = '';
+  uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
+
+  token = '';
 
   @Input()
   imageUrl: string | null = null;
@@ -40,9 +42,7 @@ export class ImageUploaderComponent implements ControlValueAccessor, OnInit {
   }
 
   async getUploadUrl(): Promise<void> {
-    const token = (await this.adminToken.getToken()).access_token;
-    // eslint-disable-next-line max-len
-    this.uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true?access_token=${token}`;
+    this.token = (await this.adminToken.getToken()).access_token;
   }
 
   propagateChange = (_: string | null): void => {
@@ -72,7 +72,13 @@ export class ImageUploaderComponent implements ControlValueAccessor, OnInit {
         const formData = new FormData();
         formData.append('file', file);
 
-        this.http.post<UploadResponse[]>(this.uploadUrl, formData).subscribe(items => {
+        const options = {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        };
+
+        this.http.post<UploadResponse[]>(this.uploadUrl, formData, options).subscribe(items => {
           if (items.length > 0) {
             const url = items[0].url;
             this.imageUrl = url;
