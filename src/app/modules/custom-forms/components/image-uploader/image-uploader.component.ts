@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AdminTokenService } from 'src/app/services/admin-token.service';
 import { environment } from 'src/environments/environment';
 import { UploadResponse } from '../../models/upload-response';
 
@@ -20,8 +21,8 @@ type fnType = (_: string | null) => void;
     },
   ],
 })
-export class ImageUploaderComponent implements ControlValueAccessor {
-  uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true`;
+export class ImageUploaderComponent implements ControlValueAccessor, OnInit {
+  uploadUrl = '';
 
   @Input()
   imageUrl: string | null = null;
@@ -29,7 +30,19 @@ export class ImageUploaderComponent implements ControlValueAccessor {
   @Output()
   imageUrlChange = new EventEmitter<string | null>();
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, private readonly adminToken: AdminTokenService) {
+  }
+
+  ngOnInit(): void {
+    this.getUploadUrl().catch(error => {
+      throw new Error(error);
+    });
+  }
+
+  async getUploadUrl(): Promise<void> {
+    const token = (await this.adminToken.getToken()).access_token;
+    // eslint-disable-next-line max-len
+    this.uploadUrl = `${environment.variables.platformUrl}/api/platform/assets?folderUrl=images&forceFileOverwrite=true?access_token=${token}`;
   }
 
   propagateChange = (_: string | null): void => {
