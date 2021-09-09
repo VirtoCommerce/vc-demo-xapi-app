@@ -1,0 +1,34 @@
+<main class="h-100" role="main">
+    <div class="container pt-4 pb-6">
+        <article class="row g-0">
+            <div class="col">
+                <h1 class="mb-4">Payment# &nbsp; {{payment?.number ?? "..."}}</h1>
+            </div>
+            <div class="w-100"></div>
+
+            <div class="col">
+                <section class="row">
+                    <div class="col details">
+                        <div class="row" *ngFor="let x of fieldsToDisplay">
+                            <label class="mb-1">{{x.label}}</label>
+                            <div class="mb-3">{{x.value}}</div>
+                        </div>
+                        <div class="row" *ngIf="payment; let x">
+                            <label class="mb-1">Billing address</label>
+                            <div class="mb-3" *ngIf="payment.billingAddress; let x">{{ x.line1 }} {{ x.line2 }}, {{
+                                x.countryName }} {{ x.postalCode }}</div>
+                            <div class="mb-2" *ngIf="!payment.billingAddress">-</div>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-dark mt-4" routerLink="/payments">Back to
+                            list</button>
+                    </div>
+                    <aside class="d-none d-md-block col offset-2 position-relative">
+                        <img class="position-absolute img-fluid mt-n2 user-select-none" src="assets/images/payment.svg"
+                            alt="" />
+                    </aside>
+                </section>
+            </div>
+        </article>
+    </div>
+</main>

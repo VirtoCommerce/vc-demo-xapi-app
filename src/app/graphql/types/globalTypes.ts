@@ -30,7 +30,6 @@ export interface InputAddItemType {
   readonly quantity: number;
   readonly price?: any | null;
   readonly comment?: string | null;
-  readonly isGift?: boolean | null;
 }
 
 export interface InputAddItemsType {
@@ -180,6 +179,10 @@ export interface InputCreateContactType {
   readonly timeZone?: string | null;
   readonly defaultLanguage?: string | null;
   readonly organizations?: ReadonlyArray<(string | null)> | null;
+}
+
+export interface InputCreateOrderFromCartType {
+  readonly cartId?: string | null;
 }
 
 export interface InputCreateOrganizationType {

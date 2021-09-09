@@ -281,6 +281,7 @@ export class CartEffects {
             userId: localStorage.getItem('cartUserId') ?? '',
             payment: {
               id: action.payment?.id,
+              paymentGatewayCode: action.payment?.paymentGatewayCode,
               billingAddress: action.payment?.billingAddress
                 ? {
                   addressType: 1,

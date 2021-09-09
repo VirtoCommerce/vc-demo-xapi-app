@@ -18,6 +18,6 @@ mutation removeCartItem ($command: InputRemoveItemType!) {
             extendedPrice { formattedAmount}
             placedPrice { formattedAmount}
         }
-        availableGifts { name productId imageUrl isAccepted }
+        availableGifts { name productId imageUrl }
     }
 }

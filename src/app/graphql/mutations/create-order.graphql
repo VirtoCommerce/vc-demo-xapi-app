@@ -1,0 +1,6 @@
+mutation createOrderFromCart ($command: InputCreateOrderFromCartType!) {
+    createOrderFromCart (command: $command) {
+        id
+        number
+    }
+}

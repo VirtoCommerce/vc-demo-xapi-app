@@ -12,6 +12,7 @@ import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstr
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsualPropertiesComponent } from './components/usual-properties/usual-properties.component';
 import { CompanyPropertiesComponent } from './components/company-properties/company-properties.component';
+import { DictionaryComponent } from './components/dictionary/dictionary.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CompanyPropertiesComponent } from './components/company-properties/comp
     CompanyEditComponent,
     UsualPropertiesComponent,
     CompanyPropertiesComponent,
+    DictionaryComponent,
   ],
   imports: [
     CommonModule,

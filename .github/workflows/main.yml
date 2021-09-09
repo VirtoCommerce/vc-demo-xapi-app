@@ -163,7 +163,7 @@ jobs:
 
     - name: Build and Publish Docker Image
       run: |
-          docker build ${{ github.workspace }} --tag ${{ env.ARTIFACT_URL }}
+          docker build ${{ github.workspace }} --tag ${{ env.ARTIFACT_URL }} --file .dockerfiles/Dockerfile
           docker push ${{ env.ARTIFACT_URL }}
 
     - name: CI results

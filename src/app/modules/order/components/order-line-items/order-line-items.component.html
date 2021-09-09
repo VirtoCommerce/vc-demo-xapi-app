@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-body py-2">
+        <div class="row">
+            <div class="col-lg-3 px-3 fw-strong item-header">
+                Product
+            </div>
+            <div class="col-lg"></div>
+            <div class="col-lg-3 center-text fw-strong item-header">
+                Quantity
+            </div>
+            <div class="col-lg-3 right-text fw-strong item-header">
+                Total
+            </div>
+            <div *ngIf="reorderAllowed" class="col-lg-3"></div>
+        </div>
+    </div>
+    <div class="card-body pt-0 pb-0">
+        <div *ngFor="let lineItem of items" class="row align-items-center py-3 border-top">
+            <div class="col-lg-3 px-3">
+                <img [src]="lineItem.imageUrl"
+                    style="max-width: 64px; max-height: 64px; display: block; margin-left: auto; margin-right: auto;"
+                    [alt]="lineItem.name" />
+            </div>
+            <div class="col-lg px-0">
+                <p class="mb-2">
+                    <a href="javascript: void(0)" class="fw-strong">{{ lineItem.name }}</a>
+                </p>
+                <p class="mb-0 fs-label">
+                    <span class="fw-strong">Item: </span>
+                    <span>{{ lineItem.sku }}</span>
+                </p>
+                <div *ngFor="let dp of getDynamicPropertiesToDisplay(lineItem.dynamicProperties ?? null)"
+                    class="align-items-center mb-0 fs-label">
+                    <span class="fw-strong">{{ dp?.name }}: </span>
+                    <span>{{ dp?.displayValue }}</span>
+                </div>
+            </div>
+            <div class="col-lg-3 center-text">
+                {{lineItem.quantity}}
+            </div>
+            <div class="col-lg-3 right-text" >
+                <span class="fw-bold price-total">{{ lineItem.extendedPrice!.formattedAmount }}</span>
+            </div>
+            <div *ngIf="reorderAllowed" class="col-lg-3">
+                <button class="btn btn-outline-primary btn-sm">Reorder</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,6 +26,9 @@ import { clearShipments, clearShipmentsVariables } from 'src/app/graphql/types/c
 import { clearPayments, clearPaymentsVariables } from '../graphql/types/clearPayments';
 import { cartVariables } from '../graphql/types/cart';
 
+import createOrderMutation from 'src/app/graphql/mutations/create-order.graphql';
+import { createOrderFromCart, createOrderFromCartVariables } from 'src/app/graphql/types/createOrderFromCart';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -41,6 +44,16 @@ export class CheckoutService implements OnDestroy {
   unsubscriber: Subject<boolean> = new Subject<boolean>();
 
   constructor(private readonly apollo: Apollo, private readonly store: Store) { }
+
+  createOrder(cartId: string): Observable<string | null> {
+    return new Observable<string | null>(observer => {
+      this.createOrderMutation(cartId)
+        .pipe(takeUntil(this.unsubscriber))
+        .subscribe(r => {
+          observer.next(r.data?.createOrderFromCart?.number ?? null);
+        });
+    });
+  }
 
   loadSampleData(): Observable<string> {
     return new Observable<string>(observer => {
@@ -176,6 +189,17 @@ export class CheckoutService implements OnDestroy {
           userId,
           storeId: 'Electronics',
           dynamicProperties,
+        },
+      },
+    });
+  }
+
+  createOrderMutation(cartId: string): Observable<FetchResult<createOrderFromCart>> {
+    return this.apollo.mutate<createOrderFromCart, createOrderFromCartVariables>({
+      mutation: createOrderMutation,
+      variables: {
+        command: {
+          cartId,
         },
       },
     });

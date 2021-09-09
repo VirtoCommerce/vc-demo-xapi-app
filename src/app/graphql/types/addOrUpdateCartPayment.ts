@@ -64,6 +64,10 @@ export interface addOrUpdateCartPayment_addOrUpdateCartPayment_payments {
    * Payment Id
    */
   readonly id: string | null;
+  /**
+   * Value of payment gateway code
+   */
+  readonly paymentGatewayCode: string | null;
   readonly billingAddress: addOrUpdateCartPayment_addOrUpdateCartPayment_payments_billingAddress | null;
 }
 

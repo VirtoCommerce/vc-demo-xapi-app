@@ -16,6 +16,6 @@ mutation addItem ($command:InputAddItemType!) {
             extendedPrice { formattedAmount}
             placedPrice { formattedAmount}
          }
-         availableGifts { name productId imageUrl isAccepted }
+         availableGifts { name productId imageUrl }
   }
 }

@@ -16,7 +16,9 @@ import { AddressFormComponent } from './components/address-form/address-form.com
 import { BillingAddressComponent } from './components/billing-address/billing-address.component';
 import { ShippingMethodComponent } from './components/shipping-method/shipping-method.component';
 import { ShippingMethodSelectComponent } from './components/shipping-method-select/shipping-method-select.component';
-import { ImageFallbackDirective } from 'src/app/directives/image-fallback.directive';
+import { PaymentMethodComponent } from './components/payment-method/payment-method.component';
+import { PaymentMethodSelectComponent } from './components/payment-method-select/payment-method-select.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ImageFallbackDirective } from 'src/app/directives/image-fallback.direct
     AddressFormComponent,
     ShippingMethodComponent,
     ShippingMethodSelectComponent,
-    ImageFallbackDirective,
+    PaymentMethodComponent,
+    PaymentMethodSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +44,7 @@ import { ImageFallbackDirective } from 'src/app/directives/image-fallback.direct
     DynamicFormsNGBootstrapUIModule,
     CheckoutRoutingModule,
     FontAwesomeModule,
+    DirectivesModule,
   ],
 })
 export class CheckoutModule { }

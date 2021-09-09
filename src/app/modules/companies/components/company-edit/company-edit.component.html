@@ -11,14 +11,17 @@
                   class="row mt-3">
           <div class="col col-md-12">
             <vc-company-properties [company]="editedCompany"
-                                    (propertyChange)="onChange($event)"
-                                    (validChange)="isValidForm.properties = $event; onValidChange();">
+                                   (propertyChange)="onChange($event)"
+                                   (validChange)="isValidForm.properties = $event; onValidChange();">
             </vc-company-properties>
             <vc-usual-properties [company]="editedCompany"
-                                  (propertyChange)="onChange($event)"
-                                  (validChange)="isValidForm.usualProperties = $event; onValidChange();">
+                                 (propertyChange)="onChange($event)"
+                                 (validChange)="isValidForm.usualProperties = $event; onValidChange();">
             </vc-usual-properties>
-            <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()"> Save</button>
+            <vc-dictionary [company]="editedCompany"
+                           (propertyChange)="onChange($event)"
+            ></vc-dictionary>
+            <button class="btn btn-primary px-6" [disabled]="isValidForms" (click)="submit()">Save</button>
           </div>
         </section>
       </div>

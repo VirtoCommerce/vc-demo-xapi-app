@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      DEPLOY_CONFIG_PATH: ".github/deploy/argoDeployVDS.json"
 
     steps: 
 
@@ -25,6 +26,7 @@ jobs:
       id: deployConfig
       with:
         envName: ${{ github.event.inputs.deployBranch }}
+        deployConfigPath: ${{ env.DEPLOY_CONFIG_PATH }}
 
     - name: Start deployment
       uses: bobheadxi/deployments@master

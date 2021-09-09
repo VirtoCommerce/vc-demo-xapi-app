@@ -82,11 +82,9 @@ export const PERSONAL_INFORMATION_INPUTS = {
     inputType: 'password',
     validators: {
       required: null,
-      passwordMatchValidator: 'personalInformation.password',
     },
     errorMessages: {
       required: validationMessages.requiredMessage,
-      passwordMatchValidator: validationMessages.passwordMismatchMessage,
     },
   }),
 };
@@ -97,5 +95,11 @@ export const PERSONAL_INFORMATION_MODEL: DynamicFormModel = [
     group: [
       ...Object.values(PERSONAL_INFORMATION_INPUTS),
     ],
+    validators: {
+      passwordMatchValidator: 'personalInformation.password',
+    },
+    errorMessages: {
+      passwordMatchValidator: validationMessages.passwordMismatchMessage,
+    },
   }),
 ];

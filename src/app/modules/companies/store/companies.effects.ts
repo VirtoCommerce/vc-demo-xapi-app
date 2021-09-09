@@ -33,7 +33,7 @@ export class CompaniesEffects {
   getCompany$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CompaniesActions.getCompany),
-      switchMap(action =>this.apollo.watchQuery<getOrganization>({
+      switchMap(action => this.apollo.watchQuery<getOrganization>({
         query: getOrganizationQuery,
         variables: { id: action.id },
       })
@@ -118,6 +118,10 @@ export class CompaniesEffects {
             {
               name: COMPANY_DYNAMIC_PROPERTIES.boolean,
               value: company.boolean?.toString(),
+            },
+            {
+              name: COMPANY_DYNAMIC_PROPERTIES.shortTextDictionary,
+              value: company.shortTextDictionary,
             },
           ],
         },

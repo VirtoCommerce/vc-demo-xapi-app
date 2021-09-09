@@ -394,3 +394,6 @@ Thumbs.db
 
 # Prettier config file
 .prettierrc
+
+# VScode config file
+.vscode/settings.json

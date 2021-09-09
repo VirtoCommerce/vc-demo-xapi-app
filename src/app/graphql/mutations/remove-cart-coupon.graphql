@@ -4,11 +4,16 @@ mutation removeCartCoupon ($command: InputRemoveCouponType!) {
         code
         isAppliedSuccessfully
       }
+      items {
+        id
+        extendedPrice{ formattedAmount }
+        placedPrice { formattedAmount }
+      }
       subTotal { formattedAmount }
     	total { formattedAmount }
       discountTotal { formattedAmount }
       taxTotal { formattedAmount }
       shippingTotal { formattedAmount }
-      availableGifts { name productId imageUrl isAccepted }
+      availableGifts { name productId imageUrl }
   }
 }

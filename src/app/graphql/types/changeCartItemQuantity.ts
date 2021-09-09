@@ -122,21 +122,17 @@ export interface changeCartItemQuantity_changeCartItemQuantity_items {
 export interface changeCartItemQuantity_changeCartItemQuantity_availableGifts {
   readonly __typename: "GiftItemType";
   /**
-   * Associated product name
+   * Value of line item name
    */
-  readonly name: string;
+  readonly name: string | null;
   /**
-   * Product id
+   * Value of product id
    */
-  readonly productId: string;
+  readonly productId: string | null;
   /**
-   * Product image absolute URL
+   * Value of line item image absolute URL
    */
   readonly imageUrl: string | null;
-  /**
-   * Flag whether this gift was added into cart
-   */
-  readonly isAccepted: boolean;
 }
 
 export interface changeCartItemQuantity_changeCartItemQuantity {

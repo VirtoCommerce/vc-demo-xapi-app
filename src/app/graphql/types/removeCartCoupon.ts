@@ -21,6 +21,32 @@ export interface removeCartCoupon_removeCoupon_coupons {
   readonly isAppliedSuccessfully: boolean | null;
 }
 
+export interface removeCartCoupon_removeCoupon_items_extendedPrice {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface removeCartCoupon_removeCoupon_items_placedPrice {
+  readonly __typename: "MoneyType";
+  /**
+   * Formatted amount.
+   */
+  readonly formattedAmount: string;
+}
+
+export interface removeCartCoupon_removeCoupon_items {
+  readonly __typename: "LineItemType";
+  /**
+   * Line item id
+   */
+  readonly id: string;
+  readonly extendedPrice: removeCartCoupon_removeCoupon_items_extendedPrice | null;
+  readonly placedPrice: removeCartCoupon_removeCoupon_items_placedPrice | null;
+}
+
 export interface removeCartCoupon_removeCoupon_subTotal {
   readonly __typename: "MoneyType";
   /**
@@ -64,26 +90,23 @@ export interface removeCartCoupon_removeCoupon_shippingTotal {
 export interface removeCartCoupon_removeCoupon_availableGifts {
   readonly __typename: "GiftItemType";
   /**
-   * Associated product name
+   * Value of line item name
    */
-  readonly name: string;
+  readonly name: string | null;
   /**
-   * Product id
+   * Value of product id
    */
-  readonly productId: string;
+  readonly productId: string | null;
   /**
-   * Product image absolute URL
+   * Value of line item image absolute URL
    */
   readonly imageUrl: string | null;
-  /**
-   * Flag whether this gift was added into cart
-   */
-  readonly isAccepted: boolean;
 }
 
 export interface removeCartCoupon_removeCoupon {
   readonly __typename: "CartType";
   readonly coupons: ReadonlyArray<(removeCartCoupon_removeCoupon_coupons | null)> | null;
+  readonly items: ReadonlyArray<(removeCartCoupon_removeCoupon_items | null)> | null;
   readonly subTotal: removeCartCoupon_removeCoupon_subTotal | null;
   readonly total: removeCartCoupon_removeCoupon_total | null;
   readonly discountTotal: removeCartCoupon_removeCoupon_discountTotal | null;

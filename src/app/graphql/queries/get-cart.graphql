@@ -27,7 +27,7 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
           code
           isAppliedSuccessfully
         }
-        availableGifts { name productId imageUrl isAccepted }
+        availableGifts { name productId imageUrl }
         availableShippingMethods {
           code
           optionName
@@ -45,6 +45,13 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
             amount
             formattedAmount
           }
+        }
+        availablePaymentMethods { 
+          code 
+          name
+          paymentMethodType
+          logoUrl
+          priority
         }
         shipments {
           id
@@ -79,6 +86,7 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
         }
         payments {
           id
+          paymentGatewayCode
           billingAddress {
             firstName
             lastName
