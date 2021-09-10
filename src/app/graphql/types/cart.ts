@@ -141,6 +141,26 @@ export interface cart_cart_coupons {
   readonly isAppliedSuccessfully: boolean | null;
 }
 
+export interface cart_cart_gifts {
+  readonly __typename: "CartGiftItemType";
+  /**
+   * Line item id
+   */
+  readonly id: string;
+  /**
+   * Was the line item rejected
+   */
+  readonly isRejected: boolean;
+  /**
+   * Value of product id
+   */
+  readonly productId: string | null;
+  /**
+   * Value of line item quantity
+   */
+  readonly quantity: number | null;
+}
+
 export interface cart_cart_availableGifts {
   readonly __typename: "GiftItemType";
   /**
@@ -432,6 +452,7 @@ export interface cart_cart {
    */
   readonly dynamicProperties: ReadonlyArray<(cart_cart_dynamicProperties | null)> | null;
   readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
+  readonly gifts: ReadonlyArray<(cart_cart_gifts | null)> | null;
   readonly availableGifts: ReadonlyArray<(cart_cart_availableGifts | null)> | null;
   readonly availableShippingMethods: ReadonlyArray<(cart_cart_availableShippingMethods | null)> | null;
   readonly availablePaymentMethods: ReadonlyArray<(cart_cart_availablePaymentMethods | null)> | null;

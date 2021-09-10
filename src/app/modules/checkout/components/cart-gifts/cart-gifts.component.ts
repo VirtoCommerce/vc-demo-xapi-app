@@ -2,10 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { cart_cart_availableGifts } from 'src/app/graphql/types/cart';
-import { CartItem } from 'src/app/models/cart.model';
-import { addCartItem, removeCartItem } from 'src/app/store/cart/cart.actions';
-import { selectGifts, selectItems } from 'src/app/store/cart/cart.selectors';
+import { GiftRecord } from 'src/app/models/cart.model';
+import { addGiftItem, rejectCartItem } from 'src/app/store/cart/cart.actions';
+import { selectGifts } from 'src/app/store/cart/cart.selectors';
 
 @Component({
   selector: 'vc-cart-gifts',
@@ -17,9 +16,7 @@ import { selectGifts, selectItems } from 'src/app/store/cart/cart.selectors';
 export class CartGiftsComponent implements OnInit, OnDestroy {
   unsubscriber = new Subject();
 
-  gifts: cart_cart_availableGifts[] = [];
-
-  private cartItems: CartItem[] = [];
+  allGifts: GiftRecord[] = [];
 
   constructor(
     private readonly store: Store
@@ -28,32 +25,21 @@ export class CartGiftsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(selectGifts)
       .pipe(takeUntil(this.unsubscriber))
-      .subscribe(items => {
-        this.gifts = items.map(li => ({ ...li }));
-      });
-
-    this.store.select(selectItems)
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe(items => {
-        this.cartItems = items.filter(li => li.isGift);
+      .subscribe(gifts => {
+        this.allGifts = gifts;
       });
   }
 
-  onAcceptGiftChanged(item: cart_cart_availableGifts, accept: boolean): void {
+  onAcceptGiftChanged(item: GiftRecord, accept: boolean): void {
     if (accept) {
-      this.store.dispatch(addCartItem({
-        isGift: true,
+      this.store.dispatch(addGiftItem({
         productId: item.productId ?? '',
-        quantity: 1,
       }));
     }
-    else {
-      const cartItemToRemove = this.cartItems.find(li => li.productId === item.productId);
-      if (cartItemToRemove) {
-        this.store.dispatch(removeCartItem({
-          lineItemId: cartItemToRemove.id,
-        }));
-      }
+    else if (item.id) {
+      this.store.dispatch(rejectCartItem({
+        lineItemId: item.id,
+      }));
     }
   }
 

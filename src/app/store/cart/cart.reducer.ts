@@ -16,9 +16,10 @@ export const initialState: State = {
     dynamicProperties: [],
     coupons: [],
     items: [],
-    availableGifts: [],
     shipments: [],
     payments: [],
+    gifts: [],
+    availableGifts: [],
     availableShippingMethods: [],
   },
   billingAddressAsShipping: true,
@@ -42,6 +43,7 @@ export const reducer = createReducer(
       dynamicProperties: customMap(action?.data?.cart?.dynamicProperties, x => ({ ...x })),
       coupons: customMap(action?.data?.cart?.coupons, x => ({ ...x })),
       items: customMap(action?.data?.cart?.items, x => ({ ...x })),
+      gifts: customMap(action?.data?.cart?.gifts, x => ({ ...x })),
       availableGifts: customMap(action?.data?.cart?.availableGifts, x => ({ ...x })),
       shipments: customMap(action?.data?.cart?.shipments, x => ({
         ...x,
@@ -83,12 +85,13 @@ export const reducer = createReducer(
             return item;
           })
           : [],
+        gifts: customMap(action?.data?.gifts, x => ({ ...x })),
+        availableGifts: customMap(action?.data?.availableGifts, x => ({ ...x })),
         coupons: customMap(action?.data?.coupons, x => ({ ...x })),
       },
     })
   ),
   on(
-    CartActions.addCartItemSuccess,
     CartActions.changeCartItemQuantitySuccess,
     CartActions.removeCartItemSuccess,
     (state, action): State => ({
@@ -97,7 +100,20 @@ export const reducer = createReducer(
         ...state.cart,
         ...action?.data,
         items: customMap(action?.data?.items, x => ({ ...x })),
+        gifts: customMap(action?.data?.gifts, x => ({ ...x })),
         availableGifts: customMap(action?.data?.availableGifts, x => ({ ...x })),
+      },
+    })
+  ),
+  on(
+    CartActions.addGiftItemSuccess,
+    CartActions.rejectCartItemSuccess,
+    (state, action): State => ({
+      ...state,
+      cart: {
+        ...state.cart,
+        ...action?.data,
+        gifts: customMap(action?.data?.gifts, x => ({ ...x })),
       },
     })
   ),

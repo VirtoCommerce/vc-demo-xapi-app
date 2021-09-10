@@ -18,6 +18,7 @@ mutation changeCartItemQuantity ($command: InputChangeCartItemQuantityType!) {
             extendedPrice { formattedAmount}
             placedPrice { formattedAmount}
         }
+        gifts{ id isRejected productId quantity }
         availableGifts { name productId imageUrl }
     }
 }

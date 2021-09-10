@@ -13,7 +13,8 @@ import * as CartActions from './cart.actions';
 import { selectCountriesState } from '../countries/countries.selectors';
 
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
-import addCartItemMutation from '../../graphql/mutations/add-cart-item.graphql';
+import addCartGiftMutation from '../../graphql/mutations/add-cart-gift-item.graphql';
+import rejectCartGiftMutation from '../../graphql/mutations/remove-cart-gift-item.graphql';
 import changeCartItemQuantityMutation from '../../graphql/mutations/change-cart-item-quantity.graphql';
 import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
@@ -24,7 +25,6 @@ import addOrUpdateShipment from '../../graphql/mutations/add-or-update-cart-ship
 import addOrUpdatePayment from '../../graphql/mutations/add-or-update-cart-payment.graphql';
 
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
-import { addItem, addItemVariables } from 'src/app/graphql/types/addItem';
 import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
@@ -36,6 +36,8 @@ import { addOrUpdateCartShipment, addOrUpdateCartShipmentVariables }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
 import { addOrUpdateCartPayment, addOrUpdateCartPaymentVariables }
   from 'src/app/graphql/types/addOrUpdateCartPayment';
+import { addGiftItem, addGiftItemVariables } from 'src/app/graphql/types/addGiftItem';
+import { removeGiftItem, removeGiftItemVariables } from 'src/app/graphql/types/removeGiftItem';
 
 @Injectable()
 export class CartEffects {
@@ -63,24 +65,47 @@ export class CartEffects {
     );
   });
 
-  addCartItem$ = createEffect(() => {
+  addGiftItem$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CartActions.addCartItem),
-      concatMap(action => this.apollo.mutate<addItem, addItemVariables>({
-        mutation: addCartItemMutation,
+      ofType(CartActions.addGiftItem),
+      concatMap(action => this.apollo.mutate<addGiftItem, addGiftItemVariables>({
+        mutation: addCartGiftMutation,
         variables: {
           command: {
             ...this.baseCartVariables,
             userId: localStorage.getItem('cartUserId') ?? '',
-            productId: action.productId,
-            quantity: action.quantity,
-            isGift: action.isGift,
+            giftItemIds: [
+              action.productId,
+            ],
           },
         },
       })
         .pipe(
-          map(result => CartActions.addCartItemSuccess({
-            data: result.data?.addItem ?? null,
+          map(result => CartActions.addGiftItemSuccess({
+            data: result.data?.addGiftItem ?? null,
+          }))
+        ))
+    );
+  });
+
+  rejectGiftItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.rejectCartItem),
+      concatMap(action => this.apollo.mutate<removeGiftItem, removeGiftItemVariables>({
+        mutation: rejectCartGiftMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            giftItemIds: [
+              action.lineItemId,
+            ],
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.rejectCartItemSuccess({
+            data: result.data?.rejectItem ?? null,
           }))
         ))
     );

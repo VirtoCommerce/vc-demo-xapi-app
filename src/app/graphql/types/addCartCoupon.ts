@@ -87,6 +87,26 @@ export interface addCartCoupon_addCoupon_shippingTotal {
   readonly formattedAmount: string;
 }
 
+export interface addCartCoupon_addCoupon_gifts {
+  readonly __typename: "CartGiftItemType";
+  /**
+   * Line item id
+   */
+  readonly id: string;
+  /**
+   * Was the line item rejected
+   */
+  readonly isRejected: boolean;
+  /**
+   * Value of product id
+   */
+  readonly productId: string | null;
+  /**
+   * Value of line item quantity
+   */
+  readonly quantity: number | null;
+}
+
 export interface addCartCoupon_addCoupon_availableGifts {
   readonly __typename: "GiftItemType";
   /**
@@ -112,6 +132,7 @@ export interface addCartCoupon_addCoupon {
   readonly discountTotal: addCartCoupon_addCoupon_discountTotal | null;
   readonly taxTotal: addCartCoupon_addCoupon_taxTotal | null;
   readonly shippingTotal: addCartCoupon_addCoupon_shippingTotal | null;
+  readonly gifts: ReadonlyArray<(addCartCoupon_addCoupon_gifts | null)> | null;
   readonly availableGifts: ReadonlyArray<(addCartCoupon_addCoupon_availableGifts | null)> | null;
 }
 

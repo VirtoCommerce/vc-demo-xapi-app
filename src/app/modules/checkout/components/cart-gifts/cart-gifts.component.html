@@ -1,11 +1,11 @@
 <div class="card">
     <div class="card-body pt-0">
-        <div *ngFor="let lineItem of gifts; let last = last;" class="row align-items-center py-3" [ngClass]="{'border-bottom': !last }">
+        <div *ngFor="let lineItem of allGifts; let last = last;" class="row align-items-center py-3" [ngClass]="{'border-bottom': !last }">
             <div class="col-lg-2">
               <div class="form-check">
                 <input class="form-check-input table" type="checkbox"
-                    [checked]="lineItem.isAccepted"
-                    (change)="onAcceptGiftChanged(lineItem, !lineItem.isAccepted)">
+                       [checked]="lineItem.isAccepted"
+                       (change)="onAcceptGiftChanged(lineItem, !lineItem.isAccepted)">
               </div>
             </div>
             <div class="col-lg-3 align-self-start">

@@ -9,14 +9,15 @@ import { updateCartDynamicProperties_updateCartDynamicProperties_dynamicProperti
   from 'src/app/graphql/types/updateCartDynamicProperties';
 import { addCartCoupon_addCoupon as addCouponResult } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon_removeCoupon as removeCouponResult } from 'src/app/graphql/types/removeCartCoupon';
-import { addItem_addItem as addItemResult } from 'src/app/graphql/types/addItem';
 import { changeCartItemQuantity_changeCartItemQuantity as changeCartItemQuantityResult }
   from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem_removeCartItem as removeCartItemResult } from 'src/app/graphql/types/removeCartItem';
 import { addOrUpdateCartShipment_addOrUpdateCartShipment as shipmentResult }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
-import { addOrUpdateCartPayment_addOrUpdateCartPayment_payments  as paymentResult }
+import { addOrUpdateCartPayment_addOrUpdateCartPayment_payments as paymentResult }
   from 'src/app/graphql/types/addOrUpdateCartPayment';
+import { addGiftItem_addGiftItem as addGiftItemResult } from 'src/app/graphql/types/addGiftItem';
+import { removeGiftItem_rejectItem } from 'src/app/graphql/types/removeGiftItem';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -32,17 +33,24 @@ export const getCartFailure = createAction(
   props<{ error: ApolloError }>()
 );
 
-export const addCartItem = createAction(
-  '[Cart] Add CartItem',
-  props<{ productId: string,
-     quantity: number,
-     isGift: boolean,
-     }>()
+export const addGiftItem = createAction(
+  '[Cart] Add GiftItem',
+  props<{ productId: string }>()
 );
 
-export const addCartItemSuccess = createAction(
-  '[Cart] Add CartItem Success',
-  props<{ data: addItemResult | null }>()
+export const addGiftItemSuccess = createAction(
+  '[Cart] Add GiftItem Success',
+  props<{ data: addGiftItemResult | null }>()
+);
+
+export const rejectCartItem = createAction(
+  '[Cart] Reject CartItem (gift)',
+  props<{ lineItemId: string }>()
+);
+
+export const rejectCartItemSuccess = createAction(
+  '[Cart] Reject CartItem (gift) Success',
+  props<{ data: removeGiftItem_rejectItem | null }>()
 );
 
 export const removeCartItem = createAction(

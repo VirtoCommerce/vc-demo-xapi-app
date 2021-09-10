@@ -28,7 +28,7 @@ export class LineItemsComponent implements OnInit, OnDestroy {
     this.store.select(selectItems)
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(items => {
-        this.items = items.filter(li => !li.isGift).map(li => ({ ...li }));
+        this.items = items.map(li => ({ ...li }));
       });
   }
 

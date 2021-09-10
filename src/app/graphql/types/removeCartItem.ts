@@ -119,6 +119,26 @@ export interface removeCartItem_removeCartItem_items {
   readonly placedPrice: removeCartItem_removeCartItem_items_placedPrice | null;
 }
 
+export interface removeCartItem_removeCartItem_gifts {
+  readonly __typename: "CartGiftItemType";
+  /**
+   * Line item id
+   */
+  readonly id: string;
+  /**
+   * Was the line item rejected
+   */
+  readonly isRejected: boolean;
+  /**
+   * Value of product id
+   */
+  readonly productId: string | null;
+  /**
+   * Value of line item quantity
+   */
+  readonly quantity: number | null;
+}
+
 export interface removeCartItem_removeCartItem_availableGifts {
   readonly __typename: "GiftItemType";
   /**
@@ -151,6 +171,7 @@ export interface removeCartItem_removeCartItem {
   readonly taxTotal: removeCartItem_removeCartItem_taxTotal | null;
   readonly shippingTotal: removeCartItem_removeCartItem_shippingTotal | null;
   readonly items: ReadonlyArray<(removeCartItem_removeCartItem_items | null)> | null;
+  readonly gifts: ReadonlyArray<(removeCartItem_removeCartItem_gifts | null)> | null;
   readonly availableGifts: ReadonlyArray<(removeCartItem_removeCartItem_availableGifts | null)> | null;
 }
 
