@@ -2,13 +2,25 @@
   <div class="container pt-4 pb-6">
     <article class="row g-0">
       <div class="col-md-12">
+
         <h1 class="mb-4">Reset your password</h1>
         <p class="fs-4 mb-4">We will send you an email to reset your password</p>
-        <form>
-          <label class="required mb-2" for="emailInput">Email</label><br />
-          <input class="form-control" type="email" name="email" id="emailInput" placeholder="Enter your email" required /><br />
-          <button class="btn btn-primary flex-fill flex-sm-grow-0">
-            <span class="mx-5">Submit</span>
+
+        <form (ngSubmit)="onSubmit(emailInput.value)" #form="ngForm">
+          <label class="form-label required" for="emailInput">Email</label>
+          <input
+            class="form-control mb-1"
+            type="email"
+            name="email"
+            id="emailInput"
+            placeholder="Enter your email"
+            #emailInput
+            ngModel
+            email
+            required />
+          <span *ngIf="form.invalid && form.dirty" class="d-block text-danger">Enter a valid email address</span>
+          <button [disabled]="form.invalid" class="btn btn-primary mt-5 flex-fill flex-sm-grow-0" type="submit">
+              <span class="mx-5">Submit</span>
           </button>
         </form>
       </div>
