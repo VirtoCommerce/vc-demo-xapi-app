@@ -4,10 +4,12 @@
     <img class="img-fluid user-select-none"
          src="assets/images/paper-plane.svg"
          alt="">
-    <span class="fs-1 my-5 fw-bold">Registration completed!</span>
-    <button class="btn btn-outline-primary"
-            routerLink='/registration'>
-      Add another one
+    <span class="fs-1 my-5 fw-bold">{{ message }}</span>
+    <button
+        *ngIf="showButton"
+        class="btn btn-outline-primary"
+        routerLink='/registration'>
+        {{ buttonTitle }}
     </button>
   </div>
 </main>

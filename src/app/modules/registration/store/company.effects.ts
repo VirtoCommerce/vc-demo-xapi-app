@@ -70,10 +70,17 @@ export class CompanyEffects {
     return this.actions$.pipe(
 
       ofType(CompanyActions.registerCompanySuccess),
-      concatMap(() => from(this.router.navigate([
-        'registration',
-        'thank-you',
-      ])))
+      concatMap(() => from(this.router.navigate(
+        [
+          'registration',
+          'thank-you',
+        ],
+        {
+          state: {
+            message: 'Registration completed!',
+          },
+        }
+      )))
     );
   }, { dispatch: false });
 

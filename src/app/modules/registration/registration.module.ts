@@ -11,7 +11,6 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
 import {
   RegistrationCompanyAddressComponent,
 } from './components/registration-company-address/registration-company-address.component';
-import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromCompany from './store/company.reducer';
 import { EffectsModule } from '@ngrx/effects';
@@ -23,7 +22,6 @@ import { CompanyEffects } from './store/company.effects';
     PersonalInformationComponent,
     CompanyDetailsComponent,
     RegistrationCompanyAddressComponent,
-    ThankYouComponent,
   ],
   imports: [
     CommonModule,

@@ -4,13 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ResetPasswordRoutingModule } from './reset-password-routing.module';
 import { ResetPasswordComponent } from './reset-password.component';
 import { EmailRequestComponent } from './email-request/email-request.component';
-import { DispatchConfirmationComponent } from './dispatch-confirmation/dispatch-confirmation.component';
-
+import { ResetPasswordFormComponent } from './reset-password-form/reset-password-form.component';
 @NgModule({
   declarations: [
     ResetPasswordComponent,
+    ResetPasswordFormComponent,
     EmailRequestComponent,
-    DispatchConfirmationComponent,
   ],
   imports: [
     CommonModule,
