@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  getDictionaryDynamicPropery_dynamicProperty_dictionaryItems_items,
-} from 'src/app/graphql/types/getDictionaryDynamicPropery';
+  getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items,
+} from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { Member } from 'src/app/models/member.model';
 import * as MemberActions from './members.actions';
 
@@ -26,7 +26,7 @@ export const reducer = createReducer(
   on(MemberActions.getGenderSuccess, (state, action): State => ({
     ...state,
     genderDictionaryItems: action.data.dynamicProperty?.dictionaryItems?.items
-      ?.map(item => item as getDictionaryDynamicPropery_dynamicProperty_dictionaryItems_items)
+      ?.map(item => item as getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items)
       .map(item => ({
         valueId: item.id,
         value: item.name,

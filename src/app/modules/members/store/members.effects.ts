@@ -12,7 +12,7 @@ import {
   updateMemberDynamicPropertiesVariables,
 } from 'src/app/graphql/types/updateMemberDynamicProperties';
 import { Member } from 'src/app/models/member.model';
-import getDictionaryDynamicProperty from 'src/app/graphql/queries/get-dictionaryDynamicProperty.graphql';
+import getDictionaryDynamicPropertyQuery from 'src/app/graphql/queries/get-dictionaryDynamicProperty.graphql';
 import createContactMutation from 'src/app/graphql/mutations/create-contact.graphql';
 import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
@@ -23,15 +23,15 @@ import { FetchResult } from '@apollo/client/core';
 import { Router } from '@angular/router';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { nonNull } from 'src/app/helpers/nonNull';
-import { getDictionaryDynamicPropery } from 'src/app/graphql/types/getDictionaryDynamicPropery';
+import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 
 @Injectable()
 export class MembersEffects {
   getGender$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.getGender),
-      concatMap(() => this.apollo.watchQuery<getDictionaryDynamicPropery>({
-        query: getDictionaryDynamicProperty,
+      concatMap(() => this.apollo.watchQuery<getDictionaryDynamicProperty>({
+        query: getDictionaryDynamicPropertyQuery,
         variables: {
           idOrName: 'Gender',
         },
