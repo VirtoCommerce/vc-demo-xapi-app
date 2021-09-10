@@ -19,7 +19,7 @@ export interface DictionaryItem {
   valueId: string
 }
 export interface State {
-  selectedCompany: PartialDeep<Company> | null,
+  selectedCompany: Company | null,
   editCompany: PartialDeep<Company> | null,
   dictionaryItems: Record<string, DictionaryItem[]> | null,
 }

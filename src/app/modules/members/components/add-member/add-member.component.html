@@ -1,0 +1,131 @@
+<main class="h-100" role="main">
+  <div class="container pt-4 pb-6">
+    <article class="row g-0">
+      <div class="col">
+        <h1 class="mb-4">New member</h1>
+      </div>
+      <div class="w-100"></div>
+      <div class="col col-sm-12">
+        <form [formGroup]="form"
+              (ngSubmit)="onSubmit()">
+
+          <div class="mb-3">
+            <label
+              for="first-name"
+              class="form-label">
+              First Name:
+            </label>
+            <input
+              id="first-name"
+              class="form-control form-control-lg"
+              type="text"
+              formControlName="firstName">
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="last-name"
+              class="form-label">
+              Last Name:
+            </label>
+            <input
+              id="last-name"
+              class="form-control form-control-lg"
+              type="text"
+              formControlName="lastName">
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="gender"
+              class="form-label">
+              Gender:
+            </label>
+            <select
+              id="gender"
+              class="form-select form-select-lg"
+              formControlName="gender">
+              <option [ngValue]="undefined"></option>
+              <option *ngFor="let genderDictionaryItem of genderDictionaryItems | async" [ngValue]="genderDictionaryItem.valueId">
+                {{ genderDictionaryItem.value }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="email"
+              class="form-label">
+              Email:
+            </label>
+            <input
+              id="email"
+              class="form-control form-control-lg"
+              type="text"
+              formControlName="email">
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="userName"
+              class="form-label">
+              User Name:
+            </label>
+            <input
+              id="userName"
+              class="form-control form-control-lg"
+              type="text"
+              formControlName="userName">
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <label
+                for="password"
+                class="form-label">
+                Password:
+              </label>
+              <input
+                id="password"
+                class="form-control form-control-lg"
+                type="password"
+                formControlName="password">
+            </div>
+
+            <div class="col-12">
+              <label
+                for="confirmPassword"
+                class="form-label">
+                Confirm password:
+              </label>
+              <input
+                id="confirmPassword"
+                class="form-control form-control-lg"
+                type="password"
+                formControlName="confirmPassword">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-8 d-flex">
+              <button
+                type="button"
+                class="btn btn-outline-dark btn-lg flex-fill">
+                Cancel
+              </button>
+            </div>
+            <div class="col-8 d-flex">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg flex-fill"
+                [disabled]="!form.valid">
+                Add member
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </article>
+  </div>
+</main>
