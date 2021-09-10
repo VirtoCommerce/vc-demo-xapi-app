@@ -52,14 +52,13 @@ export const selectGifts = createSelector(
     const available = state.cart.availableGifts as cart_cart_availableGifts[] ?? [];
     const cartGifts = state.cart.gifts as cart_cart_gifts[];
 
-    const result = available.map(availableGift => {
-      const cartGift = cartGifts.find(cartGift => cartGift.productId === availableGift.productId);
+    return available.map(availableGift => {
+      const cartGift = cartGifts.find(x => x.productId === availableGift.productId);
       return ({
         isAccepted: !cartGift ? false : !cartGift.isRejected,
         id: cartGift?.id,
         ...availableGift,
       });
     });
-    return result;
   }
 );

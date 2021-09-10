@@ -13,7 +13,7 @@ mutation changeCartItemQuantity ($command: InputChangeCartItemQuantityType!) {
             name
             sku
             quantity
-            imageUrl isGift
+            imageUrl
             dynamicProperties { name value valueType}
             extendedPrice { formattedAmount}
             placedPrice { formattedAmount}

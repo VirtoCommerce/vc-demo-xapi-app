@@ -106,10 +106,6 @@ export interface cart_cart_items {
    */
   readonly imageUrl: string | null;
   /**
-   * flag of line item is a gift
-   */
-  readonly isGift: boolean | null;
-  /**
    * Cart line item dynamic property values
    */
   readonly dynamicProperties: ReadonlyArray<(cart_cart_items_dynamicProperties | null)> | null;

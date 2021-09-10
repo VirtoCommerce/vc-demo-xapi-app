@@ -108,10 +108,6 @@ export interface removeCartItem_removeCartItem_items {
    */
   readonly imageUrl: string | null;
   /**
-   * flag of line item is a gift
-   */
-  readonly isGift: boolean | null;
-  /**
    * Cart line item dynamic property values
    */
   readonly dynamicProperties: ReadonlyArray<(removeCartItem_removeCartItem_items_dynamicProperties | null)> | null;
