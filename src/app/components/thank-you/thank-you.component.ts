@@ -14,10 +14,19 @@ export class ThankYouComponent {
 
   showButton = false;
 
-  buttonTitle = 'Add another one';
+  buttonTitle = '';
+
+  content = [
+    {
+      message: 'Registration completed!',
+      buttonTitle: 'Add another one',
+    },
+  ]
 
   constructor(private readonly router: Router) {
     this.message = this.router.getCurrentNavigation()?.extras?.state?.message as string || 'Thank you';
-    this.showButton = this.message === 'Registration completed!';
+    const contentItemIdx = this.content.findIndex(item => item.message === this.message);
+    this.showButton = contentItemIdx > -1;
+    this.buttonTitle = this.showButton ? this.content[contentItemIdx]?.buttonTitle  : '';
   }
 }

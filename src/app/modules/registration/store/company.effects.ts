@@ -168,6 +168,7 @@ export class CompanyEffects {
           userName: companyRegistration.owner.userName,
           email: companyRegistration.owner.email,
           password: companyRegistration.owner.password,
+          storeId: 'xapi',
           userType: 'Customer',
           memberId: result.data?.createContact?.id ?? null,
         },
