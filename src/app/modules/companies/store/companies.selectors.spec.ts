@@ -7,15 +7,6 @@ describe('Companies Selectors', () => {
       [fromCompanies.companiesFeatureKey]: fromCompanies.initialState,
     });
 
-    expect(result).toEqual({
-      selectedCompany: null,
-      editCompany: null,
-      dictionaryItems: null,
-      availableCultures: [
-        'en-US',
-        'de-DE',
-      ],
-      activeCulture: 'de-DE',
-    });
+    expect(result).toEqual(fromCompanies.initialState);
   });
 });
