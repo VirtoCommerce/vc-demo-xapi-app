@@ -27,6 +27,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   isValidForm = {
     properties: false,
     usualProperties: false,
+    multilanguageProperties: false,
   };
 
   get isValidForms(): boolean {

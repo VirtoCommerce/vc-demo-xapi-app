@@ -39,3 +39,8 @@ export const updateCompanyFailure = createAction(
   '[Companies] Update Company Failure',
   props<{ error: ApolloError }>()
 );
+
+export const setActiveCulture = createAction(
+  '[Companies] Set Active Culture',
+  props<{ id: string, culture: string }>()
+);

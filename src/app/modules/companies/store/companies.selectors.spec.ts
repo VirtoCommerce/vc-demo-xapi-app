@@ -7,10 +7,6 @@ describe('Companies Selectors', () => {
       [fromCompanies.companiesFeatureKey]: fromCompanies.initialState,
     });
 
-    expect(result).toEqual({
-      selectedCompany: null,
-      editCompany: null,
-      dictionaryItems: null,
-    });
+    expect(result).toEqual(fromCompanies.initialState);
   });
 });
