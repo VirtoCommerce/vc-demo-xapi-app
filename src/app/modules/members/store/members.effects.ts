@@ -29,7 +29,6 @@ import { getDictionaryDynamicPropery } from 'src/app/graphql/types/getDictionary
 export class MembersEffects {
   getGender$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(MemberActions.getGender),
       concatMap(() => this.apollo.watchQuery<getDictionaryDynamicPropery>({
         query: getDictionaryDynamicProperty,
@@ -47,7 +46,6 @@ export class MembersEffects {
 
   addMember$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(MemberActions.addMember),
       concatLatestFrom(() => [
         this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),

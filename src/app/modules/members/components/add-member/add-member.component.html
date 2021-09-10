@@ -46,7 +46,9 @@
               class="form-select form-select-lg"
               formControlName="gender">
               <option [ngValue]="undefined"></option>
-              <option *ngFor="let genderDictionaryItem of genderDictionaryItems | async" [ngValue]="genderDictionaryItem.valueId">
+              <option
+                *ngFor="let genderDictionaryItem of genderDictionaryItems | async"
+                [ngValue]="genderDictionaryItem.valueId">
                 {{ genderDictionaryItem.value }}
               </option>
             </select>
@@ -110,7 +112,8 @@
             <div class="col-8 d-flex">
               <button
                 type="button"
-                class="btn btn-outline-dark btn-lg flex-fill">
+                class="btn btn-outline-dark btn-lg flex-fill"
+                routerLink="/">
                 Cancel
               </button>
             </div>
