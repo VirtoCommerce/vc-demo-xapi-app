@@ -43,7 +43,7 @@ export class CompaniesEffects {
         query: getOrganizationQuery,
         variables: {
           id: action.id,
-          cultureName: cultureName,
+          cultureName,
         },
       })
         .valueChanges
