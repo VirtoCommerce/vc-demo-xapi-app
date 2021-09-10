@@ -25,7 +25,7 @@ export class AddMemberComponent implements OnDestroy {
     confirmPassword: new FormControl(''),
   });
 
-  genderDictionaryItems = this.store.select(selectGenderDictionaryItems);
+  genderDictionaryItems$ = this.store.select(selectGenderDictionaryItems);
 
   unsubscriber = new Subject();
 

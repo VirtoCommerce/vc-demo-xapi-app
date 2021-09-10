@@ -47,7 +47,7 @@
               formControlName="gender">
               <option [ngValue]="undefined"></option>
               <option
-                *ngFor="let genderDictionaryItem of genderDictionaryItems | async"
+                *ngFor="let genderDictionaryItem of genderDictionaryItems$ | async"
                 [ngValue]="genderDictionaryItem.valueId">
                 {{ genderDictionaryItem.value }}
               </option>
