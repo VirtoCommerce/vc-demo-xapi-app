@@ -5,6 +5,11 @@ export const selectMembersState = createFeatureSelector<fromMembers.State>(
   fromMembers.membersFeatureKey
 );
 
+export const selectNewMemberState = createSelector(
+  selectMembersState,
+  (state: fromMembers.State) => state.newMember
+);
+
 export const selectGenderDictionaryItems = createSelector(
   selectMembersState,
   (state: fromMembers.State) => state.genderDictionaryItems

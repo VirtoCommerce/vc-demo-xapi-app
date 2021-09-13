@@ -93,7 +93,7 @@
           {
             "ObjectExpression": {
               "minProperties": 2,
-              "consistent": true              
+              "consistent": true
             },
             "ObjectPattern": "never",
             "ImportDeclaration": {
@@ -150,6 +150,12 @@
         "unused-imports/no-unused-vars": [
           "error",
           { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/unbound-method": [
+          "error",
+          {
+            "ignoreStatic": true
+          }
         ],
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/prefer-readonly": [

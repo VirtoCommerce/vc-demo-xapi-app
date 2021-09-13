@@ -12,7 +12,7 @@
           <div class="mb-3">
             <label
               for="first-name"
-              class="form-label">
+              class="form-label required">
               First Name:
             </label>
             <input
@@ -20,12 +20,17 @@
               class="form-control form-control-lg"
               type="text"
               formControlName="firstName">
+            <div
+              *ngIf="form.controls.firstName.errors?.required && (form.controls.firstName.touched || form.controls.firstName.dirty)"
+              class="invalid-feedback d-block">
+                {{ validationMessages.requiredMessage.replace('{{ label }}', 'First Name') }}
+            </div>
           </div>
 
           <div class="mb-3">
             <label
               for="last-name"
-              class="form-label">
+              class="form-label required">
               Last Name:
             </label>
             <input
@@ -33,6 +38,11 @@
               class="form-control form-control-lg"
               type="text"
               formControlName="lastName">
+            <div
+              *ngIf="form.controls.lastName.errors?.required && (form.controls.lastName.touched || form.controls.lastName.dirty)"
+              class="invalid-feedback d-block">
+                {{ validationMessages.requiredMessage.replace('{{ label }}', 'Last Name') }}
+            </div>
           </div>
 
           <div class="mb-3">
@@ -57,7 +67,7 @@
           <div class="mb-3">
             <label
               for="email"
-              class="form-label">
+              class="form-label required">
               Email:
             </label>
             <input
@@ -65,12 +75,22 @@
               class="form-control form-control-lg"
               type="text"
               formControlName="email">
+              <div
+                *ngIf="form.controls.email.errors?.required && (form.controls.email.touched || form.controls.email.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.requiredMessage.replace('{{ label }}', 'Email') }}
+              </div>
+              <div
+                *ngIf="form.controls.email.errors?.email && (form.controls.email.touched || form.controls.email.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.emailIncorrectMessage }}
+              </div>
           </div>
 
           <div class="mb-3">
             <label
               for="userName"
-              class="form-label">
+              class="form-label required">
               User Name:
             </label>
             <input
@@ -78,9 +98,16 @@
               class="form-control form-control-lg"
               type="text"
               formControlName="userName">
+              <div
+                *ngIf="form.controls.userName.errors?.required && (form.controls.userName.touched || form.controls.userName.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.requiredMessage.replace('{{ label }}', 'User Name') }}
+              </div>
           </div>
 
-          <div class="row mb-3">
+          <div
+            class="row mb-3"
+            formGroupName="passwords">
             <div class="col-12">
               <label
                 for="password"
@@ -92,6 +119,11 @@
                 class="form-control form-control-lg"
                 type="password"
                 formControlName="password">
+              <div
+                *ngIf="passwords.controls.password.errors?.required && (passwords.controls.password.touched || passwords.controls.password.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.requiredMessage.replace('{{ label }}', 'Password') }}
+              </div>
             </div>
 
             <div class="col-12">
@@ -105,6 +137,18 @@
                 class="form-control form-control-lg"
                 type="password"
                 formControlName="confirmPassword">
+              <div
+                *ngIf="passwords.controls.confirmPassword.errors?.required && (passwords.controls.confirmPassword.touched || passwords.controls.confirmPassword.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.requiredMessage.replace('{{ label }}', 'Confirm password') }}
+              </div>
+            </div>
+            <div class="col">
+              <div
+                *ngIf="passwords.errors?.passwordMatchValidator && (passwords.controls.password.touched || passwords.controls.password.dirty) && (passwords.controls.confirmPassword.touched || passwords.controls.confirmPassword.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.passwordMismatchMessage }}
+              </div>
             </div>
           </div>
 
