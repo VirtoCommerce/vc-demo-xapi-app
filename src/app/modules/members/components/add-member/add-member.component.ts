@@ -41,7 +41,7 @@ export class AddMemberComponent implements OnDestroy {
   unsubscriber = new Subject();
 
   constructor(private readonly store: Store) {
-    this.store.dispatch(fromMembers.getGender());
+    this.store.dispatch(fromMembers.getGenderDictionaryItems());
     this.form.valueChanges.pipe(takeUntil(this.unsubscriber)).subscribe(formValue => {
       this.store.dispatch(fromMembers.setNewMember({
         member: this.convertFormValueToMember(formValue),

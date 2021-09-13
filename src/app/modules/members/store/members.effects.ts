@@ -29,7 +29,7 @@ import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionar
 export class MembersEffects {
   getGender$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(MemberActions.getGender),
+      ofType(MemberActions.getGenderDictionaryItems),
       concatMap(() => this.apollo.watchQuery<getDictionaryDynamicProperty>({
         query: getDictionaryDynamicPropertyQuery,
         variables: {
@@ -38,8 +38,8 @@ export class MembersEffects {
       })
         .valueChanges
         .pipe(
-          map(result => MemberActions.getGenderSuccess({ data: result.data })),
-          catchError((error: ApolloError) => of(MemberActions.getGenderFailure({ error })))
+          map(result => MemberActions.getGenderDictionaryItemsSuccess({ data: result.data })),
+          catchError((error: ApolloError) => of(MemberActions.getGenderDictionaryItemsFailure({ error })))
         ))
     );
   });
