@@ -12,6 +12,8 @@ import { EmailUniquenessAsyncValidatorService }
   from 'src/app/modules/validation/validators/email-uniqueness-async-validator.service';
 import { UsernameUniquenessAsyncValidatorService }
   from './../../../validation/validators/username-uniqueness-async-validator.service';
+import { PasswordPolicyValidatorService } from
+  'src/app/modules/validation/validators/password-policy-validator.service';
 
 @Component({
   selector: 'vc-add-member',
@@ -21,10 +23,19 @@ import { UsernameUniquenessAsyncValidatorService }
   ],
 })
 export class AddMemberComponent implements OnDestroy {
-  passwords = new FormGroup({
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
-  }, passwordMatchValidator());
+  passwords = new FormGroup(
+    {
+      password: new FormControl('', {
+        updateOn: 'blur',
+        asyncValidators: this.passwordPolicyValidator.validate.bind(this.passwordPolicyValidator),
+      }),
+      confirmPassword: new FormControl(''),
+    },
+    {
+      updateOn: 'blur',
+      validators: passwordMatchValidator(),
+    }
+  );
 
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -57,7 +68,8 @@ export class AddMemberComponent implements OnDestroy {
   constructor(
     private readonly store: Store,
     private readonly emailValidator: EmailUniquenessAsyncValidatorService,
-    private readonly userNameValidator: UsernameUniquenessAsyncValidatorService
+    private readonly userNameValidator: UsernameUniquenessAsyncValidatorService,
+    private readonly passwordPolicyValidator: PasswordPolicyValidatorService
   ) {
     this.store.dispatch(fromMembers.getGenderDictionaryItems());
     this.form.valueChanges.pipe(takeUntil(this.unsubscriber)).subscribe(formValue => {
@@ -71,6 +83,16 @@ export class AddMemberComponent implements OnDestroy {
     this.store.dispatch(fromMembers.addMember({
       member: this.convertFormValueToMember(this.form.value),
     }));
+  }
+
+  handleEmptyPassword(): void {
+    if (this.passwords.controls.password.value === '') {
+      this.passwords.controls.password.setErrors(null);
+    }
+  }
+
+  translateErrorCode(errorCode: string, errorParameter: string): string {
+    return errorCode.replace('{{ validator.errorParameter }}', errorParameter);
   }
 
   convertFormValueToMember(formValue: {

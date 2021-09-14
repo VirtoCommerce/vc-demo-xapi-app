@@ -128,12 +128,14 @@
                 id="password"
                 class="form-control form-control-lg"
                 type="password"
-                formControlName="password">
-              <div
-                *ngIf="passwords.controls.password.errors?.required && (passwords.controls.password.touched || passwords.controls.password.dirty)"
-                class="invalid-feedback d-block">
-                  {{ validationMessages.requiredMessage.replace('{{ label }}', 'Password') }}
-              </div>
+                formControlName="password" (ngModelChange)="handleEmptyPassword()">
+              <ng-container
+                *ngIf="passwords.controls.password.errors && (passwords.controls.password.touched || passwords.controls.password.dirty)"
+                >
+                  <span *ngFor="let error of passwords.controls.password.errors | keyvalue" class="invalid-feedback d-block">
+                    {{translateErrorCode(validationMessages.passwordPolicyMessages[error.key], error.value.errorParameter)}}
+                  </span>
+              </ng-container>
             </div>
 
             <div class="col-12">
