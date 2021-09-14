@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
   ],
 })
 
-export class ThankYouComponent {
+export class ThankYouComponent implements OnInit {
   message = '';
 
-  showButton = false;
+  hideButton = true;
 
   buttonTitle = '';
 
@@ -23,10 +23,19 @@ export class ThankYouComponent {
     },
   ]
 
-  constructor(private readonly router: Router) {
-    this.message = this.router.getCurrentNavigation()?.extras?.state?.message as string || 'Thank you';
+  constructor(private readonly router: Router) {}
+
+  ngOnInit(): void {
+    const state = history.state as Record<string, string>;
+    this.message = state.message || 'Thank you';
     const contentItemIdx = this.content.findIndex(item => item.message === this.message);
-    this.showButton = contentItemIdx > -1;
-    this.buttonTitle = this.showButton ? this.content[contentItemIdx]?.buttonTitle  : '';
+    this.hideButton = contentItemIdx === -1;
+    this.buttonTitle = this.hideButton ? '' : this.content[contentItemIdx]?.buttonTitle;
+  }
+
+  onSubmit(): void {
+    void this.router.navigate([
+      '/registration',
+    ]);
   }
 }

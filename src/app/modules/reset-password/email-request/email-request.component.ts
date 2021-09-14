@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import requestPasswordResetQuery from 'src/app/graphql/queries/request-password-reset.graphql';
 import { requestPasswordReset, requestPasswordResetVariables } from 'src/app/graphql/types/requestPasswordReset';
+import requestPasswordResetQuery from 'src/app/graphql/queries/request-password-reset.graphql';
 
 @Component({
   selector: 'vc-email-request',
@@ -26,7 +26,7 @@ export class EmailRequestComponent implements OnDestroy {
       query: requestPasswordResetQuery,
       variables: {
         loginOrEmail: email,
-        urlSuffix: 'reset-password',
+        urlSuffix: 'reset-password/reset',
       },
     })
       .valueChanges

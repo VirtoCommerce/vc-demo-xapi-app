@@ -1,15 +1,15 @@
-<main class="oct-bg h-100"
-      role="main">
+<main class="oct-bg h-100" role="main">
   <div class="container pt-4 pb-6 d-flex flex-column align-items-center">
     <img class="img-fluid user-select-none"
-         src="assets/images/paper-plane.svg"
-         alt="">
+        src="assets/images/paper-plane.svg"
+        alt="">
     <span class="fs-1 my-5 fw-bold">{{ message }}</span>
     <button
-        *ngIf="showButton"
+        [hidden]="hideButton"
         class="btn btn-outline-primary"
-        routerLink='/registration'>
+        (click)="onSubmit()" >
         {{ buttonTitle }}
     </button>
   </div>
 </main>
+<!-- routerLink='/registration'> -->

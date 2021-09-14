@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordRoutingModule } from './reset-password-routing.module';
+
 import { ResetPasswordComponent } from './reset-password.component';
-import { EmailRequestComponent } from './email-request/email-request.component';
 import { ResetPasswordFormComponent } from './reset-password-form/reset-password-form.component';
+import { EmailRequestComponent } from './email-request/email-request.component';
 @NgModule({
   declarations: [
     ResetPasswordComponent,
@@ -13,8 +13,9 @@ import { ResetPasswordFormComponent } from './reset-password-form/reset-password
     EmailRequestComponent,
   ],
   imports: [
-    CommonModule,
+    ReactiveFormsModule,
     FormsModule,
+    CommonModule,
     ResetPasswordRoutingModule,
   ],
 })
