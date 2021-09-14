@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,9 @@ export class ThankYouComponent implements OnInit {
     },
   ]
 
-  constructor(private readonly router: Router) {}
+  constructor(private readonly router: Router, private readonly cd: ChangeDetectorRef) {
+
+  }
 
   ngOnInit(): void {
     const state = history.state as Record<string, string>;
@@ -32,6 +34,17 @@ export class ThankYouComponent implements OnInit {
     this.hideButton = contentItemIdx === -1;
     this.buttonTitle = this.hideButton ? '' : this.content[contentItemIdx]?.buttonTitle;
   }
+
+  /*
+   * NgAfterViewChecked() {
+   *   const state = history.state as Record<string, string>;
+   *   this.message = state.message || 'Thank you';
+   *   const contentItemIdx = this.content.findIndex(item => item.message === this.message);
+   *   this.hideButton = contentItemIdx === -1;
+   *   this.buttonTitle = this.hideButton ? '' : this.content[contentItemIdx]?.buttonTitle;
+   *   this.cd.detectChanges();
+   * }
+   */
 
   onSubmit(): void {
     void this.router.navigate([
