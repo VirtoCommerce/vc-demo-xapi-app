@@ -200,6 +200,7 @@ export interface InputCreateUserType {
   readonly twoFactorEnabled?: boolean | null;
   readonly userName: string;
   readonly userType: string;
+  readonly passwordExpired?: boolean | null;
 }
 
 export interface InputDynamicPropertyValueType {

@@ -121,6 +121,7 @@ export class MembersEffects {
           email: member.email,
           password: member.password,
           userType: 'Customer',
+          passwordExpired: true,
           memberId: contactResult.data?.createContact?.id ?? null,
         },
       },
