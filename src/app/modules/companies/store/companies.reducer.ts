@@ -62,22 +62,22 @@ export const reducer = createReducer(
     },
   })),
   on(CompaniesActions.updateCompany, (state) : State => state),
-  on(CompaniesActions.updateCompanySuccess, (state, action): State  =>  {
-    const organization = {
-      ...action.data?.updateOrganization,
-      ...action.data?.updateMemberDynamicProperties,
-    };
-    delete organization.__typename;
-    const company = mapToCompany(organization as Omit<(
-      updateOrganization_updateOrganization &
-      updateMemberDynamicProperties_updateMemberDynamicProperties
-    ), '__typename'>);
-    return {
-      ...state,
-      selectedCompany: company,
-      editCompany: company,
-    };
-  }),
+  // on(CompaniesActions.updateCompanySuccess, (state, action): State  =>  {
+  //   const organization = {
+  //     ...action.data?.updateOrganization,
+  //     ...action.data?.updateMemberDynamicProperties,
+  //   };
+  //   delete organization.__typename;
+  //   const company = mapToCompany(organization as Omit<(
+  //     updateOrganization_updateOrganization &
+  //     updateMemberDynamicProperties_updateMemberDynamicProperties
+  //   ), '__typename'>);
+  //   return {
+  //     ...state,
+  //     selectedCompany: company,
+  //     editCompany: company,
+  //   };
+  // }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.setActiveCulture, (state, action): State => ({
     ...state,

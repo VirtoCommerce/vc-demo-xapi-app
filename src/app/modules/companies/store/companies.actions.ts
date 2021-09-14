@@ -32,7 +32,7 @@ export const updateCompany = createAction(
 
 export const updateCompanySuccess = createAction(
   '[Companies] Update Company Success',
-  props<{ data: updateOrganization & updateMemberDynamicProperties }>()
+  props<{ id: string }>()
 );
 
 export const updateCompanyFailure = createAction(

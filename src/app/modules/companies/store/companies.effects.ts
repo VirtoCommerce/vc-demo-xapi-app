@@ -3,7 +3,7 @@ import { updateOrganization, updateOrganizationVariables } from './../../../grap
 import { getOrganization } from './../../../graphql/types/getOrganization';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
+import { catchError, map, concatMap, mergeMap, switchMap } from 'rxjs/operators';
 import { forkJoin, Observable, of } from 'rxjs';
 
 import * as CompaniesActions from './companies.actions';
@@ -32,11 +32,11 @@ export class CompaniesEffects {
 
   getCompany$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CompaniesActions.getCompany, CompaniesActions.setActiveCulture),
+      ofType(CompaniesActions.getCompany, CompaniesActions.setActiveCulture, CompaniesActions.updateCompanySuccess),
       concatLatestFrom(() => [
         this.store.select(selectCurrentCulture),
       ]),
-      mergeMap(([
+      switchMap(([
         action,
         cultureName,
       ]) => this.apollo.watchQuery<getOrganization>({
@@ -71,12 +71,9 @@ export class CompaniesEffects {
       ]).pipe(
         map(([
           updateOrganizationResult,
-          updateMemberDynamicPropertiesResult,
+          _,
         ]) => CompaniesActions.updateCompanySuccess({
-          data: {
-            ...updateOrganizationResult.data as updateOrganization,
-            ...updateMemberDynamicPropertiesResult.data as updateMemberDynamicProperties,
-          },
+          id: updateOrganizationResult.data?.updateOrganization?.id as string,
         })),
         catchError((error: ApolloError) => of(CompaniesActions.updateCompanyFailure({ error })))
       ))
