@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors, AsyncValidator } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   validatePassword,
@@ -20,23 +20,27 @@ export class PasswordPolicyValidatorService implements AsyncValidator {
 
   validate(ctrl: AbstractControl): Observable<ValidationErrors | null> {
     const password = ctrl?.value as string;
-
-    return this.apollo.query<validatePassword, validatePasswordVariables>({
-      query: validatePasswordQuery,
-      variables: {
-        password,
-      },
-    }).pipe(
-      map(response => {
-        const errors = response.data.validatePassword?.errors?.filter(nonNull);
-        const result: ValidationErrors = {};
-        errors?.forEach(error => {
-          result[error?.code] = {
-            errorParameter: error.errorParameter,
-          };
-        });
-        return result;
-      })
-    );
+    if (password) {
+      return this.apollo.query<validatePassword, validatePasswordVariables>({
+        query: validatePasswordQuery,
+        variables: {
+          password,
+        },
+      }).pipe(
+        map(response => {
+          const errors = response.data.validatePassword?.errors?.filter(nonNull);
+          const result: ValidationErrors = {};
+          errors?.forEach(error => {
+            result[error?.code] = {
+              errorParameter: error.errorParameter,
+            };
+          });
+          return result;
+        })
+      );
+    }
+    else {
+      return of(null);
+    }
   }
 }
