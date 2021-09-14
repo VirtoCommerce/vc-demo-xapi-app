@@ -30,11 +30,21 @@ export class AddMemberComponent implements OnDestroy {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     gender: new FormControl(''),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ], this.emailValidator.validate.bind(this.emailValidator)),
-    userName: new FormControl('', Validators.required, this.userNameValidator.validate.bind(this.userNameValidator)),
+    email: new FormControl('', {
+      updateOn: 'blur',
+      validators: [
+        Validators.required,
+        Validators.email,
+      ],
+      asyncValidators: this.emailValidator.validate.bind(this.emailValidator),
+    }),
+    userName: new FormControl('', {
+      updateOn: 'blur',
+      validators: [
+        Validators.required,
+      ],
+      asyncValidators: this.userNameValidator.validate.bind(this.userNameValidator),
+    }),
     passwords: this.passwords,
   });
 
