@@ -1,11 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Member } from 'src/app/models/member.model';
+import { passwordMatchValidator } from 'src/app/modules/validation/validators/password-match-validator';
 import * as fromMembers from '../../store/members.actions';
 import { selectGenderDictionaryItems } from '../../store/members.selectors';
+import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 
 @Component({
   selector: 'vc-add-member',
@@ -15,33 +17,63 @@ import { selectGenderDictionaryItems } from '../../store/members.selectors';
   ],
 })
 export class AddMemberComponent implements OnDestroy {
-  form = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    gender: new FormControl(''),
-    email: new FormControl(''),
-    userName: new FormControl(''),
+  passwords = new FormGroup({
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
+  }, passwordMatchValidator());
+
+  form = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    gender: new FormControl(''),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    userName: new FormControl('', Validators.required),
+    passwords: this.passwords,
   });
 
   genderDictionaryItems$ = this.store.select(selectGenderDictionaryItems);
 
+  validationMessages = validationMessages;
+
   unsubscriber = new Subject();
 
   constructor(private readonly store: Store) {
-    this.store.dispatch(fromMembers.getGender());
-    this.form.valueChanges.pipe(takeUntil(this.unsubscriber)).subscribe(member => {
+    this.store.dispatch(fromMembers.getGenderDictionaryItems());
+    this.form.valueChanges.pipe(takeUntil(this.unsubscriber)).subscribe(formValue => {
       this.store.dispatch(fromMembers.setNewMember({
-        member: member as Member,
+        member: this.convertFormValueToMember(formValue),
       }));
     });
   }
 
   onSubmit(): void {
     this.store.dispatch(fromMembers.addMember({
-      member: this.form.value as Member,
+      member: this.convertFormValueToMember(this.form.value),
     }));
+  }
+
+  convertFormValueToMember(formValue: {
+    firstName: string,
+    lastName: string,
+    email: string,
+    userName: string,
+    passwords: {
+      password: string,
+      confirmPassword: string,
+    },
+    gender: string
+  }): Member {
+    return {
+      firstName: formValue.firstName,
+      lastName: formValue.lastName,
+      email: formValue.email,
+      userName: formValue.userName,
+      password: formValue.passwords.password,
+      gender: formValue.gender,
+    };
   }
 
   ngOnDestroy(): void {

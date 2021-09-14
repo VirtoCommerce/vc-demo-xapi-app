@@ -3,17 +3,17 @@ import { createAction, props } from '@ngrx/store';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { Member } from 'src/app/models/member.model';
 
-export const getGender = createAction(
-  '[Member] Get Gender'
+export const getGenderDictionaryItems = createAction(
+  '[Member] Get Dictionary Items Gender'
 );
 
-export const getGenderSuccess = createAction(
-  '[Member] Get Gender Success',
+export const getGenderDictionaryItemsSuccess = createAction(
+  '[Member] Get Gender Dictionary Items Success',
   props<{ data: getDictionaryDynamicProperty }>()
 );
 
-export const getGenderFailure = createAction(
-  '[Member] Get Gender Failure',
+export const getGenderDictionaryItemsFailure = createAction(
+  '[Member] Get Gender Dictionary Items Failure',
   props<{ error: ApolloError }>()
 );
 

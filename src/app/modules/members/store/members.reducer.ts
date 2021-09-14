@@ -22,8 +22,8 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(MemberActions.getGender, (state): State => state),
-  on(MemberActions.getGenderSuccess, (state, action): State => ({
+  on(MemberActions.getGenderDictionaryItems, (state): State => state),
+  on(MemberActions.getGenderDictionaryItemsSuccess, (state, action): State => ({
     ...state,
     genderDictionaryItems: action.data.dynamicProperty?.dictionaryItems?.items
       ?.map(item => item as getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items)
@@ -32,7 +32,7 @@ export const reducer = createReducer(
         value: item.name,
       })) ?? null,
   })),
-  on(MemberActions.getGenderFailure, (state): State => state),
+  on(MemberActions.getGenderDictionaryItemsFailure, (state): State => state),
   on(MemberActions.setNewMember, (state, action): State => ({
     ...state,
     newMember: {
