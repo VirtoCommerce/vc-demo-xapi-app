@@ -8,6 +8,10 @@ import { passwordMatchValidator } from 'src/app/modules/validation/validators/pa
 import * as fromMembers from '../../store/members.actions';
 import { selectGenderDictionaryItems } from '../../store/members.selectors';
 import  * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
+import { EmailUniquenessAsyncValidatorService }
+  from 'src/app/modules/validation/validators/email-uniqueness-async-validator.service';
+import { UsernameUniquenessAsyncValidatorService }
+  from './../../../validation/validators/username-uniqueness-async-validator.service';
 
 @Component({
   selector: 'vc-add-member',
@@ -26,11 +30,21 @@ export class AddMemberComponent implements OnDestroy {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     gender: new FormControl(''),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ]),
-    userName: new FormControl('', Validators.required),
+    email: new FormControl('', {
+      updateOn: 'blur',
+      validators: [
+        Validators.required,
+        Validators.email,
+      ],
+      asyncValidators: this.emailValidator.validate.bind(this.emailValidator),
+    }),
+    userName: new FormControl('', {
+      updateOn: 'blur',
+      validators: [
+        Validators.required,
+      ],
+      asyncValidators: this.userNameValidator.validate.bind(this.userNameValidator),
+    }),
     passwords: this.passwords,
   });
 
@@ -40,7 +54,11 @@ export class AddMemberComponent implements OnDestroy {
 
   unsubscriber = new Subject();
 
-  constructor(private readonly store: Store) {
+  constructor(
+    private readonly store: Store,
+    private readonly emailValidator: EmailUniquenessAsyncValidatorService,
+    private readonly userNameValidator: UsernameUniquenessAsyncValidatorService
+  ) {
     this.store.dispatch(fromMembers.getGenderDictionaryItems());
     this.form.valueChanges.pipe(takeUntil(this.unsubscriber)).subscribe(formValue => {
       this.store.dispatch(fromMembers.setNewMember({

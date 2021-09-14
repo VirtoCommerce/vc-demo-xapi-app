@@ -85,6 +85,11 @@
                 class="invalid-feedback d-block">
                   {{ validationMessages.emailIncorrectMessage }}
               </div>
+              <div
+                *ngIf="form.controls.email.errors?.emailUniqueness && (form.controls.email.touched || form.controls.email.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.uniqueMessage.replace('{{ label }}', 'Email') }}
+              </div>
           </div>
 
           <div class="mb-3">
@@ -102,6 +107,11 @@
                 *ngIf="form.controls.userName.errors?.required && (form.controls.userName.touched || form.controls.userName.dirty)"
                 class="invalid-feedback d-block">
                   {{ validationMessages.requiredMessage.replace('{{ label }}', 'User Name') }}
+              </div>
+              <div
+                *ngIf="form.controls.userName.errors?.usernameUniqueness && (form.controls.userName.touched || form.controls.userName.dirty)"
+                class="invalid-feedback d-block">
+                  {{ validationMessages.uniqueMessage.replace('{{ label }}', 'User Name') }}
               </div>
           </div>
 
