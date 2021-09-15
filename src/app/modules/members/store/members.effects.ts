@@ -120,6 +120,7 @@ export class MembersEffects {
           userName: member.userName,
           email: member.email,
           password: member.password,
+          storeId: 'xapi',
           userType: 'Customer',
           passwordExpired: true,
           memberId: contactResult.data?.createContact?.id ?? null,
