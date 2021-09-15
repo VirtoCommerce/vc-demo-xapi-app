@@ -48,7 +48,7 @@ export const reducer = createReducer(
     return {
       ...state,
       selectedCompany: company,
-      editCompany: { ...company },
+      editCompany: company,
       dictionaryItems: items,
     };
   }),
@@ -61,6 +61,7 @@ export const reducer = createReducer(
       ...action.data,
     },
   })),
+  on(CompaniesActions.updateCompany, (state) : State => state),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.setActiveCulture, (state, action): State => ({
     ...state,
