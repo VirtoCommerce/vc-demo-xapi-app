@@ -27,7 +27,7 @@ export class ResetPasswordFormComponent implements OnDestroy {
 
   validationMessages = ValidationMessages;
 
-  mutationErrors: string[] = [];
+  resetPasswordErrors: string[] = [];
 
   unsubscriber = new Subject()
 
@@ -70,7 +70,7 @@ export class ResetPasswordFormComponent implements OnDestroy {
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(response => {
         if (response.data?.resetPasswordByToken?.errors?.length as number > 0) {
-          this.mutationErrors = response.data?.resetPasswordByToken?.errors?.map(error => {
+          this.resetPasswordErrors = response.data?.resetPasswordByToken?.errors?.map(error => {
             return this.validationMessages.resetPasswordErrors[error?.code as string];
           }) as string[];
         }
