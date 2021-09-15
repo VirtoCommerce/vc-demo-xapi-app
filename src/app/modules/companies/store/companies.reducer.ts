@@ -48,7 +48,7 @@ export const reducer = createReducer(
     return {
       ...state,
       selectedCompany: company,
-      editCompany: company,
+      editCompany: { ...company },
       dictionaryItems: items,
     };
   }),
@@ -129,7 +129,7 @@ function mapToCompany(
       longTextMultilingual: organization.dynamicProperties
         .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.longTextMultilingual)?.value as string | null,
       htmlMultilingual: organization.dynamicProperties
-        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlMultilingual)?.value as string | null,
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlMultilingual)?.value as string ?? '',
     };
 }
 
