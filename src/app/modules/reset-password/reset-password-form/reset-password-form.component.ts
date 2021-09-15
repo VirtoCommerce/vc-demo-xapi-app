@@ -27,9 +27,7 @@ export class ResetPasswordFormComponent implements OnDestroy {
 
   validationMessages = ValidationMessages;
 
-  mutationErrors = [
-    '',
-  ];
+  mutationErrors: string[] = [];
 
   unsubscriber = new Subject()
 
