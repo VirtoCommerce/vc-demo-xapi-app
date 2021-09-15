@@ -18,3 +18,9 @@ export const passwordPolicyMessages : { [key: string]: string } = {
   PasswordRequiresUniqueChars: `Passwords must have at least {{ validator.errorParameter }} unique characters`,
   PasswordRequiresDefaultMessage: `Unexpected error`,
 };
+
+export const resetPasswordErrors : { [key: string]: string } = {
+  InvalidToken: 'Token is invalid',
+  UserNotFound: 'User not found',
+  UserNotEditable: 'You can not edit this User',
+};

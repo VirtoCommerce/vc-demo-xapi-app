@@ -27,17 +27,21 @@ export class ResetPasswordFormComponent implements OnDestroy {
 
   validationMessages = ValidationMessages;
 
+  mutationErrors = [
+    '',
+  ];
+
   unsubscriber = new Subject()
 
   resetPasswordForm = new FormGroup({
     password: new FormControl(
       '',
-      Validators.required.bind(this),
+      Validators.required,
       this.passwordPolicyValidator.validate.bind(this.passwordPolicyValidator)
     ),
     confirmPassword: new FormControl(
       '',
-      Validators.required.bind(this)
+      Validators.required
     ),
   }, passwordMatchValidator())
 
@@ -66,10 +70,17 @@ export class ResetPasswordFormComponent implements OnDestroy {
       },
     })
       .pipe(takeUntil(this.unsubscriber))
-      .subscribe(_ => {
-        void this.router.navigate([
-          'login',
-        ]);
+      .subscribe(response => {
+        if (response.data?.resetPasswordByToken?.errors?.length as number > 0) {
+          this.mutationErrors = response.data?.resetPasswordByToken?.errors?.map(error => {
+            return this.validationMessages.resetPasswordErrors[error?.code as string];
+          }) as string[];
+        }
+        else {
+          void this.router.navigate([
+            'login',
+          ]);
+        }
       });
   }
 
