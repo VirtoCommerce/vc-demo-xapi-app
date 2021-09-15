@@ -78,6 +78,7 @@ export class CompanyEffects {
         {
           state: {
             message: 'Registration completed!',
+            buttonTitle: 'Add another one',
           },
         }
       )))
