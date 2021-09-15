@@ -71,7 +71,7 @@ export class CompaniesEffects {
       ]).pipe(
         map(([
           updateOrganizationResult,
-          _,
+          __,
         ]) => CompaniesActions.updateCompanySuccess({
           id: updateOrganizationResult.data?.updateOrganization?.id as string,
         })),
