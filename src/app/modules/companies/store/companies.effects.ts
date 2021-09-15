@@ -3,7 +3,7 @@ import { updateOrganization, updateOrganizationVariables } from './../../../grap
 import { getOrganization } from './../../../graphql/types/getOrganization';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { forkJoin, Observable, of } from 'rxjs';
 
 import * as CompaniesActions from './companies.actions';

@@ -1,10 +1,8 @@
 import { PartialDeep } from 'type-fest';
-import { updateOrganization } from './../../../graphql/types/updateOrganization';
 import { Company } from '../../../models/company.model';
 import { ApolloError } from '@apollo/client/core';
 import { createAction, props } from '@ngrx/store';
 import { getOrganization } from 'src/app/graphql/types/getOrganization';
-import { updateMemberDynamicProperties } from 'src/app/graphql/types/updateMemberDynamicProperties';
 
 export const getCompany = createAction(
   '[Companies] Get Company',
