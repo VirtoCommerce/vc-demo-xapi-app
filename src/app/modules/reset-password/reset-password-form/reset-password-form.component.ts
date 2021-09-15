@@ -54,14 +54,14 @@ export class ResetPasswordFormComponent implements OnDestroy {
   }
 
   onSubmit(): void {
-    const newPassword = this.resetPasswordForm.controls.password.value as string;
+    const password = this.resetPasswordForm.controls.password.value as string;
     this.apollo.mutate<resetPasswordByToken, resetPasswordByTokenVariables>({
       mutation: resetPasswordByTokenMutation,
       variables: {
         command: {
           token: this.token,
           userId: this.userId,
-          newPassword: newPassword,
+          newPassword: password,
         },
       },
     })
