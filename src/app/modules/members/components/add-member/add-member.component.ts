@@ -85,16 +85,6 @@ export class AddMemberComponent implements OnDestroy {
     }));
   }
 
-  handleEmptyPassword(): void {
-    if (this.passwords.controls.password.value === '') {
-      this.passwords.controls.password.setErrors(null);
-    }
-  }
-
-  translateErrorCode(errorCode: string, errorParameter: string): string {
-    return errorCode.replace('{{ validator.errorParameter }}', errorParameter);
-  }
-
   convertFormValueToMember(formValue: {
     firstName: string,
     lastName: string,
