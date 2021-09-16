@@ -62,22 +62,6 @@ export const reducer = createReducer(
     },
   })),
   on(CompaniesActions.updateCompany, (state) : State => state),
-  on(CompaniesActions.updateCompanySuccess, (state, action): State  =>  {
-    const organization = {
-      ...action.data?.updateOrganization,
-      ...action.data?.updateMemberDynamicProperties,
-    };
-    delete organization.__typename;
-    const company = mapToCompany(organization as Omit<(
-      updateOrganization_updateOrganization &
-      updateMemberDynamicProperties_updateMemberDynamicProperties
-    ), '__typename'>);
-    return {
-      ...state,
-      selectedCompany: company,
-      editCompany: company,
-    };
-  }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
   on(CompaniesActions.setActiveCulture, (state, action): State => ({
     ...state,
@@ -129,7 +113,7 @@ function mapToCompany(
       longTextMultilingual: organization.dynamicProperties
         .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.longTextMultilingual)?.value as string | null,
       htmlMultilingual: organization.dynamicProperties
-        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlMultilingual)?.value as string | null,
+        .find(x => x?.name === COMPANY_DYNAMIC_PROPERTIES.htmlMultilingual)?.value as string ?? '',
     };
 }
 
