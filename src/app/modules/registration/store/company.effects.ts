@@ -70,10 +70,18 @@ export class CompanyEffects {
     return this.actions$.pipe(
 
       ofType(CompanyActions.registerCompanySuccess),
-      concatMap(() => from(this.router.navigate([
-        'registration',
-        'thank-you',
-      ])))
+      concatMap(() => from(this.router.navigate(
+        [
+          'registration',
+          'thank-you',
+        ],
+        {
+          state: {
+            message: 'Registration completed!',
+            buttonTitle: 'Add another one',
+          },
+        }
+      )))
     );
   }, { dispatch: false });
 
@@ -161,6 +169,7 @@ export class CompanyEffects {
           userName: companyRegistration.owner.userName,
           email: companyRegistration.owner.email,
           password: companyRegistration.owner.password,
+          storeId: 'xapi',
           userType: 'Customer',
           memberId: result.data?.createContact?.id ?? null,
         },

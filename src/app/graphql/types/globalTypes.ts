@@ -268,6 +268,12 @@ export interface InputRemoveItemType {
   readonly lineItemId: string;
 }
 
+export interface InputResetPasswordByTokenType {
+  readonly token: string;
+  readonly userId: string;
+  readonly newPassword: string;
+}
+
 export interface InputShipmentType {
   readonly id?: string | null;
   readonly fulfillmentCenterId?: string | null;

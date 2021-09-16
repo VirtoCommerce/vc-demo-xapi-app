@@ -8,6 +8,7 @@ import { CompanyNameComponent } from './components/company-name/company-name.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardItemComponent } from './components/dashboard-item/dashboard-item.component';
 import { DashboardSectionComponent } from './components/dashboard-section/dashboard-section.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -52,6 +53,7 @@ const appInitializerFactory =
     DashboardComponent,
     DashboardItemComponent,
     DashboardSectionComponent,
+    ThankYouComponent,
   ],
   imports: [
     BrowserModule,
