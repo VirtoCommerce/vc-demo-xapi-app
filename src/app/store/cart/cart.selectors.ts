@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { cart_cart_availableGifts, cart_cart_gifts } from 'src/app/graphql/types/cart';
+import { cart_cart_availableGifts } from 'src/app/graphql/types/cart';
 import { Cart, CartItem, Coupon, DynamicProperty } from 'src/app/models/cart.model';
 import * as fromCart from './cart.reducer';
 
@@ -48,17 +48,5 @@ export const selectItems = createSelector(
 
 export const selectGifts = createSelector(
   selectCartState,
-  (state: fromCart.State) => {
-    const available = state.cart.availableGifts as cart_cart_availableGifts[] ?? [];
-    const cartGifts = state.cart.gifts as cart_cart_gifts[];
-
-    return available.map(availableGift => {
-      const cartGift = cartGifts.find(x => x.productId === availableGift.productId);
-      return ({
-        isAccepted: !cartGift ? false : !cartGift.isRejected,
-        id: cartGift?.id,
-        ...availableGift,
-      });
-    });
-  }
+  (state: fromCart.State) => state.cart.availableGifts as cart_cart_availableGifts[]
 );

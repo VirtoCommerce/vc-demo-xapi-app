@@ -1,5 +1,0 @@
-mutation removeGiftItem($command:InputRejectGiftItemsType!) {
-  rejectItem(command: $command) {
-    gifts{ id isRejected productId quantity }
-  }
-}

@@ -115,40 +115,32 @@ export interface removeCartItem_removeCartItem_items {
   readonly placedPrice: removeCartItem_removeCartItem_items_placedPrice | null;
 }
 
-export interface removeCartItem_removeCartItem_gifts {
-  readonly __typename: "CartGiftItemType";
-  /**
-   * Line item id
-   */
-  readonly id: string;
-  /**
-   * Was the line item rejected
-   */
-  readonly isRejected: boolean;
-  /**
-   * Value of product id
-   */
-  readonly productId: string | null;
-  /**
-   * Value of line item quantity
-   */
-  readonly quantity: number | null;
-}
-
 export interface removeCartItem_removeCartItem_availableGifts {
   readonly __typename: "GiftItemType";
   /**
-   * Value of line item name
+   * Artificial ID for this value object
    */
-  readonly name: string | null;
+  readonly id: string;
   /**
-   * Value of product id
+   * Name of the reward
+   */
+  readonly name: string;
+  /**
+   * ID of lineItem if gift is in cart. Otherwise null
+   */
+  readonly lineItemId: string | null;
+  /**
+   * Product id
    */
   readonly productId: string | null;
   /**
-   * Value of line item image absolute URL
+   * Value of reward image absolute URL
    */
   readonly imageUrl: string | null;
+  /**
+   * Quantity of gifts in the reward
+   */
+  readonly quantity: number;
 }
 
 export interface removeCartItem_removeCartItem {
@@ -167,7 +159,9 @@ export interface removeCartItem_removeCartItem {
   readonly taxTotal: removeCartItem_removeCartItem_taxTotal | null;
   readonly shippingTotal: removeCartItem_removeCartItem_shippingTotal | null;
   readonly items: ReadonlyArray<(removeCartItem_removeCartItem_items | null)> | null;
-  readonly gifts: ReadonlyArray<(removeCartItem_removeCartItem_gifts | null)> | null;
+  /**
+   * Available Gifts
+   */
   readonly availableGifts: ReadonlyArray<(removeCartItem_removeCartItem_availableGifts | null)> | null;
 }
 

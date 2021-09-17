@@ -53,9 +53,4 @@ export interface ShippingMethodRecord extends ShippingMethod {
   isActive: boolean;
 }
 
-export type Gift = Partial<Mutable<Omit<graphql.cart_cart_availableGifts, typeNameTemplate>>>
-
-export interface GiftRecord extends Gift {
-  isAccepted: boolean;
-  id: string | undefined;
-}
+export type Gift = Mutable<Omit<graphql.cart_cart_availableGifts, typeNameTemplate>>

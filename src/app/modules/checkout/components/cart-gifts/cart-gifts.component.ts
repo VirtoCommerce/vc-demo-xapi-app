@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { GiftRecord } from 'src/app/models/cart.model';
-import { addGiftItem, rejectCartItem } from 'src/app/store/cart/cart.actions';
+import { Gift } from 'src/app/models/cart.model';
+import { addGiftItems, rejectCartItems } from 'src/app/store/cart/cart.actions';
 import { selectGifts } from 'src/app/store/cart/cart.selectors';
 
 @Component({
@@ -16,7 +16,7 @@ import { selectGifts } from 'src/app/store/cart/cart.selectors';
 export class CartGiftsComponent implements OnInit, OnDestroy {
   unsubscriber = new Subject();
 
-  allGifts: GiftRecord[] = [];
+  allGifts: Gift[] = [];
 
   constructor(
     private readonly store: Store
@@ -30,15 +30,21 @@ export class CartGiftsComponent implements OnInit, OnDestroy {
       });
   }
 
-  onAcceptGiftChanged(item: GiftRecord, accept: boolean): void {
+  onAcceptGiftChanged(item: Gift, accept: boolean): void {
     if (accept) {
-      this.store.dispatch(addGiftItem({
-        productId: item.productId ?? '',
+      // Add gift by sending reward id
+      this.store.dispatch(addGiftItems({
+        ids: [
+          item.id,
+        ],
       }));
     }
-    else if (item.id) {
-      this.store.dispatch(rejectCartItem({
-        lineItemId: item.id,
+    else if (item.lineItemId) {
+      // Reject gift line item by sending lineItem.id
+      this.store.dispatch(rejectCartItems({
+        ids: [
+          item.lineItemId,
+        ],
       }));
     }
   }

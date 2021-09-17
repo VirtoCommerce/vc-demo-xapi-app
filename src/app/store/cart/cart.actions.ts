@@ -16,8 +16,8 @@ import { addOrUpdateCartShipment_addOrUpdateCartShipment as shipmentResult }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
 import { addOrUpdateCartPayment_addOrUpdateCartPayment_payments as paymentResult }
   from 'src/app/graphql/types/addOrUpdateCartPayment';
-import { addGiftItem_addGiftItem as addGiftItemResult } from 'src/app/graphql/types/addGiftItem';
-import { removeGiftItem_rejectItem } from 'src/app/graphql/types/removeGiftItem';
+import { addGiftItems_addGiftItems as addGiftItemsResult } from 'src/app/graphql/types/addGiftItems';
+import { rejectGiftItems_rejectGiftItems } from 'src/app/graphql/types/rejectGiftItems';
 
 export const getCart = createAction(
   '[Cart] Get Cart'
@@ -33,24 +33,24 @@ export const getCartFailure = createAction(
   props<{ error: ApolloError }>()
 );
 
-export const addGiftItem = createAction(
+export const addGiftItems = createAction(
   '[Cart] Add GiftItem',
-  props<{ productId: string }>()
+  props<{ ids: string[] }>()
 );
 
-export const addGiftItemSuccess = createAction(
-  '[Cart] Add GiftItem Success',
-  props<{ data: addGiftItemResult | null }>()
+export const addGiftItemsSuccess = createAction(
+  '[Cart] Add GiftItems Success',
+  props<{ data: addGiftItemsResult | null }>()
 );
 
-export const rejectCartItem = createAction(
-  '[Cart] Reject CartItem (gift)',
-  props<{ lineItemId: string }>()
+export const rejectCartItems = createAction(
+  '[Cart] Reject CartItems (gifts)',
+  props<{ ids: string[] }>()
 );
 
-export const rejectCartItemSuccess = createAction(
-  '[Cart] Reject CartItem (gift) Success',
-  props<{ data: removeGiftItem_rejectItem | null }>()
+export const rejectCartItemsSuccess = createAction(
+  '[Cart] Reject CartItems (gifts) Success',
+  props<{ data: rejectGiftItems_rejectGiftItems | null }>()
 );
 
 export const removeCartItem = createAction(

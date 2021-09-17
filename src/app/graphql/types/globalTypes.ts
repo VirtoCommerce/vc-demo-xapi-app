@@ -26,7 +26,7 @@ export interface InputAddGiftItemsType {
   readonly currencyCode?: string | null;
   readonly cultureName?: string | null;
   readonly cartType?: string | null;
-  readonly giftItemIds: ReadonlyArray<(string | null)>;
+  readonly ids: ReadonlyArray<(string | null)>;
 }
 
 export interface InputAddItemsType {
@@ -81,6 +81,7 @@ export interface InputAddressType {
   readonly regionId?: string | null;
   readonly regionName?: string | null;
   readonly zip?: string | null;
+  readonly outerId?: string | null;
   readonly addressType?: number | null;
 }
 
@@ -211,6 +212,7 @@ export interface InputCreateUserType {
   readonly twoFactorEnabled?: boolean | null;
   readonly userName: string;
   readonly userType: string;
+  readonly passwordExpired?: boolean | null;
 }
 
 export interface InputDynamicPropertyValueType {
@@ -238,6 +240,7 @@ export interface InputMemberAddressType {
   readonly regionId?: string | null;
   readonly regionName?: string | null;
   readonly zip?: string | null;
+  readonly outerId?: string | null;
   readonly addressType?: number | null;
 }
 
@@ -264,7 +267,7 @@ export interface InputRejectGiftItemsType {
   readonly currencyCode?: string | null;
   readonly cultureName?: string | null;
   readonly cartType?: string | null;
-  readonly giftItemIds: ReadonlyArray<(string | null)>;
+  readonly ids: ReadonlyArray<(string | null)>;
 }
 
 export interface InputRemoveCouponType {

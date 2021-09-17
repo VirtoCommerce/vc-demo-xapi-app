@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface validatePassword_validatePassword_errors {
-  readonly __typename: "PasswordValidationErrorType";
+  readonly __typename: "IdentityErrorInfoType";
   /**
    * Error code
    */
@@ -24,14 +24,11 @@ export interface validatePassword_validatePassword_errors {
 }
 
 export interface validatePassword_validatePassword {
-  readonly __typename: "PasswordValidationType";
+  readonly __typename: "CustomIdentityResultType";
   /**
-   * Validation errors
+   * The errors that occurred during the identity operation.
    */
   readonly errors: ReadonlyArray<(validatePassword_validatePassword_errors | null)> | null;
-  /**
-   * Validation result status
-   */
   readonly succeeded: boolean;
 }
 
