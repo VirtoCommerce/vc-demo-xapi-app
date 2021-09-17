@@ -34,7 +34,7 @@ export const getCartFailure = createAction(
 );
 
 export const addGiftItems = createAction(
-  '[Cart] Add GiftItem',
+  '[Cart] Add GiftItems',
   props<{ ids: string[] }>()
 );
 
