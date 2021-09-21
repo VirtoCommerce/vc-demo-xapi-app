@@ -1,53 +1,17 @@
 # VirtoCommerce XAPI Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
+VirtoCommerce XAPI Demo is web application with e-commerce scenarios above XAPI and GraphQL from Virto Commerce.
 
-## Development server
+Ecommerce Scenarios in this application are designed for broad usage and you are encouraged to use and provide feedback on them.
 
-Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+However, this application is not production-ready and it’s not supported nor are any commitments made as to their longevity.
 
-## Code scaffolding
+## How to run XAPI app with Virto platform locally
 
-Run `ng generate component component-name` to generate a new component.  
-You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module` to generate `angular` files.
+1. Clone this repository
+2. Install Node.js dependencies by running `npm install`
+3. Open `proxy.conf.json` file and make sure that every `target` property value is the same as platform local url
+4. Run platform
+5. Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### How to generate new lazy-loading module with component
 
-`ng generate module modules/<name> --module app|modules/<name> --route <route>`
-
-## Linting
-
-Use `npm run lint` to run linter. `npm run lint -- --fix` will fix issues with available auto fixing.
-
-## ngrx
-
-`ng generate @ngrx/schematics:store|action|reducer|selector|effect|feature` to generate `ngrx` files.
-
-Examples:
-
-```
-ng generate @ngrx/schematics:feature modules/environment-variables/store/environment-variables --module modules/environment-variables/environment-variables.module.ts --reducers ../../../store/index.ts
-```
-
-```
-? Should we generate and wire success and failure actions? Yes
-? Do you want to use the create functions? Yes
-? What should be the prefix of the action? load
-```
-## Apollo (GraphQl)
-
-How to generate types for XAPI GraphQL queries and mutations:
-
-`npm run xapi:codegen`
-
-## Build
-
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
