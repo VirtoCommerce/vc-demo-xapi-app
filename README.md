@@ -6,6 +6,8 @@ Ecommerce Scenarios in this application are designed for broad usage and you are
 
 However, this application is not production-ready and it’s not supported nor are any commitments made as to their longevity.
 
+Live demo is available [here](https://xapi-app.demo.govirto.com/)
+
 ## How to run XAPI app with Virto platform locally
 
 1. Clone this repository
