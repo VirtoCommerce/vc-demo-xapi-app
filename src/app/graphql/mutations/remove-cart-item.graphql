@@ -3,7 +3,7 @@ mutation removeCartItem ($command: InputRemoveItemType!) {
         id
         customerId
         subTotal { formattedAmount }
-    	total { formattedAmount }
+    	  total { formattedAmount }
         discountTotal { formattedAmount }
         taxTotal { formattedAmount }
         shippingTotal { formattedAmount }
