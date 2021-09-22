@@ -9,3 +9,8 @@ export const selectGenderDictionaryItems = createSelector(
   selectMembersState,
   (state: fromMembers.State) => state.genderDictionaryItems
 );
+
+export const selectMembers = createSelector(
+  selectMembersState,
+  (state: fromMembers.State) => state.members
+);

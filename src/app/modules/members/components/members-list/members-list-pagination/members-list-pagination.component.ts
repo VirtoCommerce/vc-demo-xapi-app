@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'vc-members-list-pagination',
@@ -7,9 +7,6 @@ import { Component, OnInit } from '@angular/core';
     './members-list-pagination.component.scss',
   ],
 })
-export class MembersListPaginationComponent implements OnInit {
-  constructor() { }
+export class MembersListPaginationComponent {
 
-  ngOnInit(): void {
-  }
 }

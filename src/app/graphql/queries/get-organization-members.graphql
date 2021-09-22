@@ -1,0 +1,24 @@
+query getOrganizationMembers(
+  $id: String!,
+  $after: String,
+  $first: Int,
+  $searchPhrase: String,
+  $sort: String) {
+  organization(id: $id) {
+    contacts(
+      after: $after,
+      first: $first,
+      searchPhrase: $searchPhrase,
+      sort: $sort) {
+        items {
+          firstName
+          lastName
+          fullName
+          securityAccounts {
+            email
+            lockoutEnabled
+          }
+        }
+    }
+  }
+}

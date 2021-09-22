@@ -10,11 +10,18 @@ import { EffectsModule } from '@ngrx/effects';
 import { MembersEffects } from './store/members.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MembersListComponent } from './components/members-list/members-list.component';
-import { MembersListFilterBarComponent } from './components/members-list-components/members-list-filter-bar/members-list-filter-bar.component';
-import { MembersListTableComponent } from './components/members-list-components/members-list-table/members-list-table.component';
-import { MembersListPaginationComponent } from './components//members-list-components/members-list-pagination/members-list-pagination.component';
-import { SearchInputComponent } from './components/members-list-components/members-list-filter-bar/members-list-filter-bar-components/search-input/search-input.component';
-import { OptionFilterComponent } from './components/members-list-components/members-list-filter-bar/members-list-filter-bar-components/option-filter/option-filter.component';
+import { MembersListFilterBarComponent }
+  from './components/members-list/members-list-filter-bar/members-list-filter-bar.component';
+import { MembersListTableComponent }
+  from './components/members-list/members-list-table/members-list-table.component';
+import { MembersListPaginationComponent }
+  from './components//members-list/members-list-pagination/members-list-pagination.component';
+import { SearchInputComponent }
+  from './components/members-list/members-list-filter-bar/search-input/search-input.component';
+import { OptionFilterComponent }
+  from './components/members-list/members-list-filter-bar/option-filter/option-filter.component';
+import { ActionButtonsComponent }
+  from './components/members-list/members-list-table/action-buttons/action-buttons.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +32,7 @@ import { OptionFilterComponent } from './components/members-list-components/memb
     MembersListPaginationComponent,
     SearchInputComponent,
     OptionFilterComponent,
+    ActionButtonsComponent,
   ],
   imports: [
     CommonModule,

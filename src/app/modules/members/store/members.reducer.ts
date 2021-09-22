@@ -10,13 +10,15 @@ export const membersFeatureKey = 'members';
 export interface State {
   newMember: Member | null,
   newMemberSucceeded: boolean | null,
-  genderDictionaryItems: { value: string, valueId: string }[] | null
+  genderDictionaryItems: { value: string, valueId: string }[] | null,
+  members: Member[] | null,
 }
 
 export const initialState: State = {
   newMember: null,
   newMemberSucceeded: null,
   genderDictionaryItems: null,
+  members: null,
 };
 
 export const reducer = createReducer(
@@ -53,7 +55,12 @@ export const reducer = createReducer(
   on(MemberActions.addMemberFailure, (state): State => ({
     ...state,
     newMemberSucceeded: false,
-  }))
-
+  })),
+  on(MemberActions.getOrganizationMembers, (state): State => state),
+  on(MemberActions.getOrganizationMembersSuccess, (state, action): State => ({
+    ...state,
+    members: action.members ?? null,
+  })),
+  on(MemberActions.getOrganizationMembersFailure, (state): State => state)
 );
 
