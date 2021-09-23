@@ -11,6 +11,8 @@ import { nullable } from 'src/app/helpers/nullable';
 import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
 import { formatDate } from '@angular/common';
 import { nonNull } from 'src/app/helpers/nonNull';
+import { CompaniesListingItem } from 'src/app/models/companies-listing-item.model';
+import { getOrganizations } from 'src/app/graphql/types/getOrganizations';
 
 export const companiesFeatureKey = 'companies';
 
@@ -19,6 +21,10 @@ export interface DictionaryItem {
   valueId: string
 }
 export interface State {
+  companies: {
+    items: CompaniesListingItem[],
+    totalCount: number
+  } | null,
   selectedCompany: Company | null,
   editCompany: PartialDeep<Company> | null,
   dictionaryItems: Record<string, DictionaryItem[]> | null,
@@ -27,6 +33,7 @@ export interface State {
 }
 
 export const initialState: State = {
+  companies: null,
   selectedCompany: null,
   editCompany: null,
   dictionaryItems: null,
@@ -53,6 +60,18 @@ export const reducer = createReducer(
     };
   }),
   on(CompaniesActions.getCompanyFailure, (state, _): State => state),
+  on(CompaniesActions.getCompanies, (state): State => state),
+  on(CompaniesActions.getCompaniesSuccess, (state, action): State => {
+    const companies = mapToCompaniesListingItems(action.data);
+    return {
+      ...state,
+      companies: {
+        items: companies,
+        totalCount: action.data.organizations?.totalCount ?? 0,
+      },
+    };
+  }),
+  on(CompaniesActions.getCompaniesFailure, (state, _): State => state),
   on(CompaniesActions.setCompany, (state, action) : State => ({
     ...state,
     editCompany: {
@@ -69,6 +88,19 @@ export const reducer = createReducer(
   }))
 
 );
+
+function mapToCompaniesListingItems(data: getOrganizations): CompaniesListingItem[] {
+  const companies = data.organizations?.items?.map(item => {
+    return {
+      id: item?.id,
+      name: item?.name,
+      phone: item?.phones && item.phones.length > 0 ? item.phones[0] : null,
+      email: item?.emails && item.emails.length > 0 ? item.emails[0] : null,
+      address: item?.addresses?.items && item.addresses.items?.length > 0 ? item.addresses.items[0] : null,
+    };
+  });
+  return companies as CompaniesListingItem[];
+}
 
 function mapToCompany(
   organization?: getOrganization_organization |

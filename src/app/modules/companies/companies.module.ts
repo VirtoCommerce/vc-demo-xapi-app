@@ -16,6 +16,8 @@ import { CompanyPropertiesComponent } from './components/company-properties/comp
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
 import { MultilingualPropertiesComponent } from
   './components/multilanguage-properties/multilingual-properties.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { MultilingualPropertiesComponent } from
   imports: [
     CommonModule,
     CompaniesRoutingModule,
+    NgbPaginationModule,
     FormsModule,
     CodemirrorModule,
     ReactiveFormsModule,
@@ -37,6 +40,7 @@ import { MultilingualPropertiesComponent } from
     EffectsModule.forFeature([
       CompaniesEffects,
     ]),
+    FontAwesomeModule,
   ],
 })
 export class CompaniesModule { }
