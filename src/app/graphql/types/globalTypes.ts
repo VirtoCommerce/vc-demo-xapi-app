@@ -18,6 +18,17 @@ export interface InputAddCouponType {
   readonly couponCode: string;
 }
 
+export interface InputAddGiftItemsType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly ids: ReadonlyArray<(string | null)>;
+}
+
 export interface InputAddItemsType {
   readonly cartId?: string | null;
   readonly storeId: string;
@@ -70,6 +81,7 @@ export interface InputAddressType {
   readonly regionId?: string | null;
   readonly regionName?: string | null;
   readonly zip?: string | null;
+  readonly outerId?: string | null;
   readonly addressType?: number | null;
 }
 
@@ -228,6 +240,7 @@ export interface InputMemberAddressType {
   readonly regionId?: string | null;
   readonly regionName?: string | null;
   readonly zip?: string | null;
+  readonly outerId?: string | null;
   readonly addressType?: number | null;
 }
 
@@ -244,6 +257,17 @@ export interface InputPaymentType {
   readonly currency?: string | null;
   readonly price?: any | null;
   readonly amount?: any | null;
+}
+
+export interface InputRejectGiftItemsType {
+  readonly cartId?: string | null;
+  readonly storeId: string;
+  readonly cartName?: string | null;
+  readonly userId: string;
+  readonly currencyCode?: string | null;
+  readonly cultureName?: string | null;
+  readonly cartType?: string | null;
+  readonly ids: ReadonlyArray<(string | null)>;
 }
 
 export interface InputRemoveCouponType {

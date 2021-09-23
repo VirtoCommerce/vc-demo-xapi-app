@@ -14,5 +14,6 @@ mutation removeCartCoupon ($command: InputRemoveCouponType!) {
       discountTotal { formattedAmount }
       taxTotal { formattedAmount }
       shippingTotal { formattedAmount }
+      availableGifts { id name lineItemId productId imageUrl quantity }
   }
 }

@@ -4,19 +4,21 @@ import * as graphql from '../graphql/types/cart';
 type typeNameTemplate = '__typename'
 
 export interface Cart extends Mutable<Omit<graphql.cart_cart,
-    typeNameTemplate |
-    'dynamicProperties' |
-    'coupons' |
-    'items' |
-    'shipments' |
-    'payments' |
-    'availablePaymentMethods' |
-    'availableShippingMethods'>> {
+  typeNameTemplate |
+  'dynamicProperties' |
+  'coupons' |
+  'items' |
+  'shipments' |
+  'payments' |
+  'availableGifts' |
+  'availablePaymentMethods' |
+  'availableShippingMethods'>> {
   dynamicProperties: DynamicProperty[];
   coupons: Coupon[];
   items: CartItem[];
   shipments: Shipment[];
   payments: Payment[];
+  availableGifts: Gift[];
   availablePaymentMethods: PaymentMethod[];
   availableShippingMethods: ShippingMethod[];
 }
@@ -50,3 +52,5 @@ export type ShippingMethod = Partial<Mutable<Omit<graphql.cart_cart_availableShi
 export interface ShippingMethodRecord extends ShippingMethod {
   isActive: boolean;
 }
+
+export type Gift = Mutable<Omit<graphql.cart_cart_availableGifts, typeNameTemplate>>

@@ -13,6 +13,8 @@ import * as CartActions from './cart.actions';
 import { selectCountriesState } from '../countries/countries.selectors';
 
 import getCartQuery from '../../graphql/queries/get-cart.graphql';
+import addCartGiftsMutation from '../../graphql/mutations/add-cart-gift-items.graphql';
+import rejectCartGiftsMutation from '../../graphql/mutations/remove-cart-gift-items.graphql';
 import changeCartItemQuantityMutation from '../../graphql/mutations/change-cart-item-quantity.graphql';
 import removeCartItemMutation from '../../graphql/mutations/remove-cart-item.graphql';
 import updateCartCommentMutation from '../../graphql/mutations/update-cart-comment.graphql';
@@ -23,17 +25,19 @@ import addOrUpdateShipment from '../../graphql/mutations/add-or-update-cart-ship
 import addOrUpdatePayment from '../../graphql/mutations/add-or-update-cart-payment.graphql';
 
 import { cart, cartVariables } from 'src/app/graphql/types/cart';
+import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 import { removeCartItem, removeCartItemVariables } from 'src/app/graphql/types/removeCartItem';
 import { updateCartComment, updateCartCommentVariables } from 'src/app/graphql/types/updateCartComment';
 import { updateCartDynamicProperties, updateCartDynamicPropertiesVariables }
   from 'src/app/graphql/types/updateCartDynamicProperties';
 import { addCartCoupon, addCartCouponVariables } from 'src/app/graphql/types/addCartCoupon';
 import { removeCartCoupon, removeCartCouponVariables } from 'src/app/graphql/types/removeCartCoupon';
-import { changeCartItemQuantity, changeCartItemQuantityVariables } from 'src/app/graphql/types/changeCartItemQuantity';
 import { addOrUpdateCartShipment, addOrUpdateCartShipmentVariables }
   from 'src/app/graphql/types/addOrUpdateCartShipment';
 import { addOrUpdateCartPayment, addOrUpdateCartPaymentVariables }
   from 'src/app/graphql/types/addOrUpdateCartPayment';
+import { addGiftItems, addGiftItemsVariables } from 'src/app/graphql/types/addGiftItems';
+import { rejectGiftItems, rejectGiftItemsVariables } from 'src/app/graphql/types/rejectGiftItems';
 
 @Injectable()
 export class CartEffects {
@@ -57,6 +61,48 @@ export class CartEffects {
         .pipe(
           map(result => CartActions.getCartSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CartActions.getCartFailure({ error })))
+        ))
+    );
+  });
+
+  addGiftItems$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.addGiftItems),
+      concatMap(action => this.apollo.mutate<addGiftItems, addGiftItemsVariables>({
+        mutation: addCartGiftsMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            ids: action.ids,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.addGiftItemsSuccess({
+            data: result.data?.addGiftItems ?? null,
+          }))
+        ))
+    );
+  });
+
+  rejectGiftItems$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartActions.rejectCartItems),
+      concatMap(action => this.apollo.mutate<rejectGiftItems, rejectGiftItemsVariables>({
+        mutation: rejectCartGiftsMutation,
+        variables: {
+          command: {
+            ...this.baseCartVariables,
+            userId: localStorage.getItem('cartUserId') ?? '',
+            ids: action.ids,
+          },
+        },
+      })
+        .pipe(
+          map(result => CartActions.rejectCartItemsSuccess({
+            data: result.data?.rejectGiftItems ?? null,
+          }))
         ))
     );
   });

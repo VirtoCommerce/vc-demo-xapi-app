@@ -14,5 +14,6 @@ mutation addCartCoupon ($command: InputAddCouponType!) {
       discountTotal { formattedAmount }
       taxTotal { formattedAmount }
       shippingTotal { formattedAmount }
+      availableGifts { id name lineItemId productId imageUrl quantity }
   }
 }

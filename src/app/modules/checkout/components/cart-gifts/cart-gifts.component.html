@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-body pt-0">
+        <div *ngFor="let gift of allGifts; let last = last;" class="row align-items-center py-3" [ngClass]="{'border-bottom': !last }">
+            <div class="col-lg-2">
+              <div class="form-check">
+                <input class="form-check-input table" type="checkbox"
+                       [checked]="gift.lineItemId"
+                       (change)="onAcceptGiftChanged(gift, !gift.lineItemId)">
+              </div>
+            </div>
+            <div class="col-lg-3 align-self-start">
+                <img [src]="gift.imageUrl" class="img-fluid" [alt]="gift.name" />
+            </div>
+            <div class="col-lg-19">
+                <p class="mb-2">
+                    <a href="javascript: void(0)" class="fw-strong gift-name">{{ gift.name }}</a>
+                </p>
+                <p class="mb-0">
+            </div>
+        </div>
+    </div>
+</div>

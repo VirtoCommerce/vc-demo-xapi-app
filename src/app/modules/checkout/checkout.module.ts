@@ -10,6 +10,7 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
 import { CartDynamicPropertyComponent } from './components/cart-dynamic-property/cart-dynamic-property.component';
 import { CartCouponComponent } from './components/cart-coupon/cart-coupon.component';
 import { LineItemsComponent } from './components/line-items/line-items.component';
+import { CartGiftsComponent } from './components/cart-gifts/cart-gifts.component';
 import { ShippingAddressComponent } from './components/shipping-address/shipping-address.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { BillingAddressComponent } from './components/billing-address/billing-address.component';
@@ -27,6 +28,7 @@ import { DirectivesModule } from '../directives/directives.module';
     CartDynamicPropertyComponent,
     CartCouponComponent,
     LineItemsComponent,
+    CartGiftsComponent,
     ShippingAddressComponent,
     BillingAddressComponent,
     AddressFormComponent,

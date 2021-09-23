@@ -87,6 +87,34 @@ export interface removeCartCoupon_removeCoupon_shippingTotal {
   readonly formattedAmount: string;
 }
 
+export interface removeCartCoupon_removeCoupon_availableGifts {
+  readonly __typename: "GiftItemType";
+  /**
+   * Artificial ID for this value object
+   */
+  readonly id: string;
+  /**
+   * Name of the reward
+   */
+  readonly name: string;
+  /**
+   * ID of lineItem if gift is in cart. Otherwise null
+   */
+  readonly lineItemId: string | null;
+  /**
+   * Product id
+   */
+  readonly productId: string | null;
+  /**
+   * Value of reward image absolute URL
+   */
+  readonly imageUrl: string | null;
+  /**
+   * Quantity of gifts in the reward
+   */
+  readonly quantity: number;
+}
+
 export interface removeCartCoupon_removeCoupon {
   readonly __typename: "CartType";
   readonly coupons: ReadonlyArray<(removeCartCoupon_removeCoupon_coupons | null)> | null;
@@ -96,6 +124,10 @@ export interface removeCartCoupon_removeCoupon {
   readonly discountTotal: removeCartCoupon_removeCoupon_discountTotal | null;
   readonly taxTotal: removeCartCoupon_removeCoupon_taxTotal | null;
   readonly shippingTotal: removeCartCoupon_removeCoupon_shippingTotal | null;
+  /**
+   * Available Gifts
+   */
+  readonly availableGifts: ReadonlyArray<(removeCartCoupon_removeCoupon_availableGifts | null)> | null;
 }
 
 export interface removeCartCoupon {

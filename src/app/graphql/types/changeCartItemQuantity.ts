@@ -115,6 +115,34 @@ export interface changeCartItemQuantity_changeCartItemQuantity_items {
   readonly placedPrice: changeCartItemQuantity_changeCartItemQuantity_items_placedPrice | null;
 }
 
+export interface changeCartItemQuantity_changeCartItemQuantity_availableGifts {
+  readonly __typename: "GiftItemType";
+  /**
+   * Artificial ID for this value object
+   */
+  readonly id: string;
+  /**
+   * Name of the reward
+   */
+  readonly name: string;
+  /**
+   * ID of lineItem if gift is in cart. Otherwise null
+   */
+  readonly lineItemId: string | null;
+  /**
+   * Product id
+   */
+  readonly productId: string | null;
+  /**
+   * Value of reward image absolute URL
+   */
+  readonly imageUrl: string | null;
+  /**
+   * Quantity of gifts in the reward
+   */
+  readonly quantity: number;
+}
+
 export interface changeCartItemQuantity_changeCartItemQuantity {
   readonly __typename: "CartType";
   /**
@@ -131,6 +159,10 @@ export interface changeCartItemQuantity_changeCartItemQuantity {
   readonly taxTotal: changeCartItemQuantity_changeCartItemQuantity_taxTotal | null;
   readonly shippingTotal: changeCartItemQuantity_changeCartItemQuantity_shippingTotal | null;
   readonly items: ReadonlyArray<(changeCartItemQuantity_changeCartItemQuantity_items | null)> | null;
+  /**
+   * Available Gifts
+   */
+  readonly availableGifts: ReadonlyArray<(changeCartItemQuantity_changeCartItemQuantity_availableGifts | null)> | null;
 }
 
 export interface changeCartItemQuantity {

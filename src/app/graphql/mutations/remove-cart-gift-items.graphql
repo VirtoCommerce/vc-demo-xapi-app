@@ -1,0 +1,5 @@
+mutation rejectGiftItems($command:InputRejectGiftItemsType!) {
+  rejectGiftItems(command: $command) {
+    availableGifts { id name lineItemId productId imageUrl quantity }
+  }
+}

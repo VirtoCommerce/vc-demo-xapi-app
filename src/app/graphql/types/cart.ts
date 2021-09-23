@@ -137,6 +137,34 @@ export interface cart_cart_coupons {
   readonly isAppliedSuccessfully: boolean | null;
 }
 
+export interface cart_cart_availableGifts {
+  readonly __typename: "GiftItemType";
+  /**
+   * Artificial ID for this value object
+   */
+  readonly id: string;
+  /**
+   * Name of the reward
+   */
+  readonly name: string;
+  /**
+   * ID of lineItem if gift is in cart. Otherwise null
+   */
+  readonly lineItemId: string | null;
+  /**
+   * Product id
+   */
+  readonly productId: string | null;
+  /**
+   * Value of reward image absolute URL
+   */
+  readonly imageUrl: string | null;
+  /**
+   * Quantity of gifts in the reward
+   */
+  readonly quantity: number;
+}
+
 export interface cart_cart_availableShippingMethods_price {
   readonly __typename: "MoneyType";
   /**
@@ -412,6 +440,10 @@ export interface cart_cart {
    */
   readonly dynamicProperties: ReadonlyArray<(cart_cart_dynamicProperties | null)> | null;
   readonly coupons: ReadonlyArray<(cart_cart_coupons | null)> | null;
+  /**
+   * Available Gifts
+   */
+  readonly availableGifts: ReadonlyArray<(cart_cart_availableGifts | null)> | null;
   readonly availableShippingMethods: ReadonlyArray<(cart_cart_availableShippingMethods | null)> | null;
   readonly availablePaymentMethods: ReadonlyArray<(cart_cart_availablePaymentMethods | null)> | null;
   readonly shipments: ReadonlyArray<(cart_cart_shipments | null)> | null;

@@ -18,6 +18,7 @@ export const initialState: State = {
     items: [],
     shipments: [],
     payments: [],
+    availableGifts: [],
     availableShippingMethods: [],
   },
   billingAddressAsShipping: true,
@@ -41,6 +42,7 @@ export const reducer = createReducer(
       dynamicProperties: customMap(action?.data?.cart?.dynamicProperties, x => ({ ...x })),
       coupons: customMap(action?.data?.cart?.coupons, x => ({ ...x })),
       items: customMap(action?.data?.cart?.items, x => ({ ...x })),
+      availableGifts: customMap(action?.data?.cart?.availableGifts, x => ({ ...x })),
       shipments: customMap(action?.data?.cart?.shipments, x => ({
         ...x,
         deliveryAddress: x.deliveryAddress ? { ...x.deliveryAddress } : undefined,
@@ -81,6 +83,7 @@ export const reducer = createReducer(
             return item;
           })
           : [],
+        availableGifts: customMap(action?.data?.availableGifts, x => ({ ...x })),
         coupons: customMap(action?.data?.coupons, x => ({ ...x })),
       },
     })
@@ -94,6 +97,19 @@ export const reducer = createReducer(
         ...state.cart,
         ...action?.data,
         items: customMap(action?.data?.items, x => ({ ...x })),
+        availableGifts: customMap(action?.data?.availableGifts, x => ({ ...x })),
+      },
+    })
+  ),
+  on(
+    CartActions.addGiftItemsSuccess,
+    CartActions.rejectCartItemsSuccess,
+    (state, action): State => ({
+      ...state,
+      cart: {
+        ...state.cart,
+        ...action?.data,
+        availableGifts: customMap(action?.data?.availableGifts, x => ({ ...x })),
       },
     })
   ),

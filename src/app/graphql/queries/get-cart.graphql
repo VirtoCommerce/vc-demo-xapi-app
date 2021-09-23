@@ -27,6 +27,7 @@ query cart ($storeId: String!, $userId: String, $currencyCode: String!, $culture
           code
           isAppliedSuccessfully
         }
+        availableGifts { id name lineItemId productId imageUrl quantity }
         availableShippingMethods {
           code
           optionName
