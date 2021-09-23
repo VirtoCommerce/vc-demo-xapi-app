@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { FilterValues } from './filter-values.model';
 import { InputValues } from './input-values.model';
 
@@ -17,6 +18,8 @@ export class MembersListFilterBarComponent {
 
   @Output() filterChange = new EventEmitter<FilterValues>();
 
+  constructor(private readonly router: Router) {}
+
   onValueChanges({ value, emitterElement } : InputValues): void {
     switch (emitterElement) {
     case 'input':
@@ -32,5 +35,12 @@ export class MembersListFilterBarComponent {
       searchFilterValue: this.searchFilterValue,
       selectInputValue: this.selectInputValue,
     });
+  }
+
+  async onAddNewMember(): Promise<void> {
+    await this.router.navigate([
+      'members',
+      'add-member',
+    ]);
   }
 }

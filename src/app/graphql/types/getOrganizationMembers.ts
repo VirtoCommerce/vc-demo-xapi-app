@@ -15,6 +15,7 @@ export interface getOrganizationMembers_organization_contacts_items_securityAcco
 
 export interface getOrganizationMembers_organization_contacts_items {
   readonly __typename: "ContactType";
+  readonly id: string;
   readonly fullName: string;
   readonly securityAccounts: ReadonlyArray<(getOrganizationMembers_organization_contacts_items_securityAccounts | null)> | null;
 }
@@ -30,6 +31,7 @@ export interface getOrganizationMembers_organization_contacts {
 
 export interface getOrganizationMembers_organization {
   readonly __typename: "Organization";
+  readonly id: string;
   readonly contacts: getOrganizationMembers_organization_contacts | null;
 }
 

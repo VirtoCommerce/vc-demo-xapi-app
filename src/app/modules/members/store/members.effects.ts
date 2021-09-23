@@ -179,6 +179,7 @@ export class MembersEffects {
     const members = data.organization?.contacts?.items?.map(item => {
       if (item?.securityAccounts != null) {
         return {
+          id: item?.id,
           fullName: item?.fullName,
           email: item?.securityAccounts[0]?.email,
           lockedState: item?.securityAccounts[0]?.lockedState,
