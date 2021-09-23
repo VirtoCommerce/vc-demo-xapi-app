@@ -10,7 +10,7 @@
 export interface getOrganizationMembers_organization_contacts_items_securityAccounts {
   readonly __typename: "UserType";
   readonly email: string | null;
-  readonly lockoutEnabled: boolean;
+  readonly lockedState: boolean;
 }
 
 export interface getOrganizationMembers_organization_contacts_items {

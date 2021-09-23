@@ -177,7 +177,7 @@ export class MembersEffects {
         return {
           fullName: item?.fullName,
           email: item?.securityAccounts[0]?.email,
-          lockedState: item?.securityAccounts[0]?.lockoutEnabled,
+          lockedState: item?.securityAccounts[0]?.lockedState,
         };
       }
       else {

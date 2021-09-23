@@ -199,7 +199,7 @@ export interface InputCreateUserType {
   readonly email: string;
   readonly id?: string | null;
   readonly isAdministrator?: boolean | null;
-  readonly lockoutEnabled?: boolean | null;
+  readonly lockedState?: boolean | null;
   readonly lockoutEnd?: any | null;
   readonly logins?: ReadonlyArray<(InputApplicationUserLoginType | null)> | null;
   readonly memberId?: string | null;

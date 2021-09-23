@@ -16,7 +16,7 @@ query getOrganizationMembers(
           fullName
           securityAccounts {
             email
-            lockoutEnabled
+            lockedState
           }
         }
     }
