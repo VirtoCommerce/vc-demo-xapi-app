@@ -96,15 +96,19 @@ export class MembersEffects {
           query: getOrganizationMembersQuery,
           variables: {
             id: action.data.id,
-            count: action.data.after,
+            after: action.data.after,
             first: action.data.first,
-            cursor: action.data.searchPhrase,
+            searchPhrase: action.data.searchPhrase,
             sort: action.data.sort,
           },
         })
         .valueChanges.pipe(
           map(result => {
-            return MemberActions.getOrganizationMembersSuccess({ members: this.mapResultToMembers(result.data) });
+            const data = {
+              members: this.mapResultToMembers(result.data),
+              membersCount: result.data.organization!.contacts!.totalCount ?? 0,
+            };
+            return MemberActions.getOrganizationMembersSuccess({ data });
           }),
           catchError((error: ApolloError) => of(MemberActions.getOrganizationMembersFailure({ error })))
         ))

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { InputValues } from '../../../members-list/models/input-values.model';
+import { InputValues } from '../input-values.model';
 
 @Component({
   selector: 'vc-option-filter',

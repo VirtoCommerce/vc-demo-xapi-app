@@ -16,8 +16,8 @@ import { MembersListTableComponent }
   from './components/members-list/members-list-table/members-list-table.component';
 import { MembersListPaginationComponent }
   from './components//members-list/members-list-pagination/members-list-pagination.component';
-import { SearchInputComponent }
-  from './components/members-list/members-list-filter-bar/search-input/search-input.component';
+import { SearchFilterComponent }
+  from './components/members-list/members-list-filter-bar/search-filter/search-filter.component';
 import { OptionFilterComponent }
   from './components/members-list/members-list-filter-bar/option-filter/option-filter.component';
 import { ActionButtonsComponent }
@@ -30,7 +30,7 @@ import { ActionButtonsComponent }
     MembersListFilterBarComponent,
     MembersListTableComponent,
     MembersListPaginationComponent,
-    SearchInputComponent,
+    SearchFilterComponent,
     OptionFilterComponent,
     ActionButtonsComponent,
   ],

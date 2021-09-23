@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FilterValues } from '../../members-list/models/filter-values.model';
-import { InputValues } from '../../members-list/models/input-values.model';
+import { FilterValues } from './filter-values.model';
+import { InputValues } from './input-values.model';
 
 @Component({
   selector: 'vc-members-list-filter-bar',
@@ -11,7 +11,7 @@ import { InputValues } from '../../members-list/models/input-values.model';
 })
 
 export class MembersListFilterBarComponent {
-  searchInputValue = '';
+  searchFilterValue = '';
 
   selectInputValue = 'all';
 
@@ -20,7 +20,7 @@ export class MembersListFilterBarComponent {
   onValueChanges({ value, emitterElement } : InputValues): void {
     switch (emitterElement) {
     case 'input':
-      this.searchInputValue = value;
+      this.searchFilterValue = value;
       break;
     case 'select':
       this.selectInputValue = value;
@@ -29,7 +29,7 @@ export class MembersListFilterBarComponent {
       break;
     }
     this.filterChange.emit({
-      searchInputValue: this.searchInputValue,
+      searchFilterValue: this.searchFilterValue,
       selectInputValue: this.selectInputValue,
     });
   }

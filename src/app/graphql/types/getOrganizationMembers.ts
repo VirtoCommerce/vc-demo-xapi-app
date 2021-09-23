@@ -25,6 +25,7 @@ export interface getOrganizationMembers_organization_contacts {
    * A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for "{ edges { node } }" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the "cursor" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full "{ edges { node } } " version should be used instead.
    */
   readonly items: ReadonlyArray<(getOrganizationMembers_organization_contacts_items | null)> | null;
+  readonly totalCount: number | null;
 }
 
 export interface getOrganizationMembers_organization {

@@ -1,4 +1,4 @@
 export interface FilterValues {
-  searchInputValue: string,
+  searchFilterValue: string,
   selectInputValue: string,
 }

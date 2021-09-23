@@ -12,6 +12,7 @@ export interface State {
   newMemberSucceeded: boolean | null,
   genderDictionaryItems: { value: string, valueId: string }[] | null,
   members: Member[] | null,
+  membersCount: number | null,
 }
 
 export const initialState: State = {
@@ -19,6 +20,7 @@ export const initialState: State = {
   newMemberSucceeded: null,
   genderDictionaryItems: null,
   members: null,
+  membersCount: null,
 };
 
 export const reducer = createReducer(
@@ -59,7 +61,8 @@ export const reducer = createReducer(
   on(MemberActions.getOrganizationMembers, (state): State => state),
   on(MemberActions.getOrganizationMembersSuccess, (state, action): State => ({
     ...state,
-    members: action.members ?? null,
+    members: action.data.members ?? null,
+    membersCount: action.data.membersCount ?? null,
   })),
   on(MemberActions.getOrganizationMembersFailure, (state): State => state)
 );

@@ -10,6 +10,7 @@ query getOrganizationMembers(
       first: $first,
       searchPhrase: $searchPhrase,
       sort: $sort) {
+        totalCount
         items {
           firstName
           lastName
