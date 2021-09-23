@@ -8,8 +8,10 @@ query getCurrentCustomer {
       lastName
       fullName
       organizations {
-        id
-        name
+        items {
+          id
+          name
+        }
       }
     }
   }
