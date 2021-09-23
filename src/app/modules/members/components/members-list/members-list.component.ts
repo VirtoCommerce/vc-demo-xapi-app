@@ -39,7 +39,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     this.currentPage = newPage;
   }
 
-  onFilterChange(data: FilterValues) {
+  onFilterChange(data: FilterValues): void {
     console.log(data);
   }
 
