@@ -35,7 +35,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
   sortDirection = this.sortDescending;
 
-  constructor(private readonly store: Store, private readonly router: Router) { }
+  constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
     const sortigExpression = this.getSortingExpression();
