@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { MembersListFilterBarComponent } from './members-list-filter-bar.component';
 
 describe('MembersListFilterBarComponent', () => {
@@ -8,6 +8,9 @@ describe('MembersListFilterBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+      ],
       declarations: [
         MembersListFilterBarComponent,
       ],

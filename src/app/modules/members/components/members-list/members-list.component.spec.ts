@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore } from '@ngrx/store/testing';
+import { membersFeatureKey, initialState as membersInitialState } from '../../store/members.reducer';
 import { MembersListComponent } from './members-list.component';
 
 describe('MembersListComponent', () => {
@@ -10,6 +11,13 @@ describe('MembersListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         MembersListComponent,
+      ],
+      providers: [
+        provideMockStore({
+          initialState: {
+            [membersFeatureKey]: membersInitialState,
+          },
+        }),
       ],
     })
       .compileComponents();
