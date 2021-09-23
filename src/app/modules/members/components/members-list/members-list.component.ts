@@ -5,7 +5,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { getOrganizationMembers } from '../../store/members.actions';
-import { selectMembers } from '../../store/members.selectors';
+import { membersCount, selectMembers } from '../../store/members.selectors';
+import { pageInfo } from './members-list.constants';
 
 @Component({
   selector: 'vc-members-list',
@@ -19,13 +20,30 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   members$ = this.store.select(selectMembers);
 
+  totalCount$ = this.store.select(membersCount);
+
   curentCustomerOrganizationId = '';
+
+  pageSize = pageInfo.pageSize;
+
+  currentPage = 1;
 
   unsubscriber = new Subject();
 
   constructor(private readonly store: Store) { }
 
-  ngOnInit(): void {
+  onPageChange(newPage: number) {
+    const after = (newPage - 1) * this.pageSize as unknown as string;
+    this.getMembers(this.pageSize, after);
+    this.currentPage = newPage;
+  }
+
+  getMembers(
+    first?: number,
+    after?: string,
+    searchPhrase?: string,
+    sort? : string
+  ): void {
     this.curentCustomerOrganization$
       .pipe(filter(nonNull), takeUntil(this.unsubscriber))
       .subscribe(value => {
@@ -33,9 +51,17 @@ export class MembersListComponent implements OnInit, OnDestroy {
         this.store.dispatch(getOrganizationMembers({
           data: {
             id: this.curentCustomerOrganizationId,
+            first,
+            after,
+            searchPhrase,
+            sort,
           },
         }));
       });
+  }
+
+  ngOnInit(): void {
+    this.getMembers(pageInfo.pageSize);
   }
 
   ngOnDestroy(): void {

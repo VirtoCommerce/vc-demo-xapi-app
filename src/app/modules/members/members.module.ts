@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { MembersRoutingModule } from './members-routing.module';
 import { AddMemberComponent } from './components/add-member/add-member.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -39,6 +41,7 @@ import { ActionButtonsComponent }
     ReactiveFormsModule,
     MembersRoutingModule,
     FontAwesomeModule,
+    NgbPaginationModule,
     StoreModule.forFeature(fromMembers.membersFeatureKey, fromMembers.reducer),
     EffectsModule.forFeature([
       MembersEffects,

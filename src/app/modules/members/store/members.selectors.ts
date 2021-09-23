@@ -14,3 +14,8 @@ export const selectMembers = createSelector(
   selectMembersState,
   (state: fromMembers.State) => state.members
 );
+
+export const membersCount = createSelector(
+  selectMembersState,
+  (state: fromMembers.State) => state.membersCount
+);
