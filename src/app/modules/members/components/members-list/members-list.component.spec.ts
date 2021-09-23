@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { membersFeatureKey, initialState as membersInitialState } from '../../store/members.reducer';
+import { currentCustomerFeatureKey, initialState as currentCustomerInitialState }
+  from 'src/app/store/current-customer/current-customer.reducer';
 import { provideMockStore } from '@ngrx/store/testing';
-import { membersFeatureKey, initialState } from '../../store/members.reducer';
 import { MembersListComponent } from './members-list.component';
 
 describe('MembersListComponent', () => {
@@ -15,7 +17,8 @@ describe('MembersListComponent', () => {
       providers: [
         provideMockStore({
           initialState: {
-            [membersFeatureKey]: initialState,
+            [membersFeatureKey]: membersInitialState,
+            [currentCustomerFeatureKey]: currentCustomerInitialState,
           },
         }),
       ],
@@ -32,4 +35,10 @@ describe('MembersListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  /*
+   * AfterEach(() => {
+   *   TestBed.resetTestingModule();
+   * });
+   */
 });
