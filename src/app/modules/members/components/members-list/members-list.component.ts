@@ -32,7 +32,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   constructor(private readonly store: Store) { }
 
-  onPageChange(newPage: number) {
+  onPageChange(newPage: number): void {
     const after = (newPage - 1) * this.pageSize as unknown as string;
     this.getMembers(this.pageSize, after);
     this.currentPage = newPage;

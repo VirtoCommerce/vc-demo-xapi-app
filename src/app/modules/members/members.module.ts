@@ -24,6 +24,7 @@ import { OptionFilterComponent }
   from './components/members-list/members-list-filter-bar/option-filter/option-filter.component';
 import { ActionButtonsComponent }
   from './components/members-list/members-list-table/action-buttons/action-buttons.component';
+import { MemberStateComponent } from './components/members-list/members-list-table/member-state/member-state.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ActionButtonsComponent }
     SearchFilterComponent,
     OptionFilterComponent,
     ActionButtonsComponent,
+    MemberStateComponent,
   ],
   imports: [
     CommonModule,

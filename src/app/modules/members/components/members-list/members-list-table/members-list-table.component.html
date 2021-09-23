@@ -12,7 +12,9 @@
       <tr *ngFor="let member of members">
         <td>{{member.fullName}}</td>
         <td>{{member.email}}</td>
-        <td>{{member.lockedState}}</td>
+        <td>
+          <vc-member-state [lockedState]="member.lockedState!"></vc-member-state>
+        </td>
         <td class="d-sm-flex justify-content-center">
           <vc-action-buttons></vc-action-buttons>
         </td>

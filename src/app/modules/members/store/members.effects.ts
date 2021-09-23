@@ -106,7 +106,7 @@ export class MembersEffects {
           map(result => {
             const data = {
               members: this.mapResultToMembers(result.data),
-              membersCount: result.data.organization!.contacts!.totalCount ?? 0,
+              membersCount: result.data.organization?.contacts?.totalCount ?? 0,
             };
             return MemberActions.getOrganizationMembersSuccess({ data });
           }),
@@ -182,7 +182,7 @@ export class MembersEffects {
           id: item?.id,
           fullName: item?.fullName,
           email: item?.securityAccounts[0]?.email,
-          lockedState: item?.securityAccounts[0]?.lockedState,
+          lockedState: item?.securityAccounts[0]?.lockedState ? 'Inactive' : 'Active',
         };
       }
       else {

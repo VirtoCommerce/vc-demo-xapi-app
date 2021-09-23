@@ -21,7 +21,7 @@ export class MembersListPaginationComponent {
 
   faChevronRight = faChevronRight;
 
-  loadPage(page: number) {
+  loadPage(page: number): void {
     this.pageChange.emit(page);
   }
 }
