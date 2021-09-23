@@ -6,6 +6,7 @@ import { nonNull } from 'src/app/helpers/nonNull';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { getOrganizationMembers } from '../../store/members.actions';
 import { membersCount, selectMembers } from '../../store/members.selectors';
+import { FilterValues } from './members-list-filter-bar/filter-values.model';
 import { pageInfo } from './members-list.constants';
 
 @Component({
@@ -36,6 +37,10 @@ export class MembersListComponent implements OnInit, OnDestroy {
     const after = (newPage - 1) * this.pageSize as unknown as string;
     this.getMembers(this.pageSize, after);
     this.currentPage = newPage;
+  }
+
+  onFilterChange(data: FilterValues) {
+    console.log(data);
   }
 
   getMembers(

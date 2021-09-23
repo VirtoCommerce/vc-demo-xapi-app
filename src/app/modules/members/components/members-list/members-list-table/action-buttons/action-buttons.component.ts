@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class ActionButtonsComponent {
   editMember(): void {
-    console.log('editAddress');
+    console.log('editMember');
   }
 
   deleteMember(): void {

@@ -11,14 +11,4 @@ import { Member } from 'src/app/models/member.model';
 
 export class MembersListTableComponent {
   @Input() members: Member[] | null = [];
-
-  sortDirection = 'asc';
-
-  sortDescending = 'desc';
-
-  sortAscending = 'asc';
-
-  applySorting(): void {
-    console.log('applySorting');
-  }
 }
