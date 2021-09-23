@@ -1,0 +1,28 @@
+query getOrganizations($count: Int, $cursor: String, $sort: String, $searchPhrase: String) {
+  organizations(first: $count, after: $cursor, sort: $sort, searchPhrase: $searchPhrase) {
+  totalCount
+  items {
+    id
+    name
+    phones
+    emails
+    addresses {
+      items {
+        id
+        key
+        firstName
+        lastName
+        line1
+        line2
+        phone
+        email
+        countryCode
+        countryName
+        postalCode
+        regionName
+        city
+      }
+    }
+  }
+  }
+}
