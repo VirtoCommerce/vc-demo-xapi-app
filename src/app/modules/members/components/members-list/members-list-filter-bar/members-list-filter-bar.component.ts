@@ -12,9 +12,9 @@ import { InputValues } from './input-values.model';
 })
 
 export class MembersListFilterBarComponent {
-  searchFilterValue = '';
+  inputFilterValue = '';
 
-  selectInputValue = 'all';
+  selectFilterValue = 'all';
 
   @Output() filterChange = new EventEmitter<FilterValues>();
 
@@ -23,17 +23,17 @@ export class MembersListFilterBarComponent {
   onValueChanges({ value, emitterElement } : InputValues): void {
     switch (emitterElement) {
     case 'input':
-      this.searchFilterValue = value;
+      this.inputFilterValue = value;
       break;
     case 'select':
-      this.selectInputValue = value;
+      this.selectFilterValue = value;
       break;
     default:
       break;
     }
     this.filterChange.emit({
-      searchFilterValue: this.searchFilterValue,
-      selectInputValue: this.selectInputValue,
+      inputFilterValue: this.inputFilterValue,
+      selectFilterValue: this.selectFilterValue,
     });
   }
 }
