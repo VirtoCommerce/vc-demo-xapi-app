@@ -11,7 +11,7 @@ export interface State {
   newMember: Member | null,
   newMemberSucceeded: boolean | null,
   genderDictionaryItems: { value: string, valueId: string }[] | null,
-  members: Member[] | null,
+  members: Partial<Member>[] | null,
   membersCount: number | null,
 }
 

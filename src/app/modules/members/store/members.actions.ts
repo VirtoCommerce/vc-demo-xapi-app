@@ -48,7 +48,7 @@ export const getOrganizationMembers = createAction(
 
 export const getOrganizationMembersSuccess = createAction(
   '[Member] Get Company Members Success',
-  props<{ data: { members: Member[], membersCount: number }}>()
+  props<{ data: { members: Partial<Member>[], membersCount: number }}>()
 );
 
 export const getOrganizationMembersFailure = createAction(

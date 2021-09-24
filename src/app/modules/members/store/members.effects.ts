@@ -175,7 +175,7 @@ export class MembersEffects {
     });
   }
 
-  mapResultToMembers(data: getOrganizationMembers): Member[] {
+  mapResultToMembers(data: getOrganizationMembers): Partial<Member>[] {
     const members = data.organization?.contacts?.items?.map(item => {
       if (item?.securityAccounts != null) {
         return {
@@ -191,6 +191,6 @@ export class MembersEffects {
         };
       }
     });
-    return members as Member[];
+    return members as Partial<Member>[];
   }
 }
