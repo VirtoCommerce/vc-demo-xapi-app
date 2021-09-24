@@ -7,7 +7,7 @@
 // GraphQL query operation: getOrganizations
 // ====================================================
 
-export interface getOrganizations_organizations_items_addresses_items {
+export interface getOrganizations_me_contact_organizations_items_addresses_items {
   readonly __typename: "AddressType";
   /**
    * Id
@@ -63,15 +63,15 @@ export interface getOrganizations_organizations_items_addresses_items {
   readonly city: string | null;
 }
 
-export interface getOrganizations_organizations_items_addresses {
+export interface getOrganizations_me_contact_organizations_items_addresses {
   readonly __typename: "AddressConnection";
   /**
    * A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for "{ edges { node } }" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the "cursor" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full "{ edges { node } } " version should be used instead.
    */
-  readonly items: ReadonlyArray<(getOrganizations_organizations_items_addresses_items | null)> | null;
+  readonly items: ReadonlyArray<(getOrganizations_me_contact_organizations_items_addresses_items | null)> | null;
 }
 
-export interface getOrganizations_organizations_items {
+export interface getOrganizations_me_contact_organizations_items {
   readonly __typename: "Organization";
   readonly id: string;
   /**
@@ -80,10 +80,14 @@ export interface getOrganizations_organizations_items {
   readonly name: string | null;
   readonly phones: ReadonlyArray<(string | null)> | null;
   readonly emails: ReadonlyArray<(string | null)> | null;
-  readonly addresses: getOrganizations_organizations_items_addresses | null;
+  /**
+   * Organization status
+   */
+  readonly status: string | null;
+  readonly addresses: getOrganizations_me_contact_organizations_items_addresses | null;
 }
 
-export interface getOrganizations_organizations {
+export interface getOrganizations_me_contact_organizations {
   readonly __typename: "OrganizationConnection";
   /**
    * A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing "5" as the argument to `first`, then fetch the total count so it could display "5 of 83", for example. In cases where we employ infinite scrolling or don't have an exact count of entries, this field will return `null`.
@@ -92,11 +96,24 @@ export interface getOrganizations_organizations {
   /**
    * A list of all of the objects returned in the connection. This is a convenience field provided for quickly exploring the API; rather than querying for "{ edges { node } }" when no edge data is needed, this field can be used instead. Note that when clients like Relay need to fetch the "cursor" field on the edge to enable efficient pagination, this shortcut cannot be used, and the full "{ edges { node } } " version should be used instead.
    */
-  readonly items: ReadonlyArray<(getOrganizations_organizations_items | null)> | null;
+  readonly items: ReadonlyArray<(getOrganizations_me_contact_organizations_items | null)> | null;
+}
+
+export interface getOrganizations_me_contact {
+  readonly __typename: "ContactType";
+  readonly organizations: getOrganizations_me_contact_organizations | null;
+}
+
+export interface getOrganizations_me {
+  readonly __typename: "UserType";
+  /**
+   * The associated contact info
+   */
+  readonly contact: getOrganizations_me_contact | null;
 }
 
 export interface getOrganizations {
-  readonly organizations: getOrganizations_organizations | null;
+  readonly me: getOrganizations_me | null;
 }
 
 export interface getOrganizationsVariables {
