@@ -31,7 +31,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   unsubscriber = new Subject();
 
-  constructor(private readonly store: Store) { }
+  constructor(private readonly store: Store) {}
 
   onPageChange(newPage: number): void {
     const after = ((newPage - 1) * this.pageSize).toString();
@@ -43,30 +43,25 @@ export class MembersListComponent implements OnInit, OnDestroy {
     console.log(data);
   }
 
-  getMembers(
-    first?: number,
-    after?: string,
-    searchPhrase?: string,
-    sort? : string
-  ): void {
-    this.curentCustomerOrganization$
-      .pipe(filter(nonNull), takeUntil(this.unsubscriber))
-      .subscribe(value => {
-        this.curentCustomerOrganizationId = value.id;
-        this.store.dispatch(getOrganizationMembers({
-          data: {
-            id: this.curentCustomerOrganizationId,
-            first,
-            after,
-            searchPhrase,
-            sort,
-          },
-        }));
-      });
+  getMembers(first?: number, after?: string, searchPhrase?: string, sort?: string): void {
+    this.store.dispatch(
+      getOrganizationMembers({
+        data: {
+          id: this.curentCustomerOrganizationId,
+          first,
+          after,
+          searchPhrase,
+          sort,
+        },
+      })
+    );
   }
 
   ngOnInit(): void {
-    this.getMembers(pageInfo.pageSize);
+    this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber)).subscribe(value => {
+      this.curentCustomerOrganizationId = value.id;
+      this.getMembers(this.pageSize);
+    });
   }
 
   ngOnDestroy(): void {
