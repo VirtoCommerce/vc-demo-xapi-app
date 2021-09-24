@@ -36,11 +36,4 @@ export class MembersListFilterBarComponent {
       selectInputValue: this.selectInputValue,
     });
   }
-
-  async onAddNewMember(): Promise<void> {
-    await this.router.navigate([
-      'members',
-      'add-member',
-    ]);
-  }
 }
