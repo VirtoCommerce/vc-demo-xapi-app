@@ -3,7 +3,6 @@ import * as CurrentCustomerActions from './current-customer.actions';
 import {
   getCurrentCustomer_me,
   getCurrentCustomer_me_contact,
-  getCurrentCustomer_me_contact_organizations,
   getCurrentCustomer_me_contact_organizations_items,
 } from 'src/app/graphql/types/getCurrentCustomer';
 
@@ -38,7 +37,9 @@ export const reducer = createReducer(
     const user = action.data.me as getCurrentCustomer_me;
     const contact = user.contact as getCurrentCustomer_me_contact;
     const organizations = contact.organizations?.items as getCurrentCustomer_me_contact_organizations_items[];
-    const sortedOrganizations = organizations.sort((a, b) => {
+    const sortedOrganizations = [
+      ...organizations,
+    ].sort((a, b) => {
       return (a?.name ?? '').localeCompare(b?.name ?? '');
     });
 

@@ -67,7 +67,7 @@ export const reducer = createReducer(
       ...state,
       companies: {
         items: companies,
-        totalCount: action.data.organizations?.totalCount ?? 0,
+        totalCount: action.data.me?.contact?.organizations?.totalCount ?? 0,
       },
     };
   }),
@@ -90,13 +90,14 @@ export const reducer = createReducer(
 );
 
 function mapToCompaniesListingItems(data: getOrganizations): CompaniesListingItem[] {
-  const companies = data.organizations?.items?.map(item => {
+  const companies = data.me?.contact?.organizations?.items?.map(item => {
     return {
       id: item?.id,
       name: item?.name,
       phone: item?.phones && item.phones.length > 0 ? item.phones[0] : null,
       email: item?.emails && item.emails.length > 0 ? item.emails[0] : null,
       address: item?.addresses?.items && item.addresses.items?.length > 0 ? item.addresses.items[0] : null,
+      status: item?.status,
     };
   });
   return companies as CompaniesListingItem[];

@@ -45,4 +45,3 @@ export const selectCultureOptions = createSelector(
   (state: fromCompanies.State): string[] | null => state.availableCultures.map(culture => culture ?? null)
 );
 
-
