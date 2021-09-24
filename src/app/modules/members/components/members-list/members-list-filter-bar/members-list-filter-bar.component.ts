@@ -1,7 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { FilterValues } from './filter-values.model';
-import { InputValues } from './input-values.model';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'vc-members-list-filter-bar',
@@ -11,29 +8,4 @@ import { InputValues } from './input-values.model';
   ],
 })
 
-export class MembersListFilterBarComponent {
-  inputFilterValue = '';
-
-  selectFilterValue = 'all';
-
-  @Output() filterChange = new EventEmitter<FilterValues>();
-
-  constructor(private readonly router: Router) {}
-
-  onValueChanges({ value, emitterElement } : InputValues): void {
-    switch (emitterElement) {
-    case 'input':
-      this.inputFilterValue = value;
-      break;
-    case 'select':
-      this.selectFilterValue = value;
-      break;
-    default:
-      break;
-    }
-    this.filterChange.emit({
-      inputFilterValue: this.inputFilterValue,
-      selectFilterValue: this.selectFilterValue,
-    });
-  }
-}
+export class MembersListFilterBarComponent {}
