@@ -103,13 +103,7 @@ export class MembersEffects {
           },
         })
         .valueChanges.pipe(
-          map(result => {
-            const data = {
-              members: this.mapResultToMembers(result.data),
-              membersCount: result.data.organization?.contacts?.totalCount ?? 0,
-            };
-            return MemberActions.getOrganizationMembersSuccess({ data });
-          }),
+          map(result => MemberActions.getOrganizationMembersSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(MemberActions.getOrganizationMembersFailure({ error })))
         ))
     );
@@ -173,24 +167,5 @@ export class MembersEffects {
         },
       },
     });
-  }
-
-  mapResultToMembers(data: getOrganizationMembers): Partial<Member>[] {
-    const members = data.organization?.contacts?.items?.map(item => {
-      if (item?.securityAccounts != null) {
-        return {
-          id: item?.id,
-          fullName: item?.fullName,
-          email: item?.securityAccounts[0]?.email,
-          lockedState: item?.securityAccounts[0]?.lockedState ? 'Inactive' : 'Active',
-        };
-      }
-      else {
-        return {
-          fullName: item?.fullName,
-        };
-      }
-    });
-    return members as Partial<Member>[];
   }
 }

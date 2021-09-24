@@ -1,7 +1,8 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
-import { getOrganizationMembersVariables } from 'src/app/graphql/types/getOrganizationMembers';
+import { getOrganizationMembersVariables, getOrganizationMembers as getOrganizationMembersResult }
+  from 'src/app/graphql/types/getOrganizationMembers';
 import { Member } from 'src/app/models/member.model';
 
 export const getGenderDictionaryItems = createAction(
@@ -48,7 +49,7 @@ export const getOrganizationMembers = createAction(
 
 export const getOrganizationMembersSuccess = createAction(
   '[Member] Get Company Members Success',
-  props<{ data: { members: Partial<Member>[], membersCount: number }}>()
+  props<{ data: getOrganizationMembersResult }>()
 );
 
 export const getOrganizationMembersFailure = createAction(

@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
   getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items,
 } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { getOrganizationMembers } from 'src/app/graphql/types/getOrganizationMembers';
 import { Member } from 'src/app/models/member.model';
 import * as MemberActions from './members.actions';
 
@@ -61,9 +62,27 @@ export const reducer = createReducer(
   on(MemberActions.getOrganizationMembers, (state): State => state),
   on(MemberActions.getOrganizationMembersSuccess, (state, action): State => ({
     ...state,
-    members: action.data.members ?? null,
-    membersCount: action.data.membersCount ?? null,
+    members: mapResultToMembers(action.data) ?? null,
+    membersCount: action.data.organization?.contacts?.totalCount ?? null,
   })),
   on(MemberActions.getOrganizationMembersFailure, (state): State => state)
 );
 
+function mapResultToMembers(data: getOrganizationMembers): Partial<Member>[] {
+  const members = data.organization?.contacts?.items?.map(item => {
+    if (item?.securityAccounts != null) {
+      return {
+        id: item?.id,
+        fullName: item?.fullName,
+        email: item?.securityAccounts[0]?.email,
+        lockedState: item?.securityAccounts[0]?.lockedState ? 'Inactive' : 'Active',
+      };
+    }
+    else {
+      return {
+        fullName: item?.fullName,
+      };
+    }
+  });
+  return members as Partial<Member>[];
+}
