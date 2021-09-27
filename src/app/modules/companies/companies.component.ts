@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { pageInfo, sortAscending, sortDescending } from './constants/pageInfo';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
@@ -14,9 +13,7 @@ import { FilterValues } from './components/companies-list-filter-bar/filter-valu
     './companies.component.scss',
   ],
 })
-export class CompaniesComponent implements OnInit, OnDestroy {
-  unsubscriber = new Subject();
-
+export class CompaniesComponent implements OnInit {
   companies$ = this.store.select(selectCompaniesListing);
 
   cursor = pageInfo.cursor;
@@ -62,11 +59,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.cursor = '0';
     const sortigExpression = this.getSortingExpression();
     this.loadCompanies(this.pageSize, this.cursor, sortigExpression, this.filterValue);
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscriber.next();
-    this.unsubscriber.complete();
   }
 
   private loadCompanies(count?: number, cursor?: string, sort?: string, searchPhrase?: string): void {
