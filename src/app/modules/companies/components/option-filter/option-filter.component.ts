@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { InputValues } from '../companies-list-filter-bar/input-values.model';
 
 @Component({
   selector: 'vc-option-filter',
@@ -9,14 +8,10 @@ import { InputValues } from '../companies-list-filter-bar/input-values.model';
   ],
 })
 export class OptionFilterComponent {
-  @Output() valueChange = new EventEmitter<InputValues>();
+  @Output() optionFilterChange = new EventEmitter<string>();
 
   onSelectInputUpdate(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
-    const emitterElement =  'select';
-    this.valueChange.emit({
-      value,
-      emitterElement,
-    });
+    this.optionFilterChange.emit(value);
   }
 }
