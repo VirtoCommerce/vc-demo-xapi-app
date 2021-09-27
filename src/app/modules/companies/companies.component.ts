@@ -4,8 +4,8 @@ import { pageInfo, sortAscending, sortDescending } from './constants/pageInfo';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { getCompanies } from './store/companies.actions';
-import { Router } from '@angular/router';
 import { selectCompaniesListing } from './store/companies.selectors';
+import { FilterValues } from './components/companies-list-filter-bar/filter-values.model';
 
 @Component({
   selector: 'vc-companies',
@@ -35,24 +35,33 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
   sortDirection = this.sortDescending;
 
+  filterValue: string | undefined = undefined;
+
   constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
     const sortigExpression = this.getSortingExpression();
-    this.loadCompanies(this.pageSize, this.cursor, sortigExpression);
+    this.loadCompanies(this.pageSize, this.cursor, sortigExpression, this.filterValue);
   }
 
   loadPage(page: number): void {
     this.cursor = (page * this.pageSize - this.pageSize).toString();
     const sortigExpression = this.getSortingExpression();
-    this.loadCompanies(this.pageSize, this.cursor, sortigExpression);
+    this.loadCompanies(this.pageSize, this.cursor, sortigExpression, this.filterValue);
     this.page = page;
   }
 
   applySorting(): void {
     this.sortDirection = this.invertSortDirection(this.sortDirection);
     const sortigExpression = this.getSortingExpression();
-    this.loadCompanies(this.pageSize, this.cursor, sortigExpression);
+    this.loadCompanies(this.pageSize, this.cursor, sortigExpression, this.filterValue);
+  }
+
+  onFilterChange(data: FilterValues): void {
+    this.filterValue = `${data.selectInputValue} status:${data.searchFilterValue}`;
+    this.cursor = '0';
+    const sortigExpression = this.getSortingExpression();
+    this.loadCompanies(this.pageSize, this.cursor, sortigExpression, this.filterValue);
   }
 
   ngOnDestroy(): void {

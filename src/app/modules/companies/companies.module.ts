@@ -18,6 +18,10 @@ import { MultilingualPropertiesComponent } from
   './components/multilanguage-properties/multilingual-properties.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CompaniesListFilterBarComponent }
+  from './components/companies-list-filter-bar/companies-list-filter-bar.component';
+import { OptionFilterComponent } from './components/option-filter/option-filter.component';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CompanyPropertiesComponent,
     DictionaryComponent,
     MultilingualPropertiesComponent,
+    CompaniesListFilterBarComponent,
+    OptionFilterComponent,
+    SearchFilterComponent,
   ],
   imports: [
     CommonModule,

@@ -22,7 +22,7 @@ export interface DictionaryItem {
 }
 export interface State {
   companies: {
-    items: CompaniesListingItem[],
+    items: Partial<CompaniesListingItem>[],
     totalCount: number
   } | null,
   selectedCompany: Company | null,
