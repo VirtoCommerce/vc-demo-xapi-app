@@ -17,7 +17,7 @@
         <tbody>
           <tr *ngFor="let company of companies.items">
             <td>{{company.name}}</td>
-            <td>{{company.address?.countryCode}},{{company.address?.regionName}},{{company.address?.city}}, {{company.address?.line1}}, {{company.address?.postalCode}}</td>
+            <td>{{getCompanyAddress(company)}}</td>
             <td>{{company.phone}}</td>
             <td>{{company.email}}</td>
             <td>{{company.status}}</td>

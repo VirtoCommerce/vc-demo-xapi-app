@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { getCompanies } from './store/companies.actions';
 import { selectCompaniesListing } from './store/companies.selectors';
 import { FilterValues } from './components/companies-list-filter-bar/filter-values.model';
+import { CompaniesListingItem } from 'src/app/models/companies-listing-item.model';
 
 @Component({
   selector: 'vc-companies',
@@ -59,6 +60,10 @@ export class CompaniesComponent implements OnInit {
     this.cursor = '0';
     const sortigExpression = this.getSortingExpression();
     this.loadCompanies(this.pageSize, this.cursor, sortigExpression, this.filterValue);
+  }
+
+  getCompanyAddress(company: Partial<CompaniesListingItem>): string {
+    return `${company.address?.countryCode}, ${company.address?.regionName},${company.address?.city}, ${company.address?.line1}, ${company.address?.postalCode}`;
   }
 
   private loadCompanies(count?: number, cursor?: string, sort?: string, searchPhrase?: string): void {
