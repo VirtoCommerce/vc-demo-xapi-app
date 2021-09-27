@@ -63,7 +63,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   getCompanyAddress(company: Partial<CompaniesListingItem>): string {
-    return `${company.address?.countryCode}, ${company.address?.regionName},${company.address?.city}, ${company.address?.line1}, ${company.address?.postalCode}`;
+    return `${company.address?.countryCode ?? ''} ${company.address?.regionName ?? ''} ${company.address?.city ?? ''} ${company.address?.line1 ?? ''} ${company.address?.postalCode ?? ''}`;
   }
 
   private loadCompanies(count?: number, cursor?: string, sort?: string, searchPhrase?: string): void {
