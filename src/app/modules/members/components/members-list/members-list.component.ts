@@ -6,6 +6,7 @@ import { nonNull } from 'src/app/helpers/nonNull';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { getOrganizationMembers } from '../../store/members.actions';
 import { membersCount, selectMembers } from '../../store/members.selectors';
+import { FilterValues } from './members-list-filter-bar/filter-values.model';
 import { pageInfo } from './members-list.constants';
 
 @Component({
@@ -50,6 +51,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   onChangeSortDirection(): void {
     this.nameSortDirection = this.invertSortDirection(this.nameSortDirection);
+    this.getMembers();
+  }
+
+  onFilterChange(data: FilterValues): void {
+    this.searchPhrase = data.searchFilterValue;
     this.getMembers();
   }
 

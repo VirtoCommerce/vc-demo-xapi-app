@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FilterValues } from './filter-values.model';
 
 @Component({
   selector: 'vc-members-list-filter-bar',
@@ -8,4 +9,33 @@ import { Component } from '@angular/core';
   ],
 })
 
-export class MembersListFilterBarComponent {}
+export class MembersListFilterBarComponent {
+  searchFilterValue = '';
+
+  selectInputValue = '';
+
+  @Output() filterChange = new EventEmitter<FilterValues>();
+
+  onSearchPhraseChanges(value: string): void {
+    this.searchFilterValue = value;
+    this.filterChange.emit({
+      searchFilterValue: this.searchFilterValue,
+      selectInputValue: this.selectInputValue,
+    });
+  }
+
+  onOptionFilterChanges(value: string): void {
+    this.selectInputValue = value;
+    this.filterChange.emit({
+      searchFilterValue: this.searchFilterValue,
+      selectInputValue: this.selectInputValue,
+    });
+  }
+
+  onSearchButtonClick(): void {
+    this.filterChange.emit({
+      searchFilterValue: this.searchFilterValue,
+      selectInputValue: this.selectInputValue,
+    });
+  }
+}

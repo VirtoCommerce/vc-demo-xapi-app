@@ -2,7 +2,7 @@
   <div class="container pt-4 pb-6">
     <h1 class="mb-5">Company members</h1>
 
-    <vc-members-list-filter-bar></vc-members-list-filter-bar>
+    <vc-members-list-filter-bar (filterChange)="onFilterChange($event)"></vc-members-list-filter-bar>
 
     <vc-members-list-table
       [members]="members$ | async"

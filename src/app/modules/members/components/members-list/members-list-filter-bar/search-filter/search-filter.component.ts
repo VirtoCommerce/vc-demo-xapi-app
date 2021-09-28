@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { InputValues } from './../input-values.model';
 
 @Component({
   selector: 'vc-search-filter',
@@ -12,14 +11,16 @@ import { InputValues } from './../input-values.model';
 export class SearchFilterComponent {
   faSearch = faSearch;
 
-  @Output() valueChange = new EventEmitter<InputValues>();
+  @Output() searchPhraseChange = new EventEmitter<string>();
+
+  @Output() searchButtonClick = new EventEmitter();
 
   onSearchFilterUpdate(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
-    const emitterElement =  'input';
-    this.valueChange.emit({
-      value,
-      emitterElement,
-    });
+    this.searchPhraseChange.emit(value);
+  }
+
+  onSearchButtonClick(): void {
+    this.searchButtonClick.emit();
   }
 }
