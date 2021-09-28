@@ -16,7 +16,7 @@ export class MembersListTableComponent {
 
   @Output() changeSortDirection = new EventEmitter();
 
-  applySorting() {
+  applySorting(): void {
     this.changeSortDirection.emit();
   }
 }

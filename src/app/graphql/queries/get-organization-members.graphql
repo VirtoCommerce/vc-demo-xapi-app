@@ -14,9 +14,8 @@ query getOrganizationMembers(
         totalCount
         items {
           id
-          firstName
-          lastName
           fullName
+          status
           securityAccounts {
             email
             lockedState

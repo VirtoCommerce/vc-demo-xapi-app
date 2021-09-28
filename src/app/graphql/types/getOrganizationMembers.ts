@@ -17,6 +17,7 @@ export interface getOrganizationMembers_organization_contacts_items {
   readonly __typename: "ContactType";
   readonly id: string;
   readonly fullName: string;
+  readonly status: string;
   readonly securityAccounts: ReadonlyArray<(getOrganizationMembers_organization_contacts_items_securityAccounts | null)> | null;
 }
 

@@ -31,7 +31,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   readonly sortDescending = pageInfo.sortDescending;
 
-  currentPage = 1;
+  readonly firstPage = 1;
+
+  currentPage = this.firstPage;
 
   after = '0';
 
@@ -55,8 +57,8 @@ export class MembersListComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(data: FilterValues): void {
-    this.searchPhrase = data.searchFilterValue;
-    this.getMembers();
+    this.searchPhrase = `${data.selectInputValue} ${data.searchFilterValue}`;
+    this.onPageChange(this.firstPage);
   }
 
   getMembers(): void {

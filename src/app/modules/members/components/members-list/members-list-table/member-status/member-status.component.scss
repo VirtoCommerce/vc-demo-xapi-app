@@ -1,0 +1,23 @@
+@import 'src/styles/_variables.scss';
+
+.new {
+  color: $secondary;
+  border-color: $secondary;
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 3px 6px;
+}
+
+.approved {
+  @extend .new;
+  color: $success;
+  border-color: $success;;
+}
+
+.rejected {
+  @extend .new;
+  color: $danger;
+  border-color: $danger;
+}
+
+

@@ -4,6 +4,7 @@
       <tr class="py-3">
         <th scope="col" (click)="applySorting()" [ngClass]="nameSortDirection" style="cursor: pointer;">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Status</th>
         <th scope="col">Locked state</th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
@@ -12,6 +13,9 @@
       <tr *ngFor="let member of members">
         <td>{{member.fullName}}</td>
         <td>{{member.email}}</td>
+        <td>
+          <vc-member-status [status]="member.status ?? ''"></vc-member-status>
+        </td>
         <td>
           <vc-member-state [lockedState]="member.lockedState!"></vc-member-state>
         </td>

@@ -24,7 +24,10 @@ import { OptionFilterComponent }
   from './components/members-list/members-list-filter-bar/option-filter/option-filter.component';
 import { ActionButtonsComponent }
   from './components/members-list/members-list-table/action-buttons/action-buttons.component';
-import { MemberStateComponent } from './components/members-list/members-list-table/member-state/member-state.component';
+import { MemberStateComponent }
+  from './components/members-list/members-list-table/member-state/member-state.component';
+import { MemberStatusComponent }
+  from './components/members-list/members-list-table/member-status/member-status.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { MemberStateComponent } from './components/members-list/members-list-tab
     OptionFilterComponent,
     ActionButtonsComponent,
     MemberStateComponent,
+    MemberStatusComponent,
   ],
   imports: [
     CommonModule,
