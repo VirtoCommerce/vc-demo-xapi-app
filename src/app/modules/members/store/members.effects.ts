@@ -1,3 +1,4 @@
+import { pageInfo } from './../components/members-list/members-list.constants';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
@@ -70,6 +71,31 @@ export class MembersEffects {
           catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
         ))
       ))
+    );
+  });
+
+  refresh$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.deleteMemberSuccess),
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        _,
+        organization,
+      ]) => {
+        const requestData = {
+          data: {
+            id: organization.id,
+            first: pageInfo.pageSize,
+            after: '0',
+            searchPhrase: '',
+            sort: 'fullName:asc',
+          },
+        };
+
+        return of(MemberActions.getOrganizationMembers(requestData));
+      })
     );
   });
 
