@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
-import { getOrganizationMembers } from '../../store/members.actions';
+import { deleteMember, getOrganizationMembers } from '../../store/members.actions';
 import { membersCount, selectMembers } from '../../store/members.selectors';
 import { FilterValues } from './members-list-filter-bar/filter-values.model';
 import { pageInfo } from './members-list.constants';
@@ -81,6 +81,10 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   private getSortingExpression(): string {
     return `name:${this.nameSortDirection}`;
+  }
+  
+  onMemberDelete(memberData: {userName: string, memberId: string}): void {
+    this.store.dispatch(deleteMember(memberData));
   }
 
   ngOnInit(): void {

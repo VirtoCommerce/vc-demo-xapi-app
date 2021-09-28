@@ -65,7 +65,10 @@ export const reducer = createReducer(
     members: mapResultToMembers(action.data) ?? null,
     membersCount: action.data.organization?.contacts?.totalCount ?? null,
   })),
-  on(MemberActions.getOrganizationMembersFailure, (state): State => state)
+  on(MemberActions.getOrganizationMembersFailure, (state): State => state),
+  on(MemberActions.deleteMember, (state): State => state),
+  on(MemberActions.deleteMemberSuccess, (state): State => state),
+  on(MemberActions.deleteMemberFailure, (state): State => state)
 );
 
 function mapResultToMembers(data: getOrganizationMembers): Partial<Member>[] {

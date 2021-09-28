@@ -5,8 +5,8 @@ import { FetchResult } from '@apollo/client/core';
 import { ApolloError } from '@apollo/client/errors';
 import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { forkJoin, from, Observable, of } from 'rxjs';
-import { catchError, map, concatMap, filter, switchMap } from 'rxjs/operators';
+import { forkJoin, from, Observable, of, throwError } from 'rxjs';
+import { catchError, map, concatMap, filter, switchMap, mergeMap } from 'rxjs/operators';
 
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
@@ -23,11 +23,15 @@ import createContactMutation from 'src/app/graphql/mutations/create-contact.grap
 import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
+import deleteUsersMutation from 'src/app/graphql/mutations/delete-users.graphql';
+import deleteContactMutation from 'src/app/graphql/mutations/delete-contact.graphql';
 
 import { Member } from 'src/app/models/member.model';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import * as MemberActions from './members.actions';
 import { nonNull } from 'src/app/helpers/nonNull';
+import { deleteUsers, deleteUsersVariables } from 'src/app/graphql/types/deleteUsers';
+import { deleteContact, deleteContactVariables } from 'src/app/graphql/types/deleteContact';
 
 @Injectable()
 export class MembersEffects {
@@ -66,6 +70,25 @@ export class MembersEffects {
           catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
         ))
       ))
+    );
+  });
+
+  deleteMember$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.deleteMember),
+      concatMap(action => {
+        return this.deleteUser(action.userName)
+          .pipe(
+            mergeMap(result => {
+              if (result.data?.deleteUsers?.succeeded) {
+                return this.deleteContact(action.memberId);
+              }
+              else return throwError('User was not deleted');
+            }),
+            map(() => MemberActions.deleteMemberSuccess),
+            catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
+          );
+      })
     );
   });
 
@@ -164,6 +187,30 @@ export class MembersEffects {
               value: member.gender,
             },
           ],
+        },
+      },
+    });
+  }
+
+  deleteUser(userName: string): Observable<FetchResult<deleteUsers>>  {
+    return this.apollo.mutate<deleteUsers, deleteUsersVariables>({
+      mutation: deleteUsersMutation,
+      variables: {
+        command: {
+          userNames: [
+            userName,
+          ],
+        },
+      },
+    });
+  }
+
+  deleteContact(memberId: string): Observable<FetchResult<deleteContact>> {
+    return this.apollo.mutate<deleteContact, deleteContactVariables>({
+      mutation: deleteContactMutation,
+      variables: {
+        command: {
+          contactId: memberId,
         },
       },
     });

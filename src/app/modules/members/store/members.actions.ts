@@ -56,3 +56,17 @@ export const getOrganizationMembersFailure = createAction(
   '[Member] Get Company Members Failure',
   props<{ error: ApolloError }>()
 );
+
+export const deleteMember = createAction(
+  '[Member] Delete Member',
+  props<{ memberId: string, userName: string }>()
+);
+
+export const deleteMemberSuccess = createAction(
+  '[Member] Delete Member Success'
+);
+
+export const deleteMemberFailure = createAction(
+  '[Member] Delete Member Failure',
+  props<{ error: ApolloError | string }>()
+);
