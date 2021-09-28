@@ -1,21 +1,26 @@
 @import 'src/styles/_variables.scss';
 
-.new {
-  color: $secondary;
-  border-color: $secondary;
+.base {
   border: 2px solid;
   border-radius: 4px;
   padding: 3px 6px;
 }
 
+
+.new {
+  @extend .base;
+  color: $secondary;
+  border-color: $secondary;
+}
+
 .approved {
-  @extend .new;
+  @extend .base;
   color: $success;
-  border-color: $success;;
+  border-color: $success;
 }
 
 .rejected {
-  @extend .new;
+  @extend .base;
   color: $danger;
   border-color: $danger;
 }

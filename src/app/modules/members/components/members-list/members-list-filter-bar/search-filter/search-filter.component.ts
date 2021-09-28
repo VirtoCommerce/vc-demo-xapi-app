@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vc-search-filter',
@@ -10,14 +10,16 @@ import { debounceTime } from 'rxjs/operators';
     './search-filter.component.scss',
   ],
 })
-export class SearchFilterComponent implements OnInit {
-  faSearch = faSearch;
-
+export class SearchFilterComponent implements OnInit, OnDestroy {
   @Output() searchPhraseChange = new EventEmitter<string>();
 
-  @Output() searchButtonClick = new EventEmitter();
+  @Output() searchButtonClick = new EventEmitter<void>();
 
-  onSearchFilterUpdateSubscriber$ = new Subject();
+  faSearch = faSearch;
+
+  onSearchFilterUpdateSubscriber$ = new Subject<string>();
+
+  unsibscriber = new Subject();
 
   onSearchFilterUpdate(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
@@ -29,12 +31,17 @@ export class SearchFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const inputDelay = 600;
     this.onSearchFilterUpdateSubscriber$
-      .pipe(debounceTime(600))
-      .subscribe(value => this.searchPhraseChange.emit(value as string));
+      .pipe(
+        takeUntil(this.unsibscriber),
+        debounceTime(inputDelay)
+      )
+      .subscribe(value => this.searchPhraseChange.emit(value));
   }
 
   ngOnDestroy(): void {
-    this.onSearchFilterUpdateSubscriber$.unsubscribe();
+    this.unsibscriber.next();
+    this.unsibscriber.complete();
   }
 }
