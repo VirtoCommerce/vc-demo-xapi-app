@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Member } from 'src/app/models/member.model';
 
 @Component({
@@ -11,4 +11,12 @@ import { Member } from 'src/app/models/member.model';
 
 export class MembersListTableComponent {
   @Input() members: Partial<Member>[] | null = [];
+
+  @Input() nameSortDirection = '';
+
+  @Output() changeSortDirection = new EventEmitter();
+
+  applySorting() {
+    this.changeSortDirection.emit();
+  }
 }

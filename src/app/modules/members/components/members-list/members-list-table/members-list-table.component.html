@@ -2,7 +2,7 @@
   <table class="table table-striped table-borderless small-table-head" aria-label="Company addresses">
     <thead class="border-top border-bottom border-table-header">
       <tr class="py-3">
-        <th scope="col">Name</th>
+        <th scope="col" (click)="applySorting()" [ngClass]="nameSortDirection" style="cursor: pointer;">Name</th>
         <th scope="col">Email</th>
         <th scope="col">Locked state</th>
         <th scope="col" class="text-center">Actions</th>

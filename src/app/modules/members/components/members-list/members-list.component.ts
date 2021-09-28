@@ -24,38 +24,61 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   curentCustomerOrganizationId = '';
 
-  pageSize = pageInfo.pageSize;
+  readonly pageSize = pageInfo.pageSize;
+
+  readonly sortAscending = pageInfo.sortAscending;
+
+  readonly sortDescending = pageInfo.sortDescending;
 
   currentPage = 1;
+
+  after = '0';
+
+  searchPhrase = '';
+
+  nameSortDirection = this.sortAscending;
 
   unsubscriber = new Subject();
 
   constructor(private readonly store: Store) {}
 
   onPageChange(newPage: number): void {
-    const after = ((newPage - 1) * this.pageSize).toString();
-    this.getMembers(this.pageSize, after);
+    this.after = ((newPage - 1) * this.pageSize).toString();
+    this.getMembers();
     this.currentPage = newPage;
   }
 
-  getMembers(first?: number, after?: string, searchPhrase?: string, sort?: string): void {
+  onChangeSortDirection(): void {
+    this.nameSortDirection = this.invertSortDirection(this.nameSortDirection);
+    this.getMembers();
+  }
+
+  getMembers(): void {
     this.store.dispatch(
       getOrganizationMembers({
         data: {
           id: this.curentCustomerOrganizationId,
-          first,
-          after,
-          searchPhrase,
-          sort,
+          first: this.pageSize,
+          after: this.after,
+          searchPhrase: this.searchPhrase,
+          sort: this.getSortingExpression(),
         },
       })
     );
   }
 
+  private invertSortDirection(sortDirection: string): string {
+    return sortDirection === this.sortAscending ? this.sortDescending : this.sortAscending;
+  }
+
+  private getSortingExpression(): string {
+    return `name:${this.nameSortDirection}`;
+  }
+
   ngOnInit(): void {
     this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber)).subscribe(value => {
       this.curentCustomerOrganizationId = value.id;
-      this.getMembers(this.pageSize);
+      this.getMembers();
     });
   }
 
