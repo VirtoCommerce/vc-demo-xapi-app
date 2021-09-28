@@ -3,6 +3,7 @@ import { Company } from '../../../models/company.model';
 import { ApolloError } from '@apollo/client/core';
 import { createAction, props } from '@ngrx/store';
 import { getOrganization } from 'src/app/graphql/types/getOrganization';
+import { getOrganizations } from 'src/app/graphql/types/getOrganizations';
 
 export const getCompany = createAction(
   '[Companies] Get Company',
@@ -41,4 +42,19 @@ export const updateCompanyFailure = createAction(
 export const setActiveCulture = createAction(
   '[Companies] Set Active Culture',
   props<{ id: string, culture: string }>()
+);
+
+export const getCompanies = createAction(
+  '[Companies] Get Companies',
+  props<{count?: number, cursor?: string, sort?: string, searchPhrase?: string}>()
+);
+
+export const getCompaniesSuccess = createAction(
+  '[Companies] Get Companies Success',
+  props<{ data: getOrganizations }>()
+);
+
+export const getCompaniesFailure = createAction(
+  '[Companies] Get Companies Failure',
+  props<{ error: ApolloError }>()
 );

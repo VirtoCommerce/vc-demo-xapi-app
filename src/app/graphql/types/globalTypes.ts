@@ -198,7 +198,6 @@ export interface InputCreateUserType {
   readonly createdDate?: any | null;
   readonly email: string;
   readonly id?: string | null;
-  readonly isAdministrator?: boolean | null;
   readonly lockoutEnabled?: boolean | null;
   readonly lockoutEnd?: any | null;
   readonly lockedState?: boolean | null;
