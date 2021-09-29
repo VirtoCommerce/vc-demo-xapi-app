@@ -1,17 +1,12 @@
-import * as fromCompany from './registration.reducer';
+import * as fromRegistration from './registration.reducer';
 import { selectRegistrationState } from './registration.selectors';
 
 describe('Registration Selectors', () => {
   it('should select the feature state', () => {
     const result = selectRegistrationState({
-      [fromCompany.registrationFeatureKey]: fromCompany.initialState,
+      [fromRegistration.registrationFeatureKey]: fromRegistration.initialState,
     });
 
-    expect(result).toEqual({
-      companyRegistration: null,
-      companyRegistrationSucceeded: null,
-      registrationByInvitation: null,
-      registrationByInvitationSucceeded: null,
-    });
+    expect(result).toEqual(fromRegistration.initialState);
   });
 });
