@@ -96,7 +96,7 @@ export class RegistrationByInvitationComponent implements OnInit, AfterViewInit,
         data: member,
       }));
     }
-    this.isValid = event.group.valid;
+    this.isValid = this.personalInformationFormGroup.valid && this.accountInformationFormGroup.valid;
   }
 
   submit(): void {
