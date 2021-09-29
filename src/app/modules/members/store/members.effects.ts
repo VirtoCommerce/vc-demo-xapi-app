@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, filter } from 'rxjs/operators';
-import { forkJoin, from, Observable, of, OperatorFunction } from 'rxjs';
-
+import { forkJoin, from, Observable, of } from 'rxjs';
 import * as MemberActions from './members.actions';
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
 import { inviteMembers, inviteMembersVariables } from 'src/app/graphql/types/inviteMembers';
@@ -27,7 +26,7 @@ import { selectCurrentCustomerOrganization } from 'src/app/store/current-custome
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { Invitation } from 'src/app/models/invitation.model';
-import { CurrentOrganization } from 'src/app/models/current-customer';
+import { selectInviteMembers } from './members.selectors';
 
 @Injectable()
 export class MembersEffects {
@@ -51,7 +50,9 @@ export class MembersEffects {
   addMember$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.addMember),
-      this.getCurrentOrganization(),
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
       concatMap(([
         action,
         organization,
@@ -78,11 +79,15 @@ export class MembersEffects {
   inviteMembers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.inviteMembers),
-      this.getCurrentOrganization(),
+      concatLatestFrom(() => [
+        this.store.select(selectInviteMembers).pipe(filter(nonNull)),
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
       concatMap(([
-        action,
+        _,
+        invitation,
         organization,
-      ]) => this.inviteMembers(action.invitation, organization.id).pipe(
+      ]) => this.inviteMembers(invitation, organization.id).pipe(
         map(() => MemberActions.inviteMembersSuccess()),
         catchError((error: ApolloError) => of(MemberActions.inviteMembersFailure({ error })))
       ))
@@ -105,12 +110,6 @@ export class MembersEffects {
     private readonly actions$: Actions,
     private readonly apollo: Apollo
   ) { }
-
-  getCurrentOrganization<T>(): OperatorFunction<T, [T, CurrentOrganization]> {
-    return concatLatestFrom(() => [
-      this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
-    ]);
-  }
 
   createContact(
     member: Member,

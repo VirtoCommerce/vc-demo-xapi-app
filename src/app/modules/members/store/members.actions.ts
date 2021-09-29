@@ -41,18 +41,17 @@ export const addMemberFailure = createAction(
   props<{ error: ApolloError }>()
 );
 
-export const setInviteMembers = createAction(
-  '[Member] Set Invite Members',
+export const setInvitation = createAction(
+  '[Member] Set Invitation',
   props<{ invitation: Invitation }>()
 );
 
-export const clearInviteMembers = createAction(
-  '[Member] Clear Invite Member'
+export const clearInvitation = createAction(
+  '[Member] Clear Invitation'
 );
 
 export const inviteMembers = createAction(
-  '[Member] Invite Members',
-  props<{ invitation: Invitation }>()
+  '[Member] Invite Members'
 );
 
 export const inviteMembersSuccess = createAction(

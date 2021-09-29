@@ -28,16 +28,14 @@ export class InviteMembersComponent implements OnDestroy {
     private readonly store: Store
   ) {
     this.form.valueChanges.pipe(takeUntil(this.unsubscriber)).subscribe(formValue => {
-      this.store.dispatch(fromMembers.setInviteMembers({
+      this.store.dispatch(fromMembers.setInvitation({
         invitation: this.convertFormValueToInvitation(formValue),
       }));
     });
   }
 
   onSubmit(): void {
-    this.store.dispatch(fromMembers.inviteMembers({
-      invitation: this.convertFormValueToInvitation(this.form.value),
-    }));
+    this.store.dispatch(fromMembers.inviteMembers());
   }
 
   convertFormValueToInvitation(formValue: {

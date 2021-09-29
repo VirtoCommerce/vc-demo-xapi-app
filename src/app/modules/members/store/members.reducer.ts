@@ -12,16 +12,16 @@ export interface State {
   genderDictionaryItems: { value: string, valueId: string }[] | null,
   newMember: Member | null,
   newMemberSucceeded: boolean | null,
-  inviteMembers: Invitation | null,
-  inviteMembersSucceeded: boolean | null
+  invitation: Invitation | null,
+  invitationSucceeded: boolean | null
 }
 
 export const initialState: State = {
   genderDictionaryItems: null,
   newMember: null,
   newMemberSucceeded: null,
-  inviteMembers: null,
-  inviteMembersSucceeded: null,
+  invitation: null,
+  invitationSucceeded: null,
 };
 
 export const reducer = createReducer(
@@ -59,26 +59,26 @@ export const reducer = createReducer(
     ...state,
     newMemberSucceeded: false,
   })),
-  on(MemberActions.setInviteMembers, (state, action): State => ({
+  on(MemberActions.setInvitation, (state, action): State => ({
     ...state,
-    inviteMembers: {
-      ...state.inviteMembers,
+    invitation: {
+      ...state.invitation,
       ...action.invitation,
     },
   })),
-  on(MemberActions.clearInviteMembers, (state): State => ({
+  on(MemberActions.clearInvitation, (state): State => ({
     ...state,
-    inviteMembers: null,
-    inviteMembersSucceeded: null,
+    invitation: null,
+    invitationSucceeded: null,
   })),
   on(MemberActions.inviteMembers, (state): State => state),
   on(MemberActions.inviteMembersSuccess, (state): State => ({
     ...state,
-    inviteMembersSucceeded: true,
+    invitationSucceeded: true,
   })),
   on(MemberActions.inviteMembersFailure, (state): State => ({
     ...state,
-    inviteMembersSucceeded: false,
+    invitationSucceeded: false,
   }))
 
 );
