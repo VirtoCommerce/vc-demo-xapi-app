@@ -46,7 +46,7 @@ export class InviteMembersComponent implements OnDestroy {
     message: string,
   }): Invitation {
     return {
-      emails: formValue.emails.split(/,|;|\r\n|\n/g),
+      emails: formValue.emails.split(/,|;|\r\n|\n/g).map(email => email.trim()),
       message: formValue.message,
     };
   }
