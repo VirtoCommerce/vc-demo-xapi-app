@@ -200,6 +200,7 @@ export interface InputCreateUserType {
   readonly id?: string | null;
   readonly lockoutEnabled?: boolean | null;
   readonly lockoutEnd?: any | null;
+  readonly lockedState?: boolean | null;
   readonly logins?: ReadonlyArray<(InputApplicationUserLoginType | null)> | null;
   readonly memberId?: string | null;
   readonly password?: string | null;

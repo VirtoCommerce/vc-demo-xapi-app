@@ -1,43 +1,47 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, filter } from 'rxjs/operators';
-import { forkJoin, from, Observable, of } from 'rxjs';
-
-import * as MemberActions from './members.actions';
-import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
+import { Apollo } from 'apollo-angular';
+import { FetchResult } from '@apollo/client/core';
 import { ApolloError } from '@apollo/client/errors';
+import { Store } from '@ngrx/store';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { forkJoin, from, Observable, of } from 'rxjs';
+import { catchError, map, concatMap, filter, switchMap } from 'rxjs/operators';
+
+import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
 import {
   updateMemberDynamicProperties,
   updateMemberDynamicPropertiesVariables,
 } from 'src/app/graphql/types/updateMemberDynamicProperties';
-import { Member } from 'src/app/models/member.model';
+import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { getOrganizationMembers } from 'src/app/graphql/types/getOrganizationMembers';
+
 import getDictionaryDynamicPropertyQuery from 'src/app/graphql/queries/get-dictionaryDynamicProperty.graphql';
+import getOrganizationMembersQuery from 'src/app/graphql/queries/get-organization-members.graphql';
 import createContactMutation from 'src/app/graphql/mutations/create-contact.graphql';
 import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
-import { Apollo } from 'apollo-angular';
-import { Store } from '@ngrx/store';
-import { FetchResult } from '@apollo/client/core';
-import { Router } from '@angular/router';
+
+import { Member } from 'src/app/models/member.model';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
+import * as MemberActions from './members.actions';
 import { nonNull } from 'src/app/helpers/nonNull';
-import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 
 @Injectable()
 export class MembersEffects {
   getGender$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.getGenderDictionaryItems),
-      concatMap(() => this.apollo.watchQuery<getDictionaryDynamicProperty>({
-        query: getDictionaryDynamicPropertyQuery,
-        variables: {
-          idOrName: 'Gender',
-        },
-      })
-        .valueChanges
-        .pipe(
+      concatMap(() => this.apollo
+        .watchQuery<getDictionaryDynamicProperty>({
+          query: getDictionaryDynamicPropertyQuery,
+          variables: {
+            idOrName: 'Gender',
+          },
+        })
+        .valueChanges.pipe(
           map(result => MemberActions.getGenderDictionaryItemsSuccess({ data: result.data })),
           catchError((error: ApolloError) => of(MemberActions.getGenderDictionaryItemsFailure({ error })))
         ))
@@ -67,21 +71,43 @@ export class MembersEffects {
 
   clearMember$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(MemberActions.addMemberSuccess),
       concatMap(() => of(MemberActions.clearNewMember()))
     );
   });
 
-  redirectToMainPage$ = createEffect(() => {
-    return this.actions$.pipe(
+  redirectToMainPage$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(MemberActions.addMemberSuccess),
+        concatMap(() => from(this.router.navigate([
+          '/',
+        ])))
+      );
+    },
+    { dispatch: false }
+  );
 
-      ofType(MemberActions.addMemberSuccess),
-      concatMap(() => from(this.router.navigate([
-        '/',
-      ])))
+  getOrganizationMembers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.getOrganizationMembers),
+      switchMap(action => this.apollo
+        .watchQuery<getOrganizationMembers>({
+          query: getOrganizationMembersQuery,
+          variables: {
+            id: action.data.id,
+            after: action.data.after,
+            first: action.data.first,
+            searchPhrase: action.data.searchPhrase,
+            sort: action.data.sort,
+          },
+        })
+        .valueChanges.pipe(
+          map(result => MemberActions.getOrganizationMembersSuccess({ data: result.data })),
+          catchError((error: ApolloError) => of(MemberActions.getOrganizationMembersFailure({ error })))
+        ))
     );
-  }, { dispatch: false });
+  });
 
   constructor(
     private readonly router: Router,
@@ -90,10 +116,7 @@ export class MembersEffects {
     private readonly apollo: Apollo
   ) {}
 
-  createContact(
-    member: Member,
-    organizationId: string
-  ): Observable<FetchResult<createContact>> {
+  createContact(member: Member, organizationId: string): Observable<FetchResult<createContact>> {
     return this.apollo.mutate<createContact, createContactVariables>({
       mutation: createContactMutation,
       variables: {
@@ -109,10 +132,7 @@ export class MembersEffects {
     });
   }
 
-  createUser(
-    member: Member,
-    contactResult: FetchResult<createContact>
-  ): Observable<FetchResult<createUser>> {
+  createUser(member: Member, contactResult: FetchResult<createContact>): Observable<FetchResult<createUser>> {
     return this.apollo.mutate<createUser, createUserVariables>({
       mutation: createUserMutation,
       variables: {

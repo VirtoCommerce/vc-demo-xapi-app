@@ -5,4 +5,8 @@ export interface Member {
   userName: string;
   password: string;
   gender: string;
+  id?: string;
+  fullName?: string;
+  lockedState?: string;
+  status?: string;
 }

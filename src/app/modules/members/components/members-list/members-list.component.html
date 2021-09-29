@@ -1,0 +1,20 @@
+<main class="h-100" role="main">
+  <div class="container pt-4 pb-6">
+    <h1 class="mb-5">Company members</h1>
+
+    <vc-members-list-filter-bar (filterChange)="onFilterChange($event)"></vc-members-list-filter-bar>
+
+    <vc-members-list-table
+      [members]="members$ | async"
+      [nameSortDirection]="nameSortDirection"
+      (changeSortDirection)="onChangeSortDirection()">
+    </vc-members-list-table>
+
+    <vc-members-list-pagination
+      [totalCount]="totalCount$ | async"
+      [page]="currentPage"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)">
+    </vc-members-list-pagination>
+  </div>
+</main>

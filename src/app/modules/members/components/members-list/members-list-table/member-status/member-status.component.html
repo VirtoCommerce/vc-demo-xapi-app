@@ -1,0 +1,9 @@
+<span
+  [ngClass]="{
+    'px-2 py-1 rounded-1 border border-2': !!status.toLowerCase(),
+    'border-secondary text-secondary': status.toLowerCase() === 'new',
+    'border-success text-success': status.toLowerCase() === 'approved',
+    'border-danger text-danger': status.toLowerCase() === 'rejected'
+  }">
+    {{ status }}
+</span>
