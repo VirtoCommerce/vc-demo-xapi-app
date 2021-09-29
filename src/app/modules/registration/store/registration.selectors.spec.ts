@@ -1,7 +1,7 @@
 import * as fromCompany from './registration.reducer';
 import { selectRegistrationState } from './registration.selectors';
 
-describe('Company Selectors', () => {
+describe('Registration Selectors', () => {
   it('should select the feature state', () => {
     const result = selectRegistrationState({
       [fromCompany.registrationFeatureKey]: fromCompany.initialState,

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideMockStore } from '@ngrx/store/testing';
 import { RegistrationComponent } from '../../components/registration/registration.component';
-import * as CompanyRegistration from 'src/app/modules/registration/store/registration.reducer';
+import * as Registration from 'src/app/modules/registration/store/registration.reducer';
 import * as Countries from 'src/app/store/countries/countries.reducer';
 
 describe('RegistrationComponent', () => {
@@ -17,8 +17,8 @@ describe('RegistrationComponent', () => {
       providers: [
         provideMockStore({
           initialState: {
-            countries: Countries.initialState,
-            companyRegistration: CompanyRegistration.initialState,
+            [Countries.countriesFeatureKey]: Countries.initialState,
+            [Registration.registrationFeatureKey]: Registration.initialState,
           },
         }),
       ],

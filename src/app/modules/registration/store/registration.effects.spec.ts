@@ -19,8 +19,8 @@ describe('CompanyEffects', () => {
       providers: [
         provideMockStore({
           initialState: {
-            countries: Countries.initialState,
-            companyRegistration: CompanyRegistration.initialState,
+            [Countries.countriesFeatureKey]: Countries.initialState,
+            [CompanyRegistration.registrationFeatureKey]: CompanyRegistration.initialState,
           },
         }),
         CompanyEffects,
