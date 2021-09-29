@@ -16,26 +16,24 @@ export class MembersListFilterBarComponent {
 
   @Output() filterChange = new EventEmitter<FilterValues>();
 
-  onSearchPhraseChanges(value: string): void {
-    this.searchFilterValue = value;
+  emtiValues(): void {
     this.filterChange.emit({
       searchFilterValue: this.searchFilterValue,
       selectInputValue: this.selectInputValue,
     });
+  }
+
+  onSearchPhraseChanges(value: string): void {
+    this.searchFilterValue = value;
+    this.emtiValues();
   }
 
   onOptionFilterChanges(value: string): void {
     this.selectInputValue = value;
-    this.filterChange.emit({
-      searchFilterValue: this.searchFilterValue,
-      selectInputValue: this.selectInputValue,
-    });
+    this.emtiValues();
   }
 
   onSearchButtonClick(): void {
-    this.filterChange.emit({
-      searchFilterValue: this.searchFilterValue,
-      selectInputValue: this.selectInputValue,
-    });
+    this.emtiValues();
   }
 }
