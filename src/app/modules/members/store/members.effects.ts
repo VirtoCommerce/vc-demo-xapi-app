@@ -102,16 +102,24 @@ export class MembersEffects {
   deleteMember$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.deleteMember),
-      concatMap(action => forkJoin([
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        action,
+        organization,
+      ]) => forkJoin([
         of(action),
+        of(organization),
         this.deleteUser(action.userName),
       ])),
       concatMap(([
         action,
+        organization,
         result,
       ]) => {
         if (result.data?.deleteUsers?.succeeded) {
-          return this.deleteContact(action.memberId);
+          return this.deleteContact(action.memberId, organization.id);
         }
         else return throwError('User was not deleted');
       }),
@@ -233,7 +241,7 @@ export class MembersEffects {
     });
   }
 
-  deleteContact(memberId: string): Observable<FetchResult<deleteContact>> {
+  deleteContact(memberId: string, organizationId: string): Observable<FetchResult<deleteContact>> {
     return this.apollo.mutate<deleteContact, deleteContactVariables>({
       mutation: deleteContactMutation,
       variables: {
@@ -241,6 +249,18 @@ export class MembersEffects {
           contactId: memberId,
         },
       },
+      refetchQueries: [
+        {
+          query: getOrganizationMembersQuery,
+          variables: {
+            id: organizationId,
+            first: pageInfo.pageSize,
+            after: pageInfo.cursor,
+            searchPhrase: '',
+            sort: `name:${pageInfo.sortAscending}`,
+          },
+        },
+      ],
     });
   }
 }

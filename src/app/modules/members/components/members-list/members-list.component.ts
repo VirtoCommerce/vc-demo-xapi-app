@@ -81,6 +81,14 @@ export class MembersListComponent implements OnInit, OnDestroy {
       userName: member.userName,
       memberId: member.id as string,
     });
+    this.reset();
+  }
+
+  private reset(): void {
+    this.currentPage = this.firstPage;
+    this.after = pageInfo.cursor;
+    this.searchPhrase = '';
+    this.nameSortDirection = this.sortAscending;
   }
 
   private invertSortDirection(sortDirection: string): string {
@@ -98,6 +106,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.reset();
     this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber)).subscribe(value => {
       this.curentCustomerOrganizationId = value.id;
       this.getMembers();
