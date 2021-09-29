@@ -121,7 +121,9 @@ export class MembersEffects {
         if (result.data?.deleteUsers?.succeeded) {
           return this.deleteContact(action.memberId, organization.id);
         }
-        else return throwError('User was not deleted');
+        else {
+          return throwError('User was not deleted');
+        }
       }),
       concatMap(() => of(MemberActions.deleteMemberSuccess())),
       catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
