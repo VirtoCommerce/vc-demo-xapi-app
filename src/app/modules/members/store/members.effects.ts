@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, filter } from 'rxjs/operators';
-import { forkJoin, from, Observable, of } from 'rxjs';
+import { forkJoin, from, Observable, of, OperatorFunction } from 'rxjs';
 
 import * as MemberActions from './members.actions';
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
@@ -27,6 +27,7 @@ import { selectCurrentCustomerOrganization } from 'src/app/store/current-custome
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { Invitation } from 'src/app/models/invitation.model';
+import { CurrentOrganization } from 'src/app/models/current-customer';
 
 @Injectable()
 export class MembersEffects {
@@ -50,9 +51,7 @@ export class MembersEffects {
   addMember$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.addMember),
-      concatLatestFrom(() => [
-        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
-      ]),
+      this.getCurrentOrganization(),
       concatMap(([
         action,
         organization,
@@ -79,9 +78,7 @@ export class MembersEffects {
   inviteMembers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.inviteMembers),
-      concatLatestFrom(() => [
-        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
-      ]),
+      this.getCurrentOrganization(),
       concatMap(([
         action,
         organization,
@@ -107,7 +104,13 @@ export class MembersEffects {
     private readonly store: Store,
     private readonly actions$: Actions,
     private readonly apollo: Apollo
-  ) {}
+  ) { }
+
+  getCurrentOrganization<T>(): OperatorFunction<T, [T, CurrentOrganization]> {
+    return concatLatestFrom(() => [
+      this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+    ]);
+  }
 
   createContact(
     member: Member,
