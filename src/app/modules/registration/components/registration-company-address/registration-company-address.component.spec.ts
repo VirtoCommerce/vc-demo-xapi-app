@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { RegistrationCompanyAddressComponent } from './registration-company-address.component';
-import * as CompanyRegistration from 'src/app/modules/registration/store/company.reducer';
+import * as CompanyRegistration from 'src/app/modules/registration/store/registration.reducer';
 import * as Countries from 'src/app/store/countries/countries.reducer';
 
 describe('RegistrationCompanyAddressComponent', () => {

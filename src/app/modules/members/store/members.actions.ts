@@ -1,6 +1,7 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
 
 export const getGenderDictionaryItems = createAction(
@@ -37,5 +38,28 @@ export const addMemberSuccess = createAction(
 
 export const addMemberFailure = createAction(
   '[Member] Add Member Failure',
+  props<{ error: ApolloError }>()
+);
+
+export const setInviteMembers = createAction(
+  '[Member] Set Invite Members',
+  props<{ invitation: Invitation }>()
+);
+
+export const clearInviteMembers = createAction(
+  '[Member] Clear Invite Member'
+);
+
+export const inviteMembers = createAction(
+  '[Member] Invite Members',
+  props<{ invitation: Invitation }>()
+);
+
+export const inviteMembersSuccess = createAction(
+  '[Member] Invite Members Success'
+);
+
+export const inviteMembersFailure = createAction(
+  '[Member] Invite Members Failure',
   props<{ error: ApolloError }>()
 );

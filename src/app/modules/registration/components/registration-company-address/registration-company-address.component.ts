@@ -8,8 +8,8 @@ import { Store } from '@ngrx/store';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getCountries } from 'src/app/store/countries/countries.actions';
-import { setCompany } from '../../store/company.actions';
-import { CompanyAddress } from 'src/app/models/company-registration.model';
+import { setCompanyRegistration } from '../../store/registration.actions';
+import { CompanyAddress } from 'src/app/models/registration.model';
 import { selectCountryOptions } from './countries.selector';
 import { REGISTRATION_COMPANY_ADDRESS_FORM_LAYOUT } from './registration-company-address.layout';
 import {
@@ -19,7 +19,7 @@ import {
 import { Country } from 'src/app/models/country.model';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
 import { of, Subject } from 'rxjs';
-import { selectCompanyRegistration } from '../../store/company.selectors';
+import { selectCompanyRegistration } from '../../store/registration.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 
@@ -94,7 +94,7 @@ export class RegistrationCompanyAddressComponent implements AfterViewInit, OnDes
   onChange(event: DynamicFormControlEvent): void {
     const address = fromFormModel<CompanyAddress>(event.model);
     if (address != null) {
-      this.store.dispatch(setCompany({
+      this.store.dispatch(setCompanyRegistration({
         data: {
           address,
         },

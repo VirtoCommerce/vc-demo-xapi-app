@@ -8,10 +8,12 @@ import { StoreModule } from '@ngrx/store';
 import * as fromMembers from './store/members.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MembersEffects } from './store/members.effects';
+import { InviteMembersComponent } from './components/invite-members/invite-members.component';
 
 @NgModule({
   declarations: [
     AddMemberComponent,
+    InviteMembersComponent,
   ],
   imports: [
     CommonModule,

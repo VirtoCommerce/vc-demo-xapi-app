@@ -1,4 +1,5 @@
 import { DynamicFormLayout } from '@ng-dynamic-forms/core';
+import { REGISTRATION_LAYOUT } from '../../registration.layout';
 
 export const PERSONAL_INFORMATION_LAYOUT: DynamicFormLayout = {
   personalInformation: {
@@ -6,40 +7,5 @@ export const PERSONAL_INFORMATION_LAYOUT: DynamicFormLayout = {
       control: 'row',
     },
   },
-  firstName: {
-    element: {
-      label: 'required',
-    },
-  },
-  lastName: {
-    element: {
-      label: 'required',
-    },
-  },
-  email: {
-    element: {
-      label: 'required',
-    },
-  },
-  userName: {
-    element: {
-      label: 'required',
-    },
-  },
-  password: {
-    element: {
-      label: 'required',
-    },
-    grid: {
-      host: 'col-xs-24 col-md',
-    },
-  },
-  confirmPassword: {
-    element: {
-      label: 'required',
-    },
-    grid: {
-      host: 'col-xs-24 col-md',
-    },
-  },
+  ...REGISTRATION_LAYOUT,
 };

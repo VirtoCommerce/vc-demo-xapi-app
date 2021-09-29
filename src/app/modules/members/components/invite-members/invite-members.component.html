@@ -1,0 +1,64 @@
+<main class="h-100"
+      role="main">
+  <div class="container pt-4 pb-6">
+    <article class="row g-0">
+      <div class="col">
+        <h1 class="mb-4">Invite members</h1>
+      </div>
+      <div class="w-100"></div>
+      <div class="col col-sm-12">
+        <form [formGroup]="form"
+              (ngSubmit)="onSubmit()">
+
+          <div class="mb-3">
+            <label for="emails"
+                   class="form-label required">
+              Enter email addresses of the persons you wish to invite
+            </label>
+            <textarea id="emails"
+                      class="form-control form-control-lg"
+                      rows="1"
+                      placeholder="Use commas, semicolons or new lines to separate multiple entries"
+                      formControlName="emails">
+            </textarea>
+            <div *ngIf="form.controls.emails.errors?.required && (form.controls.emails.touched || form.controls.emails.dirty)"
+                 class="invalid-feedback d-block">
+              {{ validationMessages.requiredMessage.replace('{{ label }}', 'email addresses') }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="message"
+                   class="form-label required">
+              Message
+            </label>
+            <textarea id="message"
+                      class="form-control form-control-lg"
+                      rows="5"
+                      placeholder="Each person you wish to invite will receive an email with instructions. Customize the email with optional message"
+                      formControlName="message">
+            </textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-8 d-flex">
+              <button type="button"
+                      class="btn btn-outline-dark btn-lg flex-fill"
+                      routerLink="/">
+                Cancel
+              </button>
+            </div>
+            <div class="col-8 d-flex">
+              <button type="submit"
+                      class="btn btn-primary btn-lg flex-fill"
+                      [disabled]="!form.valid">
+                Invite members
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </article>
+  </div>
+</main>

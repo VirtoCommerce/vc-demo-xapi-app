@@ -7,7 +7,7 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import * as fromCountries from './countries/countries.reducer';
-import * as fromCompany from '../modules/registration/store/company.reducer';
+import * as fromCompany from '../modules/registration/store/registration.reducer';
 import * as fromCart from './cart/cart.reducer'
 import * as fromSectors from './sectors/sectors.reducer';
 import * as fromLogin from './login/login.reducer';
@@ -20,7 +20,7 @@ import * as fromMembers from '../modules/members/store/members.reducer';
 
 export interface State {
 [fromCountries.countriesFeatureKey]: fromCountries.State;
-[fromCompany.companyRegistrationFeatureKey]: fromCompany.State;
+[fromCompany.registrationFeatureKey]: fromCompany.State;
 [fromCart.cartFeatureKey]: fromCart.State
 [fromSectors.sectorsFeatureKey]: fromSectors.State;
 [fromLogin.loginFeatureKey]: fromLogin.State;
@@ -34,7 +34,7 @@ export interface State {
 
 export const reducers: ActionReducerMap<State> = {
 [fromCountries.countriesFeatureKey]: fromCountries.reducer,
-[fromCompany.companyRegistrationFeatureKey]: fromCompany.reducer,
+[fromCompany.registrationFeatureKey]: fromCompany.reducer,
 [fromCart.cartFeatureKey]: fromCart.reducer,
 [fromSectors.sectorsFeatureKey]: fromSectors.reducer,
 [fromLogin.loginFeatureKey]: fromLogin.reducer,

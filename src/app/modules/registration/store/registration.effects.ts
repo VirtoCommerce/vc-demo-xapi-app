@@ -7,30 +7,32 @@ import createContactMutation from 'src/app/graphql/mutations/create-contact.grap
 import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
-
-import * as CompanyActions from './company.actions';
+import registerByInvitationMutation from 'src/app/graphql/mutations/register-by-invitation.graphql';
+import getUserQuery from 'src/app/graphql/queries/get-user.graphql';
+import * as RegistrationActions from './registration.actions';
 import { Apollo } from 'apollo-angular';
 import { createOrganization, createOrganizationVariables } from 'src/app/graphql/types/createOrganization';
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
 import { ApolloError } from '@apollo/client/errors';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
 import { Store } from '@ngrx/store';
-import { selectCompanyRegistration } from './company.selectors';
+import { selectCompanyRegistration, selectRegistrationByInvitation } from './registration.selectors';
 import { Router } from '@angular/router';
 import { selectCountriesState } from 'src/app/store/countries/countries.selectors';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { updateMemberDynamicProperties,
   updateMemberDynamicPropertiesVariables } from 'src/app/graphql/types/updateMemberDynamicProperties';
-import { CompanyRegistration } from 'src/app/models/company-registration.model';
+import { CompanyMember, CompanyRegistration } from 'src/app/models/registration.model';
 import { Country } from 'src/app/models/country.model';
 import { FetchResult } from '@apollo/client/core';
+import { registerByInvitation, registerByInvitationVariables } from 'src/app/graphql/types/registerByInvitation';
+import { getUser, getUserVariables } from 'src/app/graphql/types/getUser';
 
 @Injectable()
 export class CompanyEffects {
   registerCompany$ = createEffect(() => {
     return this.actions$.pipe(
-
-      ofType(CompanyActions.registerCompany),
+      ofType(RegistrationActions.registerCompany),
       concatLatestFrom(() => [
         this.store.select(selectCompanyRegistration),
         this.store.select(selectCountriesState).pipe(filter(nonNull)),
@@ -48,10 +50,10 @@ export class CompanyEffects {
             __,
             contactResult,
           ]) => this.createUser(companyRegistration, contactResult).pipe(
-            map(result => CompanyActions.registerCompanySuccess({
+            map(result => RegistrationActions.registerCompanySuccess({
               data: result.data?.createUser?.succeeded ?? false,
             })),
-            catchError((error: ApolloError) => of(CompanyActions.registerCompanyFailure({ error })))
+            catchError((error: ApolloError) => of(RegistrationActions.registerCompanyFailure({ error })))
           ))
         ))
       ))
@@ -60,16 +62,51 @@ export class CompanyEffects {
 
   clearCompanyAfterRegistration$ = createEffect(() => {
     return this.actions$.pipe(
+      ofType(RegistrationActions.registerCompanySuccess),
+      concatMap(() => of(RegistrationActions.clearCompanyRegistration()))
+    );
+  });
 
-      ofType(CompanyActions.registerCompanySuccess),
-      concatMap(() => of(CompanyActions.clearCompany()))
+  getInvitedUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistrationActions.getInvitedUser),
+      concatMap(action => this.getInvitedUser(action.userId).pipe(
+        map(result => RegistrationActions.getInvitedUserSuccess({
+          email: result.data?.user?.email as string,
+        })),
+        catchError((error: ApolloError) => of(RegistrationActions.getInvitedUserFailed({ error })))
+      ))
+    );
+  });
+
+  registerByInvitation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistrationActions.registerByInvitation),
+      concatLatestFrom(() => [
+        this.store.select(selectRegistrationByInvitation),
+      ]),
+      concatMap(([
+        action,
+        registrationByInvitation,
+      ]) => this.registerByInvitation(action.userId, action.token, registrationByInvitation).pipe(
+        map(result => RegistrationActions.registerCompanySuccess({
+          data: result.data?.registerByInvitation?.succeeded ?? false,
+        })),
+        catchError((error: ApolloError) => of(RegistrationActions.registerCompanyFailure({ error })))
+      ))
+    );
+  });
+
+  clearRegistrationByInvitation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistrationActions.registerByInvitationSuccess),
+      concatMap(() => of(RegistrationActions.clearRegistrationByInvitation()))
     );
   });
 
   redirectToThankYouPage$ = createEffect(() => {
     return this.actions$.pipe(
-
-      ofType(CompanyActions.registerCompanySuccess),
+      ofType(RegistrationActions.registerCompanySuccess, RegistrationActions.registerByInvitationSuccess),
       concatMap(() => from(this.router.navigate(
         [
           'registration',
@@ -172,6 +209,38 @@ export class CompanyEffects {
           storeId: 'xapi',
           userType: 'Customer',
           memberId: result.data?.createContact?.id ?? null,
+        },
+      },
+    });
+  }
+
+  getInvitedUser(
+    userId: string
+  ): Observable<FetchResult<getUser>> {
+    return this.apollo.watchQuery<getUser, getUserVariables>({
+      query: getUserQuery,
+      variables: {
+        id: userId,
+      },
+    }).valueChanges;
+  }
+
+  registerByInvitation(
+    userId: string,
+    token: string,
+    companyMember: CompanyMember
+  ): Observable<FetchResult<registerByInvitation>> {
+    return this.apollo.mutate<registerByInvitation, registerByInvitationVariables>({
+      mutation: registerByInvitationMutation,
+      variables: {
+        command: {
+          userId,
+          token,
+          firstName: companyMember.firstName,
+          lastName: companyMember.lastName,
+          phone: companyMember.phone,
+          username: companyMember.userName,
+          password: companyMember.password,
         },
       },
     });

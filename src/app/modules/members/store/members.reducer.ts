@@ -2,21 +2,26 @@ import { createReducer, on } from '@ngrx/store';
 import {
   getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items,
 } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
 import * as MemberActions from './members.actions';
 
 export const membersFeatureKey = 'members';
 
 export interface State {
+  genderDictionaryItems: { value: string, valueId: string }[] | null,
   newMember: Member | null,
   newMemberSucceeded: boolean | null,
-  genderDictionaryItems: { value: string, valueId: string }[] | null
+  inviteMembers: Invitation | null,
+  inviteMembersSucceeded: boolean | null
 }
 
 export const initialState: State = {
+  genderDictionaryItems: null,
   newMember: null,
   newMemberSucceeded: null,
-  genderDictionaryItems: null,
+  inviteMembers: null,
+  inviteMembersSucceeded: null,
 };
 
 export const reducer = createReducer(
@@ -53,6 +58,27 @@ export const reducer = createReducer(
   on(MemberActions.addMemberFailure, (state): State => ({
     ...state,
     newMemberSucceeded: false,
+  })),
+  on(MemberActions.setInviteMembers, (state, action): State => ({
+    ...state,
+    inviteMembers: {
+      ...state.inviteMembers,
+      ...action.invitation,
+    },
+  })),
+  on(MemberActions.clearInviteMembers, (state): State => ({
+    ...state,
+    inviteMembers: null,
+    inviteMembersSucceeded: null,
+  })),
+  on(MemberActions.inviteMembers, (state): State => state),
+  on(MemberActions.inviteMembersSuccess, (state): State => ({
+    ...state,
+    inviteMembersSucceeded: true,
+  })),
+  on(MemberActions.inviteMembersFailure, (state): State => ({
+    ...state,
+    inviteMembersSucceeded: false,
   }))
 
 );

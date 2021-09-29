@@ -1,0 +1,42 @@
+<main class="h-100" role="main" class="oct-bg">
+  <div class="container pt-4 pb-6">
+    <article class="row g-0">
+      <div class="col">
+        <h1 class="mb-4">User registration</h1>
+      </div>
+      <div class="w-100"></div>
+      <div class="col col-sm-11">
+        <section class="row">
+          <h2 class="h3 text-transform-none text-primary">Personal information</h2>
+          <form [formGroup]="personalInformationFormGroup"
+                class="col">
+            <dynamic-ng-bootstrap-form [group]="personalInformationFormGroup"
+                                      [layout]="personalInformationFormLayout"
+                                      [model]="personalInformationFormModel"
+                                      (change)="onChange($event)">
+            </dynamic-ng-bootstrap-form>
+          </form>
+          <h2 class="h3 text-transform-none text-primary mt-3">Account information</h2>
+          <form [formGroup]="accountInformationFormGroup"
+                class="col">
+            <dynamic-ng-bootstrap-form [group]="accountInformationFormGroup"
+                                      [layout]="accountInformationFormLayout"
+                                      [model]="accountInformationFormModel"
+                                      (change)="onChange($event)">
+            </dynamic-ng-bootstrap-form>
+          </form>
+        </section>
+      </div>
+      <div class="w-100"></div>
+      <div class="col">
+        <div class="d-flex justify-content-between justify-content-sm-start">
+          <button class="btn btn-primary btn-lg flex-fill flex-sm-grow-0"
+                  [disabled]="!isValid"
+                  (click)="submit()">
+            <span class="mx-6">Register</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>

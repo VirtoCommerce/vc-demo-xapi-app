@@ -5,6 +5,7 @@ import { forkJoin, from, Observable, of } from 'rxjs';
 
 import * as MemberActions from './members.actions';
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
+import { inviteMembers, inviteMembersVariables } from 'src/app/graphql/types/inviteMembers';
 import { ApolloError } from '@apollo/client/errors';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
 import {
@@ -17,6 +18,7 @@ import createContactMutation from 'src/app/graphql/mutations/create-contact.grap
 import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
+import inviteMembersMutation from 'src/app/graphql/mutations/invite-members.graphql';
 import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { FetchResult } from '@apollo/client/core';
@@ -24,6 +26,7 @@ import { Router } from '@angular/router';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { Invitation } from 'src/app/models/invitation.model';
 
 @Injectable()
 export class MembersEffects {
@@ -73,10 +76,26 @@ export class MembersEffects {
     );
   });
 
+  inviteMembers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.inviteMembers),
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        action,
+        organization,
+      ]) => this.inviteMembers(action.invitation, organization.id).pipe(
+        map(() => MemberActions.inviteMembersSuccess()),
+        catchError((error: ApolloError) => of(MemberActions.inviteMembersFailure({ error })))
+      ))
+    );
+  })
+
   redirectToMainPage$ = createEffect(() => {
     return this.actions$.pipe(
 
-      ofType(MemberActions.addMemberSuccess),
+      ofType(MemberActions.addMemberSuccess, MemberActions.inviteMembersSuccess),
       concatMap(() => from(this.router.navigate([
         '/',
       ])))
@@ -144,6 +163,24 @@ export class MembersEffects {
               value: member.gender,
             },
           ],
+        },
+      },
+    });
+  }
+
+  inviteMembers(
+    invitation: Invitation,
+    organizationId: string
+  ): Observable<FetchResult<inviteMembers>> {
+    return this.apollo.mutate<inviteMembers, inviteMembersVariables>({
+      mutation: inviteMembersMutation,
+      variables: {
+        command: {
+          storeId: 'xapi',
+          organizationId,
+          urlSuffix: '/registration/by-invitation',
+          emails: invitation.emails,
+          message: invitation.message,
         },
       },
     });

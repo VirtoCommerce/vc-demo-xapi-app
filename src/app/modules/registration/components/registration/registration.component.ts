@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { registerCompany } from './store/company.actions';
+import { registerCompany } from '../../store/registration.actions';
 
 @Component({
   selector: 'vc-registration',
