@@ -1,11 +1,9 @@
-<div [ngSwitch]="status.toLowerCase()">
-  <ng-template ngSwitchCase="new">
-    <span class="px-2 py-1 rounded-1 border border-2 border-secondary text-secondary">{{status}}</span>
-  </ng-template>
-  <ng-template ngSwitchCase="approved">
-    <span class="px-2 py-1 rounded-1 border border-2 border-success text-success">{{status}}</span>
-  </ng-template>
-  <ng-template ngSwitchCase="rejected">
-    <span class="px-2 py-1 rounded-1 border border-2 border-danger text-danger">{{status}}</span>
-  </ng-template>
-</div>
+<span
+  [ngClass]="{
+    'px-2 py-1 rounded-1 border border-2': !!status.toLowerCase(),
+    'border-secondary text-secondary': status.toLowerCase() === 'new',
+    'border-success text-success': status.toLowerCase() === 'approved',
+    'border-danger text-danger': status.toLowerCase() === 'rejected'
+  }">
+    {{ status }}
+</span>
