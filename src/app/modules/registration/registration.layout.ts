@@ -1,44 +1,33 @@
-import { DynamicFormLayout } from '@ng-dynamic-forms/core';
+import { DynamicFormControlLayout, DynamicFormLayout } from '@ng-dynamic-forms/core';
+
+const requiredLargeInput: DynamicFormControlLayout = {
+  element: {
+    label: 'required',
+    control: 'form-control-lg',
+  },
+};
 
 export const REGISTRATION_LAYOUT: DynamicFormLayout = {
   firstName: {
-    element: {
-      label: 'required',
-      control: 'form-control-lg',
-    },
+    ...requiredLargeInput,
   },
   lastName: {
-    element: {
-      label: 'required',
-      control: 'form-control-lg',
-    },
+    ...requiredLargeInput,
   },
   email: {
-    element: {
-      label: 'required',
-      control: 'form-control-lg',
-    },
+    ...requiredLargeInput,
   },
   userName: {
-    element: {
-      label: 'required',
-      control: 'form-control-lg',
-    },
+    ...requiredLargeInput,
   },
   password: {
-    element: {
-      label: 'required',
-      control: 'form-control-lg',
-    },
+    ...requiredLargeInput,
     grid: {
       host: 'col-xs-24 col-md',
     },
   },
   confirmPassword: {
-    element: {
-      label: 'required',
-      control: 'form-control-lg',
-    },
+    ...requiredLargeInput,
     grid: {
       host: 'col-xs-24 col-md',
     },

@@ -40,16 +40,16 @@ export class CompanyEffects {
         companyRegistration,
         countries,
       ]) => this.createOrganization(companyRegistration, countries).pipe(
-        concatMap(result => forkJoin([
-          this.updateMemberDynamicProperties(companyRegistration, result),
-          this.createContact(companyRegistration, result),
+        concatMap(createOrganizationResult => forkJoin([
+          this.updateMemberDynamicProperties(companyRegistration, createOrganizationResult),
+          this.createContact(companyRegistration, createOrganizationResult),
         ]).pipe(
           concatMap(([
             __,
             contactResult,
           ]) => this.createUser(companyRegistration, contactResult).pipe(
-            map(result => RegistrationActions.registerCompanySuccess({
-              data: result.data?.createUser?.succeeded ?? false,
+            map(createUserResult => RegistrationActions.registerCompanySuccess({
+              data: createUserResult.data?.createUser?.succeeded ?? false,
             })),
             catchError((error: ApolloError) => of(RegistrationActions.registerCompanyFailure({ error })))
           ))
