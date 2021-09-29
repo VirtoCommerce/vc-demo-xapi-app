@@ -100,7 +100,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
   }
 
   deleteMember(memberData: {userName: string, memberId: string}): void {
-    if (confirm('Do you realy want delete companie`s member?')) {
+    if (confirm('Do you really want delete companie`s member?')) {
       this.store.dispatch(deleteMember(memberData));
     }
   }
