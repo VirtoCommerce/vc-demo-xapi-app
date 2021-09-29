@@ -7,7 +7,7 @@ import { ApolloError } from '@apollo/client/errors';
 import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { forkJoin, from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, concatMap, filter, switchMap, mergeMap } from 'rxjs/operators';
+import { catchError, map, concatMap, filter, switchMap } from 'rxjs/operators';
 
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
@@ -66,9 +66,10 @@ export class MembersEffects {
         concatMap(contactResult => forkJoin([
           this.updateMemberDynamicProperties(action.member, contactResult),
           this.createUser(action.member, contactResult),
-        ])),
-        map(() => MemberActions.addMemberSuccess()),
-        catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
+        ]).pipe(
+          map(() => MemberActions.addMemberSuccess()),
+          catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
+        ))
       ))
     );
   });
@@ -101,19 +102,21 @@ export class MembersEffects {
   deleteMember$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MemberActions.deleteMember),
-      concatMap(action => {
-        return this.deleteUser(action.userName)
-          .pipe(
-            mergeMap(result => {
-              if (result.data?.deleteUsers?.succeeded) {
-                return this.deleteContact(action.memberId);
-              }
-              else return throwError('User was not deleted');
-            }),
-            map(() => MemberActions.deleteMemberSuccess()),
-            catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
-          );
-      })
+      concatMap(action => forkJoin([
+        of(action),
+        this.deleteUser(action.userName),
+      ])),
+      concatMap(([
+        action,
+        result,
+      ]) => {
+        if (result.data?.deleteUsers?.succeeded) {
+          return this.deleteContact(action.memberId);
+        }
+        else return throwError('User was not deleted');
+      }),
+      concatMap(() => of(MemberActions.deleteMemberSuccess())),
+      catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
     );
   });
 
