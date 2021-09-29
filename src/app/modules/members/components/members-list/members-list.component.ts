@@ -35,7 +35,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   currentPage = this.firstPage;
 
-  after = '0';
+  after = pageInfo.cursor;
 
   searchPhrase = '';
 
@@ -82,9 +82,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
   private getSortingExpression(): string {
     return `name:${this.nameSortDirection}`;
   }
-  
+
   onMemberDelete(memberData: {userName: string, memberId: string}): void {
-    this.store.dispatch(deleteMember(memberData));
+    if (confirm('Do you realy want delete companie`s member?')) {
+      this.store.dispatch(deleteMember(memberData));
+    }
   }
 
   ngOnInit(): void {

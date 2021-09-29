@@ -215,6 +215,14 @@ export interface InputCreateUserType {
   readonly passwordExpired?: boolean | null;
 }
 
+export interface InputDeleteContactType {
+  readonly contactId: string;
+}
+
+export interface InputDeleteUserType {
+  readonly userNames: ReadonlyArray<(string | null)>;
+}
+
 export interface InputDynamicPropertyValueType {
   readonly name: string;
   readonly value?: string | null;

@@ -88,9 +88,9 @@ export class MembersEffects {
           data: {
             id: organization.id,
             first: pageInfo.pageSize,
-            after: '0',
+            after: pageInfo.cursor,
             searchPhrase: '',
-            sort: 'fullName:asc',
+            sort: `name:${pageInfo.sortAscending}`,
           },
         };
 
