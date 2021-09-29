@@ -80,6 +80,7 @@ function mapResultToMembers(data: getOrganizationMembers): Partial<Member>[] {
         status: item.status,
         email: item.securityAccounts[0]?.email,
         lockedState: item.securityAccounts[0]?.lockedState ? 'Inactive' : 'Active',
+        userName: item.securityAccounts[0]?.userName as string,
       };
     }
     else {

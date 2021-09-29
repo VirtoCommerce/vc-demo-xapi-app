@@ -66,10 +66,9 @@ export class MembersEffects {
         concatMap(contactResult => forkJoin([
           this.updateMemberDynamicProperties(action.member, contactResult),
           this.createUser(action.member, contactResult),
-        ]).pipe(
-          map(() => MemberActions.addMemberSuccess()),
-          catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
-        ))
+        ])),
+        map(() => MemberActions.addMemberSuccess()),
+        catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
       ))
     );
   });
@@ -111,7 +110,7 @@ export class MembersEffects {
               }
               else return throwError('User was not deleted');
             }),
-            map(() => MemberActions.deleteMemberSuccess),
+            map(() => MemberActions.deleteMemberSuccess()),
             catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
           );
       })

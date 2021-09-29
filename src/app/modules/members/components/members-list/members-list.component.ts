@@ -1,3 +1,4 @@
+import { Member } from 'src/app/models/member.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -75,6 +76,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
     );
   }
 
+  onDeleteMember(member: Member): void {
+    this.deleteMember({
+      userName: member.userName,
+      memberId: member.id as string,
+    });
+  }
+
   private invertSortDirection(sortDirection: string): string {
     return sortDirection === this.sortAscending ? this.sortDescending : this.sortAscending;
   }
@@ -83,7 +91,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     return `name:${this.nameSortDirection}`;
   }
 
-  onMemberDelete(memberData: {userName: string, memberId: string}): void {
+  deleteMember(memberData: {userName: string, memberId: string}): void {
     if (confirm('Do you realy want delete companie`s member?')) {
       this.store.dispatch(deleteMember(memberData));
     }

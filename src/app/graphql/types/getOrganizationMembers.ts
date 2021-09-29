@@ -11,6 +11,7 @@ export interface getOrganizationMembers_organization_contacts_items_securityAcco
   readonly __typename: "UserType";
   readonly email: string | null;
   readonly lockedState: boolean;
+  readonly userName: string;
 }
 
 export interface getOrganizationMembers_organization_contacts_items {
