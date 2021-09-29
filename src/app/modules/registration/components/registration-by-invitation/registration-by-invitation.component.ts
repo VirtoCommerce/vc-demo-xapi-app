@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
+import { nonNull } from 'src/app/helpers/nonNull';
 import { CompanyMember } from 'src/app/models/registration.model';
 import { registerByInvitation, setRegistrationByInvitation } from '../../store/registration.actions';
 import { selectRegistrationByInvitation } from '../../store/registration.selectors';
@@ -24,7 +25,7 @@ import {
     './registration-by-invitation.component.scss',
   ],
 })
-export class RegistrationByInvitationComponent implements AfterViewInit, OnDestroy {
+export class RegistrationByInvitationComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren(DynamicNGBootstrapFormComponent)
   formComponents!: QueryList<DynamicNGBootstrapFormComponent>;
 
@@ -56,16 +57,36 @@ export class RegistrationByInvitationComponent implements AfterViewInit, OnDestr
     private readonly store: Store
   ) { }
 
+  ngOnInit(): void {
+    this.activatedRoute.queryParamMap
+      .pipe(
+        map(queryParamMap => queryParamMap.get('email')),
+        filter(nonNull),
+        takeUntil(this.unsubscriber)
+      )
+      .subscribe(email => {
+        this.store.dispatch(setRegistrationByInvitation({
+          data: {
+            email,
+          },
+        }));
+      });
+  }
+
   ngAfterViewInit(): void {
     this.store.select(selectRegistrationByInvitation)
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(registrationByInvitation => {
         patchFormModel(this.personalInformationFormInputs, registrationByInvitation);
         patchFormModel(this.accountInformationFormInputs, registrationByInvitation);
-        this.formComponents.forEach(formComponent => {
-          this.formService.detectChanges(formComponent);
-        });
+        this.detectFormChanges();
       });
+  }
+
+  detectFormChanges(): void {
+    this.formComponents.forEach(formComponent => {
+      this.formService.detectChanges(formComponent);
+    });
   }
 
   onChange(event: DynamicFormControlEvent): void {
@@ -79,10 +100,10 @@ export class RegistrationByInvitationComponent implements AfterViewInit, OnDestr
   }
 
   submit(): void {
-    const queryParamsMap = this.activatedRoute.snapshot.queryParamMap;
+    const queryParamMap = this.activatedRoute.snapshot.queryParamMap;
     this.store.dispatch(registerByInvitation({
-      userId: queryParamsMap.get('userId') as string,
-      token: queryParamsMap.get('token') as string,
+      userId: queryParamMap.get('userId') as string,
+      token: queryParamMap.get('token') as string,
     }));
   }
 
