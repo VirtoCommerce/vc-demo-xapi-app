@@ -188,6 +188,18 @@ export class MembersEffects {
           ],
         },
       },
+      refetchQueries: [
+        {
+          query: getOrganizationMembersQuery,
+          variables: {
+            id: organizationId,
+            first: pageInfo.pageSize,
+            after: pageInfo.cursor,
+            searchPhrase: '',
+            sort: `name:${pageInfo.sortAscending}`,
+          },
+        },
+      ],
     });
   }
 
