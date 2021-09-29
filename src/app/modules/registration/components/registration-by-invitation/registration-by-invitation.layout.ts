@@ -1,5 +1,5 @@
 import { DynamicFormLayout } from '@ng-dynamic-forms/core';
-import { REGISTRATION_LAYOUT } from '../../registration.layout';
+import { halfColumn, REGISTRATION_LAYOUT, requiredLargeInput } from '../../registration.layout';
 
 export const PERSONAL_INFORMATION_LAYOUT: DynamicFormLayout = {
   personalInformation: {
@@ -11,17 +11,11 @@ export const PERSONAL_INFORMATION_LAYOUT: DynamicFormLayout = {
   lastName: REGISTRATION_LAYOUT.lastName,
   email: {
     ...REGISTRATION_LAYOUT.email,
-    grid: {
-      host: 'col-xs-24 col-md',
-    },
+    ...halfColumn,
   },
   phone: {
-    element: {
-      control: 'form-control-lg',
-    },
-    grid: {
-      host: 'col-xs-24 col-md',
-    },
+    ...requiredLargeInput,
+    ...halfColumn,
   },
 };
 

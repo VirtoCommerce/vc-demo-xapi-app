@@ -1,9 +1,15 @@
 import { DynamicFormControlLayout, DynamicFormLayout } from '@ng-dynamic-forms/core';
 
-const requiredLargeInput: DynamicFormControlLayout = {
+export const requiredLargeInput: DynamicFormControlLayout = {
   element: {
     label: 'required',
     control: 'form-control-lg',
+  },
+};
+
+export const halfColumn: DynamicFormControlLayout = {
+  grid: {
+    host: 'col-xs-24 col-md',
   },
 };
 
@@ -22,14 +28,10 @@ export const REGISTRATION_LAYOUT: DynamicFormLayout = {
   },
   password: {
     ...requiredLargeInput,
-    grid: {
-      host: 'col-xs-24 col-md',
-    },
+    ...halfColumn,
   },
   confirmPassword: {
     ...requiredLargeInput,
-    grid: {
-      host: 'col-xs-24 col-md',
-    },
+    ...halfColumn,
   },
 };
