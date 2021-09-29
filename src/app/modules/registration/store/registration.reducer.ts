@@ -48,15 +48,6 @@ export const reducer = createReducer(
     companyRegistrationSucceeded: action.data,
   })),
   on(CompanyActions.registerCompanyFailure, (state): State => state),
-  on(CompanyActions.getInvitedUser, (state): State => state),
-  on(CompanyActions.getInvitedUserSuccess, (state, action): State => ({
-    ...state,
-    registrationByInvitation: {
-      ...state.registrationByInvitation,
-      email: action.email,
-    },
-  })),
-  on(CompanyActions.getInvitedUserFailed, (state): State => state),
   on(CompanyActions.setRegistrationByInvitation, (state, action): State => ({
     ...state,
     registrationByInvitation: {

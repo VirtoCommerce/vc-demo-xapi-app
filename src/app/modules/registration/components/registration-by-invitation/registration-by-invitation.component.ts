@@ -1,14 +1,13 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicFormControlEvent, DynamicFormService } from '@ng-dynamic-forms/core';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
-import { nonNull } from 'src/app/helpers/nonNull';
 import { CompanyMember } from 'src/app/models/registration.model';
-import { getInvitedUser, registerByInvitation, setRegistrationByInvitation } from '../../store/registration.actions';
+import { registerByInvitation, setRegistrationByInvitation } from '../../store/registration.actions';
 import { selectRegistrationByInvitation } from '../../store/registration.selectors';
 import { ACCOUNT_INFORMATION_LAYOUT, PERSONAL_INFORMATION_LAYOUT } from './registration-by-invitation.layout';
 import {
@@ -25,7 +24,7 @@ import {
     './registration-by-invitation.component.scss',
   ],
 })
-export class RegistrationByInvitationComponent implements OnInit, AfterViewInit, OnDestroy {
+export class RegistrationByInvitationComponent implements AfterViewInit, OnDestroy {
   @ViewChildren(DynamicNGBootstrapFormComponent)
   formComponents!: QueryList<DynamicNGBootstrapFormComponent>;
 
@@ -56,16 +55,6 @@ export class RegistrationByInvitationComponent implements OnInit, AfterViewInit,
     private readonly formService: DynamicFormService,
     private readonly store: Store
   ) { }
-
-  ngOnInit(): void {
-    this.activatedRoute.queryParamMap.pipe(
-      map(queryParamMap => queryParamMap.get('userId')),
-      filter(nonNull),
-      takeUntil(this.unsubscriber)
-    ).subscribe(userId => {
-      this.store.dispatch(getInvitedUser({ userId }));
-    });
-  }
 
   ngAfterViewInit(): void {
     this.store.select(selectRegistrationByInvitation)

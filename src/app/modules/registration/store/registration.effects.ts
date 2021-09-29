@@ -8,7 +8,6 @@ import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
 import registerByInvitationMutation from 'src/app/graphql/mutations/register-by-invitation.graphql';
-import getUserQuery from 'src/app/graphql/queries/get-user.graphql';
 import * as RegistrationActions from './registration.actions';
 import { Apollo } from 'apollo-angular';
 import { createOrganization, createOrganizationVariables } from 'src/app/graphql/types/createOrganization';
@@ -26,7 +25,6 @@ import { CompanyMember, CompanyRegistration } from 'src/app/models/registration.
 import { Country } from 'src/app/models/country.model';
 import { FetchResult } from '@apollo/client/core';
 import { registerByInvitation, registerByInvitationVariables } from 'src/app/graphql/types/registerByInvitation';
-import { getUser, getUserVariables } from 'src/app/graphql/types/getUser';
 
 @Injectable()
 export class CompanyEffects {
@@ -64,18 +62,6 @@ export class CompanyEffects {
     return this.actions$.pipe(
       ofType(RegistrationActions.registerCompanySuccess),
       concatMap(() => of(RegistrationActions.clearCompanyRegistration()))
-    );
-  });
-
-  getInvitedUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(RegistrationActions.getInvitedUser),
-      concatMap(action => this.getInvitedUser(action.userId).pipe(
-        map(result => RegistrationActions.getInvitedUserSuccess({
-          email: result.data?.user?.email as string,
-        })),
-        catchError((error: ApolloError) => of(RegistrationActions.getInvitedUserFailed({ error })))
-      ))
     );
   });
 
@@ -212,17 +198,6 @@ export class CompanyEffects {
         },
       },
     });
-  }
-
-  getInvitedUser(
-    userId: string
-  ): Observable<FetchResult<getUser>> {
-    return this.apollo.watchQuery<getUser, getUserVariables>({
-      query: getUserQuery,
-      variables: {
-        id: userId,
-      },
-    }).valueChanges;
   }
 
   registerByInvitation(

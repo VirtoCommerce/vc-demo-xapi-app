@@ -1,5 +1,0 @@
-query getUser($id: String!) {
-  user (id: $id)  {
-    email
-  }
-}

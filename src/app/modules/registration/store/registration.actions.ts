@@ -26,21 +26,6 @@ export const registerCompanyFailure = createAction(
   props<{ error: ApolloError }>()
 );
 
-export const getInvitedUser = createAction(
-  '[Registration] Get Invited User',
-  props<{ userId: string }>()
-);
-
-export const getInvitedUserSuccess = createAction(
-  '[Registration] Get Invited User Success',
-  props<{ email: string }>()
-);
-
-export const getInvitedUserFailed = createAction(
-  '[Registration] Get Invited User Failed',
-  props<{ error: ApolloError }>()
-);
-
 export const setRegistrationByInvitation = createAction(
   '[Registration] Set Registration By Invitation',
   props<{ data: PartialDeep<CompanyMember> }>()
