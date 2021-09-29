@@ -41,6 +41,10 @@
           </div>
 
           <div class="row">
+            <div class="col">
+              <vc-errors [message]="invitationError$ | async"></vc-errors>
+            </div>
+            <div class="w-100"></div>
             <div class="col-8 d-flex">
               <button type="button"
                       class="btn btn-outline-dark btn-lg flex-fill"

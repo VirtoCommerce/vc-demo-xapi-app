@@ -10,7 +10,12 @@ export const selectGenderDictionaryItems = createSelector(
   (state: fromMembers.State) => state.genderDictionaryItems
 );
 
-export const selectInviteMembers = createSelector(
+export const selectInvitation = createSelector(
   selectMembersState,
   (state: fromMembers.State) => state.invitation
+);
+
+export const selectInvitationError = createSelector(
+  selectMembersState,
+  (state: fromMembers.State) => state.invitationError
 );

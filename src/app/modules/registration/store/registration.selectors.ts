@@ -15,3 +15,8 @@ export const selectRegistrationByInvitation = createSelector(
   selectRegistrationState,
   (state: fromCompany.State) => state.registrationByInvitation as CompanyMember
 );
+
+export const selectRegistrationByInvitationError = createSelector(
+  selectRegistrationState,
+  (state: fromCompany.State) => state.registrationByInvitationError
+);

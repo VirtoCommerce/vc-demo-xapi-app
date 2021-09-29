@@ -1,5 +1,6 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
+import { registerByInvitation_registerByInvitation_errors } from 'src/app/graphql/types/registerByInvitation';
 import { CompanyMember, CompanyRegistration } from 'src/app/models/registration.model';
 import { PartialDeep } from 'type-fest';
 
@@ -41,12 +42,13 @@ export const registerByInvitation = createAction(
 );
 
 export const registerByInvitationSuccess = createAction(
-  '[Registration] Register By Invitation Success',
-  props<{ data: boolean | null }>()
+  '[Registration] Register By Invitation Success'
 );
 
 export const registerByInvitationFailure = createAction(
   '[Registration] Register By Invitation Failure',
-  props<{ error: ApolloError }>()
+  props<{
+    error: ApolloError | ReadonlyArray<(registerByInvitation_registerByInvitation_errors | null)> | null | undefined
+  }>()
 );
 

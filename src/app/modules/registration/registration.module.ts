@@ -18,6 +18,7 @@ import { CompanyEffects } from './store/registration.effects';
 import {
   RegistrationByInvitationComponent,
 } from './components/registration-by-invitation/registration-by-invitation.component';
+import { ErrorsModule } from '../errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {
     ReactiveFormsModule,
     NgbNavModule,
     DynamicFormsNGBootstrapUIModule,
+    ErrorsModule,
     RegistrationRoutingModule,
     StoreModule.forFeature(fromCompany.registrationFeatureKey, fromCompany.reducer),
     EffectsModule.forFeature([

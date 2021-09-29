@@ -75,10 +75,12 @@ export class CompanyEffects {
         action,
         registrationByInvitation,
       ]) => this.registerByInvitation(action.userId, action.token, registrationByInvitation).pipe(
-        map(result => RegistrationActions.registerCompanySuccess({
-          data: result.data?.registerByInvitation?.succeeded ?? false,
-        })),
-        catchError((error: ApolloError) => of(RegistrationActions.registerCompanyFailure({ error })))
+        map(result => result?.data?.registerByInvitation?.succeeded
+          ? RegistrationActions.registerByInvitationSuccess()
+          : RegistrationActions.registerByInvitationFailure({
+            error: result?.data?.registerByInvitation?.errors,
+          })),
+        catchError((error: ApolloError) => of(RegistrationActions.registerByInvitationFailure({ error })))
       ))
     );
   });

@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Invitation } from 'src/app/models/invitation.model';
 import * as validationMessages from 'src/app/modules/validation/constants/validation-messages.constants';
 import * as fromMembers from '../../store/members.actions';
+import { selectInvitationError } from '../../store/members.selectors';
 
 @Component({
   selector: 'vc-invite-members',
@@ -19,6 +20,8 @@ export class InviteMembersComponent implements OnDestroy {
     emails: new FormControl('', Validators.required),
     message: new FormControl(''),
   });
+
+  invitationError$ = this.store.select(selectInvitationError);
 
   validationMessages = validationMessages;
 

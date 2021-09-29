@@ -1,6 +1,7 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { inviteMembers_inviteUser_errors } from 'src/app/graphql/types/inviteMembers';
 import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
 
@@ -60,5 +61,5 @@ export const inviteMembersSuccess = createAction(
 
 export const inviteMembersFailure = createAction(
   '[Member] Invite Members Failure',
-  props<{ error: ApolloError }>()
+  props<{ error: ApolloError | ReadonlyArray<(inviteMembers_inviteUser_errors | null)> | null | undefined }>()
 );

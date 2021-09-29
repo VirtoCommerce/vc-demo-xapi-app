@@ -9,7 +9,10 @@ import { patchFormModel, fromFormModel } from 'src/app/helpers/dynamic-forms';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { CompanyMember } from 'src/app/models/registration.model';
 import { registerByInvitation, setRegistrationByInvitation } from '../../store/registration.actions';
-import { selectRegistrationByInvitation } from '../../store/registration.selectors';
+import {
+  selectRegistrationByInvitation,
+  selectRegistrationByInvitationError,
+} from '../../store/registration.selectors';
 import { ACCOUNT_INFORMATION_LAYOUT, PERSONAL_INFORMATION_LAYOUT } from './registration-by-invitation.layout';
 import {
   ACCOUNT_INFORMATION_INPUTS,
@@ -48,6 +51,8 @@ export class RegistrationByInvitationComponent implements OnInit, AfterViewInit,
     this.formService.createFormGroup(this.accountInformationFormModel, { updateOn: 'blur' });
 
   isValid = false;
+
+  error$ = this.store.select(selectRegistrationByInvitationError);
 
   unsubscriber = new Subject();
 

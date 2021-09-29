@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as CompanyActions from './registration.actions';
 import { CompanyMember, CompanyRegistration } from 'src/app/models/registration.model';
 import { PartialDeep } from 'type-fest';
+import { ApolloError } from '@apollo/client/core';
 
 export const registrationFeatureKey = 'registration';
 
@@ -10,6 +11,7 @@ export interface State {
   companyRegistrationSucceeded: boolean | null;
   registrationByInvitation: PartialDeep<CompanyMember> | null;
   registrationByInvitationSucceeded: boolean | null;
+  registrationByInvitationError: string | null;
 }
 
 export const initialState: State = {
@@ -17,6 +19,7 @@ export const initialState: State = {
   companyRegistrationSucceeded: null,
   registrationByInvitation: null,
   registrationByInvitationSucceeded: null,
+  registrationByInvitationError: null,
 };
 
 export const reducer = createReducer(
@@ -61,10 +64,17 @@ export const reducer = createReducer(
     registrationByInvitationSucceeded: null,
   })),
   on(CompanyActions.registerByInvitation, (state): State => state),
-  on(CompanyActions.registerByInvitationSuccess, (state, action): State => ({
+  on(CompanyActions.registerByInvitationSuccess, (state): State => ({
     ...state,
-    registrationByInvitationSucceeded: action.data,
+    registrationByInvitationSucceeded: true,
   })),
-  on(CompanyActions.registerByInvitationFailure, (state): State => state)
+  on(CompanyActions.registerByInvitationFailure, (state, action): State => ({
+    ...state,
+    registrationByInvitationSucceeded: false,
+    registrationByInvitationError:
+      action.error instanceof ApolloError
+        ? action.error.message
+        : action.error?.map(error => error?.description).join('\r\n') ?? '',
+  }))
 
 );

@@ -9,6 +9,7 @@ import * as fromMembers from './store/members.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MembersEffects } from './store/members.effects';
 import { InviteMembersComponent } from './components/invite-members/invite-members.component';
+import { ErrorsModule } from '../errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { InviteMembersComponent } from './components/invite-members/invite-membe
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    ErrorsModule,
     MembersRoutingModule,
     StoreModule.forFeature(fromMembers.membersFeatureKey, fromMembers.reducer),
     EffectsModule.forFeature([

@@ -5,30 +5,26 @@
         <h1 class="mb-4">User registration</h1>
       </div>
       <div class="w-100"></div>
-      <div class="col col-sm-11">
-        <section class="row">
-          <h2 class="h3 text-transform-none text-primary">Personal information</h2>
-          <form [formGroup]="personalInformationFormGroup"
-                class="col">
-            <dynamic-ng-bootstrap-form [group]="personalInformationFormGroup"
-                                      [layout]="personalInformationFormLayout"
-                                      [model]="personalInformationFormModel"
-                                      (change)="onChange($event)">
-            </dynamic-ng-bootstrap-form>
-          </form>
-          <h2 class="h3 text-transform-none text-primary mt-3">Account information</h2>
-          <form [formGroup]="accountInformationFormGroup"
-                class="col">
-            <dynamic-ng-bootstrap-form [group]="accountInformationFormGroup"
-                                      [layout]="accountInformationFormLayout"
-                                      [model]="accountInformationFormModel"
-                                      (change)="onChange($event)">
-            </dynamic-ng-bootstrap-form>
-          </form>
-        </section>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
+      <section class="col col-sm-11">
+        <h2 class="h3 text-transform-none text-primary">Personal information</h2>
+        <form [formGroup]="personalInformationFormGroup"
+              class="col">
+          <dynamic-ng-bootstrap-form [group]="personalInformationFormGroup"
+                                    [layout]="personalInformationFormLayout"
+                                    [model]="personalInformationFormModel"
+                                    (change)="onChange($event)">
+          </dynamic-ng-bootstrap-form>
+        </form>
+        <h2 class="h3 text-transform-none text-primary mt-3">Account information</h2>
+        <form [formGroup]="accountInformationFormGroup"
+              class="col">
+          <dynamic-ng-bootstrap-form [group]="accountInformationFormGroup"
+                                    [layout]="accountInformationFormLayout"
+                                    [model]="accountInformationFormModel"
+                                    (change)="onChange($event)">
+          </dynamic-ng-bootstrap-form>
+        </form>
+        <vc-errors [message]="error$ | async"></vc-errors>
         <div class="d-flex justify-content-between justify-content-sm-start">
           <button class="btn btn-primary btn-lg flex-fill flex-sm-grow-0"
                   [disabled]="!isValid"
@@ -36,7 +32,7 @@
             <span class="mx-6">Register</span>
           </button>
         </div>
-      </div>
+      </section>
     </article>
   </div>
 </main>

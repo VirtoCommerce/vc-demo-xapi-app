@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client/core';
 import { createReducer, on } from '@ngrx/store';
 import {
   getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items,
@@ -13,7 +14,8 @@ export interface State {
   newMember: Member | null,
   newMemberSucceeded: boolean | null,
   invitation: Invitation | null,
-  invitationSucceeded: boolean | null
+  invitationSucceeded: boolean | null,
+  invitationError: string | null
 }
 
 export const initialState: State = {
@@ -22,6 +24,7 @@ export const initialState: State = {
   newMemberSucceeded: null,
   invitation: null,
   invitationSucceeded: null,
+  invitationError: null,
 };
 
 export const reducer = createReducer(
@@ -76,9 +79,13 @@ export const reducer = createReducer(
     ...state,
     invitationSucceeded: true,
   })),
-  on(MemberActions.inviteMembersFailure, (state): State => ({
+  on(MemberActions.inviteMembersFailure, (state, action): State => ({
     ...state,
     invitationSucceeded: false,
+    invitationError:
+      action.error instanceof ApolloError
+        ? action.error.message
+        : action.error?.map(error => error?.description).join('\r\n') ?? '',
   }))
 
 );

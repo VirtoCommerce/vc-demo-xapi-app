@@ -26,7 +26,7 @@ import { selectCurrentCustomerOrganization } from 'src/app/store/current-custome
 import { nonNull } from 'src/app/helpers/nonNull';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
 import { Invitation } from 'src/app/models/invitation.model';
-import { selectInviteMembers } from './members.selectors';
+import { selectInvitation } from './members.selectors';
 
 @Injectable()
 export class MembersEffects {
@@ -80,7 +80,7 @@ export class MembersEffects {
     return this.actions$.pipe(
       ofType(MemberActions.inviteMembers),
       concatLatestFrom(() => [
-        this.store.select(selectInviteMembers).pipe(filter(nonNull)),
+        this.store.select(selectInvitation).pipe(filter(nonNull)),
         this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
       ]),
       concatMap(([
@@ -88,7 +88,11 @@ export class MembersEffects {
         invitation,
         organization,
       ]) => this.inviteMembers(invitation, organization.id).pipe(
-        map(() => MemberActions.inviteMembersSuccess()),
+        map(result => result?.data?.inviteUser?.succeeded
+          ? MemberActions.inviteMembersSuccess()
+          : MemberActions.inviteMembersFailure({
+            error: result?.data?.inviteUser?.errors,
+          })),
         catchError((error: ApolloError) => of(MemberActions.inviteMembersFailure({ error })))
       ))
     );
