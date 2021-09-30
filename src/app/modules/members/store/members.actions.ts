@@ -72,7 +72,7 @@ export const deleteMemberSuccess = createAction(
 
 export const deleteMemberFailure = createAction(
   '[Member] Delete Member Failure',
-  props<{ error: ApolloError | string }>()
+  props<{ error: ApolloError | Error }>()
 );
 
 export const setInvitation = createAction(
