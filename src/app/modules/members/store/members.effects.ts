@@ -112,21 +112,22 @@ export class MembersEffects {
         of(action),
         of(organization),
         this.deleteUser(action.userName),
-      ])),
-      concatMap(([
-        action,
-        organization,
-        result,
-      ]) => {
-        if (result.data?.deleteUsers?.succeeded) {
-          return this.deleteContact(action.memberId, organization.id);
-        }
-        else {
-          return throwError('User was not deleted');
-        }
-      }),
-      concatMap(() => of(MemberActions.deleteMemberSuccess())),
-      catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
+      ]).pipe(
+        concatMap(([
+          action,
+          organization,
+          result,
+        ]) => {
+          if (result.data?.deleteUsers?.succeeded) {
+            return this.deleteContact(action.memberId, organization.id);
+          }
+          else {
+            return throwError(()=> new Error('User was not deleted'));
+          }
+        }),
+        concatMap(() => of(MemberActions.deleteMemberSuccess())),
+        catchError((error: ApolloError | Error) => of(MemberActions.deleteMemberFailure({ error })))
+      ))
     );
   });
 
