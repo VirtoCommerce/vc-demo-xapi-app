@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-white btn-xs me-3" (click)="editMember()">
   <img src="assets/images/context-pencil.svg" alt="Edit" />
 </button>
-<button type="button" class="btn btn-white btn-xs" (click)="deleteMember()">
+<button type="button" class="btn btn-white btn-xs" (click)="deleteMember()" [disabled]="disableDelete">
   <img src="assets/images/context-delete.svg" alt="Delete" />
 </button>

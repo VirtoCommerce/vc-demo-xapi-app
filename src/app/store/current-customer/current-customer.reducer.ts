@@ -8,21 +8,23 @@ import {
 
 export const currentCustomerFeatureKey = 'currentCustomer';
 
-export interface State {
-  user: {
+export interface CurrentCustomer {
+  id: string,
+  userName: string,
+  contact: {
     id: string,
-    userName: string,
-    contact: {
-      id: string,
-      firstName: string,
-      lastName: string,
-      fullName: string
-    },
-    organization: {
-      id: string,
-      name: string,
-    }
-  } | null
+    firstName: string,
+    lastName: string,
+    fullName: string
+  },
+  organization: {
+    id: string,
+    name: string,
+  }
+}
+
+export interface State {
+  user: CurrentCustomer | null
 }
 
 export const initialState: State = {
