@@ -210,13 +210,7 @@ export interface order_order_shipments {
   readonly __typename: "OrderShipmentType";
   readonly id: string;
   readonly number: string;
-  /**
-   * Current shipment method code
-   */
   readonly shipmentMethodCode: string | null;
-  /**
-   * Current shipment option code
-   */
   readonly shipmentMethodOption: string | null;
   readonly shippingMethod: order_order_shipments_shippingMethod | null;
   readonly price: order_order_shipments_price | null;

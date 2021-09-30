@@ -1,4 +1,5 @@
-<main class="h-100" role="main">
+<main class="h-100"
+      role="main">
   <div class="container pt-4 pb-6">
     <article class="row g-0">
       <div class="col">
@@ -13,9 +14,11 @@
           <li ngbNavItem="personal-information"
               destroyOnHide="false">
             <a ngbNavLink
-              class="disabled" [ngClass]="{'ps-0': activeId === 'company-details'}">
+               class="disabled"
+               [ngClass]="{'ps-0': activeId === 'company-details'}">
               <h3 class="text-condensed mb-0">
-                <span class="d-none d-sm-inline">1 </span> <span [ngClass]="{'text-black': activeId !== 'personal-information'}">Personal information</span>
+                <span class="d-none d-sm-inline">1 </span> <span
+                      [ngClass]="{'text-black': activeId !== 'personal-information'}">Personal information</span>
               </h3>
             </a>
             <ng-template ngbNavContent>
@@ -27,7 +30,8 @@
             <a ngbNavLink
                class="disabled ms-5">
               <h3 class="text-condensed mb-0">
-                <span class="d-none d-sm-inline">2 </span> <span [ngClass]="{'text-black': activeId !== 'company-details'}">Company details</span>
+                <span class="d-none d-sm-inline">2 </span> <span
+                      [ngClass]="{'text-black': activeId !== 'company-details'}">Company details</span>
               </h3>
             </a>
             <ng-template ngbNavContent>

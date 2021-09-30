@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DynamicFormControlEvent, DynamicFormOption, DynamicFormService } from '@ng-dynamic-forms/core';
 import { COMPANY_DETAILS_INPUTS, COMPANY_DETAILS_MODEL } from './company-details.model';
-import { CompanyRegistration } from 'src/app/models/company-registration.model';
-import { setCompany } from '../../store/company.actions';
+import { CompanyRegistration } from 'src/app/models/registration.model';
+import { setCompanyRegistration } from '../../store/registration.actions';
 import { Store } from '@ngrx/store';
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { of, Subject } from 'rxjs';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import { selectCompanyRegistration } from '../../store/company.selectors';
+import { selectCompanyRegistration } from '../../store/registration.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { COMPANY_DETAILS_LAYOUT } from './company-details.layout';
 import { nonNull } from 'src/app/helpers/nonNull';
@@ -86,7 +86,7 @@ export class CompanyDetailsComponent implements AfterViewInit, OnDestroy {
   onChange(event: DynamicFormControlEvent): void {
     const data = fromFormModel<CompanyRegistration>(event.model);
     if (data != null) {
-      this.store.dispatch(setCompany({
+      this.store.dispatch(setCompanyRegistration({
         data,
       }));
     }

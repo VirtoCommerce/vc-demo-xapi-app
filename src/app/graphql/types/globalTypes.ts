@@ -200,7 +200,6 @@ export interface InputCreateUserType {
   readonly id?: string | null;
   readonly lockoutEnabled?: boolean | null;
   readonly lockoutEnd?: any | null;
-  readonly lockedState?: boolean | null;
   readonly logins?: ReadonlyArray<(InputApplicationUserLoginType | null)> | null;
   readonly memberId?: string | null;
   readonly password?: string | null;
@@ -227,6 +226,14 @@ export interface InputDynamicPropertyValueType {
   readonly name: string;
   readonly value?: string | null;
   readonly locale?: string | null;
+}
+
+export interface InputInviteUserType {
+  readonly storeId: string;
+  readonly organizationId: string;
+  readonly urlSuffix?: string | null;
+  readonly emails: ReadonlyArray<string>;
+  readonly message?: string | null;
 }
 
 export interface InputMemberAddressType {
@@ -265,6 +272,16 @@ export interface InputPaymentType {
   readonly currency?: string | null;
   readonly price?: any | null;
   readonly amount?: any | null;
+}
+
+export interface InputRegisterByInvitationType {
+  readonly userId: string;
+  readonly token: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly phone?: string | null;
+  readonly username: string;
+  readonly password: string;
 }
 
 export interface InputRejectGiftItemsType {

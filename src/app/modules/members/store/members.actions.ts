@@ -1,8 +1,12 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
-import { getOrganizationMembersVariables, getOrganizationMembers as getOrganizationMembersResult }
-  from 'src/app/graphql/types/getOrganizationMembers';
+import {
+  getOrganizationMembers as getOrganizationMembersResult,
+  getOrganizationMembersVariables,
+} from 'src/app/graphql/types/getOrganizationMembers';
+import { inviteMembers_inviteUser_errors } from 'src/app/graphql/types/inviteMembers';
+import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
 
 export const getGenderDictionaryItems = createAction(
@@ -69,4 +73,26 @@ export const deleteMemberSuccess = createAction(
 export const deleteMemberFailure = createAction(
   '[Member] Delete Member Failure',
   props<{ error: ApolloError | string }>()
+);
+
+export const setInvitation = createAction(
+  '[Member] Set Invitation',
+  props<{ invitation: Invitation }>()
+);
+
+export const clearInvitation = createAction(
+  '[Member] Clear Invitation'
+);
+
+export const inviteMembers = createAction(
+  '[Member] Invite Members'
+);
+
+export const inviteMembersSuccess = createAction(
+  '[Member] Invite Members Success'
+);
+
+export const inviteMembersFailure = createAction(
+  '[Member] Invite Members Failure',
+  props<{ error: ApolloError | ReadonlyArray<(inviteMembers_inviteUser_errors | null)> | null | undefined }>()
 );

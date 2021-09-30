@@ -5,13 +5,13 @@ import {
 } from '@ng-dynamic-forms/core';
 import { PERSONAL_INFORMATION_LAYOUT } from './personal-information.layout';
 import { PERSONAL_INFORMATION_INPUTS, PERSONAL_INFORMATION_MODEL } from './personal-information.model';
-import { CompanyOwner } from 'src/app/models/company-registration.model';
-import { setCompany } from '../../store/company.actions';
+import { CompanyMember } from 'src/app/models/registration.model';
+import { setCompanyRegistration } from '../../store/registration.actions';
 import { Store } from '@ngrx/store';
 import { fromFormModel, patchFormModel } from 'src/app/helpers/dynamic-forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { selectCompanyRegistration } from '../../store/company.selectors';
+import { selectCompanyRegistration } from '../../store/registration.selectors';
 import { DynamicNGBootstrapFormComponent } from '@ng-dynamic-forms/ui-ng-bootstrap';
 
 @Component({
@@ -27,7 +27,6 @@ export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
   @ViewChild(DynamicNGBootstrapFormComponent, {
     static: true,
   })
-
   formComponent!: DynamicNGBootstrapFormComponent;
 
   formInputs = PERSONAL_INFORMATION_INPUTS;
@@ -56,9 +55,9 @@ export class PersonalInformationComponent implements AfterViewInit, OnDestroy {
   }
 
   onChange(event: DynamicFormControlEvent): void {
-    const owner = fromFormModel<CompanyOwner>(event.model);
+    const owner = fromFormModel<CompanyMember>(event.model);
     if (owner != null) {
-      this.store.dispatch(setCompany({
+      this.store.dispatch(setCompanyRegistration({
         data: {
           owner,
         },

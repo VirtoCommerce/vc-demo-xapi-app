@@ -1,4 +1,3 @@
-import { CurrentCustomer } from './../../../../store/current-customer/current-customer.reducer';
 import { Member } from 'src/app/models/member.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -10,6 +9,7 @@ import { deleteMember, getOrganizationMembers } from '../../store/members.action
 import { membersCount, selectMembers } from '../../store/members.selectors';
 import { FilterValues } from './members-list-filter-bar/filter-values.model';
 import { pageInfo } from './members-list.constants';
+import { CurrentCustomer } from 'src/app/models/current-customer';
 
 @Component({
   selector: 'vc-members-list',

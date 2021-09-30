@@ -1,38 +1,38 @@
-import { pageInfo } from './../components/members-list/members-list.constants';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Router } from '@angular/router';
 import { FetchResult } from '@apollo/client/core';
 import { ApolloError } from '@apollo/client/errors';
-import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { Apollo } from 'apollo-angular';
 import { forkJoin, from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, concatMap, filter, switchMap } from 'rxjs/operators';
-
+import { catchError, concatMap, filter, map, switchMap } from 'rxjs/operators';
+import createContactMutation from 'src/app/graphql/mutations/create-contact.graphql';
+import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
+import deleteContactMutation from 'src/app/graphql/mutations/delete-contact.graphql';
+import deleteUsersMutation from 'src/app/graphql/mutations/delete-users.graphql';
+import inviteMembersMutation from 'src/app/graphql/mutations/invite-members.graphql';
+import updateMemberDynamicPropertiesMutation from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
+import getDictionaryDynamicPropertyQuery from 'src/app/graphql/queries/get-dictionaryDynamicProperty.graphql';
+import getOrganizationMembersQuery from 'src/app/graphql/queries/get-organization-members.graphql';
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
 import { createUser, createUserVariables } from 'src/app/graphql/types/createUser';
+import { deleteContact, deleteContactVariables } from 'src/app/graphql/types/deleteContact';
+import { deleteUsers, deleteUsersVariables } from 'src/app/graphql/types/deleteUsers';
+import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { getOrganizationMembers } from 'src/app/graphql/types/getOrganizationMembers';
+import { inviteMembers, inviteMembersVariables } from 'src/app/graphql/types/inviteMembers';
 import {
   updateMemberDynamicProperties,
   updateMemberDynamicPropertiesVariables,
 } from 'src/app/graphql/types/updateMemberDynamicProperties';
-import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
-import { getOrganizationMembers } from 'src/app/graphql/types/getOrganizationMembers';
-
-import getDictionaryDynamicPropertyQuery from 'src/app/graphql/queries/get-dictionaryDynamicProperty.graphql';
-import getOrganizationMembersQuery from 'src/app/graphql/queries/get-organization-members.graphql';
-import createContactMutation from 'src/app/graphql/mutations/create-contact.graphql';
-import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
-import updateMemberDynamicPropertiesMutation
-  from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
-import deleteUsersMutation from 'src/app/graphql/mutations/delete-users.graphql';
-import deleteContactMutation from 'src/app/graphql/mutations/delete-contact.graphql';
-
+import { nonNull } from 'src/app/helpers/nonNull';
+import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
+import { pageInfo } from './../components/members-list/members-list.constants';
 import * as MemberActions from './members.actions';
-import { nonNull } from 'src/app/helpers/nonNull';
-import { deleteUsers, deleteUsersVariables } from 'src/app/graphql/types/deleteUsers';
-import { deleteContact, deleteContactVariables } from 'src/app/graphql/types/deleteContact';
+import { selectInvitation } from './members.selectors';
 
 @Injectable()
 export class MembersEffects {
@@ -137,10 +137,32 @@ export class MembersEffects {
     );
   });
 
+  inviteMembers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.inviteMembers),
+      concatLatestFrom(() => [
+        this.store.select(selectInvitation).pipe(filter(nonNull)),
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        _,
+        invitation,
+        organization,
+      ]) => this.inviteMembers(invitation, organization.id).pipe(
+        map(result => result?.data?.inviteUser?.succeeded
+          ? MemberActions.inviteMembersSuccess()
+          : MemberActions.inviteMembersFailure({
+            error: result?.data?.inviteUser?.errors,
+          })),
+        catchError((error: ApolloError) => of(MemberActions.inviteMembersFailure({ error })))
+      ))
+    );
+  })
+
   redirectToMainPage$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(MemberActions.addMemberSuccess),
+        ofType(MemberActions.addMemberSuccess, MemberActions.inviteMembersSuccess),
         concatMap(() => from(this.router.navigate([
           '/',
         ])))
@@ -175,7 +197,7 @@ export class MembersEffects {
     private readonly store: Store,
     private readonly actions$: Actions,
     private readonly apollo: Apollo
-  ) {}
+  ) { }
 
   createContact(member: Member, organizationId: string): Observable<FetchResult<createContact>> {
     return this.apollo.mutate<createContact, createContactVariables>({
@@ -275,6 +297,24 @@ export class MembersEffects {
           },
         },
       ],
+    });
+  }
+
+  inviteMembers(
+    invitation: Invitation,
+    organizationId: string
+  ): Observable<FetchResult<inviteMembers>> {
+    return this.apollo.mutate<inviteMembers, inviteMembersVariables>({
+      mutation: inviteMembersMutation,
+      variables: {
+        command: {
+          storeId: 'xapi',
+          organizationId,
+          urlSuffix: '/registration/by-invitation',
+          emails: invitation.emails,
+          message: invitation.message,
+        },
+      },
     });
   }
 }

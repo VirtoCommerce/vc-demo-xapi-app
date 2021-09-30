@@ -5,23 +5,9 @@ import {
   getCurrentCustomer_me_contact,
   getCurrentCustomer_me_contact_organizations_items,
 } from 'src/app/graphql/types/getCurrentCustomer';
+import { CurrentCustomer } from 'src/app/models/current-customer';
 
 export const currentCustomerFeatureKey = 'currentCustomer';
-
-export interface CurrentCustomer {
-  id: string,
-  userName: string,
-  contact: {
-    id: string,
-    firstName: string,
-    lastName: string,
-    fullName: string
-  },
-  organization: {
-    id: string,
-    name: string,
-  }
-}
 
 export interface State {
   user: CurrentCustomer | null

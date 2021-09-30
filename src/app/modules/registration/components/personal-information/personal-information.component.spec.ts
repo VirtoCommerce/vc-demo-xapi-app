@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { PersonalInformationComponent } from './personal-information.component';
-import * as CompanyRegistration from 'src/app/modules/registration/store/company.reducer';
+import * as Registration from 'src/app/modules/registration/store/registration.reducer';
 import * as Countries from 'src/app/store/countries/countries.reducer';
 import { ValidationModule } from 'src/app/modules/validation/validation.module';
 
@@ -17,8 +17,8 @@ describe('PersonalInformationComponent', () => {
       providers: [
         provideMockStore({
           initialState: {
-            countries: Countries.initialState,
-            companyRegistration: CompanyRegistration.initialState,
+            [Countries.countriesFeatureKey]: Countries.initialState,
+            [Registration.registrationFeatureKey]: Registration.initialState,
           },
         }),
       ],

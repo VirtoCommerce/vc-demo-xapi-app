@@ -9,7 +9,8 @@ import { faCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
   ],
 })
 export class ErrorsComponent {
-  @Input() message = '';
+  @Input()
+  message!: string | null;
 
   faTimes = faTimes;
 

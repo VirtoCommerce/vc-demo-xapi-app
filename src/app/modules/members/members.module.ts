@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { MembersRoutingModule } from './members-routing.module';
-import { AddMemberComponent } from './components/add-member/add-member.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
-import * as fromMembers from './store/members.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { MembersEffects } from './store/members.effects';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ErrorsModule } from '../errors/errors.module';
+import { MembersRoutingModule } from './members-routing.module';
+import * as fromMembers from './store/members.reducer';
+import { MembersEffects } from './store/members.effects';
+import { AddMemberComponent } from './components/add-member/add-member.component';
+import { InviteMembersComponent } from './components/invite-members/invite-members.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersListFilterBarComponent }
   from './components/members-list/members-list-filter-bar/members-list-filter-bar.component';
@@ -41,10 +41,12 @@ import { MemberStatusComponent }
     ActionButtonsComponent,
     MemberStateComponent,
     MemberStatusComponent,
+    InviteMembersComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    ErrorsModule,
     MembersRoutingModule,
     FontAwesomeModule,
     NgbPaginationModule,

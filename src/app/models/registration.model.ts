@@ -7,17 +7,18 @@ export interface CompanyAddress {
   line2: string;
 }
 
-export interface CompanyOwner {
+export interface CompanyMember {
   firstName: string;
   lastName: string;
   email: string;
+  phone?: string;
   userName: string;
   password: string;
 }
 
 export interface CompanyRegistration {
   name: string;
-  owner: CompanyOwner;
+  owner: CompanyMember;
   address: CompanyAddress;
   sector: string;
   taxNumber: string;

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RegistrationRoutingModule } from './registration-routing.module';
-import { RegistrationComponent } from './registration.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,9 +12,13 @@ import {
   RegistrationCompanyAddressComponent,
 } from './components/registration-company-address/registration-company-address.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromCompany from './store/company.reducer';
+import * as fromCompany from './store/registration.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { CompanyEffects } from './store/company.effects';
+import { CompanyEffects } from './store/registration.effects';
+import {
+  RegistrationByInvitationComponent,
+} from './components/registration-by-invitation/registration-by-invitation.component';
+import { ErrorsModule } from '../errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,16 @@ import { CompanyEffects } from './store/company.effects';
     PersonalInformationComponent,
     CompanyDetailsComponent,
     RegistrationCompanyAddressComponent,
+    RegistrationByInvitationComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     NgbNavModule,
     DynamicFormsNGBootstrapUIModule,
+    ErrorsModule,
     RegistrationRoutingModule,
-    StoreModule.forFeature(fromCompany.companyRegistrationFeatureKey, fromCompany.reducer),
+    StoreModule.forFeature(fromCompany.registrationFeatureKey, fromCompany.reducer),
     EffectsModule.forFeature([
       CompanyEffects,
     ]),

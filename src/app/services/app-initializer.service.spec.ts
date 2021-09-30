@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import * as CompanyRegistration from '../modules/registration/store/company.reducer';
+import * as Registration from '../modules/registration/store/registration.reducer';
 import * as Countries from '../store/countries/countries.reducer';
 
 import { AppInitializerService } from './app-initializer.service';
@@ -17,8 +17,8 @@ describe('AppInitializerService', () => {
       providers: [
         provideMockStore({
           initialState: {
-            countries: Countries.initialState,
-            companyRegistration: CompanyRegistration.initialState,
+            [Countries.countriesFeatureKey]: Countries.initialState,
+            [Registration.registrationFeatureKey]: Registration.initialState,
           },
         }),
       ],

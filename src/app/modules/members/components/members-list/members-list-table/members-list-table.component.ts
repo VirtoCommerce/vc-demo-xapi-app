@@ -1,5 +1,5 @@
-import { CurrentCustomer } from './../../../../../store/current-customer/current-customer.reducer';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CurrentCustomer } from 'src/app/models/current-customer';
 import { Member } from 'src/app/models/member.model';
 
 @Component({
