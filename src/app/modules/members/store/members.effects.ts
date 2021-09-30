@@ -126,6 +126,7 @@ export class MembersEffects {
           }
         }),
         concatMap(() => of(MemberActions.deleteMemberSuccess())),
+        // https://github.com/cartant/eslint-plugin-rxjs/blob/main/docs/rules/no-unsafe-catch.md
         catchError((error: ApolloError | Error) => of(MemberActions.deleteMemberFailure({ error })))
       ))
     );
