@@ -11,6 +11,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let member of members">
+        <td>{{member.id}}</td>
         <td>{{member.fullName}}</td>
         <td>{{member.email}}</td>
         <td>
@@ -20,7 +21,7 @@
           <vc-member-state [lockedState]="member.lockedState!"></vc-member-state>
         </td>
         <td class="d-sm-flex justify-content-center">
-          <vc-action-buttons (deleteClicked) = onDeleteClicked(member)></vc-action-buttons>
+          <vc-action-buttons (deleteClicked) = onDeleteClicked(member) [disableDelete]="isCurrentCustomer(member.id)"></vc-action-buttons>
         </td>
       </tr>
     </tbody>

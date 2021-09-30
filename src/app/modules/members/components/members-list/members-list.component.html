@@ -4,8 +4,9 @@
 
     <vc-members-list-filter-bar (filterChange)="onFilterChange($event)"></vc-members-list-filter-bar>
 
-    <vc-members-list-table
-      [members]="members$ | async"
+    <vc-members-list-table *ngIf="members$ | async as members"
+      [currentCustomer]="currentCustomer"
+      [members]="members"
       [nameSortDirection]="nameSortDirection"
       (changeSortDirection)="onChangeSortDirection()"
       (deleteMember)="onDeleteMember($event)">
