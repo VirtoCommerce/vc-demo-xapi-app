@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CurrentCustomer } from 'src/app/models/current-customer';
 import { Member } from 'src/app/models/member.model';
 
 @Component({
@@ -10,6 +11,8 @@ import { Member } from 'src/app/models/member.model';
 })
 
 export class MembersListTableComponent {
+  @Input() currentCustomer?: CurrentCustomer;
+
   @Input() members: Partial<Member>[] | null = [];
 
   @Input() nameSortDirection = '';
@@ -24,5 +27,9 @@ export class MembersListTableComponent {
 
   onDeleteClicked(member: Partial<Member>): void {
     this.deleteMember.emit(member as Member);
+  }
+
+  isCurrentCustomer(memberId?: string): boolean {
+    return this.currentCustomer?.contact.id === memberId;
   }
 }

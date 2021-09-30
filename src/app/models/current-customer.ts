@@ -10,7 +10,7 @@ export interface CurrentContact {
   fullName: string
 }
 
-export interface CurrentUser {
+export interface CurrentCustomer {
   id: string,
   userName: string,
   contact: CurrentContact,

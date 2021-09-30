@@ -4,11 +4,12 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
-import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
+import { selectCurrentCustomer } from 'src/app/store/current-customer/current-customer.selectors';
 import { deleteMember, getOrganizationMembers } from '../../store/members.actions';
 import { membersCount, selectMembers } from '../../store/members.selectors';
 import { FilterValues } from './members-list-filter-bar/filter-values.model';
 import { pageInfo } from './members-list.constants';
+import { CurrentCustomer } from 'src/app/models/current-customer';
 
 @Component({
   selector: 'vc-members-list',
@@ -18,13 +19,13 @@ import { pageInfo } from './members-list.constants';
   ],
 })
 export class MembersListComponent implements OnInit, OnDestroy {
-  curentCustomerOrganization$ = this.store.select(selectCurrentCustomerOrganization);
+  currentCustomer$ =  this.store.select(selectCurrentCustomer);
 
   members$ = this.store.select(selectMembers);
 
   totalCount$ = this.store.select(membersCount);
 
-  curentCustomerOrganizationId = '';
+  currentCustomer?: CurrentCustomer;
 
   readonly pageSize = pageInfo.pageSize;
 
@@ -66,7 +67,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       getOrganizationMembers({
         data: {
-          id: this.curentCustomerOrganizationId,
+          id: this.currentCustomer?.organization.id as string,
           first: this.pageSize,
           after: this.after,
           searchPhrase: this.searchPhrase,
@@ -107,8 +108,8 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.reset();
-    this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber)).subscribe(value => {
-      this.curentCustomerOrganizationId = value.id;
+    this.currentCustomer$.pipe(filter(nonNull), takeUntil(this.unsubscriber)).subscribe(value => {
+      this.currentCustomer = value;
       this.getMembers();
     });
   }
