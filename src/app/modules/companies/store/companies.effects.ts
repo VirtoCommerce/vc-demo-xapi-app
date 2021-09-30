@@ -10,6 +10,7 @@ import * as CompaniesActions from './companies.actions';
 import { ApolloError, FetchResult } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import getOrganizationQuery from '../../../graphql/queries/get-organization.graphql';
+import getOrganizationsQuery from '../../../graphql/queries/get-organizations.graphql';
 import updateOrganizationMutation from '../../../graphql/mutations/update-organization.graphql';
 import { Store } from '@ngrx/store';
 import {
@@ -21,6 +22,7 @@ import updateMemberDynamicPropertiesMutation
 import { Company } from 'src/app/models/company.model';
 import { nullable } from 'src/app/helpers/nullable';
 import { COMPANY_DYNAMIC_PROPERTIES } from '../constants/dynamic-properties';
+import { getOrganizations } from 'src/app/graphql/types/getOrganizations';
 
 @Injectable()
 export class CompaniesEffects {
@@ -51,6 +53,24 @@ export class CompaniesEffects {
           map(result => CompaniesActions.getCompanySuccess({ data: result.data })),
           catchError((error: ApolloError) => of(CompaniesActions.getCompanyFailure({ error })))
         ))
+    );
+  });
+
+  getCompanies$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CompaniesActions.getCompanies),
+      switchMap(action => this.apollo.watchQuery<getOrganizations>({
+        query: getOrganizationsQuery,
+        variables: {
+          count: action.count,
+          cursor: action.cursor,
+          sort: action.sort,
+          searchPhrase: action.searchPhrase,
+        },
+      }).valueChanges.pipe(
+        map(result => CompaniesActions.getCompaniesSuccess({ data: result.data })),
+        catchError((error: ApolloError) => of(CompaniesActions.getCompaniesFailure({ error })))
+      ))
     );
   });
 

@@ -62,7 +62,7 @@ export const dashboardContent: DashboardContentType = [
     iconSrc: '../../../assets/images/dash-member.svg',
     content: [
       {
-        link: '/members-list',
+        link: '/members/members-list',
         caption: 'MEMBERS LIST',
         description: 'Members list script demo',
       },

@@ -38,9 +38,6 @@ export interface payments_payments_items {
   readonly order: payments_payments_items_order;
   readonly createdDate: any;
   readonly status: string | null;
-  /**
-   * Payment method (gateway) code
-   */
   readonly gatewayCode: string | null;
   readonly sum: payments_payments_items_sum | null;
   readonly price: payments_payments_items_price | null;

@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
   getDictionaryDynamicProperty_dynamicProperty_dictionaryItems_items,
 } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import { getOrganizationMembers } from 'src/app/graphql/types/getOrganizationMembers';
 import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
 import * as MemberActions from './members.actions';
@@ -13,6 +14,8 @@ export interface State {
   genderDictionaryItems: { value: string, valueId: string }[] | null,
   newMember: Member | null,
   newMemberSucceeded: boolean | null,
+  members: Partial<Member>[] | null,
+  membersCount: number | null,
   invitation: Invitation | null,
   invitationSucceeded: boolean | null,
   invitationError: string | null
@@ -22,6 +25,8 @@ export const initialState: State = {
   genderDictionaryItems: null,
   newMember: null,
   newMemberSucceeded: null,
+  members: null,
+  membersCount: null,
   invitation: null,
   invitationSucceeded: null,
   invitationError: null,
@@ -62,6 +67,16 @@ export const reducer = createReducer(
     ...state,
     newMemberSucceeded: false,
   })),
+  on(MemberActions.getOrganizationMembers, (state): State => state),
+  on(MemberActions.getOrganizationMembersSuccess, (state, action): State => ({
+    ...state,
+    members: mapResultToMembers(action.data) ?? null,
+    membersCount: action.data.organization?.contacts?.totalCount ?? null,
+  })),
+  on(MemberActions.getOrganizationMembersFailure, (state): State => state),
+  on(MemberActions.deleteMember, (state): State => state),
+  on(MemberActions.deleteMemberSuccess, (state): State => state),
+  on(MemberActions.deleteMemberFailure, (state): State => state),
   on(MemberActions.setInvitation, (state, action): State => ({
     ...state,
     invitation: {
@@ -90,3 +105,23 @@ export const reducer = createReducer(
 
 );
 
+function mapResultToMembers(data: getOrganizationMembers): Partial<Member>[] {
+  const members = data.organization?.contacts?.items?.map(item => {
+    if (item?.securityAccounts != null) {
+      return {
+        id: item.id,
+        fullName: item.fullName,
+        status: item.status,
+        email: item.securityAccounts[0]?.email,
+        lockedState: item.securityAccounts[0]?.lockedState ? 'Inactive' : 'Active',
+        userName: item.securityAccounts[0]?.userName as string,
+      };
+    }
+    else {
+      return {
+        fullName: item?.fullName,
+      };
+    }
+  });
+  return members as Partial<Member>[];
+}

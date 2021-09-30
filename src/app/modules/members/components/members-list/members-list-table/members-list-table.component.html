@@ -1,0 +1,28 @@
+<div class="table-responsive mb-3">
+  <table class="table table-striped table-borderless small-table-head" aria-label="Company addresses">
+    <thead class="border-top border-bottom border-table-header">
+      <tr class="py-3">
+        <th scope="col" (click)="applySorting()" [ngClass]="nameSortDirection" style="cursor: pointer;">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Status</th>
+        <th scope="col">Locked state</th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of members">
+        <td>{{member.fullName}}</td>
+        <td>{{member.email}}</td>
+        <td>
+          <vc-member-status [status]="member.status ?? ''"></vc-member-status>
+        </td>
+        <td>
+          <vc-member-state [lockedState]="member.lockedState!"></vc-member-state>
+        </td>
+        <td class="d-sm-flex justify-content-center">
+          <vc-action-buttons (deleteClicked) = onDeleteClicked(member)></vc-action-buttons>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,10 @@
 import { ApolloError } from '@apollo/client/errors';
 import { createAction, props } from '@ngrx/store';
 import { getDictionaryDynamicProperty } from 'src/app/graphql/types/getDictionaryDynamicProperty';
+import {
+  getOrganizationMembers as getOrganizationMembersResult,
+  getOrganizationMembersVariables,
+} from 'src/app/graphql/types/getOrganizationMembers';
 import { inviteMembers_inviteUser_errors } from 'src/app/graphql/types/inviteMembers';
 import { Invitation } from 'src/app/models/invitation.model';
 import { Member } from 'src/app/models/member.model';
@@ -40,6 +44,35 @@ export const addMemberSuccess = createAction(
 export const addMemberFailure = createAction(
   '[Member] Add Member Failure',
   props<{ error: ApolloError }>()
+);
+
+export const getOrganizationMembers = createAction(
+  '[Member] Get Company Members',
+  props<{ data: getOrganizationMembersVariables }>()
+);
+
+export const getOrganizationMembersSuccess = createAction(
+  '[Member] Get Company Members Success',
+  props<{ data: getOrganizationMembersResult }>()
+);
+
+export const getOrganizationMembersFailure = createAction(
+  '[Member] Get Company Members Failure',
+  props<{ error: ApolloError }>()
+);
+
+export const deleteMember = createAction(
+  '[Member] Delete Member',
+  props<{ memberId: string, userName: string }>()
+);
+
+export const deleteMemberSuccess = createAction(
+  '[Member] Delete Member Success'
+);
+
+export const deleteMemberFailure = createAction(
+  '[Member] Delete Member Failure',
+  props<{ error: ApolloError | string }>()
 );
 
 export const setInvitation = createAction(

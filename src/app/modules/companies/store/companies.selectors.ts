@@ -8,6 +8,11 @@ export const selectCompaniesState = createFeatureSelector<fromCompanies.State>(
   fromCompanies.companiesFeatureKey
 );
 
+export const selectCompaniesListing = createSelector(
+  selectCompaniesState,
+  (state: fromCompanies.State) => state.companies
+);
+
 export const selectSelectedCompany = createSelector(
   selectCompaniesState,
   (state: fromCompanies.State) => state.selectedCompany
@@ -39,3 +44,4 @@ export const selectCultureOptions = createSelector(
   selectCompaniesState,
   (state: fromCompanies.State): string[] | null => state.availableCultures.map(culture => culture ?? null)
 );
+

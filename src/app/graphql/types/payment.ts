@@ -92,9 +92,6 @@ export interface payment_payments_items {
   readonly createdDate: any;
   readonly billingAddress: payment_payments_items_billingAddress | null;
   readonly status: string | null;
-  /**
-   * Payment method (gateway) code
-   */
   readonly gatewayCode: string | null;
   readonly sum: payment_payments_items_sum | null;
   readonly price: payment_payments_items_price | null;

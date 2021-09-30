@@ -27,6 +27,8 @@ export function createApollo(
     case 'createUser':
     case 'updateMemberDynamicProperties':
     case 'order':
+    case 'deleteUsers':
+    case 'deleteContact':
     {
       token = (await (adminToken.getToken())).access_token;
       break;
