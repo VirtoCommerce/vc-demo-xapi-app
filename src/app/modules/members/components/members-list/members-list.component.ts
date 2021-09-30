@@ -1,10 +1,11 @@
+import { Member } from 'src/app/models/member.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { nonNull } from 'src/app/helpers/nonNull';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
-import { getOrganizationMembers } from '../../store/members.actions';
+import { deleteMember, getOrganizationMembers } from '../../store/members.actions';
 import { membersCount, selectMembers } from '../../store/members.selectors';
 import { FilterValues } from './members-list-filter-bar/filter-values.model';
 import { pageInfo } from './members-list.constants';
@@ -35,7 +36,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   currentPage = this.firstPage;
 
-  after = '0';
+  after = pageInfo.cursor;
 
   searchPhrase = '';
 
@@ -75,6 +76,21 @@ export class MembersListComponent implements OnInit, OnDestroy {
     );
   }
 
+  onDeleteMember(member: Member): void {
+    this.deleteMember({
+      userName: member.userName,
+      memberId: member.id as string,
+    });
+    this.reset();
+  }
+
+  private reset(): void {
+    this.currentPage = this.firstPage;
+    this.after = pageInfo.cursor;
+    this.searchPhrase = '';
+    this.nameSortDirection = this.sortAscending;
+  }
+
   private invertSortDirection(sortDirection: string): string {
     return sortDirection === this.sortAscending ? this.sortDescending : this.sortAscending;
   }
@@ -83,7 +99,14 @@ export class MembersListComponent implements OnInit, OnDestroy {
     return `name:${this.nameSortDirection}`;
   }
 
+  deleteMember(memberData: {userName: string, memberId: string}): void {
+    if (confirm('Do you really want delete companie`s member?')) {
+      this.store.dispatch(deleteMember(memberData));
+    }
+  }
+
   ngOnInit(): void {
+    this.reset();
     this.curentCustomerOrganization$.pipe(filter(nonNull), takeUntil(this.unsubscriber)).subscribe(value => {
       this.curentCustomerOrganizationId = value.id;
       this.getMembers();

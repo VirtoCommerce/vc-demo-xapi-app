@@ -7,7 +7,8 @@
     <vc-members-list-table
       [members]="members$ | async"
       [nameSortDirection]="nameSortDirection"
-      (changeSortDirection)="onChangeSortDirection()">
+      (changeSortDirection)="onChangeSortDirection()"
+      (deleteMember)="onDeleteMember($event)">
     </vc-members-list-table>
 
     <vc-members-list-pagination

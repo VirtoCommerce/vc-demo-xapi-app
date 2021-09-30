@@ -16,7 +16,13 @@ export class MembersListTableComponent {
 
   @Output() changeSortDirection = new EventEmitter();
 
+  @Output() deleteMember = new EventEmitter<Member>()
+
   applySorting(): void {
     this.changeSortDirection.emit();
+  }
+
+  onDeleteClicked(member: Partial<Member>): void {
+    this.deleteMember.emit(member as Member);
   }
 }

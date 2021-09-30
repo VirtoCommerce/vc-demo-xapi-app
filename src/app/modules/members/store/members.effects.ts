@@ -1,3 +1,4 @@
+import { pageInfo } from './../components/members-list/members-list.constants';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
@@ -5,7 +6,7 @@ import { FetchResult } from '@apollo/client/core';
 import { ApolloError } from '@apollo/client/errors';
 import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { forkJoin, from, Observable, of } from 'rxjs';
+import { forkJoin, from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, concatMap, filter, switchMap } from 'rxjs/operators';
 
 import { createContact, createContactVariables } from 'src/app/graphql/types/createContact';
@@ -23,11 +24,15 @@ import createContactMutation from 'src/app/graphql/mutations/create-contact.grap
 import createUserMutation from 'src/app/graphql/mutations/create-user.graphql';
 import updateMemberDynamicPropertiesMutation
   from 'src/app/graphql/mutations/update-memberDynamicProperties.graphql';
+import deleteUsersMutation from 'src/app/graphql/mutations/delete-users.graphql';
+import deleteContactMutation from 'src/app/graphql/mutations/delete-contact.graphql';
 
 import { Member } from 'src/app/models/member.model';
 import { selectCurrentCustomerOrganization } from 'src/app/store/current-customer/current-customer.selectors';
 import * as MemberActions from './members.actions';
 import { nonNull } from 'src/app/helpers/nonNull';
+import { deleteUsers, deleteUsersVariables } from 'src/app/graphql/types/deleteUsers';
+import { deleteContact, deleteContactVariables } from 'src/app/graphql/types/deleteContact';
 
 @Injectable()
 export class MembersEffects {
@@ -66,6 +71,62 @@ export class MembersEffects {
           catchError((error: ApolloError) => of(MemberActions.addMemberFailure({ error })))
         ))
       ))
+    );
+  });
+
+  refresh$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.deleteMemberSuccess),
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        _,
+        organization,
+      ]) => {
+        const requestData = {
+          data: {
+            id: organization.id,
+            first: pageInfo.pageSize,
+            after: pageInfo.cursor,
+            searchPhrase: '',
+            sort: `name:${pageInfo.sortAscending}`,
+          },
+        };
+
+        return of(MemberActions.getOrganizationMembers(requestData));
+      })
+    );
+  });
+
+  deleteMember$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MemberActions.deleteMember),
+      concatLatestFrom(() => [
+        this.store.select(selectCurrentCustomerOrganization).pipe(filter(nonNull)),
+      ]),
+      concatMap(([
+        action,
+        organization,
+      ]) => forkJoin([
+        of(action),
+        of(organization),
+        this.deleteUser(action.userName),
+      ])),
+      concatMap(([
+        action,
+        organization,
+        result,
+      ]) => {
+        if (result.data?.deleteUsers?.succeeded) {
+          return this.deleteContact(action.memberId, organization.id);
+        }
+        else {
+          return throwError('User was not deleted');
+        }
+      }),
+      concatMap(() => of(MemberActions.deleteMemberSuccess())),
+      catchError((error: ApolloError | string) => of(MemberActions.deleteMemberFailure({ error })))
     );
   });
 
@@ -129,6 +190,18 @@ export class MembersEffects {
           ],
         },
       },
+      refetchQueries: [
+        {
+          query: getOrganizationMembersQuery,
+          variables: {
+            id: organizationId,
+            first: pageInfo.pageSize,
+            after: pageInfo.cursor,
+            searchPhrase: '',
+            sort: `name:${pageInfo.sortAscending}`,
+          },
+        },
+      ],
     });
   }
 
@@ -166,6 +239,42 @@ export class MembersEffects {
           ],
         },
       },
+    });
+  }
+
+  deleteUser(userName: string): Observable<FetchResult<deleteUsers>>  {
+    return this.apollo.mutate<deleteUsers, deleteUsersVariables>({
+      mutation: deleteUsersMutation,
+      variables: {
+        command: {
+          userNames: [
+            userName,
+          ],
+        },
+      },
+    });
+  }
+
+  deleteContact(memberId: string, organizationId: string): Observable<FetchResult<deleteContact>> {
+    return this.apollo.mutate<deleteContact, deleteContactVariables>({
+      mutation: deleteContactMutation,
+      variables: {
+        command: {
+          contactId: memberId,
+        },
+      },
+      refetchQueries: [
+        {
+          query: getOrganizationMembersQuery,
+          variables: {
+            id: organizationId,
+            first: pageInfo.pageSize,
+            after: pageInfo.cursor,
+            searchPhrase: '',
+            sort: `name:${pageInfo.sortAscending}`,
+          },
+        },
+      ],
     });
   }
 }

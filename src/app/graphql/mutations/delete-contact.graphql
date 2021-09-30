@@ -1,0 +1,3 @@
+mutation deleteContact($command: InputDeleteContactType!) {
+  deleteContact(command: $command)
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'vc-action-buttons',
@@ -8,11 +8,14 @@ import { Component } from '@angular/core';
   ],
 })
 export class ActionButtonsComponent {
+  @Output()
+  deleteClicked = new EventEmitter();
+
   editMember(): void {
     console.log('editMember');
   }
 
   deleteMember(): void {
-    console.log('deleteMember');
+    this.deleteClicked.emit();
   }
 }
